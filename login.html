@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/LCalendar.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+	<div>
+		<!-- <header class="text-center">
+			<a class="go_back" href="">Back</a>
+			<span>个人资料</span>
+		</header> -->
+		<div class="bodier">
+			<div id="userForm">
+				<div class="group photo_box">
+					<label>头像</label>
+					<div class="figure">
+						<div id="preview"></div>
+						<input id="photo" type="file" name="photo" style="opacity: 0">
+					</div>
+				</div>
+				<div class="group">
+					<label>昵称</label>
+					<input type="text" name="nickname" class="nickname">
+				</div>
+				<div class="group">
+					<label>姓名</label>
+					<input type="text" name="username" placeholder="请填写真实名字" class="username">
+				</div>
+				<div class="group sex">
+					<label>性别</label>
+					<div style="display: inline-block;" class="choose_sex">
+						<img src=""> 男
+					</div>
+					<div style="display: inline-block;" class="choose_sex">
+						<img src=""> 女
+					</div>
+					
+				</div>
+				<div class="group">
+					<label>生日</label>				
+					<input onclick="document.activeElement.blur();" type="text" name="start_date" id="start_date">
+					<span class="constellation"></span>
+				</div>
+				<div class="group">
+					<div>
+						<label>手机</label>
+						<input type="text" name="phone_num" class="phone_num" placeholder="请填写是十一位手机号">
+					</div>
+					
+				</div>
+				<div class="group">
+					<span style="color: #C46566;margin-right:-0.4rem; ">*</span><label class="identity_label">身份证号</label>
+					<input type="text" name="identity" class="identity" placeholder="因海关清关需要，请填好身份证号哦~">
+				</div>
+				<div class="group address_box">
+					<label>收货地址</label>
+					<span class="shipping_address"></span>
+					<img src="img/arrow.png" alt="" class="arrow_right">
+				</div>
+			</div>
+		</div>
+		<footer>
+			<span class="save">保存</span>
+		</footer>
+	</div>
+	
+</body>
+</html>
+
+<script type="text/javascript" src="vendor/jquery.js"></script>
+<script type="text/javascript" src="vendor/zepto.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vendor/LCalendar.js"></script>
+<script src="config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/login.js"></script>

@@ -1,0 +1,33 @@
+.main_product .choose_pro_type{
+	margin-top: 0.9375rem;
+}
+.choose_product .choose_pro_type{
+	margin-top: 0.625rem;
+}
+.choose_pro_type{
+	
+	line-height: 1.5rem;
+	height: 1.5rem;
+	padding-left: 0.4375rem;
+	color:#c46566;
+	letter-spacing:0.14px;
+	border: 1px solid #c46566;
+	border-radius: 3px;
+	display: inline-block;
+} 
+.choose_icon_1,.choose_icon_2{
+	display: inline-block;
+	width: 0.4375rem;
+	height: 0.4375rem;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% 100%; 
+}
+.choose_icon_1{
+	background-image: url(../img/select_icon_1.png);
+	margin-left: 0.4375rem;
+}
+.choose_icon_2{
+	background-image: url(../img/select_icon_2.png);
+	margin-right: 0.4375rem;
+}

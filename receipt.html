@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/receipt.css">
+</head>
+<body>
+	<div>
+		<div class="bodier">
+			<div>
+				<div style="margin-bottom: 0.625rem">发票类型</div>
+				<div class="receipt_type">
+					<span class="invoice" data_num="0">纸质发票</span><span class="e-invoice active" data_num="1">电子发票</span>
+				</div>
+			</div>
+			<div>
+				<div style="margin-bottom: 0.625rem">发票抬头</div>
+				<div class="invoice_title">
+					<span class="individual active" data_num="0"><i class="choose_icon"></i>个人</span><span class="company" data_num="1"><i class="choose_icon"></i>单位</span>
+				</div>
+				<div class="personal_info_for_company">
+					<div><input type="text" class="username"></div>
+					<div><input type="text" placeholder="纳税人识别号" class="pay_taxes"></div>
+				</div>
+			</div>
+			<div class="personal_info">
+				<div>
+					<span>收票人信息</span>
+				</div>
+				<div>
+					<span>收票人手机</span><input type="text" name="" class="phone_num">
+				</div>
+				<div>
+					<span>收票人邮箱</span><input type="text" name="" placeholder="用来接收电子发票邮件" class="email_num">
+				</div>
+			</div>
+			
+		</div>
+		<footer>确定</footer>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="vendor/jquery.js"></script>
+<script type="text/javascript" src="vendor/zepto.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/receipt.js"></script>

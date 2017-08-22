@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>firm_order</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/firm_order.css">
+</head>
+<body>
+	<div>
+		<div class="bodier">
+			<div class="default_address">
+				<div class="address_box"></div>
+			</div>
+			<div class="fill_id clearfix">
+				<input type="text" placeholder="因海关清关需要，请填好身份证号喔~" class="pull-left">
+				<span class="pull-right save_id" >保存</span>
+			</div>
+			<div class="product_detail_info"></div>
+			<div class="delivery_type">
+				<ul class="list-unstyled">
+					<li class="active clearfix">
+						<span class="pull-left" style="color: #5a5a5a;">顺丰冷链</span>
+						<span class="pull-right" style="color: #9b9b9b;"><span style="	margin-right: 1.5625rem;">¥40</span><i class="is_choose_icon" choose_num="0"></i></span>
+					</li>
+					<li class="clearfix">
+						<span class="pull-left" style="color: #5a5a5a;">平邮</span>
+						<span class="pull-right" style="color: #9b9b9b;"><span style="	margin-right: 1.5625rem;">¥20</span><i class="is_choose_icon" choose_num="1"></i></span>
+					</li>
+					<li class="clearfix">
+						<span class="pull-left" style="color: #5a5a5a;">暂存</span>
+						<span class="pull-right" style="color: #9b9b9b;"><span style="	margin-right: 1.5625rem;"></span><i class="is_choose_icon" choose_num="2"></i></span>
+					</li>
+				</ul>
+			</div>
+			<div class="total_info">
+				<ul class="list-unstyled">
+					<li class="clearfix">
+						<span class="pull-left" style="color: #5a5a5a;">总价</span>
+						<span class="pull-right total_price" style="color: #9b9b9b;"></span>
+					</li>
+					<li class="clearfix">
+						<span class="pull-left" style="color: #5a5a5a;">优惠信息</span>
+						<span class="pull-right is_coupon" style="color: #9b9b9b;"></span>
+					</li>
+					<li class="clearfix proof_box">
+						<span class="pull-left" style="color: #5a5a5a;">发票</span>
+						<span class="pull-right" style="color: #9b9b9b;"><span><i class="receipt"></i></span>
+					</li>
+					<li class="clearfix" style="padding-top: 1.25rem;padding-bottom: 1.25rem;height: 6.25rem">
+						<span class="pull-left" style="color: #5a5a5a;">合计</span>
+						<span class="pull-right" style="color: #9b9b9b;"><span style="font-size: 1.125rem;color:#c46566">¥420</span>
+					</li>
+				</ul>
+			</div>
+			<div class="left_message">
+				<div class="tit">买家留言</div>
+				<div>
+					<textarea name="userMessage" id="userMessage"></textarea>
+				</div>
+			</div>
+			<div class="way_for_pay">
+				<div class="tit">选择支付方式</div>
+				<div class="payfor" style="color: #5a5a5a"><i class="wechat_icon"></i>微信支付</div>
+			</div>
+			<div class="customer_service">
+				<div class="service" style="color: #5a5a5a"><i class="service_icon"></i>联系客服</div>
+			</div>
+			
+		</div>
+		<footer class="clearfix">
+			<div class="pull-left text-center">合计 ¥420</div>
+			<div class="pull-left text-center buy_instance">立即购买</div>
+		</footer>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="vendor/jquery.js"></script>
+<script type="text/javascript" src="vendor/zepto.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/firm_order.js"></script>

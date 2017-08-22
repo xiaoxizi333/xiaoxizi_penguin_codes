@@ -1,0 +1,56 @@
+/*积分*/
+.points{
+	margin-top: -0.9375rem;
+	background-color: #fbeeea!important;
+	height:4.125rem;
+	padding-left: 0.9375rem;
+}
+.points > span{
+	letter-spacing:0.14px;
+	font-family:'PingFangSC-Thin';
+	font-size: 0.875rem;
+	display: inline-block;
+}
+.points .tit{
+	border-radius: 3px;
+	border:1px solid #c46566;
+	width: 2.3125rem;
+	height: 1.4375rem;
+	line-height: 1.4375rem;
+	color: #c46566;	
+	margin-right: 0.5625rem;
+}
+.get_points{
+	color:#868191;
+	line-height:4.125rem;
+}
+/*seckill time*/
+.seckill_time{
+	height: 3.125rem;
+	background-color: #fbeeea!important;
+	padding-right: 0.9375rem;
+	padding-left: 0.9375rem;
+	font-size: 1rem;
+	letter-spacing:0.16px;
+}
+.seckill_time span{
+	line-height: 3.125rem;
+}
+.seckilling{
+	color: #868695;	
+	font-family:'PingFangSC-Regular'!important;
+}
+#caculator{
+	margin-left: 0.5rem;
+	font-size: 1.125rem;
+	color:#f0bdb3;
+	letter-spacing:0.18px;
+	font-family: 'PingFangSC-Medium'!important;
+}
+/*购买*/
+.buy a{
+	background:#d18b8d; 
+}
+footer > div {
+	width: 50%;
+}

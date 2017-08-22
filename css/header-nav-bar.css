@@ -1,0 +1,81 @@
+header{	
+	height: 3.125rem;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	max-width: 650px;
+	z-index: 100001;
+	background-color:#3f3c47;
+}
+.header{
+	background-image: url(../img/menu_logo.png);
+	background-repeat:no-repeat;
+	background-position: center center;
+	background-size: 12.5rem 2.625rem;
+}
+.nav-bar-icon{
+	position: absolute;
+	left: 0.75rem;
+	top: 50%;
+	margin-top: -0.625rem;
+}
+.nav-bar-icon i{
+	display: block;
+	width: 1.5rem;
+	height: 0.1875rem;
+	background: url(../img/nav-bar.png) no-repeat;
+	
+}
+.nav-bar-icon i+i{
+	margin-top: 0.375rem;
+}
+.left_icon{
+	position: absolute;
+	right: 0.625rem;
+	top: 50%;
+	margin-top: -0.75rem;
+
+}
+.left_icon i{
+	height:1.875rem;
+	width:1.875rem;
+	background-repeat: no-repeat; 
+	background-size: 100% 100%;
+	display: inline-block;
+}
+.shopping_icon{
+	background-image: url(../img/shopping.png);
+}
+.personal_icon{
+	background-image: url(../img/personal.png);
+	margin-left: 0.5rem;
+}
+/*choice_bar*/
+.choice_bar{
+	position: fixed;
+	top:  3.125rem;
+	left: 0.75rem;
+	z-index: 100001;
+	display: none;
+}
+.choice_bar li a{
+	display: block;
+	border-bottom: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	background:rgba(243,192,181,0.70);
+	width:6.25rem;
+	height:2.1875rem;
+	line-height:2.1875rem;
+	color: #fff;
+	font-size: 1rem;
+	text-align: center;
+	font-family:'PingFangSC-Light';
+}
+.choice_bar li:first-child{
+	border-top: 1px solid #fff;
+}
+.choice_bar li a.active{
+	background:rgba(63,60,71,0.75);
+	color:#f3c0b5;
+}

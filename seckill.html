@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/swiper-3.4.2.min.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/header-nav-bar.css">
+	<link rel="stylesheet" href="css/product_details.css">
+	<link rel="stylesheet" href="css/seckill.css">
+	
+
+</head>
+<body>
+	<header class="header">
+		<div class="nav-bar-icon">
+			<i></i>
+			<i></i>
+			<i></i>
+		</div>
+		<div class="left_icon">
+			<a href="#"><i class="shopping_icon"></i></a><a href="#"><i class="personal_icon"></i></a>
+		</div>		
+	</header>
+	<div class="bodier" style="position: relative;">
+		<ul class="choice_bar list-unstyled"></ul>
+		<div class="swiper-container">
+		  <div class="swiper-wrapper banner2_box">
+		  </div>
+		  <div class="swiper-pagination"></div>
+		</div>
+		<div class="goods_det">
+			<div class="det_text">
+				<p class="product_name"></p>
+				<p class="det"></p>
+			</div>
+			<div class="det_price clearfix">
+				<div class="vip_price pull-left" style="margin-right: 1.375rem">
+					<span>秒杀价</span>
+					<span class="specific_cost"></span>
+				</div>
+				<div class="no_vip pull-left">
+					<del>
+						<span>平日价</span>
+						<span class="real_price"></span>
+					</del>
+				</div>
+			</div>
+			<div class="other_info clearfix">
+				<div class="sale_for_month pull-left" style="margin-right: 1.375rem">
+					<span>月销</span>
+					<span class="sale_counts"></span> 
+				</div>
+				<div class="transport_fee pull-left">
+					<span>快递</span>
+					<span>免运费</span>
+				</div>
+				<div class="address pull-right">北京</div>
+
+			</div>
+			<div class="share"></div>
+			
+		</div>
+
+		<div class="points">
+			<span class="text-center tit">积分</span><span class="get_points">购买可得<span class="user_point"></span>积分</span>
+
+		</div>
+		<div class="seckill_time clearfix">
+			<span class="seckilling pull-left">本商品秒杀中</span>
+			<span class="pull-right" style="color:#8a8695;font-family:'PingFangSC-Light';">距离结束还有<span id="caculator"></span></span>
+		</div>
+		<div class="default_style" style="margin-top: -0.9375rem;">
+			<span>规格：</span>
+		</div>
+		<div class="package">
+			<div class="package-swiper">
+				<div class="swiper-container">
+				  <div class="swiper-wrapper"></div>
+				</div>
+			</div>
+			<div class="more"></div>
+		</div>
+		<div id="det_tab">
+			<ul class="list-unstyled list-inline tab_header">
+				<li class="active"><a href="javascript:;">图文介绍</a></li><li>
+				<a href="javascript:;">规格参数</a></li><li>
+				<a href="javascript:;">包装售后</a></li>
+			</ul>
+			<div class="deal_details">
+				<div class="active introduction"></div>
+				<div class="parameters"></div>
+				<div class="package_service"></div>
+			</div>
+			
+		</div>
+
+		<div class="guess">
+			<div class="text-center" style="margin-bottom: 1.25rem;">猜你喜欢</div>
+			<div class="love_banner">SKU详情</div>
+		</div>
+		<div class="vip_banner"></div>
+
+	</div>
+	<footer class="clearfix">
+		<div class="pull-left text-center">
+			<i class="communicate"></i>
+		</div>
+		<div class="pull-right buy"><a href="javascript:;">立即购买</a></div>
+	</footer>
+	<div class="mask">
+		<div class="choose_item_type">
+			<div class="type_det_info">
+				<div class="det_pic"></div>
+				<div class="specific_info">
+					<div class="price"><span>¥</span>128</div>
+					<div class="sotrage">库存 133件</div>
+					<div class="choice">选择 酒款</div>
+				</div>
+			</div>
+			<div class="type_det_box"></div>
+			
+
+			<div class="buy_num clearfix">
+				<div class="pull-left">购买数量</div>
+				<div class="add_or_substract pull-right">
+					<a class="add_btn active" href="javascript:;">-</a>
+					<span class="specific_num">1</span>
+					<a class="substract_btn" href="javascript:;">+</a>
+				</div>
+			</div>
+			<div class="sure">确定</div>
+			<div class="hide_icon"></div>
+
+		</div>
+	</div>
+	<div class="share_mask">
+		<span class="tips pull-right">点击<span style="color:#f3c0b5;">这里</span>分享哦</span>
+		<i class="share_arrow"></i>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="vendor/jquery.js"></script>
+<script type="text/javascript" src="vendor/zepto.min.js"></script>
+<script type="text/javascript" src="vendor/swiper-3.3.1.jquery.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/header_list.js"></script>
+<script src="js/product_details.js"></script>
+<script src="js/seckill.js"></script>

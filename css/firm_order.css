@@ -1,0 +1,280 @@
+body{
+	padding-top: 1.25rem;
+	padding-bottom: 3.125rem;
+}
+.bodier > div{
+	margin-bottom: 1.25rem;
+	background-color: #fff;
+	font-family:'PingFangSC-Light';
+}
+/*default_address*/
+.default_address{
+	box-shadow:0 2px 4px 0 rgba(0,0,0,0.10);
+}
+.address_box > div{
+	padding-right: 2.75rem;
+}
+.address_box{
+	font-family:'PingFangSC-Thin';
+	font-size: 0.875rem;
+	letter-spacing:0.14px;
+	color:#868191;
+	margin-left: 1.25rem;
+	margin-right:1.25rem;
+	padding-top: 0.1875rem;
+	padding-bottom: 0.8125rem;
+	position: relative;
+	line-height: 1.75rem;
+}
+.default_address{
+	font-size: 0.75rem;
+	color:#c46566;
+	letter-spacing:0.12px;
+}
+.user_name{
+	margin-bottom: 1.125rem;
+}
+.edit{
+	background-image: url(../img/pencil.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 1.4375rem;
+	height: 1.4375rem;
+	display: inline-block;
+	position: absolute;
+	top: 0.5rem;
+	right: 0;
+}
+/*save ID*/
+.fill_id{
+	height: 3.125rem;
+	line-height: 3.125rem;
+	font-size:  0.875rem;
+}
+.fill_id input{
+	border: none;
+	outline: none;
+	color:#868191;
+	font-family:'PingFangSC-Thin';
+	width: 17.875rem;
+	padding-left: 1.25rem;
+}
+.save_id{
+	display: block;
+	width: 5.5625rem;
+	height: 3.125rem;
+	line-height: 3.125rem;
+	background-color:#5a5665;
+	color: #fff;
+	letter-spacing:0;
+	text-align:center;
+}
+/*product_details*/
+.product_detail_info{
+	padding: 1.25rem 0.78125rem;
+	font-size: 0.875rem;
+	letter-spacing:-0.34px;
+}
+.product_detail_info .product_info{
+	background-color: #f9f9f9;
+	padding: 0.9375rem 0.875rem;
+	margin-bottom: 1.25rem;
+	position: relative;
+    z-index: 1000;
+}
+.product_detail_info > div:last-child{
+	margin-bottom:0;
+}
+.product_info{
+	position: relative;
+}
+.specific_photo{
+	width: 5.3125rem;
+	height:5.3125rem;
+	margin-left: 1.9375rem;
+	margin-right: 0.625rem;
+}
+.choose_icon,.is_choose_icon{
+	width: 2.5rem;
+	height: 2.5rem;
+	background-repeat: no-repeat;
+	background-size: 1.3125rem 1.3125rem;
+	background-image: url(../img/choose_normal.png);
+	background-position: center center;
+	position: absolute;
+	top: 50%;
+	margin-top: -1.25rem;
+}
+.choose_icon{
+	left: 0;
+}
+.choose_icon.active{
+	background-image: url(../img/choose_selected.png);
+}
+.product_name,.about_num .price{
+	padding-top: 0.9375rem;
+	line-height:0.875rem;
+}
+.product_name{
+	color: #5a5a5a;
+}
+.some_desc{
+	color:#9b9b9b;
+	padding-top: 0.625rem;	
+	line-height:0.875rem;
+}
+.about_num .price{
+	color:#9b9b9b;
+}
+.change_num{
+	margin-top: 2.1875rem;
+}
+.add_or_substract a{
+	color: #5a5a5a;
+}
+.add_or_substract a,.add_or_substract span{
+	background-color: #ededed;
+	display: inline-block;
+	width: 1.75rem;
+	height: 2.1875rem;
+	line-height: 2.1875rem;
+	padding: 0!important;
+	text-align: center;
+}
+.add_or_substract .add_btn{
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	background-color: #f7f7f7;
+}
+.substract_btn{
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+}
+/*左滑删除*/
+.behind {
+  width: 5.16rem;
+  height: 98%;
+  position: absolute;
+  top: 0;
+  right: 0rem; 
+}
+.behind a {
+	width: 100%;
+	height: 100%;
+	padding-top: 4.3rem;
+	font-size: 1rem;
+	background-color: #f0bdb3;
+	background-image: url(../img/delete.png);
+	background-repeat:  no-repeat;
+	background-position: center 1.6rem;
+	display: block;
+	float: right;
+	text-align: center;
+	color: #FFF;
+	position: relative;
+	margin-top: 1px;
+}
+/*delivery_type*/
+/*total_info*/
+.delivery_type ul,.total_info ul{
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin-bottom: 0;
+}
+.delivery_type ul li,.total_info ul li{
+	line-height: 3.75rem;
+	height: 3.75rem;
+	border-bottom: 1px solid rgba(151,151,151,.2);
+	position: relative;	
+	padding-left: 0.25rem;
+	
+}
+.delivery_type ul li{
+	padding-right: 1.25rem;
+}
+.delivery_type ul li:last-child,.total_info ul li:last-child{
+	border-bottom:none;
+}
+.is_choose_icon{
+	background-image: url(../img/choose_normal.png);
+	right: -0.59375rem;
+}
+li.active .is_choose_icon{
+	background-image: url(../img/choose_selected.png);
+}
+.receipt{
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	background-image: url(../img/arrow.png);
+}
+/*message*/
+/*pay communicate*/
+/*service*/
+.left_message,.way_for_pay,.customer_service{
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+}
+.left_message > div,.way_for_pay > div,.service{
+	background:#fff;
+	line-height: 3.75rem;
+	height: 3.75rem;
+}
+.left_message .tit,.way_for_pay .tit{
+	color: #9b9b9b;
+	border-bottom:1px solid rgba(151,151,151,.2);
+}
+.left_message textarea{
+	padding-top: 1.4375rem;
+	height: 3.75rem;
+	width: 100%;
+	outline: none;
+	border:none;
+	resize: none;
+	line-height: 1.25rem;
+}
+.payfor,.service{
+	position: relative;
+	padding-left: 2.125rem;
+}
+.wechat_icon,.service_icon{
+	width: 1.875rem;
+	height: 1.875rem;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center center;
+	position: absolute;
+	top: 50%;
+	margin-top: -0.9375rem;
+	left: 0;
+}
+.wechat_icon{
+	background-image: url(../img/wechat.png);
+}
+.service_icon{
+	background-image: url(../img/cusomer_sevices.png);
+}
+/*footer*/
+footer{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	height: 3.125rem;
+	z-index: 10000;
+}
+footer > div{
+	width: 50%;
+	height: 3.125rem;
+	line-height: 3.125rem;
+	font-family:'PingFangSC-Regular';
+	color:#83808b;
+	letter-spacing:0;
+	background-color: #fff;
+}
+footer > div.buy_instance{
+	color: #fff;
+	background-color: #5a5665;
+}

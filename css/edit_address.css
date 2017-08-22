@@ -1,0 +1,83 @@
+body{
+	background: #f2f2f2;
+}
+
+.default_address,.more_address{
+	box-shadow:0 2px 4px 0 rgba(0,0,0,0.10);
+	background: #fff;
+}
+.address_box > div{
+	padding-right: 2.75rem;
+}
+/*default address*/
+.address_box{
+	font-family:'PingFangSC-Thin';
+	font-size: 0.875rem;
+	letter-spacing:0.14px;
+	color:#868191;
+	margin-left: 1.25rem;
+	margin-right:1.25rem;
+	padding-top: 0.1875rem;
+	padding-bottom: 0.8125rem;
+	position: relative;
+	line-height: 1.75rem;
+}
+.default_address{
+	font-size: 0.75rem;
+	color:#c46566;
+	letter-spacing:0.12px;
+}
+.user_name{
+	margin-bottom: 1.125rem;
+}
+.edit{
+	background-image: url(../img/pencil.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 1.4375rem;
+	height: 1.4375rem;
+	display: inline-block;
+	position: absolute;
+	top: 0.5rem;
+	right: 0;
+}
+/*more address*/
+.more_address{
+	margin-top: 0.9375rem;
+}
+.more_address .left .address_box{
+	border-bottom: 1px solid rgba(151,151,151,.4);
+}
+.more_address .left:last-child .address_box{
+	border:0;
+}
+/*左滑删除*/
+.left{
+	z-index: 1000;
+	position: relative;
+	background-color: #fff;
+}
+.behind {
+  width: 4.3rem;
+  height: 98%;
+  position: absolute;
+  top: 0;
+  right: 0rem;
+  padding-right: 0!important;
+}
+.behind a {
+	width: 100%;
+	height: 100%;
+	padding-top: 3rem;
+	font-size: 1rem;
+	background-color: #f0bdb3;
+	background-image: url(../img/delete.png);
+	background-repeat:  no-repeat;
+	background-position: center 1rem;
+	display: block;
+	float: right;
+	text-align: center;
+	color: #FFF;
+	position: relative;
+	margin-top: 1px;
+}

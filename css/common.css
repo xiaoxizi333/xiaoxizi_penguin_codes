@@ -1,0 +1,40 @@
+*{
+	padding:0;
+	margin: 0;
+	box-sizing: border-box;
+}
+body{
+	max-width: 650px;
+	margin: auto;
+  background-color: #f2f2f2;
+}
+a,a:focus,a:hover{
+	text-decoration: none;
+}
+/*设置字体*/
+@font-face {
+  font-family: yati;
+  src: url("../fonts/ya.otf"); 
+}
+/*清除浮动*/
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  zoom: 1;
+}
+/*swiper_bullet*/
+.swiper-pagination-bullet{
+	width:0.625rem;
+	height:0.625rem;
+}
+.swiper-pagination-bullet{
+	background: #fff;
+	opacity: 1;
+}
+.swiper-pagination-bullet-active{
+	background:#f8b8af;
+}

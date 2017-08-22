@@ -1,0 +1,61 @@
+/***** tips start *****/
+.det{
+	margin-bottom: 1.4375rem;
+}
+.some_tips{
+	width: 2.625rem;
+	height: 2.625rem;
+	background-repeat: no-repeat;
+	background-image: url(../img/tip.png);
+	background-size: 1.3125rem 1.3125rem;
+	background-position: center center;
+	position: absolute;
+	top: 5.25rem;
+	right: 0.625rem;
+}
+.tip_cotent{
+	width: 21.25rem;
+	border: 1px solid #d89c9e;
+	line-height: 1.375rem;
+	background: #fff9f9;
+	padding: 0.625rem;
+	position: absolute;
+	top: 8.2rem;
+	right: 1.25rem;
+	z-index: 10000;
+	display: none;
+}
+.tip_cotent_1{
+	width: 5%!important;
+}
+.tip_cotent_2{
+	width: 95%!important;
+}
+.tip_cotent p{
+	margin-bottom: 0!important;
+}
+
+.tip_cotent > p > span{
+	display: inline-block;
+}
+/*三角形*/
+.triangle{
+	position: absolute;
+	top: 7.86rem;
+	right: 1.5rem;
+	z-index: 10001;
+	background-repeat: no-repeat;
+	background-image: url(../img/triangle.png);
+	background-size: 100% 100%;
+	width: 0.5625rem;
+	height: 0.4375rem;
+	display: none;
+}
+/**** tips end ****/
+/*购买*/
+.buy a{
+	background:#d18b8d; 
+}
+footer > div {
+	width: 50%;
+}

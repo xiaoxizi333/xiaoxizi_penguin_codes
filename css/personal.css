@@ -1,0 +1,73 @@
+body{
+	padding-top: 4.6875rem;
+}
+/*header*/
+header{
+	background-color: #3f3c47;
+	height: 3.125rem;
+	color: #fff;
+	font-family:'PingFangSC-Thin';
+	font-size: 1.125rem;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+	line-height: 3.125rem;
+}
+.portrait .username{
+	margin-left: 0.625rem;
+}
+.edit i{
+	display: inline-block;
+	width: 1.4375rem;
+	height: 1.4375rem;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center center;
+	background-image: url(../img/edit_white.png); 
+}
+/*bodier*/
+.bodier{
+	padding-right: 0.9375rem;
+	padding-left: 0.9375rem;
+}
+.renew{
+	height: 22.6875rem;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	background-image: url(../img/personal_bg_1.png);
+	background-size: 100% auto;
+	padding-right: 0.9375rem;
+	padding-left: 0.9375rem;
+	padding-top: 1.5625rem;
+}
+.logo_txt{
+	color:#fff;
+	letter-spacing:0.32px;
+	font-size: 2rem;
+	line-height:2rem; 
+	font-family:'MFShangYa_Noncommercial-Regular';
+}
+.title_txt{
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+	color: #c46566;
+	letter-spacing:0.24px;
+	font-family:'MFShangYa_Noncommercial-Regular';
+	margin-bottom: 0.3125rem;
+	margin-top: 4.0625rem;
+}
+.about_personal_info li{
+	font-family:'PingFangSC-Thin';
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+	font-size: 1.125rem;
+	line-height: 1.125rem;
+	color:#868191;
+	letter-spacing:0.18px;
+	border-bottom: 1px solid rgba(151,151,151,.2);
+}
+.about_personal_info li:last-child{
+	border-bottom:none;
+}

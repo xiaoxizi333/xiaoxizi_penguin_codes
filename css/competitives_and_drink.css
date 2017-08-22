@@ -1,0 +1,113 @@
+body{
+	padding-top: 3.125rem;
+	padding-bottom: 3.125rem;
+}
+/*swiper-pagination*/
+.swiper-container{
+	margin: 1.25rem 0.875rem;
+}
+.swiper-pagination{
+	text-align: right;
+	padding-right: 0.625rem;
+	position: absolute;
+	bottom: 0.4rem!important;
+}
+.swiper-slide{
+	position: relative;
+}
+/*swiper_text*/
+.banner_txt{
+	font-family: 'yati';
+	position: absolute;
+	left: 1.375rem;
+	bottom: 1rem;
+	color:#fff8f7;
+}
+/*tab*/
+.list-inline>li{
+	padding-right: 0;
+	padding-left: 0;
+}
+.filter_tab{
+	padding-left: 1.4rem;
+	margin-bottom: 1.25rem;
+}
+.filter_tab a{
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	line-height: 2.3125rem;
+	height: 2.3125rem;
+	background-image: url(../img/tab2.png);
+	padding-left: 0.75rem;
+	padding-right: 1.1875rem;
+	color:#fff;
+	display: inline-block;
+	font-size: 1.125rem;
+}
+.filter_tab li a.active{
+	background-image: url(../img/tab_active.png);
+}
+.filter_tab li{
+	margin-right: 0.625rem;
+}
+.filter_tab li:last-child{
+	margin-right:0;
+}
+/*details*/
+.details_info{
+	padding-left:0.875rem; 
+	padding-right:0.875rem; 
+}
+.details{
+	background-image: url(../img/bg.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 10.625rem;	
+}
+.details_info .details{
+	margin-bottom: 0.9375rem;
+}
+/*footer*/
+footer{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	max-width: 650px;
+}
+footer ul{
+	border-top:1px solid #979797;
+	height: 3.125rem;
+	margin-bottom: 0;
+	background:#ffffff;
+	width: 100%;
+	padding-left: 1.25rem !important;
+	padding-right: 1.25rem;
+}
+.list-inline{
+	margin-left: 0;
+}
+.list-inline>li{
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+}
+footer ul li{
+	text-align: center; 
+}
+footer ul li+li{
+	margin-left: 2.5rem;
+}
+footer ul li a{
+	font-family:'.PingFangSC-Light';
+	color:#9b9b9b;
+	letter-spacing:-0.36px;
+	text-align:center;
+	font-size: 0.9375rem;
+	display: inline-block;
+	height: 3.125rem;
+	line-height: 3.125rem;
+}
+footer ul li a.active,footer ul li a:focus{
+	color:#f0bdb3;
+
+}

@@ -1,0 +1,72 @@
+/*header*/
+header{
+	padding-left:0.9375rem; 
+	padding-right:0.9375rem; 
+	height: 3.125rem;
+	line-height: 3.125rem;
+	position: relative;
+}
+.arrow_go_back,.save_box{
+	width: 3.125rem;
+	height: 3.125rem;
+}
+.save_box{
+	text-align: right;
+}
+.go_back{
+	display: inline-block;
+	width: 0.5rem;
+	height: 0.9375rem;
+	background-image: url(../img/arrow_left.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	top: 50%;
+	margin-top: -0.46875rem;
+}
+.save{
+	font-size: 1rem;
+	color:#c46566;
+	font-family:'PingFangSC-Thin';
+}
+/*form*/
+#addressForm{
+	font-size:0.875rem;
+}
+.group{
+	margin-left: 0.875rem;
+	margin-right: 0.875rem;
+	border-bottom: 1px solid #e9e9e9;
+}
+.group:last-child{
+	border-bottom:none;
+}
+.group input,.group input:focus{
+	border:none;
+	outline: none;	    
+}
+.group label{
+	height: 3.5rem;
+	line-height: 3.5rem;
+	font-family: 'PingFangSC-Light';
+	color:#5a5a5a;
+	letter-spacing:-0.34px;
+	font-size: 0.875rem;
+	margin-right: 2.5rem;
+	margin-bottom: 0;
+	font-weight: normal;
+	width:2.3125rem;
+    white-space: nowrap;
+}
+.group input[type=text],#chooseAddress{
+	width:14.5rem!important;
+	font-size:0.875rem;
+	letter-spacing:-0.34px;
+	font-family: 'PingFangSC-Light';
+	color:#5a5a5a;
+}
+@media screen and (min-width: 375px) {
+	.group input[type=text],.shipping_address{
+		width: 14.375rem!important;
+	}
+}

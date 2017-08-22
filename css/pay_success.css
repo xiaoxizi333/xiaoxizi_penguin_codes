@@ -1,0 +1,37 @@
+body{
+	font-family:'PingFangSC-Light';
+	font-size: 0.875rem;
+	color:#5a5a5a;
+	letter-spacing:-0.34px;
+}
+.pay_succeed{
+	font-size: 1rem;
+	background-color: #fff;
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+	height: 7.1875rem;
+	line-height: 7.1875rem;
+}
+.pay_succeed .share{
+	width: 4.375rem;
+	height: 4.375rem;
+	line-height: 4.375rem;
+	background-color: #e8a49b;
+	color: #fff;	
+	border-radius: 50%;
+	text-align: center;
+	margin-top: 1.40625rem;
+}
+.go_btn{
+	text-align: center;
+	margin-top: 1.5625rem;
+}
+.go_btn > span{
+	display: inline-block;
+	width: 6.625rem;
+	background-color: #c46666;
+	text-align: center;
+	color: #fff;
+	height: 1.875rem;
+	line-height: 1.875rem;
+}

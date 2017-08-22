@@ -1,0 +1,92 @@
+body{
+	font-family:'PingFangSC-Light';
+	font-size: 0.875rem;
+	color:#5a5a5a;
+	letter-spacing:-0.34px;
+	padding-bottom: 3.125rem;
+}
+.bodier > div{
+	background-color: #fff;
+	padding: 0.9375rem 1.25rem 1.25rem;
+	margin-bottom: 1.25rem;
+}
+.receipt_type > span{
+	height: 1.875rem;
+	line-height: 1.875rem;
+	padding-left:0.625rem;
+	padding-right:0.625rem;
+	display: inline-block;
+	border-radius:3px;
+	border:1px solid #b9b9b9;
+	margin-right: 0.625rem;
+}
+.receipt_type > span.active{
+	border:1px solid #c46566;
+	color: #c46566;
+}
+.invoice_title > span{
+	position: relative;
+	padding-left: 1.5625rem;
+}
+.choose_icon{
+	width: 2.5rem;
+	height: 2.5rem;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-size: 1.3125rem 1.3125rem;
+	background-image: url(../img/choose_normal.png);
+	background-position: center center;
+	position: absolute;
+	top: 50%;
+	margin-top: -1.25rem;
+	left: -0.625rem;
+}
+.invoice_title .active .choose_icon{
+	background-image: url(../img/choose_selected.png);
+}
+.individual{
+	margin-right: 1.875rem;
+}
+.personal_info > div{
+	height: 2.8125rem;
+	line-height: 2.8125rem;
+	box-sizing: content-box;
+	border-bottom:1px solid rgba(151,151,151,.2);
+}
+.personal_info > div:last-child{
+	border-bottom:none;
+}
+.personal_info > div input{
+	border: none;
+	outline: none;
+	margin-left: 1.25rem;
+}
+.personal_info_for_company{
+	margin-top: 1.25rem;
+	display: none;
+}
+.personal_info_for_company > div{
+	margin-top: 0.625rem;
+	line-height: 2.5rem;
+	height: 2.5rem;	
+}
+.personal_info_for_company > div > input{
+	width: 100%;
+	border: none;
+	outline: none;
+	background-color: #f2f2f2;
+	padding-left: 0.625rem;
+}
+footer{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	height: 3.125rem;
+	z-index: 10000;
+	color: #fff;
+	line-height: 3.125rem;
+	text-align: center;
+	background-color: #5a5665;
+}
+
+

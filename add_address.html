@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>add_address</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/public.css">
+    <link rel="stylesheet" type="text/css" href="css/mobileSelect.css">
+	<link rel="stylesheet" href="css/address.css">
+</head>
+<body>
+	<div>
+		<header class="clearfix">
+			<div class="arrow_go_back pull-left"><i class="go_back"></i></div>
+			<div class="save_box pull-right"><span class="save">保存</span></div>
+		</header>
+		<div class="bodier">
+			<div id="addressForm">
+				<div class="group">
+					<label>收件人 </label>
+					<input type="text" class="receiver" name="receiver" value=''>
+				</div>
+				<div class="group">
+					<label>手机号</label>
+					<input type="text" class="phone_num" name="phone_num" value=''>
+				</div>			
+				<div class="group">
+					<label>地址</label>			
+					<span id="chooseAddress" style="display: inline-block;height: 20px;"></span>
+				</div>
+				<div class="group">
+					<div>
+						<label>详细地址</label>
+						<input type="text" class="address_detail" name="address_detail" value=''>
+					</div>				
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="vendor/jquery.js"></script>
+<script type="text/javascript" src="vendor/zepto.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vendor/mobileSelect.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="config.js"></script>
+<script src="js/add_address.js"></script>
+<script src="vendor/validation.js"></script>

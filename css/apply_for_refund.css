@@ -1,0 +1,107 @@
+body{
+	font-size: 0.875rem;
+	color:#5a5a5a;
+	font-family:'PingFangSC-Light';
+	letter-spacing:-0.34px;
+	padding-bottom: 3.125rem;
+}
+.bodier>div{
+	margin-bottom: 1.25rem;
+	background-color: #fff;
+	padding-left: 0.9375rem;
+}
+.show_product{
+	padding-top: 0.9375rem;
+	padding-bottom: 0.9375rem;
+}
+.show_product .product_photo{
+	width: 5.625rem;
+	height: 5.625rem;
+	background: #ccc;
+	margin-right: 0.625rem;
+}
+.refund_reason,.refund{
+	height: 3.75rem;
+	line-height: 3.75rem;
+}
+.refund_reason input{
+	outline: none;
+	border:none;
+	width: 60%;
+}
+.tip{
+	color:#9b9b9b;
+	letter-spacing:-0.29px;
+	font-size:0.75rem;
+	background-color: #f2f2f2!important;
+	margin-top: -0.75rem;
+}
+.user_comment{
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+}
+/*add photos*/
+.fileList img{
+	display: inline-block;
+	width: 5rem;
+	height: 5rem;
+	margin-right:0.5625rem;
+	margin-bottom:0.5625rem;
+	border:1px solid #e0e0e0;
+	border-radius: 4px;
+}
+.fileList{
+	display: inline-block;
+}
+.fileElem{
+	display: inline-block;
+	width: 5rem;
+	height: 5rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.filebox{
+	display: inline-block;
+	width: 5rem;
+	height: 5rem;
+	position: relative;
+	line-height: 5rem;
+	border:1px solid #e0e0e0;
+}
+.mask_add_input{
+	text-align: center;
+	width: 100%;
+	font-size: 0.875rem;
+	color:#595757;
+	font-family: 'PingFangSC-Thin';
+}
+.pic_box{
+	display: inline-block;
+	position: relative;
+}
+.cross_pic{
+	width: 1.3125rem;
+	height: 1.3125rem;
+	background-image: url(../img/cross.png);
+	background-repeat: no-repeat;
+	background-size: 0.75rem 0.75rem;
+	background-color:rgba(195,195,195,0.80);
+	background-position: center center;
+	border-radius: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin-top:-0.5rem;
+}
+footer{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	background:#5a5665;
+	color: #fff;
+	text-align: center;
+	line-height: 3.125rem;
+	height: 3.125rem;
+
+}

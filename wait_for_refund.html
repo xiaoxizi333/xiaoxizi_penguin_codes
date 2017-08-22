@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>wait_for_refund</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/wait_for_refund.css">
+</head>
+<body>
+	<div>
+		<header>
+			<div class="title_box">
+				<div style="font-size: 1.125rem;margin-bottom: 0.625rem">请等待商家处理</div>
+				<div class="remain_time">还剩1天23时</div>
+			</div>
+			
+		</header>
+		<div class="boider">
+			<div class="do_application">
+				<div style="padding-top: 0.9375rem;padding-bottom: 0.625rem;border-bottom: 1px solid rgba(151,151,151,.2)">您已成功发起退款申请，请耐心等待商家处理。</div>
+				<ul class="refund_tip list-unstyled">
+					<li>商家同意或者超时未处理，系统将退款给您。</li>
+					<li>如果商家拒绝，您可以修改退款申请后再次发起，商家会重新处理。</li>
+				</ul>
+				<div class="do_app_btn text-right">
+					<span class="withdraw">撤销申请</span><span class="amend">修改申请</span>
+					
+				</div>
+			</div>
+			<div class="refund_info">
+				<div style="line-height: 2.75rem;height: 2.75rem;padding-left: 0.3125rem">退款信息</div>
+				<div class="refund_product clearfix">
+					<div class="product_photo pull-left"></div>
+					<div class="pull-left" style="padding-top: 0.625rem">灰石酒庄雷司令</div>
+				</div>
+				<div class="refund_for_details">
+					<div class="reason_for_refund">
+						<span>退款原因：</span><input type="text" placeholder="未填写">
+					</div>
+					<div class="refund_amount">
+						<span>退款金额：</span><span>¥200.0</span>
+					</div>
+					<div class="apply_time">
+						<span>申请时间：</span><span>2017-7-28 13:50</span>
+					</div>
+					<div class="serial_num">
+						<span>退款编号：</span><span>xxxxx</span>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<footer class="clearfix">
+			<a class="pull-left">联系客服</a><a class="pull-right">拨打电话</a>
+		</footer>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="vendor/jquery.js"></script>
+<script type="text/javascript" src="vendor/zepto.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/wait_for_refund.js"></script>

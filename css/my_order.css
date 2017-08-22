@@ -1,0 +1,85 @@
+.order_box,.customer_service{
+	color:#5a5a5a;
+	letter-spacing:-0.34px;
+	font-family:'PingFangSC-Light';
+	font-size: 0.875rem;
+}
+.order_box > li{
+	margin-bottom: 0.9375rem;
+	background-color: #fff;
+}
+.my_order_det{
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+}
+.order_state{
+	color: #c46566;
+}
+.product_det li{
+	background:#f9f9f9;
+	padding: 0.9375rem 0.4375rem;
+	margin-bottom:0.625rem;
+	color: #9b9b9b;
+}
+.product_det li:last-child{
+	margin-bottom: 0;
+}
+.product_photo{
+	width: 5.625rem;
+	height: 5.625rem;
+	background:#ccc;
+	margin-right: 0.625rem;
+}
+.sum{
+	border-top:1px solid rgba(151,151,151,.2);
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+}
+.sum > div{
+	height:3.75rem;
+	line-height: 3.75rem;
+}
+.counts{
+	margin-left: 1.5625rem;
+}
+.sum_money{
+	color:#c46566;
+	font-size: 1.125rem;
+}
+.check_state{
+	margin-right: 0.625rem;
+}
+.check_state,.sure_get_goods,.pay_back,.comment{
+	height: 1.9375rem;
+	line-height: 1.9375rem;
+	padding-left: 0.9375rem;
+	padding-right: 0.8125rem;
+	background:#c46566;
+	display: inline-block;
+	color: #fff;
+	border-radius: 2px;	
+}
+.customer_service{
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+	background: #fff;
+	height: 3.75rem;
+	line-height: 3.75rem;
+}
+.service{
+	position: relative;
+	padding-left: 2.125rem;	
+}
+.service_icon{
+	width: 1.875rem;
+	height: 1.875rem;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center center;
+	position: absolute;
+	top: 50%;
+	margin-top: -0.9375rem;
+	left: 0;
+	background-image: url(../img/cusomer_sevices.png);
+}
