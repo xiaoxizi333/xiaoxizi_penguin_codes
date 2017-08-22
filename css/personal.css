@@ -14,6 +14,7 @@ header{
 	padding-left: 0.9375rem;
 	padding-right: 0.9375rem;
 	line-height: 3.125rem;
+	z-index: 10000;
 }
 .portrait .username{
 	margin-left: 0.625rem;
@@ -32,29 +33,41 @@ header{
 	padding-right: 0.9375rem;
 	padding-left: 0.9375rem;
 }
-.renew{
-	height: 22.6875rem;
-	background-repeat: no-repeat;
+.bodier>div{
+	box-shadow:0 2px 4px 0 rgba(0,0,0,0.10);
 	background-color: #fff;
-	background-image: url(../img/personal_bg_1.png);
-	background-size: 100% auto;
-	padding-right: 0.9375rem;
 	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+}
+.renew,.purchase{	
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	position: relative;
+	width: 21.75rem;
 	padding-top: 1.5625rem;
+}
+.renew{
+	background-image: url(../img/personal_bg_1.png);
+	height: 22.6875rem;			
+}
+.purchase{
+	background-image: url(../img/personal_bg_2.png);
+	height: 10.625rem;
+	margin-top: 3.75rem;
 }
 .logo_txt{
 	color:#fff;
 	letter-spacing:0.32px;
 	font-size: 2rem;
 	line-height:2rem; 
-	font-family:'MFShangYa_Noncommercial-Regular';
+	font-family:'yati';
 }
 .title_txt{
 	font-size: 1.5rem;
 	line-height: 1.5rem;
 	color: #c46566;
 	letter-spacing:0.24px;
-	font-family:'MFShangYa_Noncommercial-Regular';
+	font-family:'yati';
 	margin-bottom: 0.3125rem;
 	margin-top: 4.0625rem;
 }
@@ -71,3 +84,139 @@ header{
 .about_personal_info li:last-child{
 	border-bottom:none;
 }
+.total_btn_style{
+	padding-top: 0.9rem;
+	color:#ffffff;
+	letter-spacing:0;
+	font-family:'PingFangSC-Light';
+	font-size: 0.9375rem;
+	width: 4.375rem;
+	height: 4.375rem;
+	background:#e8a49b;
+	border-radius: 50%;
+	text-align: center;
+	position: absolute;
+	left: 50%;
+	margin-left: -2.1875rem;
+	bottom: -2.1875rem;
+}
+/*my_order*/
+.my_order{
+	padding-top: 0.625rem;
+	margin-top: 5.3125rem;
+	font-family:'PingFangSC-Light';
+	font-size:0.875rem;
+	line-height:1.5rem;
+	color:#5a5a5a;
+	letter-spacing:-0.34px;
+	position: relative;
+}
+.part_header{
+	position: absolute;
+	top: -1.5625rem;
+	background:#656570;
+	box-shadow:0 2px 4px 0 rgba(0,0,0,0.10);
+	color: #fff;
+	width: 8.125rem;
+	height: 3.125rem;
+	line-height: 3.125rem;
+	text-align: center;
+	font-family:'yati';
+	letter-spacing:0;
+	font-size: 1.375rem;
+}
+.description,.product_price{
+	color:#9b9b9b;
+}
+.go_order{
+	background-repeat: no-repeat;
+	background-image: url(../img/arrow.png);
+	background-position: right center;
+	background-size: 1.0625rem 1.0625rem;
+	height: 1.0625rem;
+	margin-bottom: 1.25rem;
+}
+.product_photo{
+	width: 5.3125rem;
+	height: 5.3125rem;
+	margin-right: 0.625rem;
+	margin-bottom: 1.5625rem;
+}
+.product_photo img{
+	width: 100%;
+	height: 100%;
+}
+.product_info,.product_price{
+	margin-top: 0.9375rem;
+}
+.real_price{
+	margin-bottom: 0.3125rem;
+}
+.summary > div{
+	display: inline-block;
+	height: 2.8125rem;
+	line-height: 2.8125rem;
+}
+.sum_price span{
+	color:#c46566;
+	letter-spacing:-0.43px;
+	font-size: 1.125rem;
+}
+/*coupon*/
+div.my_coupon{
+	padding-right: 0;
+	position: relative;
+	margin-top: 3.125rem;
+	padding-top: 3.4375rem;
+	padding-bottom: 1.875rem;
+}
+#coupon_list .swiper-slide{
+	margin-right: 20px;
+}
+#coupon_list .swiper-slide{
+	width: 100px;
+	height: 64px;
+	color: #fff;
+	text-align: center;
+	font-family:'PingFangSC-Light';
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-image: url(../img/home_coupon_bg_2.png);
+}
+#coupon_list .swiper-slide p{
+	margin-bottom: 0;
+}
+/*adddress*/
+.my_address{
+	margin-top: 3.125rem;
+	position: relative;
+	color:#868191;
+	letter-spacing:0.14px;
+	font-size: 0.875rem;
+	margin-bottom: 1.875rem;
+}
+.address_box{
+	font-family:'PingFangSC-Thin';
+	line-height: 0.875rem;
+	letter-spacing:0.14px;
+	color:#868191;
+	margin-left: 1.25rem;
+	margin-right:1.25rem;
+	padding-top: 0.1875rem;
+	padding-bottom: 1.4375rem;
+	position: relative;
+}
+.user_name{
+	margin-bottom: 2.375rem;
+}
+.edit_address{
+	color:#c46566;
+	font-family:'PingFangSC-Light';
+	text-align: right;
+	margin-bottom: 2.8125rem;
+	line-height: 1.5625rem;
+}
+.address_details{
+	line-height: 1.75rem;
+}
+

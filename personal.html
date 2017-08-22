@@ -5,6 +5,7 @@
 	<title>personal</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/swiper-3.4.2.min.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/personal.css">
 </head>
@@ -34,6 +35,80 @@
 						<span class="pull-left exp_date">距离过期有200天</span>
 					</li>
 				</ul>
+				<div class="total_btn_style renew_btn">
+					立刻<br>
+					续订
+				</div>
+			</div>
+			<div class="purchase">
+				<div class="logo_txt">企鹅团200</div>
+				<div class="total_btn_style purchase_btn">
+					立刻<br>
+					订购
+				</div>
+			</div>
+			<div class="my_order">
+				<div class="part_header">我的订单</div>
+				<div class="go_order"></div>
+				<ul class="list-unstyled">
+					<li>
+						<div class="clearfix" style="border-bottom:1px solid rgba(151,151,151,.2)">
+							<div class="product_photo pull-left"><img src="img/little_girl.jpg" alt=""></div>
+							<div class="product_info pull-left">
+								<div class="product_name">灰石酒庄雷司令</div>
+								<div class="description">赞很赞超级赞</div>
+							</div>
+							<div class="product_price pull-right">
+								<div class="real_price">¥200</div>
+								<div class="num">x1</div>
+							</div>
+						</div>
+						
+						<div class="summary text-right">
+							<div class="sum_num" style="margin-right: 1.6875rem">共2件</div><div class="sum_price">合计 <span>¥400</span></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="my_coupon">
+				<div class="part_header">优惠券</div>
+				<div id="coupon_list">
+					<div class="swiper-container"> 
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<p style="line-height: 12px;font-size: 12px;margin-top:10px">无门槛券</p>
+								<p style="line-height: 42px;font-size: 30px;">¥10</p>
+							</div>
+							<div class="swiper-slide">
+								<p style="line-height: 12px;font-size: 12px;margin-top:10px">无门槛券</p>
+								<p style="line-height: 42px;font-size: 30px;">¥10</p>
+							</div>
+							<div class="swiper-slide">
+								<p style="line-height: 12px;font-size: 12px;margin-top:10px">无门槛券</p>
+								<p style="line-height: 42px;font-size: 30px;">¥10</p>
+							</div>
+							<div class="swiper-slide">
+								<p style="line-height: 12px;font-size: 12px;margin-top:10px">无门槛券</p>
+								<p style="line-height: 42px;font-size: 30px;">¥10</p>
+							</div>
+							<div class="swiper-slide">
+								<p style="line-height: 12px;font-size: 12px;margin-top:10px">无门槛券</p>
+								<p style="line-height: 42px;font-size: 30px;">¥10</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="my_address">
+				<div class="part_header">收货地址</div>
+				<div class="edit_address">点击编辑</div>
+				<div class="address_box">
+					<div class="user_info clearfix">
+						<div class="user_name pull-left">Drunkard A</div>
+						<div class="user_phone pull-right">185xxxxxxxx</div>	
+					</div>
+					<div class="address_details">北京市朝阳区湖光中街1号Loftel大厦洪泰创新空间四区</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -42,6 +117,7 @@
 <script type="text/javascript" src="vendor/jquery.js"></script>
 <script type="text/javascript" src="vendor/zepto.min.js"></script>
 <script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vendor/swiper-3.3.1.jquery.min.js"></script>
 <script src="config.js"></script>
 <script src="js/common.js"></script>
 <script src="js/personal.js"></script>
