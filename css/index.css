@@ -5,10 +5,7 @@ header{
 	height: 5rem;
 }
 /*search*/
-.search{
-	text-align: center;
-}
-.search input{
+#search {
 	width: 21.875rem;
 	height: 1.25rem;
 	border: 0;
@@ -21,6 +18,8 @@ header{
 	font-family: 'PingFangSC-Light';
 	padding-left: 2.1875rem;
 	font-size: 0.875rem;
+	display: block;
+	margin:0 auto;
 }
 /*banner*/
 .banner_index{
@@ -63,10 +62,10 @@ header{
 .banner_swiper{
 	background-image:url(../img/home_bg_1.png);
 	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-position: left center;
-	height: 38.25rem;
+	background-size: 100%;
+	background-position: left top;
 	padding-top: 1.3125rem;
+	padding-bottom: 1.8rem;
 }
 .banner_swiper .title{
 	background-image: url(../img/home_logo.png);
@@ -77,15 +76,15 @@ header{
 	margin-bottom: 1.875rem;
 }
 /*coupon*/
-.banner_swiper .coupon ul li{
+.banner_swiper .coupon .swiper-slide{
 	padding-right: 0!important;
 	padding-left: 0!important;
-	width: 6.5625rem;
-	height: 4.21875rem;
-	margin-left: 1.125rem;
+	width: 100px;
+	height: 64px;
+	margin-left: 18px;
 	margin-top: 1.5625rem;
 }
-.banner_swiper .coupon ul li a {
+.banner_swiper .coupon .swiper-slide a {
 	background-repeat: no-repeat;
 	background-position: left center;
 	background-size: 100% 100%;
