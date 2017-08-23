@@ -1,7 +1,8 @@
 
 //取值
 var arrData = {
-	'addressId':window.localStorage.getItem('addressId')
+	'addressId':window.localStorage.getItem('addressId'),
+	'editNum':window.localStorage.getItem('editNum'),
 }
 
 $.post(config.addressList,{'uid':1370724016130198,'address_id':arrData.addressId},function(data){
@@ -88,7 +89,12 @@ $.post(config.addressList,{'uid':1370724016130198,'address_id':arrData.addressId
 		}else{
 			$.post(config.addressUpdate,{'id':arrData.addressId,'contact_user_name':receiver,'contact_phone':phoneNum,'province':province,'city':city,'district':district,'street':addressDetail,'province_code':provinceCode,'city_code':cityCode,'district_code':districtCode},function(data){
 				if(data.error_code==0){
-					window.location.href = 'edit_address.html';
+					if(arrData.editNum=='0'){
+						window.location.href = 'edit_address.html';
+						
+					}else if(arrData.editNum=='1'){
+						window.location.href = 'firm_order.html';
+					}					
 				}
 			})
 		}

@@ -75,16 +75,14 @@ function Trim(str,is_global) {
 // add photos
 
  //限制添加
-var limit = 0,
-fileIndex;
+var fileIndex;
 
 for(var i=0;i<$('.user_comment').length;i++){
 	$('.fileElem').eq(i).attr('data_index',i);
 }
-
 $('.fileElem').on('change',function(){
 	fileIndex = $(this).attr('data_index');
-	handleFiles(this);
+	handleFiles(this);	
 })
 
 function handleFiles(obj) {
@@ -98,26 +96,24 @@ function handleFiles(obj) {
     img.height = '5rem';
     img.className = 'comment_photos';
 
-	if(limit>=5){
-    	alert('已超出数量');
-    }else{
-    	limit++;
-    	var imgObj = $('<div class="pic_box"><div class="cross_pic"></div></div>').append(img);
-		$('.fileList').eq(fileIndex).append(imgObj);
-
-		//点击x取消图片
-    	for(var i=0;i<$('.pic_box').length;i++){
+	var imgObj = $('<div class="pic_box"><div class="cross_pic"></div></div>').append(img);
+	$('.fileList').eq(fileIndex).append(imgObj);
+	if($('.fileList').eq(fileIndex).find('.pic_box').length>=5){
+		$('.filebox').eq(fileIndex).hide();
+	}
+	//点击x取消图片
+	for(var i=0;i<$('.pic_box').length;i++){
+		$('.pic_box').eq(i).attr('data_index',i);
+	}
+	$('.cross_pic').off('tap.removePic').on('tap.removePic',function(){
+		var index = $(this).parent('.pic_box').attr('data_index');
+		$('.pic_box').eq(index).remove();
+		for(var i=0;i<$('.pic_box').length;i++){
     		$('.pic_box').eq(i).attr('data_index',i);
     	}
-    	$('.cross_pic').off('tap').on('tap',function(){
-    		var index = $(this).parent('.pic_box').attr('data_index');
-    		$('.pic_box').eq(index).remove();
-    		for(var i=0;i<$('.pic_box').length;i++){
-	    		$('.pic_box').eq(i).attr('data_index',i);
-	    	}
-    		limit--;
-    	})
-    }
+    	
+	})
+
     
 }
 //倒计时
@@ -140,5 +136,50 @@ minute =(minute<10 ? "0"+minute:minute);
 second =(second<10 ? "0"+second:second);
 cc.innerHTML = day1+"天"+' '+hour+":"+minute+":"+second; 
 } 
+//跳转购物车
+$('.shopping_icon').off('tap').on('tap',function(){
+	$.post(config.shoppingCartShow,{'order_type':0,'uid':1370724016130198},function(datas){
+		window.localStorage.setItem('jump_btn','0');
+		window.location.href="firm_order.html";
+	})
+})
 
+function addCart(passData){
 
+	$.post(config.shoppingCart,passData,function(data){
+		//console.log(data);
+	})	
+
+}
+//提示3秒消失
+function showTips(msg){
+	$('.warming').show().html(msg);
+	setTimeout(function(){
+		$('.warming').hide();
+	},3000);	
+}
+
+//验证
+var validator = {
+	//验证电子邮箱 [@字符前可以包含字母、数字、下划线和点号；@字符后可以包含字母、数字、下划线和点号；@字符后至少包含一个点号且点号不能是最后一个字符；最后一个点号后只能是字母或数字]  
+	IsEmail: function(input) {
+		////邮箱名以数字或字母开头；邮箱名可由字母、数字、点号、减号、下划线组成；邮箱名（@前的字符）长度为3～18个字符；邮箱名不能以点号、减号或下划线结尾；不能出现连续两个或两个以上的点号、减号。  
+		//var regex = /^[a-zA-Z0-9]((?<!(\.\.|--))[a-zA-Z0-9\._-]){1,16}[a-zA-Z0-9]@([0-9a-zA-Z][0-9a-zA-Z-]{0,62}\.)+([0-9a-zA-Z][0-9a-zA-Z-]{0,62})\.?|((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$/;  
+		var regex = /^([\w-\.]+)@([\w-\.]+)(\.[a-zA-Z0-9]+)$/;
+		if(input.match(regex)) {
+			return true;
+		} else {
+			return false;
+		}
+	},
+	//验证电话号码（可以是固定电话号码或手机号码）  
+	IsPhoneNumber: function(input) {
+		var regex = /^((\+)?86|((\+)?86)?)0?1[3458]\d{9}$|^(((0\d2|0\d{2})[- ]?)?\d{8}|((0\d3|0\d{3})[- ]?)?\d{7})(-\d{3})?$/;
+		if(input.match(regex)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}

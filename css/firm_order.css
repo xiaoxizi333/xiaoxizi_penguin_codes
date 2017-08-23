@@ -117,6 +117,8 @@ body{
 }
 .product_name{
 	color: #5a5a5a;
+	width: 7rem;
+	line-height: 1.2rem;
 }
 .some_desc{
 	color:#9b9b9b;

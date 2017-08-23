@@ -42,7 +42,9 @@ $.post(config.userShow,{'uid':1370724016130198},function(datas){
 
 	$('.identity').val(obj.id_no);
 	$('.address_box').on('tap',function(){
+		window.localStorage.setItem('editNum','0');
 		window.location.href="edit_address.html";
+
 	})
 })
 

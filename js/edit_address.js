@@ -1,6 +1,6 @@
 
 //添加地址数据
-$.post(config.addressList,{'uid':'1370724016130198'},function(data){
+$.post(config.addressList,{'uid':1370724016130198},function(data){
 	//console.log(data);
 	console.log(data.result);
 	
@@ -63,10 +63,10 @@ $.post(config.addressList,{'uid':'1370724016130198'},function(data){
 	$('.more_address .address_box').on('tap',function(){
 		var toBeDefault = $(this).index()+1;
 		var addressId = addressObj[toBeDefault].id;
-		$.post(config.addressChange,{'uid':'1370724016130198',address_id:addressId},function(data){
+		$.post(config.addressChange,{'uid':1370724016130198,address_id:addressId},function(data){
 			$('.default_address').empty();
 			$('.more_address').empty();
-			$.post(config.addressList,{'uid':'1370724016130198'},function(data){
+			$.post(config.addressList,{'uid':1370724016130198},function(data){
 				//刷新页面
 				location.reload(); 
 			})

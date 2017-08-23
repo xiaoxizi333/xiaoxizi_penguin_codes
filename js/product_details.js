@@ -86,3 +86,13 @@ $('.hide_icon').on('tap',function(){
 	$('.mask').fadeOut(1000);
 })
 
+//购物车提示
+function showTip(){
+	$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
+	$('.mask').fadeOut(1000);
+	$('.add_cart').show();
+	setTimeout(function(){
+		$('.add_cart').hide();
+	},3000);	
+}
+

@@ -32,4 +32,9 @@ var config = {
 	orderAddOne:'http://101.201.115.31:14445/biz/item/shopping_cart/order_add_one.json',
 	selectOrders:'http://101.201.115.31:14445/biz/item/shopping_cart/select_orders.json',
 	unselectOrders:'http://101.201.115.31:14445/biz/item/shopping_cart/unselect_orders.json',
+	indexCoupon:'http://101.201.115.31:14445/web/all_can_take_coupon/list.json',
+	itemBilling:'http://101.201.115.31:14445/biz/item/item/billing.json',
+	billingAdd:'http://101.201.115.31:14445/biz/item/item/billing_add_one.json',
+	billingSub:'http://101.201.115.31:14445/biz/item/item/billing_sub_one.json',
+	oneCouponTake:'http://101.201.115.31:14445/web/one_coupon/take.json',
 }

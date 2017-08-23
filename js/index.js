@@ -45,8 +45,8 @@ $.post(config.commonBanner,{'class_type':'index'},function(data){
 		
 	}
 	$('.banner2_box').html(bannerBox);
-	var mySwiper = new Swiper('.banner_swiper .swiper-container', {
-		pagination : '.swiper-pagination',
+	var mySwiper = new Swiper('.banner_contain .swiper-container', {
+		pagination : '.page_box',
 		autoplay: 3000,//可选选项，自动滑动
 		autoplayDisableOnInteraction:false//使滑动效果不停止
 
@@ -139,7 +139,7 @@ $.post(config.indexModuleList,function(datas){
 			    	window.localStorage.setItem('itemID',itemID);
 			    	window.localStorage.setItem('itemSpecId',itemSpecId);
 			    	$.post(config.goodsLsitJump,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
-			    		console.log(datas);
+			    		//console.log(datas);
 			    		var saleStartTime = datas.result[0].data.sales_start_time;
 			    		var nowTime = Date.parse(new Date());
 			    		//console.log(saleStartTime)
@@ -217,6 +217,55 @@ $.post(config.indexModuleList,function(datas){
 		}
 	}
 	
+})
+
+
+//coupon
+$.post(config.indexCoupon,{},function(datas){
+	console.log(datas);
+	var obj = datas.result;
+	var coupon = '';
+	var bgPic;
+	for(var i=0;i<obj.length;i++){
+		var objTxt = obj[i].data;
+		//1.固定金额 3.折扣 13.满减
+		var chooseBg = objTxt.coupon_value_type_array[0];
+		var discount,couponName;
+		if(chooseBg==1){
+			bgPic = 'background-image: url(img/home_coupon_bg_1.png)';
+			discount = '<span class="money_mark">¥</span>'+objTxt.coupon_value;
+			couponName = objTxt.name;
+		}else if(chooseBg==3){
+			bgPic = 'background-image: url(img/home_coupon_bg_2.png)';
+			discount = objTxt.coupon_discount/10+' 折';
+			couponName = objTxt.name;
+		}else if(chooseBg==13){
+			bgPic = 'background-image: url(img/home_coupon_bg_3.png)';
+			discount = '<span class="money_mark">¥</span>'+objTxt.coupon_value;
+			couponName = '满'+objTxt.full_sub_value+'减'+objTxt.coupon_value;
+		}
+		coupon += '<div class="swiper-slide" data_id="'+obj[i].id+'">'+
+						'<a href="javascript:;" style="'+bgPic+'">'+
+							'<div class="text-center">'+couponName+'</div>'+
+							'<div class="coupon_price text-center">'+discount+'</div>'+
+						'</a>'+
+					'</div>';
+	}
+	$('.coupon .swiper-wrapper').html(coupon);
+	//优惠券滑动
+	var couponSwiper = new Swiper('.coupon .swiper-container', {
+	    slidesPerView: 'auto',
+	});
+	$('.coupon .swiper-slide').on('tap',function(){
+		var dataId = $(this).attr('data_id');
+		$.post(config.oneCouponTake,{'uid':1370724016130198,'coupon_id':dataId},function(datas){
+			if(datas.error_code==0){
+				showTips('领取成功~');
+			}else{
+				showTips(datas.error_msg);
+			}
+		});
+	})
 })
 
 //返回顶部

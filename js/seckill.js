@@ -65,7 +65,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	//套餐
 	var packageData;
 	if(datas.result.item_spec_template.length>0){
-		packageData = {'item_id':obj.item_id};
+		packageData = {'item_id':datas.result.item_spec_template[0].data.item_id};
 	}else{
 		packageData = {'item_id':datas.result.item_info[0].id};
 	}

@@ -46,7 +46,7 @@ $('.save_box').on('tap',function(){
 	}else if(addressDetail == ''||addressDetail == undefined){
 		alert('请填写详细地址');
 	}else{
-		$.post(config.addAddr,{'uid':'1370724016130198','contact_user_name':receiver,'contact_phone':phoneNum,'province':province,'city':city,'district':district,'street':addressDetail,'province_code':provinceCode,'city_code':cityCode,'district_code':districtCode},function(data){
+		$.post(config.addAddr,{'uid':1370724016130198,'contact_user_name':receiver,'contact_phone':phoneNum,'province':province,'city':city,'district':district,'street':addressDetail,'province_code':provinceCode,'city_code':cityCode,'district_code':districtCode},function(data){
 			console.log(data.error_msg)
 			if(data.error_code==0){
 				window.location.href = 'edit_address.html';

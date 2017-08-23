@@ -24,26 +24,32 @@ $('.invoice_title > span').on('tap',function(){
 	$('.invoice_title > span').removeClass('active');
 	$(this).addClass('active');
 })
-
-$.post(config.userOrderInvoice,{'user_order_id':1380669214229620},function(datas){
+var invoice_user_id = window.localStorage.getItem('invoice_user_id');
+console.log(invoice_user_id)
+$.post(config.userOrderInvoice,{'user_order_id':invoice_user_id},function(datas){
 	console.log(datas);
 	var obj = datas.result[0].data;
 	var typeIndex = obj.invoice_type;
 	var titleIndex = obj.invoice_title;
-	$('.receipt_type > span').removeClass('active');
-	$('.receipt_type > span').eq(typeIndex).addClass('active');
-	$('.invoice_title > span').removeClass('active');
-	$('.invoice_title > span').eq(titleIndex).addClass('active');
-	if(obj.pay_taxes_no!==null){
+	if(typeIndex!==undefined){
+		$('.receipt_type > span').removeClass('active');
+		$('.receipt_type > span').eq(typeIndex).addClass('active');
+	}
+	if(titleIndex!==undefined){
+		$('.invoice_title > span').removeClass('active');
+		$('.invoice_title > span').eq(titleIndex).addClass('active');
+	}	
+	
+	if(obj.pay_taxes_no!==undefined){
 		$('.pay_taxes').val(obj.pay_taxes_no);
 	}
-	if(obj.receive_company!==null){
+	if(obj.receive_company!==undefined){
 		$('.username').val(obj.receive_company);
 	}
-	if(obj.receive_company!==null){
+	if(obj.receive_company!==undefined){
 		$('.phone_num').val(obj.receive_phone);
 	}
-	if(obj.receive_email!==null){
+	if(obj.receive_email!==undefined){
 		$('.email_num').val(obj.receive_email);
 	}
 })
@@ -55,15 +61,31 @@ $('footer').on('tap',function(){
 	var phoneNum = $('.phone_num').val();
 	var emailNum = $('.email_num').val();
 	window.localStorage.setItem('whichShow',receiptType);
-
 	if(receiptType==0){
-		$.post(config.receipt,{'user_order_id':1380669214229620,'invoice_title':receiptTitle,'invoice_type':receiptType,'receive_company':companyNm,'pay_taxes_no':payTaxes},function(data){
-			window.location.href="firm_order.html";
-		})
+		if($('.username').val()==''){
+			showTips('请填写名称');
+		}else if($('.pay_taxes').val()==''){
+			showTips('请填写纳税人识别号');
+		}else{
+			$.post(config.receipt,{'user_order_id':invoice_user_id,'invoice_title':receiptTitle,'invoice_type':receiptType,'receive_company':companyNm,'pay_taxes_no':payTaxes},function(data){
+				//console.log(data);
+				
+				window.location.href="firm_order.html";
+			})
+		}
+		
 	}else if(receiptType==1){
-		$.post(config.receipt,{'user_order_id':1380669214229620,'invoice_title':receiptTitle,'invoice_type':receiptType,'receive_phone':phoneNum,'receive_email':emailNum},function(data){
-			window.location.href="firm_order.html";
-		})
+		if(!validator.IsPhoneNumber($('.phone_num').val())){
+			showTips('请填写正确手机号');
+		}else if(!validator.IsEmail($('.email_num').val())){
+			showTips('请填写正确邮箱');
+		}else{
+			$.post(config.receipt,{'user_order_id':invoice_user_id,'invoice_title':receiptTitle,'invoice_type':receiptType,'receive_phone':phoneNum,'receive_email':emailNum},function(data){
+				//console.log(data);
+				window.location.href="firm_order.html";
+			})
+		}
+		
 	}
 
 
