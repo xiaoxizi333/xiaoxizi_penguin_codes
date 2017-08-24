@@ -94,7 +94,9 @@ $.post(config.addressList,{'uid':1370724016130198,'address_id':arrData.addressId
 						
 					}else if(arrData.editNum=='1'){
 						window.location.href = 'firm_order.html';
-					}					
+					}else if(arrData.editNum=='2'){
+						window.location.href = 'personal.html';
+					}				
 				}
 			})
 		}

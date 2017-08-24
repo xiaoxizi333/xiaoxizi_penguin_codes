@@ -67,46 +67,37 @@ $('#search').on('keydown',function(e){
 //通栏类型 1.大通栏 2.双拼通栏3.组合通栏(左边大图)4.组合通栏(右边大图)\
 //商品列表：获取module_id
 $.post(config.indexModuleList,function(datas){
-	//console.log(datas);
+	console.log(datas);
 	var obj = datas.result;
-	var pic = '';
+	var arr = [];
 	for(var i=0;i<obj.length;i++){
 		var moduleType = obj[i].data.no_identifier;
+		
 		//console.log(moduleType)
 		if(moduleType=='TLGG'){
 			$('<div class="pic_module clearfix"></div>').appendTo($('.pic_module_box'));
 			var bannerType = obj[i].data.banner_type;
 			var jumpUrl = obj[i].data.jump_urls;
 			var advertisementObj = obj[i].data.banner_urls;
+			
+			
 			for(var j=0;j<advertisementObj.length;j++){
-				var pic_url;
-				if(bannerType==1){
-					pic_url = 'sort1';
-				}else if(bannerType==2){
-					pic_url = 'sort2';
-				}else if(bannerType==3){
-					pic_url = 'sort3';
-				}else if(bannerType==4){
-					pic_url = 'sort4';
-				}
 				if(advertisementObj!==undefined){
-					if(jumpUrl==undefined){
+					//if(jumpUrl==undefined){
 						pic += '<div class="sorts '+pic_url+'"><img src="'+advertisementObj[j]+'"></div>';
-					}else{
-						if(jumpUrl[j]!==undefined&&jumpUrl[j]!==""){
-							pic += '<div class="sorts '+pic_url+'"><a href="'+jumpUrl[j]+'"><img src="'+advertisementObj[j]+'"></a></div>';
-						}else{
-							pic += '<div class="sorts '+pic_url+'"><a><img src="'+advertisementObj[j]+'"></a></div>';
-						}
+					//}else{
+						//if(jumpUrl[j]!==undefined&&jumpUrl[j]!==""){
+							//pic += '<div class="sorts '+pic_url+'"><a href="'+jumpUrl[j]+'"><img src="'+advertisementObj[j]+'"></a></div>';
+						//}else{
+							//pic += '<div class="sorts '+pic_url+'"><a><img src="'+advertisementObj[j]+'"></a></div>';
+						//}
 						
-					}
+					//}
+
 				}
-				
 
 			}
-			for(var j=0;j<$('.pic_module').length;j++){
-				$('.pic_module').eq(j).html(pic);
-			}			
+			//$('.pic_module').eq(tlggIndex).html(pic);	
 
 		}
 		if(moduleType=='SPLB'){
@@ -222,7 +213,7 @@ $.post(config.indexModuleList,function(datas){
 
 //coupon
 $.post(config.indexCoupon,{},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result;
 	var coupon = '';
 	var bgPic;
@@ -256,7 +247,7 @@ $.post(config.indexCoupon,{},function(datas){
 	var couponSwiper = new Swiper('.coupon .swiper-container', {
 	    slidesPerView: 'auto',
 	});
-	$('.coupon .swiper-slide').on('tap',function(){
+	$('.coupon .swiper-slide').on('click',function(){
 		var dataId = $(this).attr('data_id');
 		$.post(config.oneCouponTake,{'uid':1370724016130198,'coupon_id':dataId},function(datas){
 			if(datas.error_code==0){

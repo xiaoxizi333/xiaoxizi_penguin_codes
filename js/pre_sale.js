@@ -1,14 +1,10 @@
 //商品详情
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	
-	//console.log(datas);
+	console.log(datas);
 
 	var obj = datas.result.item_info[0].data;
-	$('.product_name').html(obj.name);
-	var salePoints = obj.sales_points;
-	for(var i=0;i<salePoints.length;i++){
-		$('.det').append(salePoints[i]);
-	}
+
 	if(datas.result.item_spec_template.length>0){
 		$('.specific_cost').html('¥'+obj.real_price);
 	}else{
@@ -26,24 +22,6 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	saleMinutes =(saleMinutes<10 ? "0"+saleMinutes:saleMinutes);
 	$('.specific_date').html(saleMonth+'月'+saleDay+'日');
 	$('.specific_time').html(saleHours+':'+saleMinutes);
-
-	$('.sale_counts').html(obj.sales_count);
-
-	//默认选择
-	if(obj.spec1==undefined&&obj.spec2==undefined&&obj.spec3==undefined){
-		$('.default_style').hide();
-	}else{
-		$('.default_style').show();
-		if(obj.spec1!==undefined){
-			$('.default_style').append('<span>'+obj.spec1+'</span>'+' ');
-		}
-		if(obj.spec2!==undefined){
-			$('.default_style').append('<span>'+obj.spec2+'</span>'+' ');
-		}
-		if(obj.spec3!==undefined){
-			$('.default_style').append('<span>'+obj.spec3+'</span>');
-		}
-	}
 
 	//选择规格
 	var itemTemplate = datas.result.item_spec_template;

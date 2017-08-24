@@ -1,3 +1,6 @@
+body{
+	padding-bottom: 3.75rem;
+}
 .order_box,.customer_service{
 	color:#5a5a5a;
 	letter-spacing:-0.34px;
@@ -65,6 +68,9 @@
 	background: #fff;
 	height: 3.75rem;
 	line-height: 3.75rem;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
 }
 .service{
 	position: relative;

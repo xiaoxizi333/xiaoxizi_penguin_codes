@@ -41,15 +41,8 @@ $.post(config.commonBanner,{'class_type':'prime'},function(datas){
 
 //商品列表
 //分页
-var page_num = 1;
-getdata(page_num);
+getdata(1);
 
-$(window).scroll(function() {
-    if (window.scrollY  >= $(document).height() - $(window).height()) {		
-		//console.log(scrollY)
-		getdata(page_num++);
-    }
-});
 filterGoods('prime');
 $('.filter_tab li a').on('tap',function(){
 	$('.filter_tab li a').removeClass('active');
@@ -70,6 +63,16 @@ function getdata(page){
 			html += '<div data_num="'+i+'" class="detail_pic"><img src="'+obj[i].data.title_pics[0]+'" class="details"></div>';
 		}
 		$('.details_info').html(html);
+		$(window).scroll(function() {
+		    if (window.scrollY  >= $(document).height() - $(window).height()) {		
+				//console.log(scrollY)
+				//console.log(datas.total_count%20);
+				if(datas.total_count%20==0){
+					getdata(datas.total_count/20+1);
+				}
+			
+	   		}
+		});
 	})
 
 }

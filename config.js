@@ -37,4 +37,6 @@ var config = {
 	billingAdd:'http://101.201.115.31:14445/biz/item/item/billing_add_one.json',
 	billingSub:'http://101.201.115.31:14445/biz/item/item/billing_sub_one.json',
 	oneCouponTake:'http://101.201.115.31:14445/web/one_coupon/take.json',
+	userOrderList:'http://101.201.115.31:14445/web/user_order/order_list.json',
+	myCouponList:'http://101.201.115.31:14445/web/my_coupon/list.json',
 }

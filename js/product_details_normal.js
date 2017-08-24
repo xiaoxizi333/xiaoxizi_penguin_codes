@@ -3,32 +3,13 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 
 	var obj = datas.result.item_info[0].data;
 	console.log(obj)
-	$('.product_name').html(obj.name);
-	var salePoints = obj.sales_points;
-	for(var i=0;i<salePoints.length;i++){
-		$('.det').append(salePoints[i]);
-	}
+	
 	if(datas.result.item_spec_template.length>0){
 		$('.specific_cost').html('¥'+obj.real_price);
 	}else{
 		$('.specific_cost').html('¥'+obj.range_price);
 	}
-	$('.sale_counts').html(obj.sales_count);
-	//默认选择
-	if(obj.spec1==undefined&&obj.spec2==undefined&&obj.spec3==undefined){
-		$('.default_style').hide();
-	}else{
-		$('.default_style').show();
-		if(obj.spec1!==undefined){
-			$('.default_style').append('<span>'+obj.spec1+'</span>'+' ');
-		}
-		if(obj.spec2!==undefined){
-			$('.default_style').append('<span>'+obj.spec2+'</span>'+' ');
-		}
-		if(obj.spec3!==undefined){
-			$('.default_style').append('<span>'+obj.spec3+'</span>');
-		}
-	}
+
 	//套餐
 	var packageData;
 	if(datas.result.item_spec_template.length>0){
@@ -93,7 +74,9 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 				if(index =='0'){		
 					var cartData = {'uid':1370724016130198,'item_id':itemID};
 					addCart(cartData);
-					showTip();
+					$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
+					$('.mask').fadeOut(1000);
+					showTips('添加成功~');
 			
 				}else if(index =='1'){
 					var cartData = {'uid':1370724016130198,'item_id':itemID};
@@ -157,7 +140,9 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 
 							var cartData = {'uid':1370724016130198,'item_id':itemID,'spec1':spec1_data,'spec2':spec2_data,'spec3':spec3_data,'num':$('.add_or_substract .specific_num').html()};
 							addCart(cartData);
-							showTip();
+							$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
+							$('.mask').fadeOut(1000);
+							showTips('添加成功~');
 						}
 					})
 				//立即购买	

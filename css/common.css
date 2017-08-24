@@ -38,7 +38,7 @@ a,a:focus,a:hover{
 .swiper-pagination-bullet-active{
 	background:#f8b8af;
 }
-.warming,.add_cart{
+.warming{
 	padding: 1rem;
 	line-height: 1rem;
 	background-color: rgba(63,60,71,.7);
@@ -49,4 +49,11 @@ a,a:focus,a:hover{
 	margin-top: -1.5rem;
 	margin-left: -4rem;
 	display: none;
+	z-index: 10000;
+}
+/*背景图*/
+.bg{
+	background-position: center center;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
 }

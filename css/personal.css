@@ -129,12 +129,18 @@ header{
 	color:#9b9b9b;
 }
 .go_order{
+	height: 1.0625rem;
+	margin-bottom: 1.25rem;
+	text-align: right;
+}
+.go_order a{
+	height: 1.0625rem;
+	width: 3rem;
+	display: inline-block;
 	background-repeat: no-repeat;
 	background-image: url(../img/arrow.png);
 	background-position: right center;
 	background-size: 1.0625rem 1.0625rem;
-	height: 1.0625rem;
-	margin-bottom: 1.25rem;
 }
 .product_photo{
 	width: 5.3125rem;
@@ -142,12 +148,15 @@ header{
 	margin-right: 0.625rem;
 	margin-bottom: 1.5625rem;
 }
-.product_photo img{
-	width: 100%;
-	height: 100%;
-}
 .product_info,.product_price{
 	margin-top: 0.9375rem;
+}
+.product_info{
+	width: 10rem;
+	line-height: 1.2rem;	
+}
+.product_name{
+	margin-bottom: 0.3125rem;
 }
 .real_price{
 	margin-bottom: 0.3125rem;
@@ -207,13 +216,13 @@ div.my_coupon{
 	position: relative;
 }
 .user_name{
-	margin-bottom: 2.375rem;
+	margin-bottom: 1.25rem;
 }
 .edit_address{
 	color:#c46566;
 	font-family:'PingFangSC-Light';
 	text-align: right;
-	margin-bottom: 2.8125rem;
+	margin-bottom: 1.25rem;
 	line-height: 1.5625rem;
 }
 .address_details{

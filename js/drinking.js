@@ -44,14 +44,8 @@ $.post(config.commonBanner,{'class_type':'drink'},function(datas){
 
 //商品列表
 //分页
-var page_num = 1;
-getdata(page_num);
-$(window).scroll(function() {
-    if (window.scrollY  >= $(document).height() - $(window).height()) {		
-		//console.log(scrollY)
-		getdata(page_num++);
-    }
-});
+getdata(1);
+
 filterGoods('drink');
 $('.filter_tab li a').on('tap',function(){
 	$('.filter_tab li a').removeClass('active');
@@ -65,13 +59,24 @@ function getdata(page){
 		data.page=page;
 	}
 	$.post(config.primeDrinkList,{'drink_or_prime':'drink','page':data.page},function(datas){
-		//console.log(datas)
+		console.log(datas)
+		//console.log(data.page)
 		var obj = datas.result;
 		var html = '';
 		for(var i=0;i<obj.length;i++){
 			html += '<div data_num="'+i+'" class="detail_pic"><img src="'+obj[i].data.title_pics[0]+'" class="details"></div>';
 		}
 		$('.details_info').append(html);
+		$(window).scroll(function() {
+		    if (window.scrollY  >= $(document).height() - $(window).height()) {		
+				//console.log(scrollY)
+				//console.log(datas.total_count%20);
+				if(datas.total_count%20==0){
+					getdata(datas.total_count/20+1);
+				}
+			
+	   		}
+		});
 	})
 
 }
