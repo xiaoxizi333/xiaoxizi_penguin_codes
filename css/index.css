@@ -127,32 +127,25 @@ header{
 	height: 100%;
 }
 /*4种类型的排版*/
-.sorts{
+.sorts a{
 	float: left;
+	display: block;
 	width: 50%;
 }
 .sorts img{
 	width: 100%;
 }
-.sort1{
+.sort1 a{
 	width: 100%;
 }
-.sort3 img{
-	width: 50%;
-}
-/*
-.sort4 img{
-	width: 100%;
-}*/
-
-/*item_pic 图片测试边框*/
+/*goods_list*/
 .goods_list .swiper-slide{
-	width:18.75rem!important;
+	width:22.5rem!important;
 }
 .goods_list .swiper-slide img{
 	box-sizing: border-box;
-	border: 1px solid #000;
-	width:18.75rem!important;
+	width:22.5rem!important;
+	height: 11.875rem;
 }
 /*go_top*/
 .go_top{
@@ -181,5 +174,22 @@ header{
   height: 1.5625rem;
   line-height: 1.5625rem;
 }
-
+/*通栏文字*/
+.tlwz{
+	font-family: 'PingFangSC-Thin';
+	font-size: 0.875rem;
+	line-height: 1.125rem;
+	color: #5a5a5a;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	background-color: #fff;
+}
+.tlwz>div{
+	border-bottom: 1px solid rgba(151,151,151,.2);
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+.tlwz:last-child >div{
+	border-bottom:none;
+}
 

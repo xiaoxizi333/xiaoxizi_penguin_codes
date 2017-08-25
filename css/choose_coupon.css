@@ -1,0 +1,63 @@
+body{
+	padding-left:1.25rem;
+	padding-right:1.25rem;
+	padding-top:1.25rem;
+	color: #5a5a5a;
+	font-size: 0.875rem;
+}
+.no_use,.coupon_info{
+	background-color: #fff;
+	margin-bottom:1.25rem;
+	box-shadow:0 2px 4px 0 rgba(0,0,0,0.10);
+	padding-left: 0.625rem;	
+} 
+.no_use{
+	padding-bottom: 0.625rem;
+	padding-top: 0.625rem;
+}
+.no_use > span{
+	display: block;
+}
+.choose_icon,.use_icon{
+	display: inline-block;
+	width: 1.875rem;
+	height: 1.625rem;
+	background-repeat: no-repeat;
+	background-size: 1.25rem 1.25rem;
+	background-position: left center;
+	background-image: url(../img/choose_selected.png);
+}
+/*coupon_list*/
+.coupon_info{
+	height: 7.5rem;
+	padding-top: 1.375rem;
+	position: relative;
+}
+.coupon_info > div{
+	line-height: 1.5rem;
+}
+.price{
+	font-family:'PingFangSC-Regular';
+	color: #c46566;
+	margin-bottom: 0.625rem;
+}
+.limit_date{
+	color: #9b9b9b;
+}
+.use_icon{
+	position: absolute;
+	right: 1.875rem;
+	top: 50%;
+	margin-top: -0.8125rem;
+}
+.lack{
+	width: 6.25rem;
+	height: 6.25rem;
+	border-radius: 50%;
+	display: block;
+	background-color: #f2f2f2;
+	position: absolute;
+	right: -5.125rem;
+	top: 50%;
+	margin-top: -3.125rem; 
+}
