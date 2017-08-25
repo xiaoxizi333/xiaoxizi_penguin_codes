@@ -107,6 +107,8 @@ function handleFiles(obj) {
 	}
 	$('.cross_pic').off('tap.removePic').on('tap.removePic',function(){
 		var index = $(this).parent('.pic_box').attr('data_index');
+		var showAdd = $(this).parents('.fileList').attr('data_index');
+		$('.filebox').eq(showAdd).show();
 		$('.pic_box').eq(index).remove();
 		for(var i=0;i<$('.pic_box').length;i++){
     		$('.pic_box').eq(i).attr('data_index',i);

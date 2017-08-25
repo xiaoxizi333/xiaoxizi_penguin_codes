@@ -40,6 +40,7 @@ body{
 	font-family:'PingFangSC-Regular';
 	color: #c46566;
 	margin-bottom: 0.625rem;
+	font-size: 1rem;
 }
 .limit_date{
 	color: #9b9b9b;
@@ -49,6 +50,7 @@ body{
 	right: 1.875rem;
 	top: 50%;
 	margin-top: -0.8125rem;
+	background-position: right center;
 }
 .lack{
 	width: 6.25rem;
