@@ -1,5 +1,4 @@
-
-$.post(config.userShow,{'uid':1370724016130198},function(datas){
+$.post(config.userShow,{'uid':uid},function(datas){
 	console.log(datas);
 	
 	var obj = datas.result[0].user_data;
@@ -51,8 +50,8 @@ $.post(config.userShow,{'uid':1370724016130198},function(datas){
 $('.save').on('tap',function(){
 	var birthdayStr = Date.parse($('#start_date').val());
 	var genderId = window.localStorage.getItem('sex')*1;
-	$.post(config.userUpdate,{'uid':1370724016130198,'real_name':$('.username').val(),'birthday':birthdayStr,'user_name':$('.nickname').val(),'id_no':$('.identity').val(),'user_profile_pic':$('#preview img').attr('src'),'gender':genderId,'phone':$('.phone_num').val(),},function(datas){
-		
+	$.post(config.userUpdate,{'uid':uid,'real_name':$('.username').val(),'birthday':birthdayStr,'user_name':$('.nickname').val(),'id_no':$('.identity').val(),'user_profile_pic':$('#preview img').attr('src'),'gender':genderId,'phone':$('.phone_num').val(),},function(datas){
+		window.location.href="personal.html";
 	})
 })
 

@@ -1,5 +1,6 @@
+
 //地址
-$.post(config.addressList,{'uid':1370724016130198},function(data){
+$.post(config.addressList,{'uid':uid},function(data){
 	var addressObj = data.result;
 	//console.log(addressObj);
 	for(var i=0;i<addressObj.length;i++){
@@ -19,27 +20,41 @@ $.post(config.addressList,{'uid':1370724016130198},function(data){
 		window.localStorage.setItem('editNum','1');
 	})
 })
-
 //商品列表
 var cartOrBuy =  window.localStorage.getItem('jump_btn');
 if(cartOrBuy=='0'){
-	$.post(config.shoppingCartShow,{'order_type':0,'uid':1370724016130198},function(datas){
-		console.log(datas);
-		window.localStorage.setItem('invoice_user_id',datas.result.user_order[0].id);
+	$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
+		//console.log(datas);
 		var obj = datas.result.order;
+		window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
+		//添加身份证号码显示
+		var idNum = datas.result.user_order[0].data.id_no;
+		$('.fill_id input').val(idNum);
+		$('.save_id').on('tap',function(){
+			if(validator.IsIDCard($('.fill_id input').val())){
+				$.post(config.idNoSave,{'user_order_id':datas.result.user_order[0].id,'id_no':$('.fill_id input').val()},function(datas){
+					if(datas.error_code==0){
+						alert('保存成功～');
+					}else{
+						alert(datas.error_msg);
+					}
+				})
+			}else{
+				alert('请输入正确的身份证号码～')
+			}		
+		})
 		var list = '';
 		var desc = '';
 		for(var i=0;i<obj.length;i++){
-			
 			list += '<div class="product_info_box" style="position:relative" data_id="'+obj[i].id+'">'+
 						'<div class="product_info clearfix">'+
 							'<div class="choose_icon"></div>'+
 							'<div class="specific_photo pull-left">'+
 								'<img src="'+obj[i].data.title_pics[0]+'" style="width: 100%;height: 100%" alt="">'+
 							'</div>'+
-							'<div class="description pull-left">'+
+							'<div class="description pull-left" style="width:6rem">'+
 								'<div class="product_name">'+obj[i].data.name+'</div>'+
-								'<div class="some_desc"></div>'+
+								'<div class="some_desc"></div>'+ 
 							'</div>'+
 							'<div class="about_num pull-right text-right">'+
 								'<div class="price">¥'+obj[i].data.real_price+'</div>'+
@@ -64,8 +79,9 @@ if(cartOrBuy=='0'){
 				$('.some_desc').eq(i).append(desc);	
 			}
 			if(obj[i].data.is_selected==1){
-				$('.choose_icon').addClass('active');
-				
+				$('.choose_icon').addClass('active');				
+			}else if(obj[i].data.is_selected==0){
+				$('.choose_icon').removeClass('active');
 			}
 		}
 		//选择购物车商品
@@ -73,58 +89,51 @@ if(cartOrBuy=='0'){
 			$(this).toggleClass('active');
 			var dataId = $(this).parents('.product_info_box').attr('data_id');
 			if($(this).hasClass('active')){
-				$.post(config.selectOrders,{'uid':1370724016130198,'order_ids':dataId,'order_type':0},function(datas){
+				$.post(config.selectOrders,{'uid':uid,'order_ids':dataId,'order_type':0},function(datas){
 					//console.log(datas);
-					window.localStorage.setItem('invoice_user_id',datas.result.user_order[0].id);
 					$('.total_info .total_price').html('¥'+datas.result.shopping_cart[0].data.real_total_price);
 				})
 			}else{
-				$.post(config.unselectOrders,{'uid':1370724016130198,'order_ids':dataId,'order_type':0},function(datas){
+				$.post(config.unselectOrders,{'uid':uid,'order_ids':dataId,'order_type':0},function(datas){
 					//console.log(datas);
-					window.localStorage.setItem('invoice_user_id',datas.result.user_order[0].id);
 					$('.total_info .total_price').html('¥'+datas.result.shopping_cart[0].data.real_total_price);
-				})
-				
-			}
-			
+				})	
+			}	
 		})
-
 		//弹窗 加减数量
 		var numArr = [];
 		for(var i=0;i<$('.product_detail_info .product_info_box').length;i++){
 			var num = parseInt($('.specific_num').eq(i).html());
 			numArr.push(num);
 		}
-
 		$('.add_or_substract a').on('tap',function(){
 			var dataId = $(this).parents('.product_info_box').attr('data_id')*1;
 			//console.log(dataId)
 			var dataNum = $(this).parent().attr('data_num');
 			var index = $(this).index();
-
 			if(index==0){	
 				if(numArr[dataNum] <= 1){
 					$('.specific_num').eq(dataNum).html(1);	
 				}else{
 					//order_type：0 购物车 1 立即购买
-					$.post(config.orderSubOne,{'uid':1370724016130198,'order_id':dataId,'order_type':0},function(datas){
+					$.post(config.orderSubOne,{'uid':uid,'order_id':dataId,'order_type':0},function(datas){
 						//console.log(datas);
-						window.localStorage.setItem('invoice_user_id',datas.result.user_order[0].id);
 						$('.specific_num').eq(dataNum).html(--numArr[dataNum]);	
 						$('.total_info .total_price').html('¥'+datas.result.shopping_cart[0].data.total_price);
-					})
-					
+						window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+					})					
 				}
 			}else if(index==2){
-				$.post(config.orderAddOne,{'uid':1370724016130198,'order_id':dataId,'order_type':0},function(datas){
+				$.post(config.orderAddOne,{'uid':uid,'order_id':dataId,'order_type':0},function(datas){
 					//console.log(datas);
-					window.localStorage.setItem('invoice_user_id',datas.result.user_order[0].id);
 					$('.specific_num').eq(dataNum).html(++numArr[dataNum]);
 					$('.total_info .total_price').html('¥'+datas.result.shopping_cart[0].data.total_price);
+					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
 				})
 			}
 		})
 		deleteGoods();
+		isPreserve();
 	})
 }else if(cartOrBuy=='1'){
 	var list = '<div class="product_info_box" style="position:relative" data_id="'+window.localStorage.getItem('goods_id')+'">'+
@@ -152,7 +161,7 @@ if(cartOrBuy=='0'){
 	$('.product_detail_info').html(list);
 	$('.some_desc').html(window.localStorage.getItem('goods_desc'));
 	$('.total_info .total_price').html('¥'+window.localStorage.getItem('goods_prcie')*window.localStorage.getItem('goods_count'));
-	$('.is_coupon').html(window.localStorage.getItem('goods_coupon'))
+	$('.is_coupon').html(window.localStorage.getItem('goods_coupon'));
 	//弹窗加减
 	$('.add_or_substract a').on('tap',function(){
 		var dataId = $(this).parents('.product_info_box').attr('data_id')*1;
@@ -162,39 +171,36 @@ if(cartOrBuy=='0'){
 			if(num <= 1){
 				$('.specific_num').html(1);	
 			}else{
-
-				$.post(config.billingSub,{'uid':1370724016130198,'order_id':dataId},function(datas){
-					//console.log(datas);
-					window.localStorage.setItem('invoice_user_id',datas.result.user_order[0].id);
+				$.post(config.billingSub,{'uid':uid,'order_id':dataId},function(datas){
+					console.log(datas);
 					$('.specific_num').html(datas.result.order[0].data.total_count);	
 					$('.total_info .total_price').html('¥'+datas.result.shopping_cart[0].data.total_price);
 					window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
-				})
-				
+					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+				})				
 			}
 		}else if(index==2){
-			$.post(config.billingAdd,{'uid':1370724016130198,'order_id':dataId},function(datas){
-				console.log(datas);
-				window.localStorage.setItem('invoice_user_id',datas.result.user_order[0].id);
+			$.post(config.billingAdd,{'uid':uid,'order_id':dataId},function(datas){
+				//console.log(datas);
 				$('.specific_num').html(datas.result.order[0].data.total_count);
 				$('.total_info .total_price').html('¥'+datas.result.shopping_cart[0].data.total_price);
 				window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
+				window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
 			})
 		}
 
-	})
-	deleteGoods();
+	});
+	isPreserve();
 
 }
+
 //右滑删除
 function prevent_default(e) {
     e.preventDefault();
 }
-
 function disable_scroll() {
     $(document).on('touchmove', prevent_default);
 }
-
 function enable_scroll() {
     $(document).unbind('touchmove', prevent_default)
 }
@@ -204,7 +210,6 @@ function deleteGoods(){
 	    .on('touchstart', function(e) {
 	        $('.product_info').css('left', '0px') 
 	        x = e.originalEvent.targetTouches[0].pageX;
-
 	    })
 	    .on('touchmove', function(e) {
 	        var change = e.originalEvent.targetTouches[0].pageX - x
@@ -215,7 +220,6 @@ function deleteGoods(){
 	    .on('touchend', function(e) {
 	        var left = parseFloat(e.currentTarget.style.left);
 	        var new_left;
-
 	        if (left < -35) {
 	            new_left = -$('.behind').width();
 	        } else {
@@ -228,15 +232,12 @@ function deleteGoods(){
 	$('.delete-btn').on('tap',function(){
 		var orderId = $(this).parent().parent().attr('data_id');
 		//console.log(orderId);
-
-		$.post(config.sRemoveOrder,{'uid':1370724016130198,'order_ids':orderId},function(data){
+		$.post(config.sRemoveOrder,{'uid':uid,'order_ids':orderId},function(data){
 			//console.log(data);
 			if(data.error_code==0){
 				alert('删除成功');
-				window.localStorage.setItem('invoice_user_id',datas.result.user_order[0].id);
 				location.reload();
 			}else{
-				window.localStorage.setItem('invoice_user_id',datas.result.user_order[0].id);
 				alert(data.error_msg);
 			}
 			if($('.product_info_box').length==0){
@@ -247,22 +248,63 @@ function deleteGoods(){
 		})
 	})
 }
-
-
-
-
 //delivery
 $('.delivery_type ul > li .is_choose_icon').off('tap').on('tap',function(){
-	var index = $(this).attr('choose_num');
+	var index = $(this).attr('choose_num')*1;
 	$('.delivery_type ul > li').removeClass('active');
 	$('.delivery_type ul > li').eq(index).addClass('active');
-})
+});
+//显示暂存选择
+function isPreserve(){
+	var user_order_id = window.localStorage.getItem('user_order_id')*1;
+	$.post(config.isPrestore,{'user_order_id':user_order_id},function(datas){
+		console.log(datas);
+		var preserve_id = datas.result[0].data.is_prestore;
+		if(preserve_id==0){
+			$('.preserve').removeClass('active');
+		}else if(preserve_id==1){
+			$('.preserve').addClass('active');
+		}
+	})
+	var if_selected = false;
+	$('.preserve .is_choose_icon').off('tap').on('tap',function(){
+		//暂存选择
+		var prestoreData;
+		var user_order_id = window.localStorage.getItem('user_order_id')*1;
+		if(if_selected){
+			$('.preserve').removeClass('active');
+			prestoreData = {'is_prestore':0,'user_order_id':user_order_id}
+			if_selected = false;
+		}else{
+			$('.preserve').addClass('active');
+			prestoreData = {'is_prestore':1,'user_order_id':user_order_id}
+			if_selected = true;
+		}
+		$.post(config.isPrestore,prestoreData,function(datas){
+			//console.log(datas)
+		})
+	})
+}
 
 //发票
 $('.proof_box').on('click',function(){
-	$.post(config.userOrderInvoice,{'user_order_id':window.localStorage.getItem('invoice_user_id')},function(data){
+	userOrderId();
+	$.post(config.userOrderInvoice,{'user_order_id':window.localStorage.getItem('user_order_id')*1},function(data){
 		window.location.href="receipt.html";
-	})	
+	})			
+})
+//优惠券
+$('.total_info li').eq(1).on('tap',function(){
+	userOrderId();
+	window.location.href="choose_coupon.html";
 })
 
-
+//重新获取user_order_id
+function userOrderId(){
+	if(cartOrBuy=='0'){
+		$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
+			window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
+			console.log(datas.result.user_order[0].id)
+		})
+	}
+}

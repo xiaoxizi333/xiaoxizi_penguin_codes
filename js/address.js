@@ -5,7 +5,7 @@ var arrData = {
 	'editNum':window.localStorage.getItem('editNum'),
 }
 
-$.post(config.addressList,{'uid':1370724016130198,'address_id':arrData.addressId},function(data){
+$.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(data){
 	//console.log(data);
 	console.log(areadata);
 	var html = '',

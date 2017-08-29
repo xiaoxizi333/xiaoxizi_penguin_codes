@@ -36,7 +36,7 @@ $.ajax({
     }
  })
 $('.buy').on('tap',function(){
-    $.post(config.billing,{'uid':1370724016130198,'item_group_id':groupId.group_id_array[0]},function(data){
+    $.post(config.billing,{'uid':uid,'item_group_id':groupId.group_id_array[0]},function(data){
         //console.log(data)
         if(data.error_code==0){
           window.location.href="firm_order.html";

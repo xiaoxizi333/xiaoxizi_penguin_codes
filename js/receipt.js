@@ -1,14 +1,15 @@
 //receipt type
-
 var whichShow = window.localStorage.getItem('whichShow');
 //console.log(whichShow);
+if(whichShow==null){
+	whichShow = 1;
+}
 showType(whichShow);
 $('.receipt_type > span').on('tap',function(){
 	$('.receipt_type > span').removeClass('active');
 	$(this).addClass('active');
 	var index = $(this).index();
-	showType(index);
-	
+	showType(index);	
 })
 function showType(index){
 	if(index==0){
@@ -24,8 +25,7 @@ $('.invoice_title > span').on('tap',function(){
 	$('.invoice_title > span').removeClass('active');
 	$(this).addClass('active');
 })
-var invoice_user_id = window.localStorage.getItem('invoice_user_id');
-console.log(invoice_user_id)
+var invoice_user_id = window.localStorage.getItem('user_order_id');
 $.post(config.userOrderInvoice,{'user_order_id':invoice_user_id},function(datas){
 	console.log(datas);
 	var obj = datas.result[0].data;
@@ -39,7 +39,6 @@ $.post(config.userOrderInvoice,{'user_order_id':invoice_user_id},function(datas)
 		$('.invoice_title > span').removeClass('active');
 		$('.invoice_title > span').eq(titleIndex).addClass('active');
 	}	
-	
 	if(obj.pay_taxes_no!==undefined){
 		$('.pay_taxes').val(obj.pay_taxes_no);
 	}
@@ -68,12 +67,10 @@ $('footer').on('tap',function(){
 			showTips('请填写纳税人识别号');
 		}else{
 			$.post(config.receipt,{'user_order_id':invoice_user_id,'invoice_title':receiptTitle,'invoice_type':receiptType,'receive_company':companyNm,'pay_taxes_no':payTaxes},function(data){
-				//console.log(data);
-				
+				//console.log(data);				
 				window.location.href="firm_order.html";
 			})
-		}
-		
+		}		
 	}else if(receiptType==1){
 		if(!validator.IsPhoneNumber($('.phone_num').val())){
 			showTips('请填写正确手机号');
@@ -84,9 +81,7 @@ $('footer').on('tap',function(){
 				//console.log(data);
 				window.location.href="firm_order.html";
 			})
-		}
-		
+		}		
 	}
-
 
 })

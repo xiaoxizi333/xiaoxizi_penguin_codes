@@ -7,7 +7,7 @@ function getdata(page){
 	if(page!==undefined){
 		pageData.page=page;
 	}
-	$.post(config.userOrderList,{'uid':1370724016130198,'page':pageData.page},function(datas){
+	$.post(config.userOrderList,{'uid':uid,'page':pageData.page},function(datas){
 		var obj = datas.result.list;
 		var orderBox = '',
 			realOrderList = '';

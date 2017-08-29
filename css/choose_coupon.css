@@ -14,18 +14,30 @@ body{
 .no_use{
 	padding-bottom: 0.625rem;
 	padding-top: 0.625rem;
+	position: relative;
 }
 .no_use > span{
 	display: block;
 }
-.choose_icon,.use_icon{
+.use_icon{
 	display: inline-block;
 	width: 1.875rem;
 	height: 1.625rem;
 	background-repeat: no-repeat;
 	background-size: 1.25rem 1.25rem;
 	background-position: left center;
-	background-image: url(../img/choose_selected.png);
+	background-image: url(../img/choose_normal.png);
+	position: absolute;
+	right: 1.875rem;
+	top: 50%;
+	margin-top: -0.8125rem;
+	background-position: right center;
+}
+.use_icon.active{
+	background-image: url(../img/choose_selected.png)!important;
+}
+.use_icon:first-child{
+	right: 1.25rem;
 }
 /*coupon_list*/
 .coupon_info{
@@ -44,13 +56,6 @@ body{
 }
 .limit_date{
 	color: #9b9b9b;
-}
-.use_icon{
-	position: absolute;
-	right: 1.875rem;
-	top: 50%;
-	margin-top: -0.8125rem;
-	background-position: right center;
 }
 .lack{
 	width: 6.25rem;

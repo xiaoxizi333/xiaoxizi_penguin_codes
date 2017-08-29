@@ -182,9 +182,49 @@ function searchItems(passData){
 			var detailsObj = datas.result;
 			var detailsHtml = '';
 			for(var i=0;i<detailsObj.length;i++){
-				detailsHtml += '<div><img src="'+detailsObj[i].data.title_pics+'" class="details"></div>';
+				detailsHtml += '<div class="detail_pic" data_id="'+detailsObj[i].id+'"><img src="'+detailsObj[i].data.title_pics+'" class="details"></div>';
 			}
 			$('.SKU_details').html(detailsHtml);
+			for(var i=0;i<detailsObj.length;i++){
+				$('.detail_pic').off('click').on('click',function(){
+					var itemID = $(this).attr('data_id');
+					var goodsIndex = $(this).index();
+					var specId = detailsObj[goodsIndex].good_item_spec_id?detailsObj[goodsIndex].good_item_spec_id:0;
+					window.localStorage.setItem('itemID',itemID);
+					window.localStorage.setItem('itemSpecId',specId);
+					var saleStartTime = detailsObj[goodsIndex].data.sales_start_time;
+					var secStartTime = detailsObj[goodsIndex].data.seckill_startime;
+					var secEndTime = detailsObj[goodsIndex].data.seckill_endtime;
+					var isSeckill = detailsObj[goodsIndex].data.is_seckill;
+					var nowTime = Date.parse(new Date());
+					if(saleStartTime||isSeckill){
+						if(saleStartTime>0){
+			    			if(saleStartTime-nowTime>0){
+			    				window.location.href="pre_sale.html";
+			    			}else{
+			    				window.location.href="product_details.html";
+			    			}
+			    		//跳转正常
+			    		}else if(saleStartTime<0){
+			    			window.location.href="product_details.html";
+			    		}
+			    		//跳转 0:正常详情 1:秒杀详情
+						if(isSeckill==0){
+							window.location.href="product_details.html";
+						}else if(isSeckill==1){
+							if(nowTime>secStartTime&&nowTime<secEndTime){
+								window.location.href="seckill.html";
+							}else{
+								window.location.href="product_details.html";
+							}
+							
+						}
+					}else{
+						window.location.href="product_details.html";
+					}
+						
+				})
+			}
 	    }
 	});
 }

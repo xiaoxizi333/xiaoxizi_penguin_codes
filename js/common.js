@@ -14,6 +14,8 @@
 	window.addEventListener(resizeEvt, recalc, false);
 	doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
+//设置全局uid
+var uid = 1370724016130198;
 
 // header_nav_bar
 var isShow = true;
@@ -72,52 +74,6 @@ function Trim(str,is_global) {
     return result;
 }
 
-// add photos
-
- //限制添加
-var fileIndex;
-
-for(var i=0;i<$('.user_comment').length;i++){
-	$('.fileElem').eq(i).attr('data_index',i);
-}
-$('.fileElem').on('change',function(){
-	fileIndex = $(this).attr('data_index');
-	handleFiles(this);	
-})
-
-function handleFiles(obj) {
-    var files = obj.files,
-    img = new Image();
-    try{
-    	img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
-    }catch(err){}
-    
-    img.width = '5rem';
-    img.height = '5rem';
-    img.className = 'comment_photos';
-
-	var imgObj = $('<div class="pic_box"><div class="cross_pic"></div></div>').append(img);
-	$('.fileList').eq(fileIndex).append(imgObj);
-	if($('.fileList').eq(fileIndex).find('.pic_box').length>=5){
-		$('.filebox').eq(fileIndex).hide();
-	}
-	//点击x取消图片
-	for(var i=0;i<$('.pic_box').length;i++){
-		$('.pic_box').eq(i).attr('data_index',i);
-	}
-	$('.cross_pic').off('tap.removePic').on('tap.removePic',function(){
-		var index = $(this).parent('.pic_box').attr('data_index');
-		var showAdd = $(this).parents('.fileList').attr('data_index');
-		$('.filebox').eq(showAdd).show();
-		$('.pic_box').eq(index).remove();
-		for(var i=0;i<$('.pic_box').length;i++){
-    		$('.pic_box').eq(i).attr('data_index',i);
-    	}
-    	
-	})
-
-    
-}
 //倒计时
 var interval = 1000; 
 function ShowCountDown(str,divname) 
@@ -136,13 +92,31 @@ var cc = document.getElementById(divname);
 hour =(hour<10 ? "0"+hour:hour);
 minute =(minute<10 ? "0"+minute:minute);
 second =(second<10 ? "0"+second:second);
+//console.log(cc);
 cc.innerHTML = day1+"天"+' '+hour+":"+minute+":"+second; 
 } 
+
+//时间转换器
+function switchDate(time,mark){
+	var timeStr = new Date(time);
+	var y = timeStr.getFullYear();
+	var m = timeStr.getMonth();
+	var d = timeStr.getDate();
+	m = m<10?'0'+m:m;
+	d = d<10?'0'+d:d;
+	return y+mark+m+mark+d;
+}
+
 //跳转购物车
 $('.shopping_icon').off('tap').on('tap',function(){
-	$.post(config.shoppingCartShow,{'order_type':0,'uid':1370724016130198},function(datas){
-		window.localStorage.setItem('jump_btn','0');
-		window.location.href="firm_order.html";
+	$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
+		//console.log(datas);
+		if(datas.result.order.length==0){
+			alert('您的购物车还没有商品哦，赶快选购吧～')
+		}else{
+			window.localStorage.setItem('jump_btn','0');
+			window.location.href="firm_order.html";
+		}
 	})
 })
 
@@ -182,7 +156,92 @@ var validator = {
 		} else {
 			return false;
 		}
+	},
+	IsIDCard: function(input) {
+		input = input.toUpperCase();
+		//验证身份证号码格式 [一代身份证号码为15位的数字；二代身份证号码为18位的数字或17位的数字加字母X]  
+		if(!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/i.test(input))) {
+			return false;
+		}
+		//验证省份  
+		var arrCity = {
+			11: '北京',
+			12: '天津',
+			13: '河北',
+			14: '山西',
+			15: '内蒙古',
+			21: '辽宁',
+			22: '吉林',
+			23: '黑龙江 ',
+			31: '上海',
+			32: '江苏',
+			33: '浙江',
+			34: '安徽',
+			35: '福建',
+			36: '江西',
+			37: '山东',
+			41: '河南',
+			42: '湖北',
+			43: '湖南',
+			44: '广东',
+			45: '广西',
+			46: '海南',
+			50: '重庆',
+			51: '四川',
+			52: '贵州',
+			53: '云南',
+			54: '西藏',
+			61: '陕西',
+			62: '甘肃',
+			63: '青海',
+			64: '宁夏',
+			65: '新疆',
+			71: '台湾',
+			81: '香港',
+			82: '澳门',
+			91: '国外'
+		};
+		if(arrCity[parseInt(input.substr(0, 2))] == null) {
+			return false;
+		}
+		//验证出生日期  
+		var regBirth, birthSplit, birth;
+		var len = input.length;
+		if(len == 15) {
+			regBirth = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/);
+			birthSplit = input.match(regBirth);
+			birth = new Date('19' + birthSplit[2] + '/' + birthSplit[3] + '/' + birthSplit[4]);
+			if(!(birth.getYear() == Number(birthSplit[2]) && (birth.getMonth() + 1) == Number(birthSplit[3]) && birth.getDate() == Number(birthSplit[4]))) {
+				return false;
+			}
+			return true;
+		} else if(len == 18) {
+			regBirth = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/i);
+			birthSplit = input.match(regBirth);
+			birth = new Date(birthSplit[2] + '/' + birthSplit[3] + '/' + birthSplit[4]);
+			if(!(birth.getFullYear() == Number(birthSplit[2]) && (birth.getMonth() + 1) == Number(birthSplit[3]) && birth.getDate() == Number(birthSplit[4]))) {
+				return false;
+			}
+			//验证校验码  
+			var valnum;
+			var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
+			var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+			var nTemp = 0,
+				i;
+			for(i = 0; i < 17; i++) {
+				nTemp += input.substr(i, 1) * arrInt[i];
+			}
+			valnum = arrCh[nTemp % 11];
+			if(valnum != input.substr(17, 1)) {
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 
 }
+
+
+
 

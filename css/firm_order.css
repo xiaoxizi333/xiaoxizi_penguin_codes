@@ -117,8 +117,15 @@ body{
 }
 .product_name{
 	color: #5a5a5a;
+}
+.description > div{
 	width: 7rem;
 	line-height: 1.2rem;
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
 }
 .some_desc{
 	color:#9b9b9b;
@@ -183,7 +190,7 @@ body{
 	padding-right: 1rem;
 	margin-bottom: 0;
 }
-.delivery_type ul li,.total_info ul li{
+.delivery_type ul li,.total_info ul li,.preserve{
 	line-height: 3.75rem;
 	height: 3.75rem;
 	border-bottom: 1px solid rgba(151,151,151,.2);
@@ -191,17 +198,21 @@ body{
 	padding-left: 0.25rem;
 	
 }
-.delivery_type ul li{
+.delivery_type ul li,.preserve{
 	padding-right: 1.25rem;
 }
-.delivery_type ul li:last-child,.total_info ul li:last-child{
+.preserve,.total_info ul li:last-child{
 	border-bottom:none;
+}
+.preserve{
+	margin-left: 1rem;
+	margin-right: 1rem;
 }
 .is_choose_icon{
 	background-image: url(../img/choose_normal.png);
 	right: -0.59375rem;
 }
-li.active .is_choose_icon{
+.active .is_choose_icon{
 	background-image: url(../img/choose_selected.png);
 }
 .receipt{

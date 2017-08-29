@@ -1,14 +1,14 @@
 //商品详情
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	
-	console.log(datas);
+	//console.log(itemID);
 
 	var obj = datas.result.item_info[0].data;
 
 	if(datas.result.item_spec_template.length>0){
-		$('.specific_cost').html('¥'+obj.real_price);
-	}else{
 		$('.specific_cost').html('¥'+obj.range_price);
+	}else{
+		$('.specific_cost').html('¥'+obj.real_price);
 	}
 	//最晚时间
 	var startTime = new Date(obj.sales_start_time);
@@ -30,12 +30,26 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	if(itemTemplate.length==0){
 		$('.type_det_box').hide();
 		$('.mask .sure').off('tap').on('tap',function(){
-			var cartData = {'uid':1370724016130198,'item_id':itemID};
+			var cartData = {'uid':uid,'item_id':itemID,'num':$('.add_or_substract .specific_num').html()};
 			$.post(config.itemBilling,cartData,function(data){
+				var obj = data.result.order[0].data;
+				var obj2 = data.result.order[0].item_info[0].data.sales_points;
+				var detailDesc = '';
+				for(var i=0;i<obj2.length;i++){
+					detailDesc += obj2[i];					
+				}
+				window.localStorage.setItem('jump_btn','1');
+				window.localStorage.setItem('goods_name',obj.name);
+				window.localStorage.setItem('goods_desc',detailDesc);
+				window.localStorage.setItem('goods_prcie',obj.real_price);
+				window.localStorage.setItem('goods_pic',obj.title_pics[0]);
+				window.localStorage.setItem('goods_count',obj.total_count);
+				window.localStorage.setItem('goods_id',data.result.order[0].id);
+				window.localStorage.setItem('goods_coupon',data.result.shopping_cart[0].data.coupon_avaliable_msg);
+				window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
 				window.localStorage.setItem('jump_btn','1');
 				window.location.href="firm_order.html"
-			})
-				
+			})			
 		})
 	}else{
 		$('.type_det_box').show();
@@ -81,17 +95,15 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						spec3_data = $('.specific_type_info').eq(2).find('li.active').html();
 					}
 
-					var cartData = {'uid':1370724016130198,'item_id':itemID,'spec1':spec1_data,'spec2':spec2_data,'spec3':spec3_data,'num':$('.add_or_substract .specific_num').html()};
+					var cartData = {'uid':uid,'item_id':itemID,'spec1':spec1_data,'spec2':spec2_data,'spec3':spec3_data,'num':$('.add_or_substract .specific_num').html()};
 					$.post(config.itemBilling,cartData,function(data){
 						console.log(data)
 						var obj = data.result.order[0].data;
 						var obj2 = data.result.order[0].item_info[0].data.sales_points;
 						var detailDesc = '';
 						for(var i=0;i<obj2.length;i++){
-							detailDesc += obj2[i];
-							
+							detailDesc += obj2[i];							
 						}
-
 						window.localStorage.setItem('jump_btn','1');
 						window.localStorage.setItem('goods_name',obj.name);
 						window.localStorage.setItem('goods_desc',detailDesc);
@@ -100,7 +112,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						window.localStorage.setItem('goods_count',obj.total_count);
 						window.localStorage.setItem('goods_id',data.result.order[0].id);
 						window.localStorage.setItem('goods_coupon',data.result.shopping_cart[0].data.coupon_avaliable_msg);
-						window.localStorage.setItem('invoice_user_id',data.result.user_order[0].id);
+						window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
 						window.location.href="firm_order.html"
 						
 					})
@@ -109,8 +121,56 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		})
 
 	}
-	
-
+	//评论tab条数
+	var commentId,commentLevel,isPic,comments;
+	if(datas.result.item_spec_template.length>0){
+		commentId = datas.result.item_spec_template[0].data.item_id;
+	}else{
+		commentId = datas.result.item_info[0].id;
+	}
+	$.post(config.commentCount,{'item_id':commentId},function(datas){
+		//console.log(datas);
+		var obj = datas.result;
+		var good = obj.good_comment_count;
+		var normal = obj.normal_comment_count;
+		var bad = obj.bad_comment_count;
+		var totalCount = good+normal+bad;
+		$('.comment_nav li .comment_num').eq(0).html(totalCount);
+		$('.comment_nav li .comment_num').eq(1).html(good);
+		$('.comment_nav li .comment_num').eq(2).html(normal);
+		$('.comment_nav li .comment_num').eq(3).html(bad);
+		$('.comment_nav li .comment_num').eq(4).html(obj.pic_comment_count);
+		if(totalCount==0){
+			$('.no_comment').show();
+		}else{
+			$('.no_comment').hide();
+		}
+	})
+	//评论列表	
+	comments = {'item_id':commentId};
+	//console.log(comments);
+	addDatas(comments);
+	$('.comment_nav li').on('tap',function(){
+		var index = $(this).index();
+		switch(index){
+			case 0:
+				comments = {'item_id':commentId};
+				break;
+			case 1:
+				comments = {'item_id':commentId,'comment_level':0};
+				break;
+			case 2:
+				comments = {'item_id':commentId,'comment_level':1};
+				break;
+			case 3:
+				comments = {'item_id':commentId,'comment_level':2};
+				break;
+			case 4:
+				comments = {'item_id':commentId,'is_pic':1};
+				break;
+		}
+		addDatas(comments);
+	})
 	//套餐
 	var packageData;
 	if(datas.result.item_spec_template.length>0){
@@ -148,9 +208,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 				$('.package_det').eq(i).append(pacPicUrl);
 			}
 
-			var packageSwiper = new Swiper('.package-swiper .swiper-container', {
+			new Swiper('.package-swiper .swiper-container-2', {
 				autoplay: 3000,//可选选项，自动滑动
-				autoplayDisableOnInteraction:false//使滑动效果不停止
+				autoplayDisableOnInteraction:false,//使滑动效果不停止
+				observer:true,
+				observeParents:true,
 
 			});
 			$('.package-swiper .swiper-slide').on('click',function(){
@@ -158,8 +220,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 				window.localStorage.setItem('productNm',obj.name);
 				window.localStorage.setItem('groupId',$(this).attr('data_id'));
 			})
-		}
-		
+		}		
 
 	})
 
@@ -167,7 +228,6 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 
 //保护用户名
 $('.tab_header li').on('tap',function(){
-	console.log($('.username'))
 	for(var i=0;i<$('.username').length;i++){
 		var str = $('.username').eq(i).html();
 		var str1 = str.substr(0,1);
@@ -178,7 +238,6 @@ $('.tab_header li').on('tap',function(){
 
 // tip
 var isShowTip = true;
-
 $('.some_tips').on('tap',function(){
 	if(isShowTip){
 		$('.tip_cotent').show();
@@ -188,8 +247,7 @@ $('.some_tips').on('tap',function(){
 		$('.tip_cotent').hide();
 		$('.triangle').hide();
 		isShowTip = true;
-	}
-	
+	}	
 })
 $(document).on('tap',function(e){
 	if(e.target.className!=='some_tips'&&e.target.className!=='tip_cotent_1 pull-left'&&e.target.className!=='tip_cotent_2 pull-left'){

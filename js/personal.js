@@ -1,6 +1,6 @@
 //我的订单
-$.post(config.userOrderList,{'uid':1370724016130198,'limit':1},function(datas){
-	//console.log(datas);
+$.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
+	console.log(datas);
 	var obj = datas.result.list[0].order;
 	var orderList = '';
 	for(var i=0;i<obj.length;i++){
@@ -32,7 +32,7 @@ $.post(config.userOrderList,{'uid':1370724016130198,'limit':1},function(datas){
 	$('.my_order_list').append(priceSummary);
 })
 //优惠券
-$.post(config.myCouponList,{'uid':1370724016130198},function(datas){
+$.post(config.myCouponList,{'uid':uid},function(datas){
 	//console.log(datas);
 	var obj = datas.result;
 	var coupon = '';
@@ -61,7 +61,7 @@ $.post(config.myCouponList,{'uid':1370724016130198},function(datas){
 			}
 			coupon += '<div class="swiper-slide" style="'+bgPic+'" data_id="'+obj[i].id+'">'+
 							'<p style="line-height: 12px;font-size: 12px;margin-top:10px">'+couponName+'</p>'+
-							'<p style="line-height: 42px;font-size: 30px;">'+discount+'</p>'+
+							'<p style="line-height: 42px;font-size: 22px;">'+discount+'</p>'+
 
 						'</div>';
 		 }
@@ -75,7 +75,7 @@ $.post(config.myCouponList,{'uid':1370724016130198},function(datas){
 
 });
 //地址
-$.post(config.addressList,{'uid':1370724016130198},function(data){
+$.post(config.addressList,{'uid':uid},function(data){
 	var addressObj = data.result;
 	//console.log(addressObj);
 	for(var i=0;i<addressObj.length;i++){

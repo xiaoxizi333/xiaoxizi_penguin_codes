@@ -85,11 +85,6 @@ body{
 	height: 3.125rem;
 	line-height: 3.125rem;
 }
-.default_style > span{
-	display: inline-block;
-	height: 100%;
-	line-height: 3.125rem;
-}
 /*package*/
 .package{
 	padding-top: 0.875rem;
@@ -230,6 +225,7 @@ body{
 	margin-bottom: 2.1875rem;
 }
 .comment_content{
+	margin-top: 2.1875rem;
 	padding-right: 1rem;
 	padding-left: 0.875rem;
 }
@@ -274,6 +270,20 @@ body{
 	padding-bottom: 3.125rem;
 	padding-left: 2.5rem;
 	color: #c6c6c6;
+}
+.no_comment{
+	text-align: center;
+    height: 5rem;
+    line-height: 5rem;
+}
+.comment_box>div:not(:last-child){
+	border-bottom: 1px solid rgba(151,151,151,.2);
+}
+/*parameters*/
+.parameters{
+	padding-top: 1rem!important;
+	padding-bottom: 1rem!important;
+	overflow: hidden;
 }
 /*******tab end******/
 /*guess*/

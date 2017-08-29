@@ -34,11 +34,6 @@ textarea{
 }
 /*add photos*/
 .fileList img{
-	display: inline-block;
-	width: 5rem;
-	height: 5rem;
-	margin-right:0.5625rem;
-	margin-bottom:0.5625rem;
 	border:1px solid #e0e0e0;
 	border-radius: 4px;
 }
@@ -71,6 +66,8 @@ textarea{
 .pic_box{
 	display: inline-block;
 	position: relative;
+	margin-right:0.5625rem;
+	margin-bottom:0.5625rem;
 }
 .cross_pic{
 	width: 1.3125rem;
@@ -83,8 +80,26 @@ textarea{
 	border-radius: 100%;
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: -0.6rem;
 	margin-top:-0.5rem;
+}
+/*evaluate*/
+.evaluate{
+	margin-top: 1.5rem;
+}
+.evaluate span{
+	display: inline-block;
+	color:#595757;
+	font-family: 'PingFangSC-Thin';
+	background-repeat: no-repeat;
+	background-size: 1.3125rem 1.3125rem;
+	background-position: left center;
+	background-image: url(../img/choose_normal.png);
+	padding-left: 1.5rem;
+	margin-right: 1rem;
+}
+.evaluate span.active{
+	background-image: url(../img/choose_selected.png);
 }
 /*footer*/
 footer{
@@ -106,4 +121,7 @@ footer{
 	text-align: center;
 	color: #fff;
 	padding:0!important;
+}
+a.publish_btn:focus, a.publish_btn:hover{
+	color: #fff;
 }

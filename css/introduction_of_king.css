@@ -1,0 +1,19 @@
+body{
+	padding-top: 3.125rem;
+}
+.bodier{
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+}
+.bodier .title{
+	margin:0.875rem auto 0;
+	background-image: url(../img/introduce_title.png);
+	background-repeat: no-repeat;
+	background-size: 17.8125rem 5.3125rem;
+	background-position: center center;
+	width: 17.8125rem;
+	height: 5.3125rem;
+}
+.bodier .introduction{
+	background-color: #fff;
+}
