@@ -1,6 +1,6 @@
 //receipt type
 var whichShow = window.localStorage.getItem('whichShow');
-//console.log(whichShow);
+console.log(whichShow);
 if(whichShow==null){
 	whichShow = 1;
 }
@@ -25,12 +25,13 @@ $('.invoice_title > span').on('tap',function(){
 	$('.invoice_title > span').removeClass('active');
 	$(this).addClass('active');
 })
-var invoice_user_id = window.localStorage.getItem('user_order_id');
-$.post(config.userOrderInvoice,{'user_order_id':invoice_user_id},function(datas){
+var user_order_id = window.localStorage.getItem('user_order_id');
+$.post(config.userOrderInvoice,{'user_order_id':user_order_id},function(datas){
 	console.log(datas);
 	var obj = datas.result[0].data;
 	var typeIndex = obj.invoice_type;
 	var titleIndex = obj.invoice_title;
+	showType(typeIndex);
 	if(typeIndex!==undefined){
 		$('.receipt_type > span').removeClass('active');
 		$('.receipt_type > span').eq(typeIndex).addClass('active');
@@ -66,7 +67,7 @@ $('footer').on('tap',function(){
 		}else if($('.pay_taxes').val()==''){
 			showTips('请填写纳税人识别号');
 		}else{
-			$.post(config.receipt,{'user_order_id':invoice_user_id,'invoice_title':receiptTitle,'invoice_type':receiptType,'receive_company':companyNm,'pay_taxes_no':payTaxes},function(data){
+			$.post(config.receipt,{'user_order_id':user_order_id,'invoice_title':receiptTitle,'invoice_type':receiptType,'receive_company':companyNm,'pay_taxes_no':payTaxes},function(data){
 				//console.log(data);				
 				window.location.href="firm_order.html";
 			})
@@ -77,7 +78,7 @@ $('footer').on('tap',function(){
 		}else if(!validator.IsEmail($('.email_num').val())){
 			showTips('请填写正确邮箱');
 		}else{
-			$.post(config.receipt,{'user_order_id':invoice_user_id,'invoice_title':receiptTitle,'invoice_type':receiptType,'receive_phone':phoneNum,'receive_email':emailNum},function(data){
+			$.post(config.receipt,{'user_order_id':user_order_id,'invoice_title':receiptTitle,'invoice_type':receiptType,'receive_phone':phoneNum,'receive_email':emailNum},function(data){
 				//console.log(data);
 				window.location.href="firm_order.html";
 			})

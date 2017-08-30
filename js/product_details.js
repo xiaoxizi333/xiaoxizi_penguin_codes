@@ -65,8 +65,9 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 function addDatas(comments){
 	$('.comment_box').empty();
 	$.post(config.itemCommentList,comments,function(datas){
-		//console.log(datas);
-		var obj = datas.result;
+		console.log(datas);
+		var picArr = [],
+			obj = datas.result;
 		for(var k=0;k<obj.length;k++){
 			var detailObj = obj[k].data;
 			var commentList = '<div class="comment_content">'+
@@ -87,10 +88,18 @@ function addDatas(comments){
 			var picObj = detailObj.comment_pics;
 			var picHtml = '';
 			for(var j=0;j<picObj.length;j++){
-				picHtml += '<img src="'+picObj[j]+'" alt="" style="width: 6.25rem;height: 6.25rem;">';
+				picHtml += '<img src="'+picObj[j]+'" style="width: 6.25rem;height: 6.25rem;">';
 			}
 			$('.comment_pic').eq(k).html(picHtml);
 		}
+		$('.comment_pic img').on('click',function(){
+			var picUrl = $(this).attr('src');
+			$('.big_pic img').attr('src',picUrl);
+			$('.big_pic').fadeIn();
+		})
+		$(document).on('tap',function(){
+			$('.big_pic').fadeOut();
+		})
 	})
 }
 

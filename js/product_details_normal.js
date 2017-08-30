@@ -74,19 +74,19 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			$('.sure').off('tap').on('tap',function(){
 				if(index =='0'){		
 					var cartData = {'uid':uid,'item_id':itemID,'num':$('.add_or_substract .specific_num').html()*1};
-					addCart(cartData);
-					$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
-					$('.mask').fadeOut(1000);
-					showTips('添加成功~');
+					$.post(config.shoppingCart,cartData,function(data){
+						$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
+						$('.mask').fadeOut(1000);
+						showTips('添加成功~');
+					})
 			
 				}else if(index =='1'){
 					var cartData = {'uid':uid,'item_id':itemID,'num':$('.add_or_substract .specific_num').html()*1};
 					//console.log(cartData)
 					$.post(config.itemBilling,cartData,function(data){
-						//console.log(data)
+						console.log(data)
 						var obj = data.result.order[0].data;
 						var obj2 = data.result.order[0].item_info[0].data.sales_points;
-						console.log(data)
 						var detailDesc = '';
 						for(var i=0;i<obj2.length;i++){
 							detailDesc += obj2[i];
@@ -99,8 +99,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						window.localStorage.setItem('goods_pic',obj.title_pics[0]);
 						window.localStorage.setItem('goods_count',obj.total_count);
 						window.localStorage.setItem('goods_id',data.result.order[0].id);
-						window.localStorage.setItem('goods_coupon',data.result.shopping_cart[0].data.coupon_avaliable_msg);
 						window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
+						window.localStorage.setItem('item_total_price',data.result.user_order[0].data.item_total_price);
+						window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
+						window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
+						window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
 						window.location.href="firm_order.html"
 					})
 					
@@ -158,10 +161,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 							}
 
 							var cartData = {'uid':uid,'item_id':itemID,'spec1':spec1_data,'spec2':spec2_data,'spec3':spec3_data,'num':$('.add_or_substract .specific_num').html()*1};
-							addCart(cartData);
-							$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
-							$('.mask').fadeOut(1000);
-							showTips('添加成功~');
+							$.post(config.shoppingCart,cartData,function(data){
+								$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
+								$('.mask').fadeOut(1000);
+								showTips('添加成功~');
+							})			
 						}
 					})
 				//立即购买	
@@ -206,8 +210,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 								window.localStorage.setItem('goods_pic',obj.title_pics[0]);
 								window.localStorage.setItem('goods_count',obj.total_count);
 								window.localStorage.setItem('goods_id',data.result.order[0].id);
-								window.localStorage.setItem('goods_coupon',data.result.shopping_cart[0].data.coupon_avaliable_msg);
 								window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
+								window.localStorage.setItem('item_total_price',data.result.user_order[0].data.item_total_price);
+								window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
+								window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
+								window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
 								window.location.href="firm_order.html"
 							})
 						}
@@ -226,7 +233,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		commentId = datas.result.item_info[0].id;
 	}
 	$.post(config.commentCount,{'item_id':commentId},function(datas){
-		console.log(datas);
+		//console.log(datas);
 		var obj = datas.result;
 		var good = obj.good_comment_count;
 		var normal = obj.normal_comment_count;

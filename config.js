@@ -49,4 +49,5 @@ var config = {
 	myCouponList:'http://101.201.115.31:14445/web/confirm_order/my_coupon_list.json',
 	noCoupon:'http://101.201.115.31:14445/web/confirm_order/select_no_coupon.json',
 	selectOneCoupon:'http://101.201.115.31:14445/web/confirm_order/select_one_coupon.json',
+	selectExpress:'http://101.201.115.31:14445/web/confirm_order/select_express.json',
 }

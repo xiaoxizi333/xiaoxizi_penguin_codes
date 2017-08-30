@@ -45,9 +45,12 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 				window.localStorage.setItem('goods_pic',obj.title_pics[0]);
 				window.localStorage.setItem('goods_count',obj.total_count);
 				window.localStorage.setItem('goods_id',data.result.order[0].id);
-				window.localStorage.setItem('goods_coupon',data.result.shopping_cart[0].data.coupon_avaliable_msg);
 				window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
 				window.localStorage.setItem('jump_btn','1');
+				window.localStorage.setItem('item_total_price',data.result.user_order[0].data.item_total_price);
+				window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
+				window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
+				window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
 				window.location.href="firm_order.html"
 			})			
 		})
@@ -111,8 +114,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						window.localStorage.setItem('goods_pic',obj.title_pics[0]);
 						window.localStorage.setItem('goods_count',obj.total_count);
 						window.localStorage.setItem('goods_id',data.result.order[0].id);
-						window.localStorage.setItem('goods_coupon',data.result.shopping_cart[0].data.coupon_avaliable_msg);
 						window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
+						window.localStorage.setItem('item_total_price',data.result.user_order[0].data.item_total_price);
+						window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
+						window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
+						window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
 						window.location.href="firm_order.html"
 						
 					})

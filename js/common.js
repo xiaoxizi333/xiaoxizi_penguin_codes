@@ -120,13 +120,6 @@ $('.shopping_icon').off('tap').on('tap',function(){
 	})
 })
 
-function addCart(passData){
-
-	$.post(config.shoppingCart,passData,function(data){
-		//console.log(data);
-	})	
-
-}
 //提示3秒消失
 function showTips(msg){
 	$('.warming').show().html(msg);
