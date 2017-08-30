@@ -16,8 +16,8 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 								'<textarea placeholder="请写下对酒的感受吧~"></textarea>'+
 							'</div>'+
 						'</div>'+
-						'<div class="photos">'+
-							'<div class="fileList" data_index="'+i+'"></div>'+
+						'<div class="photos" data_index="'+i+'">'+
+							'<div class="fileList"></div>'+
 							'<div class="filebox">'+
 								'<input type="file" data_index="'+i+'" class="fileElem" accept="image/*" style="opacity: 0">'+
 								'<div class="mask_add_input">最多五张</div>'+
@@ -54,10 +54,8 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 				}
 				//点击x取消图片
 				$('.cross_pic').off('tap').on('tap',function(){
+					var showAdd = $(this).parent('.pic_box').parent('.fileList').parent('.photos').attr('data_index');
 					$(this).parent('.pic_box').remove();
-					var showAdd = $(this).closest().attr('data_index');
-					console.log(showAdd);
-					console.log($(this).parent().parent());
 					$('.filebox').eq(showAdd).show();
 			    })
 		    }

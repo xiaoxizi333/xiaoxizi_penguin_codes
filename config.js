@@ -50,4 +50,6 @@ var config = {
 	noCoupon:'http://101.201.115.31:14445/web/confirm_order/select_no_coupon.json',
 	selectOneCoupon:'http://101.201.115.31:14445/web/confirm_order/select_one_coupon.json',
 	selectExpress:'http://101.201.115.31:14445/web/confirm_order/select_express.json',
+	goToPay:'http://101.201.115.31:14445/biz/item/shopping_cart/order_set/go_to_pay.json',
+	goToPayItem:'http://101.201.115.31:14445/biz/item/item/go_to_pay.json',
 }

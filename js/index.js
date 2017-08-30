@@ -165,49 +165,52 @@ $.post(config.indexModuleList,function(datas){
 			    async:false, 
 			    success:function(datas){
 			    	//console.log(datas);
-					$('.module_box').append($('<div class="seckill"><div class="seckill_time clearfix"><span class="pull-left">限时抢购 <span style="font-family: "PingFangSC-Light";"><em>Wine Seckill</em></span></span><span class="pull-right">还剩 <span id="caculate_time'+seckillIndex+'"></span> 分钟</span></div><div class="swiper-container"><div class="swiper-wrapper"></div></div></div>'));
-					var obj = datas.result.list[0].item_list;
-					var seckillPic = '';
-					var endTime = datas.result.list[0].seckill_end_time;
-					for(var i=0;i<obj.length;i++){
-						seckillPic = '<div class="swiper-slide"><img src="'+obj[i].good_item_pic+'" style="width:100%" data_id="'+obj[i].good_item_id+'" spec_id="'+obj[i].good_item_spec_id+'"></div>';
-						$('.seckill .swiper-wrapper').eq(seckillIndex).append(seckillPic);
-					}
-					ShowCountDown(endTime,'caculate_time'+seckillIndex+'');
-					for(var k=0;k<$('.seckill').length;k++){
-						setInterval(function(){ShowCountDown(endTime,'caculate_time'+(k-1)+'');},interval)
-					}
-					seckillIndex++;
-				    new Swiper('.seckill .swiper-container', {
-						pagination : '.swiper-pagination',
-						autoplay: 3000,//可选选项，自动滑动
-						autoplayDisableOnInteraction:false,//使滑动效果不停止
-						observer:true,
-						observeParents:true
-					});
-					$('.seckill .swiper-slide img').on('click',function(){
-						var itemID = $(this).attr('data_id');
-						var specId = $(this).attr('spec_id')?$(this).attr('spec_id'):0;
-						window.localStorage.setItem('itemID',itemID);
-				    	window.localStorage.setItem('itemSpecId',specId);
-						$.post(config.goodsLsitJump,{'item_id':itemID,'item_spec_id':specId},function(datas){
-							//console.log(datas);
-							var nowTime = Date.parse(new Date());
-							var secStartTime = datas.result[0].data.seckill_startime;
-							var secEndTime = datas.result[0].data.seckill_endtime;
-							var isSeckill = datas.result[0].data.is_seckill;
-							//跳转 0:正常详情 1:秒杀详情
-							if(isSeckill==0){
-								window.location.href="product_details.html";
-							}else if(isSeckill==1){
-								if(nowTime>secStartTime&&nowTime<secEndTime){
-									window.location.href="seckill.html";
-								}else{
+			    	if(datas.error_code==0){
+						$('.module_box').append($('<div class="seckill"><div class="seckill_time clearfix"><span class="pull-left">限时抢购 <span style="font-family: "PingFangSC-Light";"><em>Wine Seckill</em></span></span><span class="pull-right">还剩 <span id="caculate_time'+seckillIndex+'"></span> 分钟</span></div><div class="swiper-container"><div class="swiper-wrapper"></div></div></div>'));
+						var obj = datas.result.list[0].item_list;
+						var seckillPic = '';
+						var endTime = datas.result.list[0].seckill_end_time;
+						for(var i=0;i<obj.length;i++){
+							seckillPic = '<div class="swiper-slide"><img src="'+obj[i].good_item_pic+'" style="width:100%" data_id="'+obj[i].good_item_id+'" spec_id="'+obj[i].good_item_spec_id+'"></div>';
+							$('.seckill .swiper-wrapper').eq(seckillIndex).append(seckillPic);
+						}
+						ShowCountDown(endTime,'caculate_time'+seckillIndex+'');
+						for(var k=0;k<$('.seckill').length;k++){
+							setInterval(function(){ShowCountDown(endTime,'caculate_time'+(k-1)+'');},interval)
+						}
+						seckillIndex++;
+					    new Swiper('.seckill .swiper-container', {
+							pagination : '.swiper-pagination',
+							autoplay: 3000,//可选选项，自动滑动
+							autoplayDisableOnInteraction:false,//使滑动效果不停止
+							observer:true,
+							observeParents:true
+						});
+						$('.seckill .swiper-slide img').on('click',function(){
+							var itemID = $(this).attr('data_id');
+							var specId = $(this).attr('spec_id')?$(this).attr('spec_id'):0;
+							window.localStorage.setItem('itemID',itemID);
+					    	window.localStorage.setItem('itemSpecId',specId);
+							$.post(config.goodsLsitJump,{'item_id':itemID,'item_spec_id':specId},function(datas){
+								//console.log(datas);
+								var nowTime = Date.parse(new Date());
+								var secStartTime = datas.result[0].data.seckill_startime;
+								var secEndTime = datas.result[0].data.seckill_endtime;
+								var isSeckill = datas.result[0].data.is_seckill;
+								//跳转 0:正常详情 1:秒杀详情
+								if(isSeckill==0){
 									window.location.href="product_details.html";
-								}							
-							}
+								}else if(isSeckill==1){
+									if(nowTime>secStartTime&&nowTime<secEndTime){
+										window.location.href="seckill.html";
+									}else{
+										window.location.href="product_details.html";
+									}							
+								}
+							})
 						})
-					})				
+			    	}
+									
 			    }	
 			})	
 		}else if(moduleType=='TLWZ'){

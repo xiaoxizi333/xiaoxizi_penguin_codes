@@ -59,7 +59,7 @@ if(cartOrBuy=='0'){
 							'<div class="about_num pull-right text-right">'+
 								'<div class="price">¥'+obj[i].data.real_price+'</div>'+
 									'<div class="change_num clearfix">'+
-									'<div class="add_or_substract pull-right"  data_num="'+i+'">'+
+									'<div class="add_or_substract pull-right" data_num="'+i+'">'+
 										'<a class="add_btn" href="javascript:;">-</a>'+
 										'<span class="specific_num">'+obj[i].data.total_count+'</span>'+
 										'<a class="substract_btn" href="javascript:;">+</a>'+
@@ -137,7 +137,30 @@ if(cartOrBuy=='0'){
 			}
 		})
 		deleteGoods();
-		isPreserve();
+		var preserveId = datas.result.user_order[0].data.is_prestore;
+		if(preserveId==0){
+			$('.preserve').removeClass('active');
+		}else if(preserveId==1){
+			$('.preserve').addClass('active');
+		}
+		//console.log(preserveId)
+		$('.preserve .is_choose_icon').off('tap').on('tap',function(){
+			//暂存选择
+			var prestoreData;
+			var user_order_id = window.localStorage.getItem('user_order_id')*1;
+			if(preserveId){
+				$('.preserve').removeClass('active');
+				prestoreData = {'is_prestore':0,'user_order_id':user_order_id}
+				preserveId = 0;
+			}else{
+				$('.preserve').addClass('active');
+				prestoreData = {'is_prestore':1,'user_order_id':user_order_id}
+				preserveId = 1;
+			}
+			$.post(config.isPrestore,prestoreData,function(datas){
+				//console.log(datas)
+			})
+		})
 		//优惠券
 		$('.total_info li').eq(1).on('click',function(){
 			$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
@@ -154,13 +177,117 @@ if(cartOrBuy=='0'){
 		})
 		//delivery
 		var delivery_type = datas.result.user_order[0].data.post_type;
-		if(delivery_type==-1){
+		var ship_fee = datas.result.user_order[0].data.ship_fee;
+		if(delivery_type===''){
 			$('.delivery_type ul li').removeClass('active');
 		}else{
+			$('.express_price').html('');
+			$('.express_price').eq(delivery_type).html('¥'+ship_fee);
 			$('.delivery_type ul li').removeClass('active');
-			$('.delivery_type ul li').eq(delivery_type).addClass('active');
+			$('.delivery_type ul li').eq(delivery_type).addClass('active');		
 		}
 		delivery();
+		//console.log(delivery_type)
+		//立即购买
+		$('.buy_instance').on('tap',function(){
+			if(delivery_type===''&&window.localStorage.getItem('cart_delivery_type')===null){
+				alert('请选择邮寄方式哦～')	;
+			}else{
+				localStorage.removeItem('cart_delivery_type');
+				$.post(config.goToPay,{'uid':uid,'pay_source':'h5','open_id':'oHtkhv9A7dKjnmrRk_1RA_l2pZjA','comment':$('#userMessage').val()},function(pay){
+					console.log(pay);
+					wx.config({
+						// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+						appId: pay.result.appId, // 必填，公众号的唯一标识
+						timestamp: pay.result.timeStamp, // 必填，生成签名的时间戳
+						nonceStr: pay.result.nonceStr, // 必填，生成签名的随机串
+						signature: pay.result.sign,// 必填，签名，见附录1
+						jsApiList: [
+							'checkJsApi',
+							'onMenuShareTimeline',
+							'onMenuShareAppMessage',
+							'onMenuShareQQ',
+							'onMenuShareWeibo',
+							'onMenuShareQZone',
+							'hideMenuItems',
+							'showMenuItems',
+							'hideAllNonBaseMenuItem',
+							'showAllNonBaseMenuItem',
+							'translateVoice',
+							'startRecord',
+							'stopRecord',
+							'onVoiceRecordEnd',
+							'playVoice',
+							'onVoicePlayEnd',
+							'pauseVoice',
+							'stopVoice',
+							'uploadVoice',
+							'downloadVoice',
+							'chooseImage',
+							'previewImage',
+							'uploadImage',
+							'downloadImage',
+							'getNetworkType',
+							'openLocation',
+							'getLocation',
+							'hideOptionMenu',
+							'showOptionMenu',
+							'closeWindow',
+							'scanQRCode',
+							'chooseWXPay',
+							'openProductSpecificView',
+							'addCard',
+							'chooseCard',
+							'openCard'
+						]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+					});
+
+					// wx.error(function(res){
+
+					//     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+					// });
+
+
+					function onBridgeReady(pay){
+						WeixinJSBridge.invoke(
+							'getBrandWCPayRequest', {
+								"appId":pay.result.appId,     //公众号名称，由商户传入
+								"timeStamp":pay.result.timeStamp,         //时间戳，自1970年以来的秒数
+								"nonceStr":pay.result.nonceStr, //随机串
+								"package":pay.result.package_value,
+								"signType":pay.result.signType,         //微信签名方式：
+								"paySign":pay.result.paySign //微信签名
+							},
+							function(res){
+								if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+									window.location.href="pay_success.html";
+								}else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+									alert('支付取消');
+									window.location.href="my_order.html";
+								}else if(res.err_msg == "get_brand_wcpay_request:fail"){
+									alert('支付失败');
+									window.location.href="my_order.html";	
+								}
+
+								// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+							}
+						);
+					}
+					if (typeof WeixinJSBridge == "undefined"){
+						if( document.addEventListener ){
+							document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+						}else if (document.attachEvent){
+							document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+							document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+						}
+					}else{
+						onBridgeReady(pay);
+					}
+				})
+			}
+			
+		})
+
 	})
 }else if(cartOrBuy=='1'){
 	var list = '<div class="product_info_box" style="position:relative" data_id="'+window.localStorage.getItem('goods_id')+'">'+
@@ -175,7 +302,7 @@ if(cartOrBuy=='0'){
 						'<div class="about_num pull-right text-right">'+
 							'<div class="price">¥'+window.localStorage.getItem('goods_prcie')+'</div>'+
 								'<div class="change_num clearfix">'+
-								'<div class="add_or_substract pull-right">'+
+								'<div class="add_or_substract pull-right" data_num="'+0+'">'+
 									'<a class="add_btn" href="javascript:;">-</a>'+
 									'<span class="specific_num">'+window.localStorage.getItem('goods_count')+'</span>'+
 									'<a class="substract_btn" href="javascript:;">+</a>'+
@@ -190,17 +317,22 @@ if(cartOrBuy=='0'){
 	$('.total_info .total_price').html('¥'+window.localStorage.getItem('item_total_price'));
 	$('#sum_1, #sum_2').html(window.localStorage.getItem('total_price'));
 	//弹窗加减
+	var numArr = [];
+	for(var i=0;i<$('.product_detail_info .product_info_box').length;i++){
+		var num = parseInt($('.specific_num').eq(i).html());
+		numArr.push(num);
+	}
 	$('.add_or_substract a').on('tap',function(){
 		var dataId = $(this).parents('.product_info_box').attr('data_id')*1;
+		var dataNum = $(this).parent().attr('data_num');
 		var index = $(this).index();
-		var num = parseInt($('.specific_num').html());
 		if(index==0){	
-			if(num <= 1){
+			if(numArr[dataNum] <= 1){
 				$('.specific_num').html(1);	
 			}else{
 				$.post(config.billingSub,{'uid':uid,'order_id':dataId},function(datas){
 					console.log(datas);
-					$('.specific_num').html(datas.result.order[0].data.total_count);	
+					$('.specific_num').eq(dataNum).html(datas.result.order[0].data.total_count);	
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 					window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
@@ -211,8 +343,9 @@ if(cartOrBuy=='0'){
 			}
 		}else if(index==2){
 			$.post(config.billingAdd,{'uid':uid,'order_id':dataId},function(datas){
-				//console.log(datas);
-				$('.specific_num').html(datas.result.order[0].data.total_count);
+				console.log(datas);
+				$('.specific_num').eq(dataNum).html(datas.result.order[0].data.total_count);
+				console.log(dataNum)
 				$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 				$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 				window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
@@ -223,7 +356,31 @@ if(cartOrBuy=='0'){
 		}
 
 	});
-	isPreserve();
+	var preserveId = window.localStorage.getItem('preserveId');
+	if(preserveId==0){
+		$('.preserve').removeClass('active');
+	}else if(preserveId==1){
+		$('.preserve').addClass('active');
+	}
+	//console.log(preserveId)
+	$('.preserve .is_choose_icon').off('tap').on('tap',function(){
+		//暂存选择
+		var prestoreData;
+		var user_order_id = window.localStorage.getItem('user_order_id')*1;
+		if(preserveId){
+			$('.preserve').removeClass('active');
+			prestoreData = {'is_prestore':0,'user_order_id':user_order_id}
+			preserveId = 0;
+		}else{
+			$('.preserve').addClass('active');
+			prestoreData = {'is_prestore':1,'user_order_id':user_order_id}
+			preserveId = 1;
+		}
+		$.post(config.isPrestore,prestoreData,function(datas){
+			//console.log(datas);
+			window.localStorage.setItem('preserveId',datas.result.user_order[0].data.is_prestore);
+		})
+	})
 	$('.total_info li').eq(1).on('tap',function(){
 		window.location.href="choose_coupon.html";
 	})
@@ -234,14 +391,121 @@ if(cartOrBuy=='0'){
 	//delivery
 	var delivery_type = window.localStorage.getItem('delivery_type');
 	var ship_fee = window.localStorage.getItem('ship_fee');
-	if(delivery_type==-1){
+	if(delivery_type===''){
 		$('.delivery_type ul li').removeClass('active');
 	}else{
 		$('.delivery_type ul li').removeClass('active');
 		$('.delivery_type ul li').eq(delivery_type).addClass('active');
-		$('express_price').eq(delivery_type).html('¥'+ship_fee);
+		$('.express_price').html('');
+		$('.express_price').eq(delivery_type).html('¥'+ship_fee);
 	}
 	delivery();
+	//立即购买
+	$('.buy_instance').on('tap',function(){
+		var is_presell,
+			productType = window.localStorage.getItem('product_type');
+		if(productType=='preSale'){
+			is_presell = 1;	
+		}else{
+			is_presell = 0;
+		}
+		console.log(is_presell) 
+		if(delivery_type===''){
+			alert('请选择邮寄方式哦～')	;
+		}else{
+			$.post(config.goToPayItem,{'uid':uid,'pay_source':'h5','open_id':'oHtkhv9A7dKjnmrRk_1RA_l2pZjA','comment':$('#userMessage').val(),'is_presell':is_presell},function(pay){
+				console.log(pay);
+				// wx.config({
+				// 	// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				// 	appId: pay.result.appId, // 必填，公众号的唯一标识
+				// 	timestamp: pay.result.timeStamp, // 必填，生成签名的时间戳
+				// 	nonceStr: pay.result.nonceStr, // 必填，生成签名的随机串
+				// 	signature: pay.result.sign,// 必填，签名，见附录1
+				// 	jsApiList: [
+				// 		'checkJsApi',
+				// 		'onMenuShareTimeline',
+				// 		'onMenuShareAppMessage',
+				// 		'onMenuShareQQ',
+				// 		'onMenuShareWeibo',
+				// 		'onMenuShareQZone',
+				// 		'hideMenuItems',
+				// 		'showMenuItems',
+				// 		'hideAllNonBaseMenuItem',
+				// 		'showAllNonBaseMenuItem',
+				// 		'translateVoice',
+				// 		'startRecord',
+				// 		'stopRecord',
+				// 		'onVoiceRecordEnd',
+				// 		'playVoice',
+				// 		'onVoicePlayEnd',
+				// 		'pauseVoice',
+				// 		'stopVoice',
+				// 		'uploadVoice',
+				// 		'downloadVoice',
+				// 		'chooseImage',
+				// 		'previewImage',
+				// 		'uploadImage',
+				// 		'downloadImage',
+				// 		'getNetworkType',
+				// 		'openLocation',
+				// 		'getLocation',
+				// 		'hideOptionMenu',
+				// 		'showOptionMenu',
+				// 		'closeWindow',
+				// 		'scanQRCode',
+				// 		'chooseWXPay',
+				// 		'openProductSpecificView',
+				// 		'addCard',
+				// 		'chooseCard',
+				// 		'openCard'
+				// 	]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				// });
+
+				// wx.error(function(res){
+
+				//     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+				// });
+
+
+				// function onBridgeReady(pay){
+				// 	WeixinJSBridge.invoke(
+				// 		'getBrandWCPayRequest', {
+				// 			"appId":pay.result.appId,     //公众号名称，由商户传入
+				// 			"timeStamp":pay.result.timeStamp,         //时间戳，自1970年以来的秒数
+				// 			"nonceStr":pay.result.nonceStr, //随机串
+				// 			"package":pay.result.package_value,
+				// 			"signType":pay.result.signType,         //微信签名方式：
+				// 			"paySign":pay.result.paySign //微信签名
+				// 		},
+				// 		function(res){
+				// 			if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+				// 				window.location.href="pay_success.html";
+				// 			}else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+				// 				alert('支付取消');
+				// 				window.location.href="my_order.html";
+				// 			}else if(res.err_msg == "get_brand_wcpay_request:fail"){
+				// 				alert('支付失败');
+				// 				window.location.href="my_order.html";	
+				// 			}
+
+				// 			// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+				// 		}
+				// 	);
+				// }
+				// if (typeof WeixinJSBridge == "undefined"){
+				// 	if( document.addEventListener ){
+				// 		document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+				// 	}else if (document.attachEvent){
+				// 		document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+				// 		document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+				// 	}
+				// }else{
+				// 	onBridgeReady(pay);
+				// }
+			})
+		}
+		
+	})
 }
 
 //右滑删除
@@ -310,47 +574,17 @@ function delivery(){
 		var user_order_id = window.localStorage.getItem('user_order_id')*1;
 		$.post(config.selectExpress,{'user_order_id':user_order_id,'uid':uid,'post_type':index,'express':express},function(datas){
 			console.log(datas);
-			var delivery_type = datas.result.user_order[0].data.post_type;
+			delivery_type = datas.result.user_order[0].data.post_type;
 			$('.delivery_type ul > li').removeClass('active');
 			$('.delivery_type ul > li').eq(delivery_type).addClass('active');
+			window.localStorage.setItem('cart_delivery_type',datas.result.user_order[0].data.post_type);
 			window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
 			$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 			window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
+			$('.express_price').html('');
 			$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);	
 			window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
 		})
 	});
-}
-		
-//显示暂存选择
-function isPreserve(){
-	var user_order_id = window.localStorage.getItem('user_order_id')*1;
-	$.post(config.isPrestore,{'user_order_id':user_order_id},function(datas){
-		//console.log(datas);
-		var preserve_id = datas.result[0].data.is_prestore;
-		if(preserve_id==0){
-			$('.preserve').removeClass('active');
-		}else if(preserve_id==1){
-			$('.preserve').addClass('active');
-		}
-	})
-	var if_selected = false;
-	$('.preserve .is_choose_icon').off('tap').on('tap',function(){
-		//暂存选择
-		var prestoreData;
-		var user_order_id = window.localStorage.getItem('user_order_id')*1;
-		if(if_selected){
-			$('.preserve').removeClass('active');
-			prestoreData = {'is_prestore':0,'user_order_id':user_order_id}
-			if_selected = false;
-		}else{
-			$('.preserve').addClass('active');
-			prestoreData = {'is_prestore':1,'user_order_id':user_order_id}
-			if_selected = true;
-		}
-		$.post(config.isPrestore,prestoreData,function(datas){
-			//console.log(datas)
-		})
-	})
 }
 

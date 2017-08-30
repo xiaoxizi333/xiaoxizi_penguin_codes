@@ -1,3 +1,4 @@
+window.localStorage.setItem('product_type','preSale');
 //商品详情
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	
@@ -51,6 +52,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 				window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
 				window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
 				window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
+				window.localStorage.setItem('preserveId',data.result.user_order[0].data.is_prestore);
 				window.location.href="firm_order.html"
 			})			
 		})
@@ -119,6 +121,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
 						window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
 						window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
+						window.localStorage.setItem('preserveId',data.result.user_order[0].data.is_prestore);
 						window.location.href="firm_order.html"
 						
 					})

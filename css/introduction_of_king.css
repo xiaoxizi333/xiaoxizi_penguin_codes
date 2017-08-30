@@ -16,4 +16,16 @@ body{
 }
 .bodier .introduction{
 	background-color: #fff;
+	color:#5a5a5a;
+	font-size: 0.875rem;
+	font-family: '-apple-system,BlinkMacSystemFont,PingFang SC,Helvetica,Tahoma,Arial,Hiragino Sans GB,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,SimSun,\\5B8B\4F53,Heiti,\\9ED1\4F53,sans-serif';
+	padding: 1.25rem 0.9375rem 0.9375rem;
+	line-height: 1.7;
+}
+.bodier .introduction{
+	margin-bottom: 1.25rem;
+}
+.bodier .introduction .pic{
+	width: 100%;
+	margin-bottom: 0.625rem;
 }

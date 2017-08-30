@@ -65,7 +65,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 function addDatas(comments){
 	$('.comment_box').empty();
 	$.post(config.itemCommentList,comments,function(datas){
-		console.log(datas);
+		//console.log(datas);
 		var picArr = [],
 			obj = datas.result;
 		for(var k=0;k<obj.length;k++){
