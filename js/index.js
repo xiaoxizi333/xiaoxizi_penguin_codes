@@ -220,7 +220,7 @@ $.post(config.indexModuleList,function(datas){
 			var WZId = tObj.item_class*1;
 		 	var jumpType = tObj.type;
 		 	var customUrl = tObj.custom_url;
-			var html = '<div class="tlwz" type="'+jumpType+'" id="'+WZId+'" customUrl="'+customUrl+'"><div>'+title+'</div></div>';
+			var html = '<div class="tlwz" type="'+jumpType+'" id="'+WZId+'" customUrl="'+customUrl+'"><div><span class="logo"></span><span>'+title+'</span></div></div>';
 		 	//console.log(jumpType)
 			$('.module_box').append(html);
 			jump('.tlwz');			

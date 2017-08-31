@@ -284,6 +284,24 @@ if(cartOrBuy=='0'){
 
 	})
 }else if(cartOrBuy=='1'){
+	//身份证
+	var idNum = window.localStorage.getItem('identity');
+		$('.fill_id input').val(idNum);
+		$('.save_id').on('tap',function(){
+			if(validator.IsIDCard($('.fill_id input').val())){
+				$.post(config.idNoSave,{'user_order_id':window.localStorage.getItem('user_order_id')*1,'id_no':$('.fill_id input').val()},function(datas){
+					if(datas.error_code==0){
+						console.log(datas);
+						window.localStorage.setItem('identity',datas.result[0].data.id_no);
+						alert('保存成功～');
+					}else{
+						alert(datas.error_msg);
+					}
+				})
+			}else{
+				alert('请输入正确的身份证号码～')
+			}		
+		})
 	var goodsBox = JSON.parse(window.localStorage.getItem('goodsBox'));
 	//console.log(goodsBox);
 	var counts,list = '';

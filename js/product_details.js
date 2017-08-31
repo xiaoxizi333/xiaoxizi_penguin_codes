@@ -26,11 +26,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		bannerBox += ' <div class="swiper-slide"><img src="'+objPic[i]+'" alt="" style="width: 100%;height:14.375rem"></div>';
 	}
 	$('.banner2_box').html(bannerBox);
-	var mySwiper = new Swiper('.swiper-container', {
+	var mySwiper = new Swiper('.swiper-container-1', {
 		pagination : '.swiper-pagination',
 		//autoplay: 3000,//可选选项，自动滑动
-		autoplayDisableOnInteraction:false,//使滑动效果不停止
-		runCallbacksOnInit : false,	
+		//autoplayDisableOnInteraction:false,//使滑动效果不停止
+		//runCallbacksOnInit : false,	
 		observer:true,
 		observeParents:true,
 	});

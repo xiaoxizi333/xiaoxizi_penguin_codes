@@ -32,8 +32,8 @@ $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 	$('.my_order_list').append(priceSummary);
 })
 //优惠券
-$.post(config.myCouponList,{'uid':uid},function(datas){
-	//console.log(datas);
+$.post(config.myCoupon,{'uid':uid},function(datas){
+	console.log(datas);
 	var obj = datas.result;
 	var coupon = '';
 	var bgPic;

@@ -38,7 +38,7 @@ var config = {
 	billingSub:'http://101.201.115.31:14445/biz/item/item/billing_sub_one.json',
 	oneCouponTake:'http://101.201.115.31:14445/web/one_coupon/take.json',
 	userOrderList:'http://101.201.115.31:14445/web/user_order/order_list.json',
-	myCouponList:'http://101.201.115.31:14445/web/my_coupon/list.json',
+	myCoupon:'http://101.201.115.31:14445/web/my_coupon/list.json',
 	guessUouLike:'http://101.201.115.31:14445/web/item_detail/guess_you_like.json',
 	idNoSave:'http://101.201.115.31:14445/web/confirm_order_id_no/save.json',
 	isPrestore:'http://101.201.115.31:14445/web/confirm_order/select_is_prestore.json',

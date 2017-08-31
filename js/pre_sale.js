@@ -65,6 +65,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 				window.localStorage.setItem('preserveId',data.result.user_order[0].data.is_prestore);
 
 				window.localStorage.setItem('goodsBox',goodsBox);
+				window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
 				window.localStorage.setItem('jump_btn','1');
 				window.localStorage.setItem('counts_num','0');
 				window.location.href="firm_order.html";
@@ -148,6 +149,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						window.localStorage.setItem('preserveId',data.result.user_order[0].data.is_prestore);
 
 						window.localStorage.setItem('goodsBox',goodsBox);
+						window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
 						window.localStorage.setItem('jump_btn','1');
 						window.localStorage.setItem('counts_num','0');
 						window.location.href="firm_order.html";

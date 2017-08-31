@@ -295,6 +295,9 @@ body{
 	color:#868191;
 	font-family: 'PingFangSC-Thin';
 }
+.love_banner img{
+	width: 100%;
+}
 /*footer*/
 footer{
 	height: 3.125rem;
