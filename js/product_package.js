@@ -7,7 +7,7 @@ $.ajax({
     url: config.findGroupBy,
     data: JSON.stringify(groupId), 
     success: function(datas){
-    	console.log(datas);
+    	//console.log(datas);
     	var obj = datas.result.list[0];
     	$('header').html(productNm);
     	$('.main_product .product_photo').html('<img style="width:100%;height:100%;" src="'+obj.group_info_group_pic+'">');
@@ -33,26 +33,41 @@ $.ajax({
         $.post(config.billing,{'uid':uid,'item_group_id':groupId.group_id_array[0]},function(data){
             console.log(data)
             if(data.error_code==0){
-              var obj = data.result.order[0].data;
-              var obj2 = data.result.order[0].item_info[0].data.sales_points;
-              var detailDesc = '';
-              for(var i=0;i<obj2.length;i++){
-                detailDesc += obj2[i];          
+              var goodsInfo,
+              goodsBox = [],
+              obj = data.result.order;
+              for(var i=0;i<obj.length;i++){
+                var obj2 = obj[i].data;
+                goodsInfo = {};
+                goodsBox.push(goodsInfo);
+                goodsBox[i].goods_name = obj2.name;
+                goodsBox[i].goods_prcie = obj2.real_price;
+                goodsBox[i].goods_pic = [obj2.title_pics[0]];
+                goodsBox[i].goods_count = obj2.total_count;
+                goodsBox[i].goods_id = data.result.order[i].id;
+                
+                var salePoints = obj[i].item_info[0].data.sales_points;
+                var salePointsStr = '';
+                for(var k=0;k<salePoints.length;k++){
+                  salePointsStr += salePoints[k];
+                }
+                goodsBox[i].goods_desc = salePointsStr;
+
               }
-              window.localStorage.setItem('jump_btn','2');
-              window.localStorage.setItem('goods_name',obj.name);
-              window.localStorage.setItem('goods_desc',detailDesc);
-              window.localStorage.setItem('goods_prcie',obj.real_price);
-              window.localStorage.setItem('goods_pic',obj.title_pics[0]);
-              window.localStorage.setItem('goods_count',obj.total_count);
-              window.localStorage.setItem('goods_id',data.result.order[0].id);
-              window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
+              console.log(goodsBox)
+              goodsBox = JSON.stringify(goodsBox);
               window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
+              window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
               window.localStorage.setItem('item_total_price',data.result.user_order[0].data.item_total_price);
               window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
               window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
               window.localStorage.setItem('preserveId',data.result.user_order[0].data.is_prestore);
-              //window.location.href="firm_order.html"
+
+              window.localStorage.setItem('goodsBox',goodsBox);
+              window.localStorage.setItem('jump_btn','1');
+              window.localStorage.setItem('counts_num','0');
+              window.localStorage.setItem('package','0');
+              window.location.href="firm_order.html";
             }else{
               alert(data.error_msg)
             }

@@ -1,6 +1,6 @@
 //header list
 $.post(config.classify,{'is_add_best_ares':1},function(data){
-	console.log(data);
+	//console.log(data);
 	var obj = data.result;
 	var choiceBar = '';
 	for(var i=0;i<obj.length;i++){

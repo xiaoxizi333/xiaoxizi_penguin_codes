@@ -2,7 +2,7 @@
 var itemID = window.localStorage.getItem('itemID')*1;
 var itemSpecId = window.localStorage.getItem('itemSpecId')*1;
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
-	//console.log(datas);
+	console.log(datas);
 
 	var objPic = datas.result.item_info[0].data.title_pics;
 	var bannerBox = '';

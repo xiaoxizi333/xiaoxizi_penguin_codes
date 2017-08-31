@@ -29,3 +29,6 @@ body{
 	width: 100%;
 	margin-bottom: 0.625rem;
 }
+.text-indent{
+	text-indent:2em;
+}

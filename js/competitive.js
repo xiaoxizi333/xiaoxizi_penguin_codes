@@ -56,7 +56,7 @@ function getdata(page){
 		data.page=page;
 	}
 	$.post(config.primeDrinkList,{'drink_or_prime':'prime','page':data.page},function(datas){
-		//console.log(datas)
+		console.log(datas)
 		var obj = datas.result;
 		var html = '';
 		for(var i=0;i<obj.length;i++){
@@ -67,7 +67,7 @@ function getdata(page){
 			$('.detail_pic').off('click').on('click',function(){
 				var itemID = $(this).attr('data_id');
 				var goodsIndex = $(this).index();
-				var specId = obj[goodsIndex].good_item_spec_id?obj[goodsIndex].good_item_spec_id:0;
+				var specId = obj[goodsIndex].data.good_item_spec_id?obj[goodsIndex].good_item_spec_id:0;
 				window.localStorage.setItem('itemID',itemID);
 				window.localStorage.setItem('itemSpecId',specId);
 				var saleStartTime = obj[goodsIndex].data.sales_start_time;

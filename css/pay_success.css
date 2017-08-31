@@ -26,7 +26,7 @@ body{
 	text-align: center;
 	margin-top: 1.5625rem;
 }
-.go_btn > span{
+.go_btn > span a{
 	display: inline-block;
 	width: 6.625rem;
 	background-color: #c46666;
@@ -34,4 +34,7 @@ body{
 	color: #fff;
 	height: 1.875rem;
 	line-height: 1.875rem;
+}
+.go_btn > span a:focus{
+	color: #fff;
 }

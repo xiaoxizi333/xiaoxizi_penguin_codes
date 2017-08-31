@@ -1,11 +1,9 @@
-
 //地址
 $.post(config.addressList,{'uid':uid},function(data){
 	var addressObj = data.result;
 	//console.log(addressObj);
 	for(var i=0;i<addressObj.length;i++){
 		if(addressObj[i].data.state==1){
-
 			var defaultHtml = '<div class="user_info clearfix">'+
 								'<div class="user_name pull-left">'+data.result[i].data.contact_user_name+' <span class="default_address">[默认地址]</span></div>'+
 								'<div class="user_phone pull-right">'+data.result[i].data.contact_phone+'</div>'+
@@ -24,7 +22,7 @@ $.post(config.addressList,{'uid':uid},function(data){
 var cartOrBuy =  window.localStorage.getItem('jump_btn');
 if(cartOrBuy=='0'){
 	$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
-		console.log(datas);
+		//console.log(datas);
 		var obj = datas.result.order;
 		window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
 		//添加身份证号码显示
@@ -114,18 +112,14 @@ if(cartOrBuy=='0'){
 			var dataNum = $(this).parent().attr('data_num');
 			var index = $(this).index();
 			if(index==0){	
-				if(numArr[dataNum] <= 1){
-					$('.specific_num').eq(dataNum).html(1);	
-				}else{
-					//order_type：0 购物车 1 立即购买
-					$.post(config.orderSubOne,{'uid':uid,'order_id':dataId,'order_type':0},function(datas){
-						//console.log(datas);
-						$('.specific_num').eq(dataNum).html(--numArr[dataNum]);	
-						$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
-						$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
-						window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
-					})					
-				}
+				//order_type：0 购物车 1 立即购买
+				$.post(config.orderSubOne,{'uid':uid,'order_id':dataId,'order_type':0},function(datas){
+					//console.log(datas);
+					$('.specific_num').eq(dataNum).html(--numArr[dataNum]);	
+					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
+					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+				})						
 			}else if(index==2){
 				$.post(config.orderAddOne,{'uid':uid,'order_id':dataId,'order_type':0},function(datas){
 					//console.log(datas);
@@ -290,21 +284,33 @@ if(cartOrBuy=='0'){
 
 	})
 }else if(cartOrBuy=='1'){
-	var list = '<div class="product_info_box" style="position:relative" data_id="'+window.localStorage.getItem('goods_id')+'">'+
+	var goodsBox = JSON.parse(window.localStorage.getItem('goodsBox'));
+	//console.log(goodsBox);
+	var counts,list = '';
+	var counts_num = window.localStorage.getItem('counts_num');
+	
+	for(var i=0;i<goodsBox.length;i++){
+		var obj =goodsBox[i];
+		if(counts_num=='0'){
+			counts = obj.goods_count;
+		}else if(counts_num=='1'){
+			counts = window.localStorage.getItem('goods_count');
+		}
+		list += '<div class="product_info_box" style="position:relative" data_id="'+obj.goods_id+'">'+
 					'<div class="product_info clearfix">'+
 						'<div class="specific_photo pull-left">'+
-							'<img src="'+window.localStorage.getItem('goods_pic')+'" style="width: 100%;height: 100%" alt="">'+
+							'<img src="'+obj.goods_pic[0]+'" style="width: 100%;height: 100%" alt="">'+
 						'</div>'+
 						'<div class="description pull-left">'+
-							'<div class="product_name">'+window.localStorage.getItem('goods_name')+'</div>'+
-							'<div class="some_desc"></div>'+
+							'<div class="product_name">'+obj.goods_name+'</div>'+
+							'<div class="some_desc">'+obj.goods_desc+'</div>'+
 						'</div>'+
 						'<div class="about_num pull-right text-right">'+
-							'<div class="price">¥'+window.localStorage.getItem('goods_prcie')+'</div>'+
+							'<div class="price">¥'+obj.goods_prcie+'</div>'+
 								'<div class="change_num clearfix">'+
-								'<div class="add_or_substract pull-right" data_num="'+0+'">'+
+								'<div class="add_or_substract pull-right" data_num="'+i+'">'+
 									'<a class="add_btn" href="javascript:;">-</a>'+
-									'<span class="specific_num">'+window.localStorage.getItem('goods_count')+'</span>'+
+									'<span class="specific_num">'+counts+'</span>'+
 									'<a class="substract_btn" href="javascript:;">+</a>'+
 								'</div>'+
 							'</div>'+
@@ -312,46 +318,45 @@ if(cartOrBuy=='0'){
 					'</div>'+
 					'<div class="behind"><a class="delete-btn text-center">删除</a></div>'+
 				'</div>';
+	}
 	$('.product_detail_info').html(list);
-	$('.some_desc').html(window.localStorage.getItem('goods_desc'));
+	var isAddSub = window.localStorage.getItem('package');
+	if(isAddSub){
+		$('.change_num').hide();
+		window.localStorage.removeItem('package');
+	}else{
+		$('.change_num').show();
+	}
 	$('.total_info .total_price').html('¥'+window.localStorage.getItem('item_total_price'));
 	$('#sum_1, #sum_2').html(window.localStorage.getItem('total_price'));
 	//弹窗加减
-	var numArr = [];
-	for(var i=0;i<$('.product_detail_info .product_info_box').length;i++){
-		var num = parseInt($('.specific_num').eq(i).html());
-		numArr.push(num);
-	}
 	$('.add_or_substract a').on('tap',function(){
 		var dataId = $(this).parents('.product_info_box').attr('data_id')*1;
-		var dataNum = $(this).parent().attr('data_num');
 		var index = $(this).index();
-		if(index==0){	
-			if(numArr[dataNum] <= 1){
-				$('.specific_num').html(1);	
-			}else{
-				$.post(config.billingSub,{'uid':uid,'order_id':dataId},function(datas){
-					console.log(datas);
-					$('.specific_num').eq(dataNum).html(datas.result.order[0].data.total_count);	
-					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
-					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
-					window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
-					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
-					window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
-					window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
-				})				
-			}
-		}else if(index==2){
-			$.post(config.billingAdd,{'uid':uid,'order_id':dataId},function(datas){
+		if(index==0){
+			$.post(config.billingSub,{'uid':uid,'order_id':dataId},function(datas){
 				console.log(datas);
-				$('.specific_num').eq(dataNum).html(datas.result.order[0].data.total_count);
-				console.log(dataNum)
+				$('.specific_num').eq(0).html(datas.result.order[0].data.total_count);	
 				$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 				$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 				window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
 				window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
 				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
 				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
+				window.localStorage.setItem('counts_num','1');
+			})				
+			
+		}else if(index==2){
+			$.post(config.billingAdd,{'uid':uid,'order_id':dataId},function(datas){
+				console.log(datas);
+				$('.specific_num').eq(0).html(datas.result.order[0].data.total_count);
+				$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
+				$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+				window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
+				window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
+				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
+				window.localStorage.setItem('counts_num','1');
 			})
 		}
 
@@ -362,12 +367,13 @@ if(cartOrBuy=='0'){
 	}else if(preserveId==1){
 		$('.preserve').addClass('active');
 	}
-	//console.log(preserveId)
+
 	$('.preserve .is_choose_icon').off('tap').on('tap',function(){
 		//暂存选择
 		var prestoreData;
 		var user_order_id = window.localStorage.getItem('user_order_id')*1;
-		if(preserveId){
+
+		if(preserveId!=='0'){
 			$('.preserve').removeClass('active');
 			prestoreData = {'is_prestore':0,'user_order_id':user_order_id}
 			preserveId = 0;
@@ -378,7 +384,7 @@ if(cartOrBuy=='0'){
 		}
 		$.post(config.isPrestore,prestoreData,function(datas){
 			//console.log(datas);
-			window.localStorage.setItem('preserveId',datas.result.user_order[0].data.is_prestore);
+			window.localStorage.setItem('preserveId',datas.result[0].data.is_prestore);
 		})
 	})
 	$('.total_info li').eq(1).on('tap',function(){
@@ -415,93 +421,91 @@ if(cartOrBuy=='0'){
 		}else{
 			$.post(config.goToPayItem,{'uid':uid,'pay_source':'h5','open_id':'oHtkhv9A7dKjnmrRk_1RA_l2pZjA','comment':$('#userMessage').val(),'is_presell':is_presell},function(pay){
 				console.log(pay);
-				// wx.config({
-				// 	// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-				// 	appId: pay.result.appId, // 必填，公众号的唯一标识
-				// 	timestamp: pay.result.timeStamp, // 必填，生成签名的时间戳
-				// 	nonceStr: pay.result.nonceStr, // 必填，生成签名的随机串
-				// 	signature: pay.result.sign,// 必填，签名，见附录1
-				// 	jsApiList: [
-				// 		'checkJsApi',
-				// 		'onMenuShareTimeline',
-				// 		'onMenuShareAppMessage',
-				// 		'onMenuShareQQ',
-				// 		'onMenuShareWeibo',
-				// 		'onMenuShareQZone',
-				// 		'hideMenuItems',
-				// 		'showMenuItems',
-				// 		'hideAllNonBaseMenuItem',
-				// 		'showAllNonBaseMenuItem',
-				// 		'translateVoice',
-				// 		'startRecord',
-				// 		'stopRecord',
-				// 		'onVoiceRecordEnd',
-				// 		'playVoice',
-				// 		'onVoicePlayEnd',
-				// 		'pauseVoice',
-				// 		'stopVoice',
-				// 		'uploadVoice',
-				// 		'downloadVoice',
-				// 		'chooseImage',
-				// 		'previewImage',
-				// 		'uploadImage',
-				// 		'downloadImage',
-				// 		'getNetworkType',
-				// 		'openLocation',
-				// 		'getLocation',
-				// 		'hideOptionMenu',
-				// 		'showOptionMenu',
-				// 		'closeWindow',
-				// 		'scanQRCode',
-				// 		'chooseWXPay',
-				// 		'openProductSpecificView',
-				// 		'addCard',
-				// 		'chooseCard',
-				// 		'openCard'
-				// 	]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-				// });
+				wx.config({
+					// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					appId: pay.result.appId, // 必填，公众号的唯一标识
+					timestamp: pay.result.timeStamp, // 必填，生成签名的时间戳
+					nonceStr: pay.result.nonceStr, // 必填，生成签名的随机串
+					signature: pay.result.sign,// 必填，签名，见附录1
+					jsApiList: [
+						'checkJsApi',
+						'onMenuShareTimeline',
+						'onMenuShareAppMessage',
+						'onMenuShareQQ',
+						'onMenuShareWeibo',
+						'onMenuShareQZone',
+						'hideMenuItems',
+						'showMenuItems',
+						'hideAllNonBaseMenuItem',
+						'showAllNonBaseMenuItem',
+						'translateVoice',
+						'startRecord',
+						'stopRecord',
+						'onVoiceRecordEnd',
+						'playVoice',
+						'onVoicePlayEnd',
+						'pauseVoice',
+						'stopVoice',
+						'uploadVoice',
+						'downloadVoice',
+						'chooseImage',
+						'previewImage',
+						'uploadImage',
+						'downloadImage',
+						'getNetworkType',
+						'openLocation',
+						'getLocation',
+						'hideOptionMenu',
+						'showOptionMenu',
+						'closeWindow',
+						'scanQRCode',
+						'chooseWXPay',
+						'openProductSpecificView',
+						'addCard',
+						'chooseCard',
+						'openCard'
+					]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				});
 
-				// wx.error(function(res){
+				wx.error(function(res){
 
-				//     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-				// });
+				    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+				});
+				function onBridgeReady(pay){
+					WeixinJSBridge.invoke(
+						'getBrandWCPayRequest', {
+							"appId":pay.result.appId,     //公众号名称，由商户传入
+							"timeStamp":pay.result.timeStamp,         //时间戳，自1970年以来的秒数
+							"nonceStr":pay.result.nonceStr, //随机串
+							"package":pay.result.package_value,
+							"signType":pay.result.signType,         //微信签名方式：
+							"paySign":pay.result.paySign //微信签名
+						},
+						function(res){
+							if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+								window.location.href="pay_success.html";
+							}else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+								alert('支付取消');
+								window.location.href="my_order.html";
+							}else if(res.err_msg == "get_brand_wcpay_request:fail"){
+								alert('支付失败');
+								window.location.href="my_order.html";	
+							}
 
-
-				// function onBridgeReady(pay){
-				// 	WeixinJSBridge.invoke(
-				// 		'getBrandWCPayRequest', {
-				// 			"appId":pay.result.appId,     //公众号名称，由商户传入
-				// 			"timeStamp":pay.result.timeStamp,         //时间戳，自1970年以来的秒数
-				// 			"nonceStr":pay.result.nonceStr, //随机串
-				// 			"package":pay.result.package_value,
-				// 			"signType":pay.result.signType,         //微信签名方式：
-				// 			"paySign":pay.result.paySign //微信签名
-				// 		},
-				// 		function(res){
-				// 			if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-				// 				window.location.href="pay_success.html";
-				// 			}else if(res.err_msg == "get_brand_wcpay_request:cancel"){
-				// 				alert('支付取消');
-				// 				window.location.href="my_order.html";
-				// 			}else if(res.err_msg == "get_brand_wcpay_request:fail"){
-				// 				alert('支付失败');
-				// 				window.location.href="my_order.html";	
-				// 			}
-
-				// 			// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
-				// 		}
-				// 	);
-				// }
-				// if (typeof WeixinJSBridge == "undefined"){
-				// 	if( document.addEventListener ){
-				// 		document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-				// 	}else if (document.attachEvent){
-				// 		document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-				// 		document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-				// 	}
-				// }else{
-				// 	onBridgeReady(pay);
-				// }
+							// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+						}
+					);
+				}
+				if (typeof WeixinJSBridge == "undefined"){
+					if( document.addEventListener ){
+						document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+					}else if (document.attachEvent){
+						document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+						document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+					}
+				}else{
+					onBridgeReady(pay);
+				}
 			})
 		}
 		
@@ -572,6 +576,7 @@ function delivery(){
 		var index = $(this).attr('choose_num')*1;
 		var express = $('.express_name').eq(index).attr('name');
 		var user_order_id = window.localStorage.getItem('user_order_id')*1;
+		var isPackage = window.localStorage.getItem('package');
 		$.post(config.selectExpress,{'user_order_id':user_order_id,'uid':uid,'post_type':index,'express':express},function(datas){
 			console.log(datas);
 			delivery_type = datas.result.user_order[0].data.post_type;
