@@ -14,6 +14,7 @@ $.post(config.classify,{'is_add_best_ares':0,'limit':6},function(data){
 	$('.type_tab ul li').on('tap',function(){
 		var index = $(this).index();
 		window.localStorage.setItem('tabId',obj[index].id);
+		window.localStorage.setItem('tabOrList','0');
 	})
 })
 //banner
@@ -85,22 +86,22 @@ $.post(config.indexModuleList,function(datas){
 						break;
 					case 2:
 						pic = '<div class="sorts clearfix sort2">'+
-								'<a href="'+jumpUrl[0]+'"><img src="'+advertisementObj[0]+'" alt="" /></a>'+
-								'<a href="'+jumpUrl[1]+'"><img src="'+advertisementObj[1]+'" alt="" /></a>'+
+								'<a href="'+jumpUrl[0]+'" class="pull-left"><img src="'+advertisementObj[0]+'" alt="" /></a>'+
+								'<a href="'+jumpUrl[1]+'" class="pull-right"><img src="'+advertisementObj[1]+'" alt="" /></a>'+
 							'</div>';
 						break;
 					case 3:
 						pic = '<div class="sorts clearfix sort3">'+
-								'<a href="'+jumpUrl[0]+'" class="pull-left"><img src="'+advertisementObj[0]+'" alt="" /></a>'+
-								'<a href="'+jumpUrl[1]+'" class="pull-right"><img src="'+advertisementObj[1]+'" alt="" /></a>'+
-								'<a href="'+jumpUrl[2]+'" class="pull-right"><img src="'+advertisementObj[2]+'" alt="" /></a>'+
+								'<a href="'+jumpUrl[0]+'" class="pull-left" style="width:55.3%;"><img src="'+advertisementObj[0]+'" alt="" /></a>'+
+								'<a href="'+jumpUrl[1]+'" class="pull-right" style="width:44.3%;margin-bottom:1px"><img src="'+advertisementObj[1]+'" alt="" /></a>'+
+								'<a href="'+jumpUrl[2]+'" class="pull-right" style="width:44.3%;"><img src="'+advertisementObj[2]+'" alt="" /></a>'+
 							'</div>';
 						break;
 					case 4:
 						pic = '<div class="sorts clearfix sort4">'+
-								'<a href="'+jumpUrl[0]+'" class="pull-right"><img src="'+advertisementObj[0]+'" alt="" /></a>'+
-								'<a href="'+jumpUrl[1]+'" class="pull-left"><img src="'+advertisementObj[1]+'" alt="" /></a>'+
-								'<a href="'+jumpUrl[2]+'" class="pull-left"><img src="'+advertisementObj[2]+'" alt="" /></a>'+
+								'<a href="'+jumpUrl[2]+'" class="pull-right" style="width:55.3%;"><img src="'+advertisementObj[2]+'" alt="" /></a>'+
+								'<a href="'+jumpUrl[0]+'" class="pull-left" style="width:44.3%;margin-bottom:1px"><img src="'+advertisementObj[0]+'" alt="" /></a>'+
+								'<a href="'+jumpUrl[1]+'" class="pull-left" style="width:44.3%;"><img src="'+advertisementObj[1]+'" alt="" /></a>'+
 							'</div>';
 						break;
 				}

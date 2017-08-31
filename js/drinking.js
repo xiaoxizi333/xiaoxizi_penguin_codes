@@ -4,15 +4,13 @@ $.post(config.commonBanner,{'class_type':'drink'},function(datas){
 	var picUrl = datas.result[0].data.jump_urls;
 	var html = '';
 	if(obj!==undefined){
-		if(picUrl==undefined){
-			for(var i=0;i<obj.length;i++){
+		for(var i=0;i<obj.length;i++){
+			if(picUrl==undefined){
 				html += '<div class="swiper-slide">'+
 					    	'<img src="'+obj[i]+'" alt="" style="width: 100%;height:10.625rem">'+
 					    	'<div class="banner_txt"><span style="font-size: 2.125rem;letter-spacing:0.34px;">畅饮</span><span style="font-size: 1.75rem;letter-spacing:0.28px;">系列</span></div>'+
 					    '</div>';
-			}
-		}else{
-			for(var i=0;i<obj.length;i++){
+			}else{
 				if(picUrl[i]==""||picUrl[i]==undefined){
 					html += '<div class="swiper-slide">'+
 							'<a>'+
@@ -28,6 +26,7 @@ $.post(config.commonBanner,{'class_type':'drink'},function(datas){
 					    	'</a>'+
 					    '</div>';
 				}
+				
 			}
 		}
 	}	

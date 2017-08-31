@@ -13,6 +13,7 @@ $.post(config.classify,{'is_add_best_ares':1},function(data){
 		$(this).find('a').addClass('active');
 		var index = $(this).index();
 		window.localStorage.setItem('tabId',obj[index].id);
+		window.localStorage.setItem('tabOrList','1');		
 	})
 
 })

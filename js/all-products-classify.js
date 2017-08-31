@@ -1,22 +1,30 @@
-
+var tabId = window.localStorage.getItem('tabId')*1;
+var tabOrList = window.localStorage.getItem('tabOrList');
+var bannerData;
+if(tabOrList=='0'){
+	bannerData = {'class_id':tabId};
+}else if(tabOrList=='1'){
+	bannerData = {'class_type':'all'};
+}
 //banner
-$.post(config.commonBanner,{'class_type':'all'},function(datas){
-	//console.log(datas);
+$.post(config.commonBanner,bannerData,function(datas){
+	console.log(datas);
 	var obj = datas.result[0].data.show_pic_arr;
 	var picUrl = datas.result[0].data.jump_urls;
 	var bannerBox = '';
 	if(obj!==undefined){
-		if(picUrl==undefined){
-			for(var i=0;i<obj.length;i++){
+		for(var i=0;i<obj.length;i++){
+			if(picUrl==undefined){
+				
 				bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" alt="" style="width: 100%;height:14.375rem"></div>';
-			}
-		}else{
-			for(var i=0;i<obj.length;i++){
+				
+			}else{
 				if(picUrl[i]==""||picUrl[i]==undefined){
 					bannerBox += ' <div class="swiper-slide"><a><img src="'+obj[i]+'" alt="" style="width: 100%;height:14.375rem"></a></div>';
 				}else{
 					bannerBox += ' <div class="swiper-slide"><a href="'+picUrl[i]+'"><img src="'+obj[i]+'" alt="" style="width: 100%;height:14.375rem"></a></div>';
-				}				
+								
+				}
 			}
 		}
 			
