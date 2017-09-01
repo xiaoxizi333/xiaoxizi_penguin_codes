@@ -27,7 +27,7 @@ $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 	
 	var aboutPriceData = datas.result.list[0].user_order.data;
 	var priceSummary = '<div class="summary text-right">'+
-							'<div class="sum_num" style="margin-right: 1.6875rem">共'+aboutPriceData.item_total_count+'件</div><div class="sum_price">合计 <span>¥'+aboutPriceData.item_total_price+'</span></div>'+
+							'<div class="sum_num" style="margin-right: 1.6875rem">共'+aboutPriceData.item_total_count+'件</div><div class="sum_price">合计 <span>¥'+aboutPriceData.total_price+'</span></div>'+
 						'</div>';
 	$('.my_order_list').append(priceSummary);
 })

@@ -9,6 +9,7 @@ body{
 	margin-bottom: 1.25rem;
 	background-color: #fff;
 	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
 }
 .show_product{
 	padding-top: 0.9375rem;
@@ -17,7 +18,6 @@ body{
 .show_product .product_photo{
 	width: 5.625rem;
 	height: 5.625rem;
-	background: #ccc;
 	margin-right: 0.625rem;
 }
 .refund_reason,.refund{
@@ -40,20 +40,26 @@ body{
 	padding-top: 1.25rem;
 	padding-bottom: 1.25rem;
 }
+.sum_refund{
+	outline: none;
+	height: 100%;
+}
+.order_box > div:not(:last-child){
+	border-bottom: 1px solid rgba(151,151,151,.2);
+}
+
 /*add photos*/
 .fileList img{
 	display: inline-block;
 	width: 5rem;
 	height: 5rem;
-	margin-right:0.5625rem;
-	margin-bottom:0.5625rem;
 	border:1px solid #e0e0e0;
 	border-radius: 4px;
 }
 .fileList{
 	display: inline-block;
 }
-.fileElem{
+#fileElem{
 	display: inline-block;
 	width: 5rem;
 	height: 5rem;
@@ -91,8 +97,9 @@ body{
 	border-radius: 100%;
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: -0.5rem;
 	margin-top:-0.5rem;
+	z-index: 1000;
 }
 footer{
 	width: 100%;

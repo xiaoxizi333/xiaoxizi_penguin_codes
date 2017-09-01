@@ -34,41 +34,45 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			var cartData = {'uid':uid,'item_id':itemID,'num':$('.add_or_substract .specific_num').html()};
 			$.post(config.itemBilling,cartData,function(data){
 				//console.log(data)
-				var goodsInfo,
-					goodsBox = [],
-					obj = data.result.order;
-				for(var i=0;i<obj.length;i++){
-					var obj2 = obj[i].data;
-					goodsInfo = {};
-					goodsBox.push(goodsInfo);
-					goodsBox[i].goods_name = obj2.name;
-					goodsBox[i].goods_prcie = obj2.real_price;
-					goodsBox[i].goods_pic = [obj2.title_pics[0]];
-					goodsBox[i].goods_count = obj2.total_count;
-					goodsBox[i].goods_id = data.result.order[i].id;
-					
-					var salePoints = obj[i].item_info[0].data.sales_points;
-					var salePointsStr = '';
-					for(var k=0;k<salePoints.length;k++){
-						salePointsStr += salePoints[k];
+				if(data.error_code==0){
+					var goodsInfo,
+						goodsBox = [],
+						obj = data.result.order;
+					for(var i=0;i<obj.length;i++){
+						var obj2 = obj[i].data;
+						goodsInfo = {};
+						goodsBox.push(goodsInfo);
+						goodsBox[i].goods_name = obj2.name;
+						goodsBox[i].goods_prcie = obj2.real_price;
+						goodsBox[i].goods_pic = [obj2.title_pics[0]];
+						goodsBox[i].goods_count = obj2.total_count;
+						goodsBox[i].goods_id = data.result.order[i].id;
+						
+						var salePoints = obj[i].item_info[0].data.sales_points;
+						var salePointsStr = '';
+						for(var k=0;k<salePoints.length;k++){
+							salePointsStr += salePoints[k];
+						}
+						goodsBox[i].goods_desc = salePointsStr;
+
 					}
-					goodsBox[i].goods_desc = salePointsStr;
+					console.log(goodsBox)
+					goodsBox = JSON.stringify(goodsBox);
+					window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
+					window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
+					window.localStorage.setItem('item_total_price',data.result.user_order[0].data.item_total_price);
+					window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
+					window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
+					window.localStorage.setItem('preserveId',data.result.user_order[0].data.is_prestore);
 
-				}
-				console.log(goodsBox)
-				goodsBox = JSON.stringify(goodsBox);
-				window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
-				window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
-				window.localStorage.setItem('item_total_price',data.result.user_order[0].data.item_total_price);
-				window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
-				window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
-				window.localStorage.setItem('preserveId',data.result.user_order[0].data.is_prestore);
-
-				window.localStorage.setItem('goodsBox',goodsBox);
-				window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
-				window.localStorage.setItem('jump_btn','1');
-				window.localStorage.setItem('counts_num','0');
-				window.location.href="firm_order.html";
+					window.localStorage.setItem('goodsBox',goodsBox);
+					window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
+					window.localStorage.setItem('jump_btn','1');
+					window.localStorage.setItem('counts_num','0');
+					window.location.href="firm_order.html";
+				}else{
+					showTips(data.error_msg);
+				}			
 			})			
 		})
 	}else{
@@ -118,41 +122,45 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 					var cartData = {'uid':uid,'item_id':itemID,'spec1':spec1_data,'spec2':spec2_data,'spec3':spec3_data,'num':$('.add_or_substract .specific_num').html()};
 					$.post(config.itemBilling,cartData,function(data){
 						//console.log(data)
-						var goodsInfo,
-							goodsBox = [],
-							obj = data.result.order;
-						for(var i=0;i<obj.length;i++){
-							var obj2 = obj[i].data;
-							goodsInfo = {};
-							goodsBox.push(goodsInfo);
-							goodsBox[i].goods_name = obj2.name;
-							goodsBox[i].goods_prcie = obj2.real_price;
-							goodsBox[i].goods_pic = [obj2.title_pics[0]];
-							goodsBox[i].goods_count = obj2.total_count;
-							goodsBox[i].goods_id = data.result.order[i].id;
-							
-							var salePoints = obj[i].item_info[0].data.sales_points;
-							var salePointsStr = '';
-							for(var k=0;k<salePoints.length;k++){
-								salePointsStr += salePoints[k];
+						if(data.error_code==0){
+							var goodsInfo,
+								goodsBox = [],
+								obj = data.result.order;
+							for(var i=0;i<obj.length;i++){
+								var obj2 = obj[i].data;
+								goodsInfo = {};
+								goodsBox.push(goodsInfo);
+								goodsBox[i].goods_name = obj2.name;
+								goodsBox[i].goods_prcie = obj2.real_price;
+								goodsBox[i].goods_pic = [obj2.title_pics[0]];
+								goodsBox[i].goods_count = obj2.total_count;
+								goodsBox[i].goods_id = data.result.order[i].id;
+								
+								var salePoints = obj[i].item_info[0].data.sales_points;
+								var salePointsStr = '';
+								for(var k=0;k<salePoints.length;k++){
+									salePointsStr += salePoints[k];
+								}
+								goodsBox[i].goods_desc = salePointsStr;
+
 							}
-							goodsBox[i].goods_desc = salePointsStr;
+							console.log(goodsBox)
+							goodsBox = JSON.stringify(goodsBox);
+							window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
+							window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
+							window.localStorage.setItem('item_total_price',data.result.user_order[0].data.item_total_price);
+							window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
+							window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
+							window.localStorage.setItem('preserveId',data.result.user_order[0].data.is_prestore);
 
+							window.localStorage.setItem('goodsBox',goodsBox);
+							window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
+							window.localStorage.setItem('jump_btn','1');
+							window.localStorage.setItem('counts_num','0');
+							window.location.href="firm_order.html";
+						}else{
+							showTips(data.error_msg);
 						}
-						console.log(goodsBox)
-						goodsBox = JSON.stringify(goodsBox);
-						window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
-						window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
-						window.localStorage.setItem('item_total_price',data.result.user_order[0].data.item_total_price);
-						window.localStorage.setItem('delivery_type',data.result.user_order[0].data.post_type);
-						window.localStorage.setItem('ship_fee',data.result.user_order[0].data.ship_fee);
-						window.localStorage.setItem('preserveId',data.result.user_order[0].data.is_prestore);
-
-						window.localStorage.setItem('goodsBox',goodsBox);
-						window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
-						window.localStorage.setItem('jump_btn','1');
-						window.localStorage.setItem('counts_num','0');
-						window.location.href="firm_order.html";
 					})
 				}
 			})

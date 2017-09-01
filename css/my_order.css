@@ -11,6 +11,9 @@ body{
 	margin-bottom: 0.9375rem;
 	background-color: #fff;
 }
+.order_list_box{
+	padding-bottom: 1.25rem;
+}
 .my_order_det{
 	padding-left: 0.9375rem;
 	padding-right: 0.9375rem;
@@ -51,14 +54,19 @@ body{
 }
 .check_state{
 	margin-right: 0.625rem;
+	display: none;
 }
-.check_state,.sure_get_goods,.pay_back,.comment{
+.delete_order{
+	margin-left: 0.625rem;
+	display: none;
+}
+.state_btns{
 	height: 1.9375rem;
 	line-height: 1.9375rem;
 	padding-left: 0.9375rem;
 	padding-right: 0.8125rem;
 	background:#c46566;
-	display: inline-block;
+	float:right;
 	color: #fff;
 	border-radius: 2px;	
 }

@@ -52,4 +52,10 @@ var config = {
 	selectExpress:'http://101.201.115.31:14445/web/confirm_order/select_express.json',
 	goToPay:'http://101.201.115.31:14445/biz/item/shopping_cart/order_set/go_to_pay.json',
 	goToPayItem:'http://101.201.115.31:14445/biz/item/item/go_to_pay.json',
+	confirm:'http://101.201.115.31:14445/web/user_order/confirm.json',
+	userOrderRefund:'http://101.201.115.31:14445/web/user_order/refund.json',
+	orderRefundCancel:'http://101.201.115.31:14445/web/user_order_refund/cancel.json',
+	orderListRemove:'http://101.201.115.31:14445/web/my_order_list/remove.json',
+	userOrderAddress:'http://101.201.115.31:14445/web/user_order_address.json',
+	myOrderRepay:'http://101.201.115.31:14445/web/my_order/repay.json',
 }

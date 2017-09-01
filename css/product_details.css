@@ -155,6 +155,9 @@ body{
 .deal_details > div.active{
 	display: block;
 }
+.deal_details img{
+	width: 100%!important;
+}
 .sub_nav_deal{
 	background:#f2f2f2;
 	padding-left: 0.9375rem!important;

@@ -127,7 +127,84 @@ function showTips(msg){
 		$('.warming').hide();
 	},3000);	
 }
+//分页
+function getdata(page,drinkOrPrime){
+	$.ajax(
+   {
+	    
+		type:"POST",
+	    url:config.primeDrinkList,
+	    data:{'drink_or_prime':drinkOrPrime,'page':page},
+	    beforeSend:function(){
+	      	$('.spinner').show();
+	    },
+	    success:function(datas){
+			console.log(datas)
+			var obj = datas.result;
+			for(var i=0;i<obj.length;i++){
+				var specId = obj[i].data.good_item_spec_id?obj[i].good_item_spec_id:0;
+				var saleStartTime = obj[i].data.sales_start_time;
+				var secStartTime = obj[i].data.seckill_startime;
+				var secEndTime = obj[i].data.seckill_endtime;
+				var isSeckill = obj[i].data.is_seckill;
 
+				var html = '<div data_num="'+i+'" spec_id="'+specId+'" sales_start_time="'+saleStartTime+'" seckill_startime="'+secStartTime+'" seckill_endtime="'+secEndTime+'" is_seckill="'+isSeckill+'" class="detail_pic" data_id="'+obj[i].id+'"><img src="'+obj[i].data.title_pics[0]+'" class="details"></div>';
+				$('.details_info').append(html);
+			}
+			$('.detail_pic').off('click').on('click',function(){		
+				var itemID = $(this).attr('data_id');
+				var goodsIndex = $(this).index();
+				var specId = $(this).attr('spec_id');
+				window.localStorage.setItem('itemID',itemID);
+				window.localStorage.setItem('itemSpecId',specId);
+				var saleStartTime = $(this).attr('sales_start_time');
+				var secStartTime = $(this).attr('seckill_startime');
+				var secEndTime = $(this).attr('seckill_endtime');
+				var isSeckill = $(this).attr('is_seckill');
+				var nowTime = Date.parse(new Date());
+				console.log(isSeckill)
+				if(saleStartTime||isSeckill){
+					if(saleStartTime>0){
+		    			if(saleStartTime-nowTime>0){
+		    				window.location.href="pre_sale.html";
+		    			}else{
+		    				window.location.href="product_details.html";
+		    			}
+		    		//跳转正常
+		    		}else if(saleStartTime<0){
+		    			window.location.href="product_details.html";
+		    		}
+		    		//跳转 0:正常详情 1:秒杀详情
+					if(isSeckill==0){
+						window.location.href="product_details.html";
+					}else if(isSeckill==1){
+						if(nowTime>secStartTime&&nowTime<secEndTime){
+							window.location.href="seckill.html";
+						}else{
+							window.location.href="product_details.html";
+						}
+						
+					}
+				}else{
+					window.location.href="product_details.html";
+				}
+			})
+			$(window).scroll(function() {
+			    if (window.scrollY  >= $(document).height() - $(window).height()) {		
+					//console.log(scrollY)
+					//console.log(datas.result.total_count/20);
+					var totalPage = Math.ceil(datas.total_count/20);
+					if(pageNm<totalPage){
+						console.log(pageNm)
+						pageNm++;
+						getdata(pageNm);
+					}									
+				}
+			});
+		},
+		complete:function(){$('.spinner').hide()},
+	})
+}
 //验证
 var validator = {
 	//验证电子邮箱 [@字符前可以包含字母、数字、下划线和点号；@字符后可以包含字母、数字、下划线和点号；@字符后至少包含一个点号且点号不能是最后一个字符；最后一个点号后只能是字母或数字]  

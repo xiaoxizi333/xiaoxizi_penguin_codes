@@ -108,6 +108,15 @@ header{
 	color: #fff;
 	border-radius: 2px;	
 }
+.supplement{
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    width: 10rem;
+
+}
 /*footer*/
 footer{
 	width: 100%;

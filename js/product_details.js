@@ -23,7 +23,9 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		}
 	}
 	for(var i=0;i<objPic.length;i++){
-		bannerBox += ' <div class="swiper-slide"><img src="'+objPic[i]+'" alt="" style="width: 100%;height:14.375rem"></div>';
+		if(objPic[i]){
+			bannerBox += '<div class="swiper-slide"><img src="'+objPic[i]+'" alt="" style="width: 100%;height:14.375rem"></div>';
+		}	
 	}
 	$('.banner2_box').html(bannerBox);
 	var mySwiper = new Swiper('.swiper-container-1', {

@@ -11,26 +11,23 @@
 <body>
 	<div>
 		<div class="bodier">
-			<div class="show_product clearfix">
-				<div class="product_photo pull-left"></div>
-				<span class="pull-left" style="padding-top: 0.625rem">灰石酒庄雷司令</span>
-
-			</div>
+			<div class="order_box"></div>
+			
 			<div class="refund_reason">
 				<span style="margin-right: 1.5625rem">退款原因及说明</span>
 				<input type="text" placeholder="选填">
 			</div>
 			<div class="refund">
 				<span style="margin-right: 4.125rem">退款金额</span>
-				<span style="color: #c46566">¥200.0</span>
+				<span style="color: #c46566">¥<input class="sum_refund" /></span>
 			</div>
-			<div class="tip">最多¥200.0，含发货邮费¥0.00</div>
+			<div class="tip">最多¥<span class="at_most"></span>，含发货邮费¥<span class="ship_fee"></span></div>
 			<div class="user_comment">
 				<div style="margin-bottom: 1.5625rem">上传凭证</div>
 				<div class="photos">
 					<div class="fileList"></div>
 					<div class="filebox">
-						<input type="file" class="fileElem" accept="image/*" style="opacity: 0">
+						<input type="file" id="fileElem" accept="image/*" style="opacity: 0">
 						<div class="mask_add_input">最多五张</div>
 					</div>	
 				</div>
@@ -43,5 +40,6 @@
 <script type="text/javascript" src="vendor/jquery.js"></script>
 <script type="text/javascript" src="vendor/zepto.min.js"></script>
 <script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="config.js"></script>
 <script src="js/common.js"></script>
 <script src="js/apply_for_refund.js"></script>
