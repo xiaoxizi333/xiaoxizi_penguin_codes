@@ -58,4 +58,6 @@ var config = {
 	orderListRemove:'http://101.201.115.31:14445/web/my_order_list/remove.json',
 	userOrderAddress:'http://101.201.115.31:14445/web/user_order_address.json',
 	myOrderRepay:'http://101.201.115.31:14445/web/my_order/repay.json',
+	itemDetail:'http://101.201.115.31:14445/web/item_detail_user_buy/list.json',
+	vipService:'http://101.201.115.31:14445/web/user_center/vip_service.json',
 }

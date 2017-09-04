@@ -192,6 +192,13 @@ header{
 	border-bottom:none;
 }
 .logo{
-	-width: 
+	color: #c46566;
+	font-size: 0.875rem;
+	font-family: 'PingFangSC-Thin';
+	border-radius: 4px;
+	border: 1px solid #c46566;
+	padding:0.2rem 0.2rem;
+	box-sizing:border-box;
+	display: inline-block;
 }
 

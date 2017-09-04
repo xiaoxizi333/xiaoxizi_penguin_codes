@@ -43,7 +43,6 @@ $.post(config.myCouponList,{'uid':uid,'user_order_id':user_order_id},function(da
 		$('.use_icon').removeClass('active');
 		$(this).addClass('active');
 	})
-
 })
 
 

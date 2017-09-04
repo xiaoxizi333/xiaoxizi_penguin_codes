@@ -1,4 +1,3 @@
-
 $.post(config.commonBanner,{'class_type':'prime'},function(datas){
 	//console.log(datas);
 	var obj = datas.result[0].data.show_pic_arr;
@@ -30,20 +29,16 @@ $.post(config.commonBanner,{'class_type':'prime'},function(datas){
 			}
 		}
 	}
-	$('.banner_box').html(html);
-	
+	$('.banner_box').html(html);	
 	var mySwiper = new Swiper('.swiper-container', {
 		pagination : '.swiper-pagination',
 		autoplay: 3000,//可选选项，自动滑动
 		autoplayDisableOnInteraction:false//使滑动效果不停止
-
 	})
 })
-
 //商品列表
 var pageNm = 1;
 getdata(pageNm,'prime');
-
 filterGoods('prime');
 $('.filter_tab li a').on('tap',function(){
 	$('.filter_tab li a').removeClass('active');

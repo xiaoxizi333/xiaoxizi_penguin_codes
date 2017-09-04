@@ -1,9 +1,9 @@
 //订单列表
 var pageNm = 1;
-getdata(pageNm);
+dividePage(pageNm);
 
 //分页
-function getdata(page){
+function dividePage(page){
 	 $.ajax(
    {
       type:"POST",
@@ -130,12 +130,19 @@ function getdata(page){
 		//删除订单
 		$('.delete_order').on('click',function(){
 			var user_order_id = $(this).parents('.order_list_box').attr('data_id');
-			$.post(config.orderListRemove,{'user_order_id':user_order_id},function(datas){
-				if(datas.error_code==0){
-					location.reload();
-				}else{
-					showTips(datas.error_msg);
-				}
+			$('.delete_mask').show();
+			$('.yes').on('click',function(){
+				$.post(config.orderListRemove,{'user_order_id':user_order_id},function(datas){
+					if(datas.error_code==0){
+						location.reload();
+					}else{
+						showTips(datas.error_msg);
+					}
+					$('.delete_mask').hide();
+				})
+			})
+			$('.no').on('click',function(){
+				$('.delete_mask').hide();
 			})
 		})
 		//查看退款记录
@@ -278,7 +285,7 @@ function getdata(page){
 				if(pageNm<totalPage){
 					console.log(pageNm)
 					pageNm++;
-					getdata(pageNm);
+					dividePage(pageNm);
 				}									
 			}
 		});

@@ -11,7 +11,7 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 	for(var i=0;i<orders.length;i++){
 		var orderObj = orders[i].data;
 		html += '<div class="refund_product clearfix">'+
-					'<div class="product_photo pull-left"><img src="'+orderObj.title_pics[0]+'" style="width:100%;height:100%;" alt="" /></div>'+
+					'<div class="product_photo pull-left bg" style="background-image:url('+orderObj.title_pics[0]+')"></div>'+
 					'<span class="pull-left" style="padding-top: 0.625rem">'+orderObj.name+'</span>'+
 				'</div>';
 	}

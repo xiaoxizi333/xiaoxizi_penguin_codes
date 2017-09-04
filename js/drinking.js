@@ -25,27 +25,20 @@ $.post(config.commonBanner,{'class_type':'drink'},function(datas){
 					    		'<div class="banner_txt"><span style="font-size: 2.125rem;letter-spacing:0.34px;">畅饮</span><span style="font-size: 1.75rem;letter-spacing:0.28px;">系列</span></div>'+
 					    	'</a>'+
 					    '</div>';
-				}
-				
+				}	
 			}
 		}
-	}	
-	
-	$('.banner_box').html(html);
-
-	
+	}		
+	$('.banner_box').html(html);	
 	var mySwiper = new Swiper('.swiper-container', {
 		pagination : '.swiper-pagination',
 		autoplay: 3000,//可选选项，自动滑动
 		autoplayDisableOnInteraction:false//使滑动效果不停止
-
 	})
 })
-
 //商品列表
 var pageNm = 1;
 getdata(pageNm,'drink');
-
 filterGoods('drink');
 $('.filter_tab li a').on('tap',function(){
 	$('.filter_tab li a').removeClass('active');

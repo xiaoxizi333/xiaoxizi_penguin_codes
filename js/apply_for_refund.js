@@ -8,6 +8,10 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		html += '<div class="show_product clearfix">'+
 					'<div class="product_photo pull-left"><img src="'+orderObj.title_pics[0]+'" style="width:100%;height:100%;" alt="" /></div>'+
 					'<span class="pull-left" style="padding-top: 0.625rem">'+orderObj.name+'</span>'+
+					'<div class="pull-right text-right" style="padding-top: 0.625rem;">'+
+						'<span style="display:block;margin-bottom: 0.8125rem;">'+orderObj.real_price+'</span>'+
+						'<span style="display:block">x'+orderObj.total_count+'</span>'+
+					'</div>'+
 				'</div>';
 	}
 	$('.order_box').html(html);
@@ -65,7 +69,6 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		picUrl = JSON.stringify(picUrl);
 		var passData = {'user_order_id':user_order_id,'refund_value':$('.sum_refund').val()*1,'refund_pics':picUrl,'refund_desc':reason};
 		console.log(passData)
-
 		$.ajax({
 		    url: config.userOrderRefund,
 		    type: "POST",
@@ -78,5 +81,4 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		    }
 		})
 	})
-
 })

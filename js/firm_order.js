@@ -47,9 +47,7 @@ if(cartOrBuy=='0'){
 			list += '<div class="product_info_box" style="position:relative" data_id="'+obj[i].id+'">'+
 						'<div class="product_info clearfix">'+
 							'<div class="choose_icon"></div>'+
-							'<div class="specific_photo pull-left">'+
-								'<img src="'+obj[i].data.title_pics[0]+'" style="width: 100%;height: 100%" alt="">'+
-							'</div>'+
+							'<div class="specific_photo pull-left bg" style="background-image:url('+obj[i].data.title_pics[0]+')"></div>'+
 							'<div class="description pull-left" style="width:6rem">'+
 								'<div class="product_name">'+obj[i].data.name+'</div>'+
 								'<div class="some_desc"></div>'+ 
@@ -316,9 +314,7 @@ if(cartOrBuy=='0'){
 		}
 		list += '<div class="product_info_box" style="position:relative" data_id="'+obj.goods_id+'">'+
 					'<div class="product_info clearfix">'+
-						'<div class="specific_photo pull-left">'+
-							'<img src="'+obj.goods_pic[0]+'" style="width: 100%;height: 100%" alt="">'+
-						'</div>'+
+						'<div class="specific_photo pull-left bg" style="background-image:url('+obj.goods_pic[0]+')"></div>'+
 						'<div class="description pull-left">'+
 							'<div class="product_name">'+obj.goods_name+'</div>'+
 							'<div class="some_desc">'+obj.goods_desc+'</div>'+
@@ -568,24 +564,30 @@ function deleteGoods(){
 	$('.delete-btn').on('tap',function(){
 		var orderId = $(this).parent().parent().attr('data_id');
 		//console.log(orderId);
-		$.post(config.sRemoveOrder,{'uid':uid,'order_ids':orderId},function(data){
-			//console.log(data);
-			if(data.error_code==0){
-				alert('删除成功');
-				if($('.product_info_box').length==1){
-					window.history.go(-1);		
+		$('.delete_mask').show();
+		$('.yes').on('click',function(){
+			$.post(config.sRemoveOrder,{'uid':uid,'order_ids':orderId},function(data){
+				//console.log(data);
+				if(data.error_code==0){
+					if($('.product_info_box').length==1){
+						window.history.go(-1);		
+					}else{
+						location.reload();
+					}		
 				}else{
-					location.reload();
-				}		
-			}else{
-				alert(data.error_msg);
-			}
-			if($('.product_info_box').length==0){
-				$('.product_detail_info').hide();
-			}else{
-				$('.product_detail_info').show();
-			}
+					showTips(data.error_msg);
+				}
+				$('.delete_mask').hide();
+				if($('.product_info_box').length==0){
+					$('.product_detail_info').hide();
+				}else{
+					$('.product_detail_info').show();
+				}
+			})
 		})
+		$('.no').on('click',function(){
+			$('.delete_mask').hide();
+		})	
 	})
 }
 //delivery

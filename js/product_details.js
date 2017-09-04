@@ -2,7 +2,7 @@
 var itemID = window.localStorage.getItem('itemID')*1;
 var itemSpecId = window.localStorage.getItem('itemSpecId')*1;
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
-	console.log(datas);
+	//console.log(datas);
 
 	var objPic = datas.result.item_info[0].data.title_pics;
 	var bannerBox = '';
@@ -24,7 +24,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	}
 	for(var i=0;i<objPic.length;i++){
 		if(objPic[i]){
-			bannerBox += '<div class="swiper-slide"><img src="'+objPic[i]+'" alt="" style="width: 100%;height:14.375rem"></div>';
+			bannerBox += '<div class="swiper-slide"><img src="'+objPic[i]+'" alt="" style="width: 100%;height:100%"></div>';
 		}	
 	}
 	$('.banner2_box').html(bannerBox);
@@ -61,6 +61,54 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			$('.default_style').append('<span>'+obj.spec3+'</span>');
 		}
 	}
+	//套餐
+	var packageData;
+	if(datas.result.item_spec_template.length>0){
+		packageData = {'item_id':datas.result.item_spec_template[0].data.item_id};
+	}else{
+		packageData = {'item_id':datas.result.item_info[0].id};
+	}
+
+	$.post(config.itemFindItemGroup,packageData,function(datas){
+		//console.log(datas);
+		var package_list = datas.result.list;
+		if(package_list.length==0){
+			$('.package').hide();
+		}else{
+			$('.package').show();
+			var pacDetails = '';
+			//console.log(package_list);
+			for(var i=0;i<package_list.length;i++){
+				pacDetails += '<div class="swiper-slide" data_id="'+package_list[i].group_info_id+'">'+
+									'<div class="text-center" style="margin-bottom: 1.25rem;">'+package_list[i].group_info_title+'</div>'+
+									'<div class="package_det clearfix">'+
+									'</div>'+
+							  	'</div>';	
+			}
+			$('.package-swiper .swiper-wrapper').html(pacDetails);
+			for(var i=0;i<package_list.length;i++){
+				var pacPicUrl = '<div class="det_content pull-left bg" style="background-image:url('+package_list[i].maps_group[0].item_info[0].title_pics[0]+')"></div>'+
+							'<div class="pull-left plus">+</div>'+
+							'<div class="det_content pull-left bg" style="background-image:url('+package_list[i].maps_group[1].item_info[0].title_pics[0]+')"></div>';
+				$('.package_det').eq(i).append(pacPicUrl);
+			}
+
+			new Swiper('.package-swiper .swiper-container-2', {
+				autoplay: 3000,//可选选项，自动滑动
+				autoplayDisableOnInteraction:false,//使滑动效果不停止
+				observer:true,
+				observeParents:true,
+
+			});
+			$('.package-swiper .swiper-slide').on('click',function(){
+				window.location.href="product_package.html";
+				window.localStorage.setItem('productNm',obj.name);
+				window.localStorage.setItem('groupId',$(this).attr('data_id'));
+			})
+		}
+		
+
+	})
 	
 })
 //添加评论
@@ -75,7 +123,7 @@ function addDatas(comments){
 			var commentList = '<div class="comment_content">'+
 								'<div class="user_info clearfix">'+
 									'<div class="specific_user_info pull-left clearfix">'+
-										'<div class="user_photo pull-left"><img src="'+detailObj.comment_user_pic+'" style="width: 2.25rem;height: 2.25rem;border-radius: 50%;margin-right: 0.25rem"></div>'+
+										'<div class="user_photo pull-left"><img src="'+detailObj.comment_user_pic+'" style="width: 2.25rem!important;height: 2.25rem;border-radius: 50%;margin-right: 0.25rem"></div>'+
 										'<div class="user_details pull-left">'+detailObj.comment_user_nickname+'</div>'+
 									'</div>'+
 									'<div class="date_time pull-right">'+switchDate(datas.result[k].created_at,'-')+'</div>'+
@@ -90,7 +138,7 @@ function addDatas(comments){
 			var picObj = detailObj.comment_pics;
 			var picHtml = '';
 			for(var j=0;j<picObj.length;j++){
-				picHtml += '<img src="'+picObj[j]+'" style="width: 6.25rem;height: 6.25rem;">';
+				picHtml += '<img src="'+picObj[j]+'" style="width: 6.25rem!important;height: 6.25rem;">';
 			}
 			$('.comment_pic').eq(k).html(picHtml);
 		}
@@ -165,13 +213,34 @@ $('.share_mask').on('tap',function(){
 })
 
 //tab
-$('.tab_header li').on('tap',function(){
+$('.tab_header li').on('click',function(){
 	var index = $(this).index();
 	$('.tab_header li').removeClass('active');
 	$(this).addClass('active');
-	$('.deal_details div').removeClass('active');
-	$('.deal_details div').eq(index).addClass('active');
+	$('.deal_details > div').removeClass('active');
+	$('.deal_details > div').eq(index).addClass('active');
 })
+function makeDeal(){
+	//成交量
+	$.post(config.itemDetail,{'item_id':itemID},function(datas){
+		console.log(datas);
+		var dealInfo = datas.result;
+		if(dealInfo.length){
+			var dealHtml = '';
+			for(var i=0;i<dealInfo.length;i++){
+				var userInfo = dealInfo[i].user_info;
+				dealHtml += '<li class="clearfix">'+
+							'<span class="username pull-left" style="width: 30%">'+protectUserName(userInfo.user_data.real_name)+'</span>'+
+							'<span class="deal_time pull-left text-center" style="width: 50%">'+switchDate2(dealInfo[i].created_at)+'</span>'+
+							'<span class="deal_num pull-left text-center" style="width: 20%">'+dealInfo[i].data.total_count+'</span>'+
+						'</li>';
+			}
+			$('.deal_specific_info').html(dealHtml);
+		}else{
+			$('.deal_specific_info').html('<div class="no_details no_deals">暂无交易～</div>');
+		}	
+	})
+}
 //comment
 $('.comment_nav li').on('tap',function(){
 	$('.comment_nav li').removeClass('active');
@@ -206,5 +275,24 @@ $('.hide_icon').on('tap',function(){
 	$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
 	$('.mask').fadeOut(1000);
 })
-
+function switchDate2(time){
+	var timeStr = new Date(time);
+	var m = timeStr.getMonth();
+	var d = timeStr.getDate();
+	var h = timeStr.getHours();
+	var m = timeStr.getMinutes();
+	var s = timeStr.getSeconds();
+	m = m<10?'0'+m:m;
+	d = d<10?'0'+d:d;
+	h = h<10?'0'+h:h;
+	m = m<10?'0'+m:m;
+	s = s<10?'0'+s:s;
+	return m+'-'+d+' '+h+':'+m+':'+s;
+}
+//保护用户名
+function protectUserName(str){
+	var str1 = str.substr(0,1);
+	var str3 = str.slice(2);
+	return str1+'*'+str3;
+}
 

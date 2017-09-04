@@ -11,6 +11,9 @@ body{
 	color:#868191;
 	letter-spacing:0.14px;
 }
+.swiper-container-1{
+	height: 14.375rem;
+}
 /*details*/
 .goods_det{
 	padding-top: 1.1875rem;
@@ -155,7 +158,7 @@ body{
 .deal_details > div.active{
 	display: block;
 }
-.deal_details img{
+.deal_details .introduction img{
 	width: 100%!important;
 }
 .sub_nav_deal{
@@ -274,7 +277,7 @@ body{
 	padding-left: 2.5rem;
 	color: #c6c6c6;
 }
-.no_comment{
+.no_details{
 	text-align: center;
     height: 5rem;
     line-height: 5rem;
@@ -288,18 +291,26 @@ body{
 	padding-bottom: 1rem!important;
 	overflow: hidden;
 }
+/*package_service*/
+.package_service{
+	padding-top: 2rem;
+}
 /*******tab end******/
 /*guess*/
 .guess{
 	background-color: #fff;
 	padding-top: 0.875rem;
-	padding-bottom: 1rem;
 	text-align: center;
 	color:#868191;
 	font-family: 'PingFangSC-Thin';
 }
+.love_banner{
+	padding-left:0.875rem;
+	padding-right:0.875rem;
+}
 .love_banner img{
 	width: 100%;
+	margin-bottom:0.9375rem
 }
 /*footer*/
 footer{

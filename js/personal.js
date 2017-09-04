@@ -1,13 +1,50 @@
+//分红
+$.post(config.vipService,{'uid':1260826557228176},function(datas){
+	console.log(datas);
+	var service = datas.result.service;
+	if(service.length){
+		$('.renew_box').show();
+		var serviceHtml = '';
+		for(var i=0;i<service.length;i++){
+			var obj = service[i];
+			var points = obj.user_info.user_data.point?obj.user_info.user_data.point:0;
+			serviceHtml += '<div class="renew">'+
+								'<div class="logo_txt">企鹅团200</div>'+
+								'<div class="title_txt">'+obj.vip_service.data.vip_item.name+'</div>'+
+								'<ul class="list-unstyled about_personal_info">'+
+									'<li class="clearfix">'+
+										'<span class="pull-left">我的积分</span>'+
+										'<span class="pull-right my_points">'+points+'</span>'+
+									'</li>'+
+									'<li class="clearfix">'+
+										'<span class="pull-left delivery_info">快件到达北京市</span>'+
+										'<span class="pull-right delivery_state">已发货</span>'+
+									'</li>'+
+									'<li class="clearfix">'+
+										'<span class="pull-left exp_date">距离过期有'+getExpireDay(obj.vip_service.data.end_time)+'天</span>'+
+									'</li>'+
+								'</ul>'+
+								'<div class="total_btn_style renew_btn">'+
+									'立刻<br>'+
+									'续订'+
+								'</div>'+
+							'</div>';
+		}
+		$('.renew_box').html(serviceHtml);
+	}else{
+		$('.purchase').show();
+	}
+})
 //我的订单
 $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result.list[0].order;
 	var orderList = '';
 	for(var i=0;i<obj.length;i++){
 		var detailsObj = obj[i].data; 
 		orderList = '<li>'+
 						'<div class="clearfix" style="border-bottom:1px solid rgba(151,151,151,.2)">'+
-							'<div class="product_photo pull-left bg" style="background-image:url('+detailsObj.title_pics[0]+')""></div>'+
+							'<div class="product_photo pull-left bg" style="background-image:url('+detailsObj.title_pics[0]+')"></div>'+
 							'<div class="product_info pull-left">'+
 								'<div class="product_name">'+detailsObj.name+'</div>'+
 								'<div class="description"></div>'+
@@ -33,7 +70,7 @@ $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 })
 //优惠券
 $.post(config.myCoupon,{'uid':uid},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result;
 	var coupon = '';
 	var bgPic;
@@ -95,3 +132,12 @@ $.post(config.addressList,{'uid':uid},function(data){
 		window.localStorage.setItem('editNum','2');
 	})
 })
+//过期时间
+function getExpireDay(str){
+	var now = new Date(); 
+	var endDate = new Date(str); 
+	var leftTime=endDate.getTime()-now.getTime();
+	var leftsecond = parseInt(leftTime/1000); 
+	var day=Math.floor(leftsecond/(60*60*24)); 
+	return day;
+}

@@ -220,7 +220,7 @@ $.post(config.indexModuleList,function(datas){
 			var WZId = tObj.item_class*1;
 		 	var jumpType = tObj.type;
 		 	var customUrl = tObj.custom_url;
-			var html = '<div class="tlwz" type="'+jumpType+'" id="'+WZId+'" customUrl="'+customUrl+'"><div><span class="logo"></span><span>'+title+'</span></div></div>';
+			var html = '<div class="tlwz" type="'+jumpType+'" id="'+WZId+'" customUrl="'+customUrl+'"><div class="clearfix"><div class="pull-left" style="width:18%"><span class="logo">醉鹅娘</span></div><div class="pull-left" style="width:80%"><span style="padding: 0.26rem 0.26rem;display:inline-block">'+title+'</span></div></div></div>';
 		 	//console.log(jumpType)
 			$('.module_box').append(html);
 			jump('.tlwz');			

@@ -51,13 +51,11 @@ function searchItem(){
 							window.location.href="seckill.html";
 						}else{
 							window.location.href="product_details.html";
-						}
-						
+						}	
 					}
 				}else{
 					window.location.href="product_details.html";
-				}
-						
+				}		
 			})
 		}
 	})

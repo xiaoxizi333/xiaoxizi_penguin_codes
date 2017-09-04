@@ -45,10 +45,10 @@ body{
 .more_address{
 	margin-top: 0.9375rem;
 }
-.more_address .left .address_box{
-	border-bottom: 1px solid rgba(151,151,151,.4);
+.more_address .address_pox .address_box{
+	border-top: 1px solid rgba(151,151,151,.4);
 }
-.more_address .left:last-child .address_box{
+.more_address .address_pox:first-child .address_box{
 	border:0;
 }
 /*左滑删除*/

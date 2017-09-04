@@ -10,7 +10,7 @@ $.ajax({
     	//console.log(datas);
     	var obj = datas.result.list[0];
     	$('header').html(productNm);
-    	$('.main_product .product_photo').html('<img style="width:100%;height:100%;" src="'+obj.group_info_group_pic+'">');
+    	$('.main_product .product_photo').attr('style','background-image:url("'+obj.group_info_group_pic+'")');
    		$('.main_product_pic').html(obj.group_info_title);
       $('.price .origin_price del').html(obj.group_info_origin_price);
    		$('.price .new_price').html(obj.group_info_group_price);
@@ -20,7 +20,7 @@ $.ajax({
           itemDetail = '';
    		for(var i=0;i<packageItem.length;i++){
    			itemDetail += '<div class="choose_product clearfix">'+
-           							'<div class="product_photo pull-left"><img src="'+packageItem[i].item_info[0].title_pics[0]+'" style="width:100%;height:100%"></div>'+
+           							'<div class="product_photo pull-left bg" style="background-image:url('+packageItem[i].item_info[0].title_pics[0]+')"></div>'+
         								'<div class="pull-left" style="padding-top:0.4rem;width: 50%;">'+packageItem[i].item_info[0].name+'</div>'+
         								'<div class="price pull-right">'+
         									'<div class="text-right" style="padding-top:0.4rem;">¥<span></span>'+packageItem[i].map_group_price+'</div>'+

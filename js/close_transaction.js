@@ -6,7 +6,6 @@ $.post(config.userOrderAddress,{'user_order_id':user_order_id},function(datas){
 	$('.user_name').html(addressObj.contact_user_name);
 	$('.user_phone').html(addressObj.contact_phone);
 	$('.address_details').html(addressObj.address_detail);
-
 })
 //商品
 $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
@@ -17,7 +16,7 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		var obj = orderObj[i].data;
 		var descData = orderObj[i].item_info[0].data.sales_points;
 		var productHtml = '<li class="clearfix">'+
-							'<div class="product_photo pull-left"><img src="'+obj.title_pics[0]+'" style="width:100%;height:100%"></div>'+
+							'<div class="product_photo pull-left bg" style="background-image:url('+obj.title_pics[0]+')"></div>'+
 							'<div class="description pull-left">'+
 								'<div style="padding-top: 0.8125rem;margin-bottom: 0.8125rem;color:#5a5a5a">'+obj.name+'</div>'+
 								'<div class="supplement"></div>'+

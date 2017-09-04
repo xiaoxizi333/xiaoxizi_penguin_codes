@@ -14,30 +14,24 @@ $.post(config.commonBanner,bannerData,function(datas){
 	var bannerBox = '';
 	if(obj!==undefined){
 		for(var i=0;i<obj.length;i++){
-			if(picUrl==undefined){
-				
-				bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" alt="" style="width: 100%;height:14.375rem"></div>';
-				
+			if(picUrl==undefined){	
+				bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" alt="" style="width: 100%;height:14.375rem"></div>';	
 			}else{
 				if(picUrl[i]==""||picUrl[i]==undefined){
 					bannerBox += ' <div class="swiper-slide"><a><img src="'+obj[i]+'" alt="" style="width: 100%;height:14.375rem"></a></div>';
 				}else{
-					bannerBox += ' <div class="swiper-slide"><a href="'+picUrl[i]+'"><img src="'+obj[i]+'" alt="" style="width: 100%;height:14.375rem"></a></div>';
-								
+					bannerBox += ' <div class="swiper-slide"><a href="'+picUrl[i]+'"><img src="'+obj[i]+'" alt="" style="width: 100%;height:14.375rem"></a></div>';				
 				}
 			}
-		}
-			
+		}			
 	}
 	$('.banner2_box').html(bannerBox);
 	var mySwiper = new Swiper('.swiper-container', {
 		pagination : '.swiper-pagination',
 		autoplay: 3000,//可选选项，自动滑动
 		autoplayDisableOnInteraction:false//使滑动效果不停止
-
 	})
 })
-
 var firstItem = window.localStorage.getItem('tabId');
 $.post(config.allItemList,{'item_class':firstItem},function(datas){
 	//console.log(datas);
@@ -48,7 +42,6 @@ $.post(config.allItemList,{'item_class':firstItem},function(datas){
 	}
 	$('.SKU_details').html(detailsHtml);
 })
-
 //一级列表
 $.post(config.indexItemClassList,function(datas){
 	//console.log(datas);
@@ -59,7 +52,6 @@ $.post(config.indexItemClassList,function(datas){
 		html += '<li id="'+obj[i].id+'"><a href="javascript:;">'+obj[i].data.class_name+'</a></li>';
 	}
 	$('.sort_tab').html(html);
-
 	for(var j=0;j<obj.length;j++){
 		var tabId = parseInt(window.localStorage.getItem('tabId'));
 		if(tabId == obj[j].id){
@@ -76,7 +68,6 @@ $.post(config.indexItemClassList,function(datas){
 		var itemClass = datas.result[itemIndex].id;
 		window.localStorage.setItem('item_class',itemClass);
 		var state = window.localStorage.getItem('state');
-
 		var passData;
 		//console.log(typeof state)
 		//console.log(state)
@@ -87,16 +78,13 @@ $.post(config.indexItemClassList,function(datas){
 			}else{
 				state = JSON.parse(state);
 				passData = {'item_class':itemClass,'sort':state};
-			}
-			
+			}	
 		}else{
 			passData = {'item_class':itemClass}
 		}
 		searchItems(passData);
-
 	})
 })
-
 //二级标签
 addTabActive($('.filter_tab li'));
 $('.filter_tab li').on('tap',function(){
@@ -105,7 +93,6 @@ $('.filter_tab li').on('tap',function(){
 	var itemIndex = $(this).index();
 	var passData;
 	var itemClass = window.localStorage.getItem('item_class');
-
 	if(itemIndex==0){
 		passData = {'item_class':itemClass,sort:{"data.sales_count":"desc"}};
 		var sortState = {"data.sales_count":"desc"};
@@ -123,9 +110,7 @@ $('.filter_tab li').on('tap',function(){
 		window.localStorage.setItem('state',sortState);
 	}
 	searchItems(passData);
-
 })
-
 //三级标签
 $.post(config.tagList,function(datas){
 	//console.log(datas);
@@ -136,20 +121,14 @@ $.post(config.tagList,function(datas){
 	}
 	$('.product_tab').html(html);
 	addTabActive($('.product_tab li'));
-	
 	$('.product_tab li').on('tap',function(){
 		$('.SKU_details').empty();
 		var passData;
 		var itemClass = window.localStorage.getItem('item_class');
 		var sortState = window.localStorage.getItem('state');
-		
 		var sortState2 = JSON.parse(sortState);
-
 		var sortId = $(this).attr('id')*1;
-		
 		sortState2[1] = JSON.parse(sortId);
-		
-
 		if(sortState){
 			if(sortState == '[1379545677630329]'){
 				passData = {'item_class':itemClass,'tag_id_array':sortState2};
@@ -160,8 +139,7 @@ $.post(config.tagList,function(datas){
 				var tagId = JSON.stringify(arr);
 				tagId = JSON.parse(tagId);
 				passData = {'item_class':itemClass,'sort':sortNum,'tag_id_array':tagId};
-			}
-				
+			}	
 		}else{	
 			passData = {'item_class':itemClass,'tag_id_array':tagId}
 		}
@@ -169,9 +147,6 @@ $.post(config.tagList,function(datas){
 		searchItems(passData);
 	})
 })
-
-
-
 function addTabActive(obj){
 	obj.on('tap',function(){
 		obj.removeClass('active');
@@ -224,13 +199,11 @@ function searchItems(passData){
 								window.location.href="seckill.html";
 							}else{
 								window.location.href="product_details.html";
-							}
-							
+							}		
 						}
 					}else{
 						window.location.href="product_details.html";
-					}
-						
+					}	
 				})
 			}
 	    }

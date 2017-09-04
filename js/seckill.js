@@ -68,6 +68,8 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 							window.localStorage.setItem('counts_num','0');
 							window.location.href="firm_order.html";
 						}else{
+							$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
+							$('.mask').fadeOut(1000);
 							showTips(data.error_msg);
 						}
 					})
@@ -156,7 +158,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 							}
 							var cartData = {'uid':uid,'item_id':itemID,'spec1':spec1_data,'spec2':spec2_data,'spec3':spec3_data,'num':$('.add_or_substract .specific_num').html()};
 							$.post(config.itemBilling,cartData,function(data){
-								console.log(data)
+								console.log(data);
 								if(data.error_code==0){
 									var goodsInfo,
 										goodsBox = [],
@@ -194,6 +196,8 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 									window.localStorage.setItem('counts_num','0');
 									window.location.href="firm_order.html";
 								}else{
+									$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
+									$('.mask').fadeOut(1000);
 									showTips(data.error_msg);
 								}
 							})
@@ -204,56 +208,6 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			
 		})
 	}
-	//套餐
-	var packageData;
-	if(datas.result.item_spec_template.length>0){
-		packageData = {'item_id':datas.result.item_spec_template[0].data.item_id};
-	}else{
-		packageData = {'item_id':datas.result.item_info[0].id};
-	}
-	//console.log(packageData);
-	$.post(config.itemFindItemGroup,packageData,function(datas){
-		//console.log(datas);
-		var package_list = datas.result.list;
-		if(package_list.length==0){
-			$('.package').hide();
-		}else{
-			$('.package').show();
-			var pacDetails = '';
-			//console.log(package_list);
-			for(var i=0;i<package_list.length;i++){
-				pacDetails += '<div class="swiper-slide" data_id="'+package_list[i].group_info_id+'">'+
-									'<div class="text-center" style="margin-bottom: 1.25rem;">'+package_list[i].group_info_title+'</div>'+
-									'<div class="package_det clearfix">'+
-									'</div>'+
-							  	'</div>';	
-			}
-			$('.package-swiper .swiper-wrapper').html(pacDetails);
-			for(var i=0;i<package_list.length;i++){
-				var pacPicUrl = '<div class="det_content pull-left">'+
-								'<img style="width:100%;height:100%" src="'+package_list[i].maps_group[0].item_info[0].title_pics[0]+'">'+
-							'</div>'+
-							'<div class="pull-left plus">+</div>'+
-							'<div class="det_content pull-left">'+
-								'<img style="width:100%;height:100%" src="'+package_list[i].maps_group[1].item_info[0].title_pics[0]+'">'+
-							'</div>';
-				$('.package_det').eq(i).append(pacPicUrl);
-			}
-			new Swiper('.package-swiper .swiper-container-2', {
-				autoplay: 3000,//可选选项，自动滑动
-				autoplayDisableOnInteraction:false,//使滑动效果不停止
-				observer:true,
-				observeParents:true,
-
-			});
-			$('.package-swiper .swiper-slide').on('click',function(){
-				window.location.href="product_package.html";
-				window.localStorage.setItem('productNm',obj.name);
-				window.localStorage.setItem('groupId',$(this).attr('data_id'));
-			})
-		}
-
-	})
 	//选项卡
 	$('.introduction').append(obj.detail_desc);
 	$('.parameters').html(obj.item_params);

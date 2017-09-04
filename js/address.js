@@ -4,7 +4,6 @@ var arrData = {
 	'addressId':window.localStorage.getItem('addressId'),
 	'editNum':window.localStorage.getItem('editNum'),
 }
-
 $.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(data){
 	//console.log(data);
 	console.log(areadata);
@@ -29,15 +28,11 @@ $.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(da
 					'</div>'+					
 				'</div>';
 	$('#addressForm').html(html);
-
-
 	//点击返回键调回上页
 	$('.arrow_go_back').on('tap',function(){
 		window.location.href = 'edit_address.html';
 	})
-
 	//选择地区
-	//只有trigger 和 wheels 是必要参数  其他都是选填参数
 	var mobileSelect4 = new MobileSelect({
 	    trigger: '#chooseAddress',
 	    title: '地区选择',
@@ -49,19 +44,16 @@ $.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(da
 	        window.localStorage.setItem('areaData',datas);
 	    } 
 	});
-
 	//点击保存
 	$('.save_box').on('tap',function(){
 		var receiver = $('.receiver').val();
 		var phoneNum = $('.phone_num').val();
 		var chooseAddress = $('#chooseAddress').html();
 		var addressDetail = $('.address_detail').val();
-
 		var areaArr = Trim(chooseAddress,'g').split(',');
 		var province = areaArr[0];
 		var city = areaArr[1];
 		var district = areaArr[2];
-
 		var areaData = JSON.parse(window.localStorage.getItem('areaData'));
 		var provinceCode,cityCode,districtCode;
 		if(areaData==null){
@@ -74,10 +66,8 @@ $.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(da
 			cityCode = areaData[1].id*1;
 			districtCode = areaData[2].id*1;
 			//console.log(provinceCode)
-		}
-		
+		}	
 		//验证表单
-
 		if(receiver ==''||receiver==undefined){
 			alert('请填写姓名');
 		}else if(!validator.IsMobilePhoneNumber(phoneNum)){
@@ -90,8 +80,7 @@ $.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(da
 			$.post(config.addressUpdate,{'id':arrData.addressId,'contact_user_name':receiver,'contact_phone':phoneNum,'province':province,'city':city,'district':district,'street':addressDetail,'province_code':provinceCode,'city_code':cityCode,'district_code':districtCode},function(data){
 				if(data.error_code==0){
 					if(arrData.editNum=='0'){
-						window.location.href = 'edit_address.html';
-						
+						window.location.href = 'edit_address.html';						
 					}else if(arrData.editNum=='1'){
 						window.location.href = 'firm_order.html';
 					}else if(arrData.editNum=='2'){
@@ -100,9 +89,7 @@ $.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(da
 				}
 			})
 		}
-
 	})
-
 })
 
 

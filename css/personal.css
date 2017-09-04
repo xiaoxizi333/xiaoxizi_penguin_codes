@@ -39,20 +39,21 @@ header{
 	padding-left: 0.9375rem;
 	padding-right: 0.9375rem;
 }
-.renew,.purchase{	
+.renew_box,.purchase{	
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 	position: relative;
 	width: 21.75rem;
-	padding-top: 1.5625rem;
+	padding-top: 1.5625rem;	
+	display: none;
 }
-.renew{
+.renew_box{
 	background-image: url(../img/personal_bg_1.png);
 	height: 22.6875rem;			
 }
 .purchase{
 	background-image: url(../img/personal_bg_2.png);
-	height: 10.625rem;
+	padding-bottom: 3.125rem;
 	margin-top: 3.75rem;
 }
 .logo_txt{
