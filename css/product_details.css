@@ -35,11 +35,18 @@ body{
 	color:#868191;
 	letter-spacing:0.14px;
 	margin-bottom: 2.34375rem;
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    width: 19rem;
 }
 .det_price{
 	padding-bottom: 1.0625rem;
 	margin-bottom: 1.0625rem;
 	border-bottom: 1px solid #979797;
+	line-height: 1rem;
 }
 .vip_price{
 	font-family:'PingFangSC-Regular';
@@ -49,9 +56,10 @@ body{
 }
 .no_vip{
 	font-family:'PingFangSC-Light';
-	font-size:1rem;
+	font-size:0.875rem;
 	color:#8a8695;
 	letter-spacing:0.16px;
+	margin-left: 1rem;
 }
 .sale_for_month{
 	font-family:'PingFangSC-Thin';
@@ -403,7 +411,7 @@ footer > div{
 .specific_info{
 	padding-left: 9rem;
 }
-.price{
+.price_style{
 	font-family:'PingFangSC-Regular';
 	font-size:1.125rem;
 	color:#c46566;
@@ -414,7 +422,7 @@ footer > div{
 }
 .specific_type_info li{
 	padding:0.5rem 1.625rem;
-	background: #ededed;
+	background: #eee;
 	border-radius:5px;
 	color:#5a5a5a;
 	text-align: center;
@@ -516,3 +524,4 @@ footer > div{
 .big_pic img{
 	width: 90%;
 }
+

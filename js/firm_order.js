@@ -1,3 +1,4 @@
+isVip();
 //地址
 $.post(config.addressList,{'uid':uid},function(data){
 	var addressObj = data.result;
@@ -22,7 +23,7 @@ $.post(config.addressList,{'uid':uid},function(data){
 var cartOrBuy =  window.localStorage.getItem('jump_btn');
 if(cartOrBuy=='0'){
 	$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
-		//console.log(datas);
+		console.log(datas);
 		var obj = datas.result.order;
 		window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
 		//添加身份证号码显示
@@ -41,19 +42,28 @@ if(cartOrBuy=='0'){
 				alert('请输入正确的身份证号码～')
 			}		
 		})
-		var list = '';
-		var desc = '';
+		var priceForGoods;
 		for(var i=0;i<obj.length;i++){
-			list += '<div class="product_info_box" style="position:relative" data_id="'+obj[i].id+'">'+
+			if(isVipPrice){
+				priceForGoods = obj[i].data.real_price;
+			}else{
+				priceForGoods = obj[i].data.public_price;
+			}
+			var s1 = obj[i].data.spec1?obj[i].data.spec1:'';
+			var s2 = obj[i].data.spec2?obj[i].data.spec2:'';
+			var s3 = obj[i].data.spec3?obj[i].data.spec3:'';
+			var specStr = s1+s2+s3;
+			var list = '<div class="product_info_box" style="position:relative" data_id="'+obj[i].id+'">'+
 						'<div class="product_info clearfix">'+
 							'<div class="choose_icon"></div>'+
 							'<div class="specific_photo pull-left bg" style="background-image:url('+obj[i].data.title_pics[0]+')"></div>'+
 							'<div class="description pull-left" style="width:6rem">'+
 								'<div class="product_name">'+obj[i].data.name+'</div>'+
+								'<div class="spec_info">规格：'+specStr+'</div>'+
 								'<div class="some_desc"></div>'+ 
 							'</div>'+
 							'<div class="about_num pull-right text-right">'+
-								'<div class="price">¥'+obj[i].data.real_price+'</div>'+
+								'<div class="price">¥'+priceForGoods+'</div>'+
 									'<div class="change_num clearfix">'+
 									'<div class="add_or_substract pull-right" data_num="'+i+'">'+
 										'<a class="add_btn" href="javascript:;">-</a>'+
@@ -64,16 +74,18 @@ if(cartOrBuy=='0'){
 							'</div>'+
 						'</div>'+
 						'<div class="behind"><a class="delete-btn text-center">删除</a></div>'+
-					'</div>';		
+					'</div>';
+			$('.product_detail_info').append(list);	
+			if(specStr){
+				$('.product_info_box').eq(i).find('.spec_info').show();
+			}else{
+				$('.product_info_box').eq(i).find('.spec_info').hide();
+			}	
 		}
-		$('.product_detail_info').html(list);
 		$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 		$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 		for(var i=0;i<obj.length;i++){
-			for(var j=0;j<obj[i].item_info[0].data.sales_points.length;j++){
-				desc = obj[i].item_info[0].data.sales_points[j];
-				$('.some_desc').eq(i).append(desc);	
-			}
+			$('.some_desc').eq(i).html(obj[i].data.sub_name);	
 			if(obj[i].data.is_selected==1){
 				$('.choose_icon').addClass('active');				
 			}else if(obj[i].data.is_selected==0){
@@ -302,9 +314,8 @@ if(cartOrBuy=='0'){
 		})
 	var goodsBox = JSON.parse(window.localStorage.getItem('goodsBox'));
 	//console.log(goodsBox);
-	var counts,list = '';
+	var counts;
 	var counts_num = window.localStorage.getItem('counts_num');
-	
 	for(var i=0;i<goodsBox.length;i++){
 		var obj =goodsBox[i];
 		if(counts_num=='0'){
@@ -312,11 +323,13 @@ if(cartOrBuy=='0'){
 		}else if(counts_num=='1'){
 			counts = window.localStorage.getItem('goods_count');
 		}
-		list += '<div class="product_info_box" style="position:relative" data_id="'+obj.goods_id+'">'+
+		var specInfoStr = obj.spec_str;
+		var list = '<div class="product_info_box" style="position:relative" data_id="'+obj.goods_id+'">'+
 					'<div class="product_info clearfix">'+
 						'<div class="specific_photo pull-left bg" style="background-image:url('+obj.goods_pic[0]+')"></div>'+
 						'<div class="description pull-left">'+
 							'<div class="product_name">'+obj.goods_name+'</div>'+
+							'<div class="spec_info">规格：'+specInfoStr+'</div>'+
 							'<div class="some_desc">'+obj.goods_desc+'</div>'+
 						'</div>'+
 						'<div class="about_num pull-right text-right">'+
@@ -332,8 +345,14 @@ if(cartOrBuy=='0'){
 					'</div>'+
 					'<div class="behind"><a class="delete-btn text-center">删除</a></div>'+
 				'</div>';
+		$('.product_detail_info').append(list);
+		if(specInfoStr){
+			$('.product_info_box').eq(i).find('.spec_info').show();
+		}else{
+			$('.product_info_box').eq(i).find('.spec_info').hide();
+		}	
 	}
-	$('.product_detail_info').html(list);
+	
 	var isAddSub = window.localStorage.getItem('package');
 	if(isAddSub){
 		$('.change_num').hide();

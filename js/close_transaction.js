@@ -14,7 +14,7 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 	$('.order_numbers').html(datas.result.list[0].user_order.id);
 	for(var i=0;i<orderObj.length;i++){
 		var obj = orderObj[i].data;
-		var descData = orderObj[i].item_info[0].data.sales_points;
+		var descData = orderObj[i].data.sub_name;
 		var productHtml = '<li class="clearfix">'+
 							'<div class="product_photo pull-left bg" style="background-image:url('+obj.title_pics[0]+')"></div>'+
 							'<div class="description pull-left">'+
@@ -27,9 +27,7 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 							'</div>'+
 						'</li>';
 		$('.product_list').append(productHtml);
-		for(var k=0;k<descData.length;k++){
-			$('.product_det ul').find('.supplement').eq(i).append(descData[k]);
-		}
+		$('.product_det ul').find('.supplement').eq(i).append(descData);	
 	}
 	$('.total_count').html(datas.result.list[0].user_order.data.item_total_count);
 

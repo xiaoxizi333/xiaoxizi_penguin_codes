@@ -3,7 +3,6 @@ var itemID = window.localStorage.getItem('itemID')*1;
 var itemSpecId = window.localStorage.getItem('itemSpecId')*1;
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	//console.log(datas);
-
 	var objPic = datas.result.item_info[0].data.title_pics;
 	var bannerBox = '';
 	//添加视频：0 商品介绍区 1 商品幻灯区
@@ -40,12 +39,19 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	//产品详情添加
 	var obj = datas.result.item_info[0].data;
 	$('.product_name').html(obj.name);
-	var salePoints = obj.sales_points;
-	for(var i=0;i<salePoints.length;i++){
-		$('.det').append(salePoints[i]);
-	}
+	$('.det').append(obj.sub_name);
 	$('.sale_counts').html(obj.sales_count);
-
+	//地点
+	$('.other_info .address').html(obj.post_area);
+	//具体运费
+	if(uid){
+		$.post(config.itemFreight,{'uid':uid,'item_id':itemID},function(datas){
+			//console.log(datas)
+			$('.specific_fee').html(datas.result.freight+'元');
+		})
+	}else{
+		$('.specific_fee').html('登录后查看具体运费哦');
+	}
 	//默认选择
 	if(obj.spec1==undefined&&obj.spec2==undefined&&obj.spec3==undefined){
 		$('.default_style').hide();
@@ -223,7 +229,7 @@ $('.tab_header li').on('click',function(){
 function makeDeal(){
 	//成交量
 	$.post(config.itemDetail,{'item_id':itemID},function(datas){
-		console.log(datas);
+		//console.log(datas);
 		var dealInfo = datas.result;
 		if(dealInfo.length){
 			var dealHtml = '';

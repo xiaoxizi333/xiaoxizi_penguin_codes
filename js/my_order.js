@@ -256,7 +256,7 @@ function dividePage(page){
 			var listObj = datas.result.list[i].order;
 			for(var j=0;j<listObj.length;j++){
 				var listData = listObj[j].data;
-				var descData = listObj[j].item_info[0].data.sales_points;
+				var descData = listObj[j].data.sub_name;
 
 				realOrderList = '<li class="clearfix">'+
 									'<div class="product_photo pull-left" style="background-image:url('+listData.title_pics[0]+');background-position: center center;background-size: auto 100%;"></div>'+
@@ -270,10 +270,7 @@ function dividePage(page){
 									'</div>'+
 								'</li>';
 				$('.product_det ul').eq(i+(20*(page-1))).append(realOrderList);
-				for(var k=0;k<descData.length;k++){
-					$('.product_det ul').eq(i+(20*(page-1))).find('.supplement').eq(j).append(descData[k]);
-				}
-																
+				$('.product_det ul').eq(i+(20*(page-1))).find('.supplement').eq(j).append(descData);												
 			}
 			
 		}

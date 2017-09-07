@@ -45,13 +45,7 @@ $.ajax({
                 goodsBox[i].goods_pic = [obj2.title_pics[0]];
                 goodsBox[i].goods_count = obj2.total_count;
                 goodsBox[i].goods_id = data.result.order[i].id;
-                
-                var salePoints = obj[i].item_info[0].data.sales_points;
-                var salePointsStr = '';
-                for(var k=0;k<salePoints.length;k++){
-                  salePointsStr += salePoints[k];
-                }
-                goodsBox[i].goods_desc = salePointsStr;
+                goodsBox[i].goods_desc = obj[i].data.sub_name;
 
               }
               console.log(goodsBox)

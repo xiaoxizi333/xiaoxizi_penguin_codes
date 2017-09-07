@@ -119,6 +119,17 @@ $('.shopping_icon').off('tap').on('tap',function(){
 		}
 	})
 })
+//isVip
+var isVipPrice;
+function isVip(){
+	$.post(config.isVip,{'uid':uid?uid:0},function(datas){
+		if(datas.result.length){
+			isVipPrice = 1;
+		}else{
+			isVipPrice = 0;
+		}
+	})	
+}
 
 //提示3秒消失
 function showTips(msg){

@@ -56,10 +56,8 @@ $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 						'</div>'+
 					'</li>';
 		$('.my_order_list').append(orderList);
-		var saleObj = obj[i].item_info[0].data.sales_points;
-		for(var j=0;j<saleObj.length;j++){
-			$('.description').eq(i).append(saleObj[j]);
-		}
+		var saleObj = obj[i].data.sub_name;
+		$('.description').eq(i).append(saleObj);
 	}
 	
 	var aboutPriceData = datas.result.list[0].user_order.data;

@@ -60,4 +60,6 @@ var config = {
 	myOrderRepay:'http://101.201.115.31:14445/web/my_order/repay.json',
 	itemDetail:'http://101.201.115.31:14445/web/item_detail_user_buy/list.json',
 	vipService:'http://101.201.115.31:14445/web/user_center/vip_service.json',
+	isVip:'http://101.201.115.31:14445/check_user_is_vip.json',
+	itemFreight:'http://101.201.115.31:14445/custom/plugin/show_item_freight.json',
 }
