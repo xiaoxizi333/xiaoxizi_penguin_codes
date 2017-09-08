@@ -4,11 +4,36 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	var obj = datas.result.item_info[0].data;
 	//选择规格
 	$('.det_pic').css('background-image','url('+obj.title_pics[0]+')');
+	var priceHtml;
 	if(datas.result.item_spec_template.length>0){
-		$('.specific_cost').html('¥'+obj.range_price);
+		priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
+						'<span>价格</span>'+
+						'<span class="specific_cost">¥'+obj.range_price+'</span>'+
+					'</div>';
 	}else{
-		$('.specific_cost').html('¥'+obj.real_price);
+		if(isVipPrice){
+			priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
+							'<span>价格</span>'+
+							'<span class="specific_cost price_for_vip">¥'+obj.real_price+'</span>'+
+						'</div>'+
+						'<div class="pull-left">'+
+							'<del >'+
+								'<span class="another_price normal_price">非会员价 ¥'+obj.public_price+'</span>'+
+							'</del>'+
+						'</div>';
+		}else{
+			priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
+							'<span>价格</span>'+
+							'<span class="specific_cost normal_price">¥'+obj.public_price+'</span>'+
+						'</div>'+
+						'<div class="no_vip pull-left">'+
+							'<del >'+
+								'<span class="another_price price_for_vip">会员价 ¥'+obj.real_price+'</span>'+
+							'</del>'+
+						'</div>';
+		}
 	}
+	$('.det_price').html(priceHtml);
 	var itemTemplate = datas.result.item_spec_template;
 	var templateTxt = '',
 		txt;
@@ -312,7 +337,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 								$('.storage_tip').css({'opacity':0});
 								var cartData = {'uid':uid,'item_id':itemID,'spec1':spec1,'spec2':spec2,'spec3':spec3,'num':$('.add_or_substract .specific_num').html()*1};
 								$.post(config.itemBilling,cartData,function(data){
-									//console.log(data)
+									console.log(data)
 									if(data.error_code==0){
 										var goodsInfo,
 											goodsBox = [],

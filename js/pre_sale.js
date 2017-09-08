@@ -5,11 +5,40 @@ isVip();
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	console.log(datas)
 	var obj = datas.result.item_info[0].data;
+	var priceHtml;
 	if(datas.result.item_spec_template.length>0){
-		$('.specific_cost').html('¥'+obj.range_price);
+		priceHtml = '<div class="vip_price" style="margin-right: 1.375rem;margin-bottom: 0.5rem;">'+
+						'<span>全款预售</span>'+
+						'<span class="specific_cost">¥'+obj.range_price+'</span>'+
+					'</div>';
 	}else{
-		$('.specific_cost').html('¥'+obj.real_price);
+		if(isVipPrice){
+			priceHtml = '<div class="clearfix">'+
+							'<div class="vip_price pull-left" style="margin-right: 1.375rem;margin-bottom: 0.5rem;">'+
+								'<span>全款预售</span>'+
+								'<span class="specific_cost price_for_vip">¥'+obj.real_price+'</span>'+
+							'</div>'+
+							'<div class="pull-left">'+
+								'<del >'+
+									'<span class="another_price normal_price">非会员价 ¥'+obj.public_price+'</span>'+
+								'</del>'+
+							'</div>'+
+						'</div>';
+		}else{
+			priceHtml = '<div class="clearfix">'+
+							'<div class="vip_price pull-left" style="margin-right: 1.375rem;margin-bottom: 0.5rem;">'+
+								'<span>全款预售</span>'+
+								'<span class="specific_cost normal_price">¥'+obj.public_price+'</span>'+
+							'</div>'+
+							'<div class="no_vip pull-left">'+
+								'<del >'+
+									'<span class="another_price price_for_vip">会员价 ¥'+obj.real_price+'</span>'+
+								'</del>'+
+							'</div>'+
+						'</div>';
+		}
 	}
+	$('.det_price').prepend(priceHtml);
 	//最晚时间
 	var startTime = new Date(obj.sales_start_time);
 	var saleMonth = startTime.getMonth()+1;

@@ -111,11 +111,6 @@ if(cartOrBuy=='0'){
 			}	
 		})
 		//弹窗 加减数量
-		var numArr = [];
-		for(var i=0;i<$('.product_detail_info .product_info_box').length;i++){
-			var num = parseInt($('.specific_num').eq(i).html());
-			numArr.push(num);
-		}
 		$('.add_or_substract a').on('tap',function(){
 			var dataId = $(this).parents('.product_info_box').attr('data_id')*1;
 			//console.log(dataId)
@@ -125,7 +120,7 @@ if(cartOrBuy=='0'){
 				//order_type：0 购物车 1 立即购买
 				$.post(config.orderSubOne,{'uid':uid,'order_id':dataId,'order_type':0},function(datas){
 					//console.log(datas);
-					$('.specific_num').eq(dataNum).html(--numArr[dataNum]);	
+					$('.specific_num').eq(dataNum).html(datas.result.order[dataNum].data.total_count);	
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
@@ -133,7 +128,7 @@ if(cartOrBuy=='0'){
 			}else if(index==2){
 				$.post(config.orderAddOne,{'uid':uid,'order_id':dataId,'order_type':0},function(datas){
 					//console.log(datas);
-					$('.specific_num').eq(dataNum).html(++numArr[dataNum]);
+					$('.specific_num').eq(dataNum).html(datas.result.order[dataNum].data.total_count);
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
