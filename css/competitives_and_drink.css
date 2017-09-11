@@ -67,6 +67,7 @@ body{
 }
 .details_info .details{
 	margin-bottom: 0.9375rem;
+	border-radius: 4px;
 }
 /*footer*/
 footer{

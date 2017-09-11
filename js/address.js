@@ -1,5 +1,3 @@
-
-//取值
 var arrData = {
 	'addressId':window.localStorage.getItem('addressId'),
 	'editNum':window.localStorage.getItem('editNum'),
@@ -80,7 +78,7 @@ $.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(da
 			$.post(config.addressUpdate,{'id':arrData.addressId,'contact_user_name':receiver,'contact_phone':phoneNum,'province':province,'city':city,'district':district,'street':addressDetail,'province_code':provinceCode,'city_code':cityCode,'district_code':districtCode},function(data){
 				if(data.error_code==0){
 					if(arrData.editNum=='0'){
-						window.location.href = 'edit_address.html';						
+						window.location.href = 'login.html';						
 					}else if(arrData.editNum=='1'){
 						window.location.href = 'firm_order.html';
 					}else if(arrData.editNum=='2'){

@@ -141,8 +141,7 @@ function showTips(msg){
 //分页
 function getdata(page,drinkOrPrime){
 	$.ajax(
-   {
-	    
+   {    
 		type:"POST",
 	    url:config.primeDrinkList,
 	    data:{'drink_or_prime':drinkOrPrime,'page':page},
@@ -208,7 +207,7 @@ function getdata(page,drinkOrPrime){
 					if(pageNm<totalPage){
 						console.log(pageNm)
 						pageNm++;
-						getdata(pageNm);
+						getdata(pageNm,drinkOrPrime);
 					}									
 				}
 			});

@@ -1,6 +1,6 @@
 //分红
 $.post(config.vipService,{'uid':1260826557228176},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var service = datas.result.service;
 	if(service.length){
 		$('.renew_box').show();
@@ -37,38 +37,37 @@ $.post(config.vipService,{'uid':1260826557228176},function(datas){
 })
 //我的订单
 $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
-	//console.log(datas);
-	var obj = datas.result.list[0].order;
-	var orderList = '';
-	for(var i=0;i<obj.length;i++){
-		var detailsObj = obj[i].data; 
-		orderList = '<li>'+
-						'<div class="clearfix" style="border-bottom:1px solid rgba(151,151,151,.2)">'+
-							'<div class="product_photo pull-left bg" style="background-image:url('+detailsObj.title_pics[0]+')"></div>'+
-							'<div class="product_info pull-left">'+
-								'<div class="product_name">'+detailsObj.name+'</div>'+
-								'<div class="description"></div>'+
+	console.log(datas);
+	if(datas.result.list.length){
+		var detailsObj = datas.result.list[0].order[0].data; 
+		var aboutPriceData = datas.result.list[0].user_order.data;
+		var orderList = '<li>'+
+							'<div class="clearfix" style="border-bottom:1px solid rgba(151,151,151,.2)">'+
+								'<div class="product_photo pull-left bg" style="background-image:url('+detailsObj.title_pics[0]+')"></div>'+
+								'<div class="product_info pull-left">'+
+									'<div class="product_name">'+detailsObj.name+'</div>'+
+									'<div class="description">'+obj[i].data.sub_name+'</div>'+
+								'</div>'+
+								'<div class="product_price pull-right">'+
+									'<div class="real_price">¥'+detailsObj.real_price+'</div>'+
+									'<div class="num">x'+detailsObj.total_count+'</div>'+
+								'</div>'+
 							'</div>'+
-							'<div class="product_price pull-right">'+
-								'<div class="real_price">¥'+detailsObj.real_price+'</div>'+
-								'<div class="num">x'+detailsObj.total_count+'</div>'+
-							'</div>'+
-						'</div>'+
-					'</li>';
-		$('.my_order_list').append(orderList);
-		var saleObj = obj[i].data.sub_name;
-		$('.description').eq(i).append(saleObj);
-	}
-	
-	var aboutPriceData = datas.result.list[0].user_order.data;
-	var priceSummary = '<div class="summary text-right">'+
+						'</li>'+
+						'<div class="summary text-right">'+
 							'<div class="sum_num" style="margin-right: 1.6875rem">共'+aboutPriceData.item_total_count+'件</div><div class="sum_price">合计 <span>¥'+aboutPriceData.total_price+'</span></div>'+
 						'</div>';
-	$('.my_order_list').append(priceSummary);
+		$('.my_order_list').html(orderList);
+		$('.go_order a').on('tap',function(){
+			window.location.href = "my_order.html";
+		})
+	}else{
+		$('.my_order_list').html('<div class="text-center" style="padding-bottom: 1.25rem;font-family:PingFangSC-Thin">您还没有订单哟～</div>');
+	}	
 })
 //优惠券
 $.post(config.myCoupon,{'uid':uid},function(datas){
-	//console.log(datas);
+	console.log(datas);
 	var obj = datas.result;
 	var coupon = '';
 	var bgPic;
@@ -102,33 +101,40 @@ $.post(config.myCoupon,{'uid':uid},function(datas){
 		 }
 		$('#coupon_list .swiper-wrapper').html(coupon);
 	}
-	
 	var couponSwiper = new Swiper('#coupon_list .swiper-container', {
 	    slidesPerView: 'auto',
 	    paginationClickable: true,
 	});
-
 });
 //地址
 $.post(config.addressList,{'uid':uid},function(data){
 	var addressObj = data.result;
-	//console.log(addressObj);
-	for(var i=0;i<addressObj.length;i++){
-		if(addressObj[i].data.state==1){
+	console.log(addressObj);
+	if(addressObj.length){
+		for(var i=0;i<addressObj.length;i++){
+			if(addressObj[i].data.state==1){
+				var defaultHtml = '<div class="user_info clearfix">'+
+										'<div class="user_name pull-left">'+data.result[i].data.contact_user_name+'</div>'+
+										'<div class="user_phone pull-right">'+data.result[i].data.contact_phone+'</div>'+
+									'</div>'+
+									'<div class="address_details">'+data.result[i].data.address_detail+'</div>';
 
-			var defaultHtml = '<div class="user_info clearfix">'+
-									'<div class="user_name pull-left">'+data.result[i].data.contact_user_name+'</div>'+
-									'<div class="user_phone pull-right">'+data.result[i].data.contact_phone+'</div>'+
-								'</div>'+
-								'<div class="address_details">'+data.result[i].data.address_detail+'</div>';
-
+			}
 		}
+		$('.address_box').html(defaultHtml);
+		$('.edit_address').html('点击编辑');
+		$('.edit_address').on('tap',function(){
+			window.location.href="edit_address.html";
+			window.localStorage.setItem('editNum','2');
+		})
+	}else{
+		$('.address_box').html('<div class="text-center">请先添加地址哦～</div>');
+		$('.edit_address').html('点击添加');
+		$('.edit_address').on('tap',function(){
+			window.location.href="add_address.html";
+			window.localStorage.setItem('editNum','2');
+		})
 	}
-	$('.address_box').append(defaultHtml);
-	$('.edit_address').on('tap',function(){
-		window.location.href="edit_address.html";
-		window.localStorage.setItem('editNum','2');
-	})
 })
 //过期时间
 function getExpireDay(str){

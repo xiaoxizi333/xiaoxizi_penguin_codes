@@ -54,12 +54,6 @@ $('#search').on('keydown',function(e){
 	}
 })
 //商品模块化
-//获取数组顺序：上下左右
-//通栏广告-->获取banner_type
-//通栏类型 1.大通栏 2.双拼通栏3.组合通栏(左边大图)4.组合通栏(右边大图)\
-//商品列表：获取module_id
-//新增两个种类：TLWZ：展示广告文字内容（判断type值跳转）
-//				ZDYTW：展示图片内容（判断type值跳转）
 $.post(config.indexModuleList,function(datas){
 	//console.log(datas);
 	var obj = datas.result;
@@ -149,7 +143,7 @@ $.post(config.indexModuleList,function(datas){
 				    				window.location.href="product_details.html";
 				    			}
 				    		//跳转正常
-				    		}else if(saleStartTime<0){
+				    		}else if(saleStartTime<=0){
 				    			window.location.href="product_details.html";
 				    		}
 				    	})
@@ -182,7 +176,7 @@ $.post(config.indexModuleList,function(datas){
 						seckillIndex++;
 					    new Swiper('.seckill .swiper-container', {
 							pagination : '.swiper-pagination',
-							autoplay: 3000,//可选选项，自动滑动
+							//autoplay: 3000,//可选选项，自动滑动
 							autoplayDisableOnInteraction:false,//使滑动效果不停止
 							observer:true,
 							observeParents:true

@@ -1,30 +1,26 @@
-
+var arrData = {
+	'editNum':window.localStorage.getItem('editNum'),
+}
 //点击返回键调回上页
 $('.arrow_go_back').on('tap',function(){
 	window.location.href = 'edit_address.html';
 })
-
 //选择地区
-//只有trigger 和 wheels 是必要参数  其他都是选填参数
 var mobileSelect4 = new MobileSelect({
     trigger: '#chooseAddress',
     title: '地区选择',
-    wheels: [
-                {data:areadata}
-            ],
+    wheels: [{data:areadata}],
     callback:function(indexArr, data){
     	var datas = JSON.stringify(data);
         window.localStorage.setItem('areaData',datas);
     } 
 });
-
 //点击保存
 $('.save_box').on('tap',function(){
 	var receiver = $('.receiver').val();
 	var phoneNum = $('.phone_num').val();
 	var chooseAddress = $('#chooseAddress').html();
 	var addressDetail = $('.address_detail').val();
-
 	var areaArr = Trim(chooseAddress,'g').split(',');
 	var province = areaArr[0];
 	var city = areaArr[1];
@@ -47,9 +43,14 @@ $('.save_box').on('tap',function(){
 		$.post(config.addAddr,{'uid':uid,'contact_user_name':receiver,'contact_phone':phoneNum,'province':province,'city':city,'district':district,'street':addressDetail,'province_code':provinceCode,'city_code':cityCode,'district_code':districtCode},function(data){
 			console.log(data.error_msg)
 			if(data.error_code==0){
-				window.location.href = 'edit_address.html';
+				if(arrData.editNum=='0'){
+					window.location.href = 'login.html';						
+				}else if(arrData.editNum=='1'){
+					window.location.href = 'firm_order.html';
+				}else if(arrData.editNum=='2'){
+					window.location.href = 'personal.html';
+				}	
 			}
 		})
 	}
-
 })

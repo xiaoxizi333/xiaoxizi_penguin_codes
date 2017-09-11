@@ -2,18 +2,23 @@ isVip();
 //地址
 $.post(config.addressList,{'uid':uid},function(data){
 	var addressObj = data.result;
-	//console.log(addressObj);
+	console.log(addressObj);
 	for(var i=0;i<addressObj.length;i++){
 		if(addressObj[i].data.state==1){
-			var defaultHtml = '<div class="user_info clearfix">'+
-								'<div class="user_name pull-left">'+data.result[i].data.contact_user_name+' <span class="default_address">[默认地址]</span></div>'+
-								'<div class="user_phone pull-right">'+data.result[i].data.contact_phone+'</div>'+
-								'<i class="edit" data_num='+i+'></i>'+
-							'</div>'+
-							'<div class="address_details">'+data.result[i].data.address_detail+'</div>';
+			var defaultHtml = '<div class="address_box">'+
+								'<div class="user_info clearfix">'+
+									'<div class="user_name pull-left">'+data.result[i].data.contact_user_name+' <span class="default_address">[默认地址]</span></div>'+
+									'<div class="user_phone pull-right">'+data.result[i].data.contact_phone+'</div>'+
+									'<i class="edit" data_num='+i+'></i>'+
+								'</div>'+
+								'<div class="address_details">'+data.result[i].data.address_detail+'</div>';
+							'</div>';
 		}
 	}
-	$('.address_box').html(defaultHtml);
+	$('.default_address').html(defaultHtml);
+	if(!$('.default_address .address_box').length){
+		$('.default_address').html('<a href="edit_address.html" class="text-center" style="height:5.625rem;line-height:5.625rem;display:block;font-family: PingFangSC-Thin;font-size: 0.875rem;letter-spacing: 0.14px;color: #868191;">请选择默认地址哦～</a>');
+	}
 	$('.edit').on('tap',function(){
 		window.location.href="edit_address.html";
 		window.localStorage.setItem('editNum','1');
@@ -44,7 +49,7 @@ if(cartOrBuy=='0'){
 		})
 		var priceForGoods;
 		for(var i=0;i<obj.length;i++){
-			if(isVipPrice){
+			if(isVipPrice||obj[i].data.isSeckill==1){
 				priceForGoods = obj[i].data.real_price;
 			}else{
 				priceForGoods = obj[i].data.public_price;
@@ -613,16 +618,21 @@ function delivery(){
 		var isPackage = window.localStorage.getItem('package');
 		$.post(config.selectExpress,{'user_order_id':user_order_id,'uid':uid,'post_type':index,'express':express},function(datas){
 			console.log(datas);
-			delivery_type = datas.result.user_order[0].data.post_type;
-			$('.delivery_type ul > li').removeClass('active');
-			$('.delivery_type ul > li').eq(delivery_type).addClass('active');
-			window.localStorage.setItem('cart_delivery_type',datas.result.user_order[0].data.post_type);
-			window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
-			$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
-			window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
-			$('.express_price').html('');
-			$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);	
-			window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+			if(datas.error_code==0){
+				delivery_type = datas.result.user_order[0].data.post_type;
+				$('.delivery_type ul > li').removeClass('active');
+				$('.delivery_type ul > li').eq(delivery_type).addClass('active');
+				window.localStorage.setItem('cart_delivery_type',datas.result.user_order[0].data.post_type);
+				window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
+				$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
+				$('.express_price').html('');
+				$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);	
+				window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+			}else{
+				alert(datas.error_msg)
+			}
+			
 		})
 	});
 }

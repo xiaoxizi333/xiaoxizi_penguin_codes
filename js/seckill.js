@@ -55,11 +55,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 								var s2 = obj2.spec2?obj2.spec2:'';
 								var s3 = obj2.spec3?obj2.spec3:'';
 								goodsBox[i].spec_str = s1+s2+s3;
-								if(isVipPrice){
-									goodsBox[i].goods_prcie = obj2.real_price;
-								}else{
-									goodsBox[i].goods_prcie = obj2.public_price;
-								}
+								goodsBox[i].goods_prcie = obj2.real_price;
 								goodsBox[i].goods_pic = [obj2.title_pics[0]];
 								goodsBox[i].goods_count = obj2.total_count;
 								goodsBox[i].goods_id = data.result.order[i].id;
@@ -175,12 +171,8 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 											var s1 = obj2.spec1?obj2.spec1:'';
 											var s2 = obj2.spec2?obj2.spec2:'';
 											var s3 = obj2.spec3?obj2.spec3:'';
-											goodsBox[i].spec_str = s1+s2+s3;
-											if(isVipPrice){
-												goodsBox[i].goods_prcie = obj2.real_price;
-											}else{
-												goodsBox[i].goods_prcie = obj2.public_price;
-											}
+											goodsBox[i].spec_str = s1+s2+s3;											
+											goodsBox[i].goods_prcie = obj2.real_price;											
 											goodsBox[i].goods_pic = [obj2.title_pics[0]];
 											goodsBox[i].goods_count = obj2.total_count;
 											goodsBox[i].goods_id = data.result.order[i].id;
