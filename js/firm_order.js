@@ -49,7 +49,7 @@ if(cartOrBuy=='0'){
 		})
 		var priceForGoods;
 		for(var i=0;i<obj.length;i++){
-			if(isVipPrice||obj[i].data.isSeckill==1){
+			if(isVipPrice||obj[i].data.is_seckill==1){
 				priceForGoods = obj[i].data.real_price;
 			}else{
 				priceForGoods = obj[i].data.public_price;
