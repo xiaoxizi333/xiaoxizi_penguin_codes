@@ -159,6 +159,9 @@ header{
 	opacity: 0;
 }
 /*seckill*/
+.seckill{
+	position: relative;
+}
 .seckill_time{
   background-color: #bdb3cb;
   height: 1.5625rem;
@@ -172,6 +175,15 @@ header{
   display: inline-block;
   height: 1.5625rem;
   line-height: 1.5625rem;
+}
+.seckill_mask{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 100000;
+}
+.seckill_mask img{
+	width: 100%;
 }
 /*通栏文字*/
 .tlwz{
