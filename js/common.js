@@ -15,7 +15,8 @@
 	doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
 //设置全局uid
-var uid = 1370724016130198;
+var uid = sessionStorage.getItem("uid");
+console.log(uid);
 
 // header_nav_bar
 var isShow = true;
