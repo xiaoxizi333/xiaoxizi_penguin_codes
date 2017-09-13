@@ -8,11 +8,12 @@ $openid = $access['openid'];
 if($openid){
 	$param = array();
 	$param['openid'] = $openid;
-	$http = new \Http();
-	$json = $http->send('http://101.201.115.31:14445/web/get_user_info/by_open_id.json', $param);
-	$result = json_decode($json, true, 512, JSON_BIGINT_AS_STRING);
+	$result = json_decode(httpPost('http://101.201.115.31:14445/web/get_user_info/by_open_id.json', $param));
 	if ($result['error_code'] != 0) {
-
+		var_dump($result);
+		echo '<script>sessionStorage.setItem("uid", "'.$result['result']['id'].'");</script>';
+		http_redirect('/');
+		die(); 
     }
 }
 
@@ -27,4 +28,17 @@ function httpGet($url)
 	$res = curl_exec($curl);
 	curl_close($curl);
 	return $res;
+}
+function httpPost($url, $array = array()) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 0 );
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($array));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 100);
+    $content = curl_exec($ch);
+    curl_close ( $ch );
+    return $content;
 }
