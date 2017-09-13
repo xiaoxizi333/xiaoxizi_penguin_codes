@@ -16,8 +16,9 @@
 })(document, window);
 //设置全局uid
 var uid = sessionStorage.getItem("uid");
+var openid = sessionStorage.getItem("openid");
 console.log(uid);
-
+console.log(openid);
 // header_nav_bar
 var isShow = true;
 $('.nav-bar-icon').on('click',function(){
