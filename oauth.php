@@ -10,6 +10,8 @@ if($openid){
 	$param['openid'] = $openid;
 	$result =  httpPost('http://101.201.115.31:14445/web/get_user_info/by_open_id.json', $param);
 	var_dump($result);
+	$result = json_decode($result,true);
+	var_dump($result);
 	echo '<script>sessionStorage.setItem("openid", "'.$openid.'");sessionStorage.setItem("uid", "'.$result['result']['id'].'");</script>';
 	//header('Location: /');
 	die(); 
