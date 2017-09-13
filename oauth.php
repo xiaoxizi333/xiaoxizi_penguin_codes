@@ -9,12 +9,10 @@ if($openid){
 	$param = array();
 	$param['openid'] = $openid;
 	$result = json_decode(httpPost('http://101.201.115.31:14445/web/get_user_info/by_open_id.json', $param));
-	if ($result['error_code'] != 0) {
-		var_dump($result);
-		echo '<script>sessionStorage.setItem("uid", "'.$result['result']['id'].'");</script>';
-		http_redirect('/');
-		die(); 
-    }
+	var_dump($result);
+	echo '<script>sessionStorage.setItem("openid", "'.$openid.'");sessionStorage.setItem("uid", "'.$result['result']['id'].'");</script>';
+	header('Location: /');
+	die(); 
 }
 
 function httpGet($url)
