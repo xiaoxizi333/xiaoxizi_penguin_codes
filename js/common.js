@@ -17,7 +17,7 @@
 //设置全局uid
 var uid = localStorage.getItem("uid");
 var openid = localStorage.getItem("openid");
-console.log(openid);
+console.log(localStorage);
 // header_nav_bar
 var isShow = true;
 $('.nav-bar-icon').on('click',function(){

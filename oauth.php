@@ -13,9 +13,10 @@ if($openid){
 	if ($result['error_code'] != 0) {
 		echo '<script>localStorage.setItem("openid", "'.$openid.'");localStorage.setItem("uid", "'.$result['result']['id'].'");</script>';
 	}else{
+		var_dump($openid);
 		echo '<script>localStorage.setItem("openid", "'.$openid.'");</script>';
 	}
-	header('Location: /index.html');
+	//header('Location: /index.html');
 	die(); 
 }
 
