@@ -20,7 +20,7 @@ if($openid && $access_token){
 	if ($result['error_code'] != 0) {
 		echo '<script>localStorage.setItem("uid", "'.$result['result']['id'].'");</script>';
 	}
-	header('Location: /');
+	echo '<script>window.location.href="/";</script>';
 }
 
 function httpGet($url)
