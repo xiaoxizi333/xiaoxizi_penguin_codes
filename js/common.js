@@ -15,9 +15,8 @@
 	doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
 //设置全局uid
-var uid = sessionStorage.getItem("uid");
-var openid = sessionStorage.getItem("openid");
-console.log(uid);
+var uid = localStorage.getItem("uid");
+var openid = localStorage.getItem("openid");
 console.log(openid);
 // header_nav_bar
 var isShow = true;
