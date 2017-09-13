@@ -15,6 +15,7 @@ if($openid){
 	}else{
 		echo '<script>localStorage.setItem("openid", "'.$openid.'");</script>';
 	}
+	header('Location: /');
 }
 
 function httpGet($url)
