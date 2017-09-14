@@ -48,7 +48,7 @@ header{
 .type_tab ul li a{
 	width: 3.125rem;
 	height: 3.125rem;
-	display: inline-block;
+	display: block;
 	line-height: 3.125rem;
 	text-align: center;
 	color:#fff;
@@ -57,6 +57,8 @@ header{
 	margin-right: 2.8125rem;
 	margin-left: 1.875rem;
 	margin-bottom: 1.5rem;
+	overflow: hidden;
+	float: left;
 }
 /*banner2*/
 .banner_swiper{

@@ -115,6 +115,18 @@ if(cartOrBuy=='0'){
 				})	
 			}	
 		})
+		//delivery
+		var delivery_type = datas.result.user_order[0].data.post_type;
+		var ship_fee = datas.result.user_order[0].data.ship_fee;
+		if(delivery_type===''){
+			$('.delivery_type ul li').removeClass('active');
+		}else{
+			$('.express_price').html('');
+			$('.express_price').eq(delivery_type).html('¥'+ship_fee);
+			$('.delivery_type ul li').removeClass('active');
+			$('.delivery_type ul li').eq(delivery_type).addClass('active');		
+		}
+		delivery();
 		//弹窗 加减数量
 		$('.add_or_substract a').on('tap',function(){
 			var dataId = $(this).parents('.product_info_box').attr('data_id')*1;
@@ -129,14 +141,16 @@ if(cartOrBuy=='0'){
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+					$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
 				})						
 			}else if(index==2){
 				$.post(config.orderAddOne,{'uid':uid,'order_id':dataId,'order_type':0},function(datas){
-					//console.log(datas);
+					console.log(datas);
 					$('.specific_num').eq(dataNum).html(datas.result.order[dataNum].data.total_count);
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+					$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
 				})
 			}
 		})
@@ -179,18 +193,6 @@ if(cartOrBuy=='0'){
 				window.location.href="receipt.html";
 			})			
 		})
-		//delivery
-		var delivery_type = datas.result.user_order[0].data.post_type;
-		var ship_fee = datas.result.user_order[0].data.ship_fee;
-		if(delivery_type===''){
-			$('.delivery_type ul li').removeClass('active');
-		}else{
-			$('.express_price').html('');
-			$('.express_price').eq(delivery_type).html('¥'+ship_fee);
-			$('.delivery_type ul li').removeClass('active');
-			$('.delivery_type ul li').eq(delivery_type).addClass('active');		
-		}
-		delivery();
 		//console.log(delivery_type)
 		//立即购买
 		$('.buy_instance').on('tap',function(){
@@ -362,6 +364,18 @@ if(cartOrBuy=='0'){
 	}
 	$('.total_info .total_price').html('¥'+window.localStorage.getItem('item_total_price'));
 	$('#sum_1, #sum_2').html(window.localStorage.getItem('total_price'));
+	//delivery
+	var delivery_type = window.localStorage.getItem('delivery_type');
+	var ship_fee = window.localStorage.getItem('ship_fee');
+	if(delivery_type===''){
+		$('.delivery_type ul li').removeClass('active');
+	}else{
+		$('.delivery_type ul li').removeClass('active');
+		$('.delivery_type ul li').eq(delivery_type).addClass('active');
+		$('.express_price').html('');
+		$('.express_price').eq(delivery_type).html('¥'+ship_fee);
+	}
+	delivery();
 	//弹窗加减
 	$('.add_or_substract a').on('tap',function(){
 		var dataId = $(this).parents('.product_info_box').attr('data_id')*1;
@@ -377,6 +391,7 @@ if(cartOrBuy=='0'){
 				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
 				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
 				window.localStorage.setItem('counts_num','1');
+				$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
 			})				
 			
 		}else if(index==2){
@@ -390,6 +405,7 @@ if(cartOrBuy=='0'){
 				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
 				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
 				window.localStorage.setItem('counts_num','1');
+				$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
 			})
 		}
 
@@ -427,18 +443,6 @@ if(cartOrBuy=='0'){
 	$('.proof_box').on('click',function(){
 		window.location.href="receipt.html";			
 	})
-	//delivery
-	var delivery_type = window.localStorage.getItem('delivery_type');
-	var ship_fee = window.localStorage.getItem('ship_fee');
-	if(delivery_type===''){
-		$('.delivery_type ul li').removeClass('active');
-	}else{
-		$('.delivery_type ul li').removeClass('active');
-		$('.delivery_type ul li').eq(delivery_type).addClass('active');
-		$('.express_price').html('');
-		$('.express_price').eq(delivery_type).html('¥'+ship_fee);
-	}
-	delivery();
 	//立即购买
 	$('.buy_instance').on('tap',function(){
 		var is_presell,

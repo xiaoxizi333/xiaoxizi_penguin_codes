@@ -3,7 +3,7 @@ window.localStorage.setItem('product_type','preSale');
 isVip();
 //商品详情
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
-	console.log(datas)
+	//console.log(datas)
 	var obj = datas.result.item_info[0].data;
 	var priceHtml;
 	if(datas.result.item_spec_template.length>0){
@@ -358,9 +358,10 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	}
 	$('.introduction').append(obj.detail_desc);
 	//成交量
-	makeDeal();
+	var makeDealPage = 1;
+	makeDeal(makeDealPage);
 	//评论tab条数
-	var commentId,commentLevel,isPic,comments;
+	var commentId,commentLevel,isPic,comments,pageNm = 1;
 	if(datas.result.item_spec_template.length>0){
 		commentId = datas.result.item_spec_template[0].data.item_id;
 	}else{
@@ -380,36 +381,41 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		$('.comment_nav li .comment_num').eq(4).html(obj.pic_comment_count);
 		if(totalCount==0){
 			$('.no_comment').show();
+			$('.load_more').hide();
 		}else{
 			$('.no_comment').hide();
+			$('.load_more').show();
 		}
 	})
 	//评论列表	
-	comments = {'item_id':commentId};
-	//console.log(comments);
-	addDatas(comments);
+	comments = {'item_id':commentId,'limit':1,'page':pageNm};
+	addDatas(pageNm,comments);
 	$('.comment_nav li').on('tap',function(){
+		$('.comment_nav li').removeClass('active');
+		$(this).addClass('active');
+		$('.comment_box').empty();
+		$('.load_more').html('加载更多');
+		pageNm = 1;
 		var index = $(this).index();
 		switch(index){
 			case 0:
-				comments = {'item_id':commentId};
+				comments = {'item_id':commentId,'page':pageNm,'limit':1};
 				break;
 			case 1:
-				comments = {'item_id':commentId,'comment_level':0};
+				comments = {'item_id':commentId,'comment_level':0,'page':pageNm,'limit':1};
 				break;
 			case 2:
-				comments = {'item_id':commentId,'comment_level':1};
+				comments = {'item_id':commentId,'comment_level':1,'page':pageNm,'limit':1};
 				break;
 			case 3:
-				comments = {'item_id':commentId,'comment_level':2};
+				comments = {'item_id':commentId,'comment_level':2,'page':pageNm,'limit':1};
 				break;
 			case 4:
-				comments = {'item_id':commentId,'is_pic':1};
+				comments = {'item_id':commentId,'is_pic':1,'page':pageNm,'limit':1};
 				break;
 		}
-		addDatas(comments);
+		addDatas(pageNm,comments);
 	})
-
 })
 // tip
 var isShowTip = true;

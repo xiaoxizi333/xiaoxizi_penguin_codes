@@ -16,7 +16,32 @@
 })(document, window);
 //设置全局uid
 var uid = 1370724016130198;
-
+/**
+ * Created by acmen on 2017/4/9.
+ */
+var util = {
+    api_host:"http://api.qietuan.org",
+    get: function(url, callback){
+        $.get(url, function (data) {
+            callback(data);
+        });
+    },
+    post: function(url, post_data, callback){
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: util.api_host + url,
+            data: JSON.stringify(post_data),  //这里是要传递的参数，格式为 data: "{paraName:paraValue}",下面将会看到
+            dataType: 'json',   //WebService 会返回Json类型
+            success: function(data) {     //回调函数，result，返回值
+                callback(data);
+            },
+            fail: function (data) {
+                alert("系统错误");
+            }
+        });
+    }
+};
 // header_nav_bar
 var isShow = true;
 $('.nav-bar-icon').on('click',function(){
@@ -28,7 +53,6 @@ $('.nav-bar-icon').on('click',function(){
 		isShow = true;
 	}
 })
-
 //filter
 function filterGoods(drinkOrPrime){
 	$('.filter_tab li').on('tap',function(){

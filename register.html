@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>会员中心</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/buyer.css">
+    <link rel="stylesheet" href="css/changePassword.css">
+</head>
+<body>
+<div class="container js-modal-login">
+    <div class="account-form">
+        <div class="js-change-phone-form">
+            <h2 class="form-title big">
+                <span>会员注册</span>
+            </h2>
+            <ul class="block form">
+                <li class="relative block-item">
+                    <label>手机号</label>
+                    <input type="tel" name="phone" maxlength="11" class="js-txt-telphone" autocomplete="off" placeholder="请输入您的手机号" value=""/>
+                </li>
+                <li class="relative block-item">
+                    <label>验证码</label>
+                    <input type="tel" name="code" class="js-txt-auth" placeholder="请输入短信验证码" maxlength="6"/>
+                    <button type="button" class="tag tag-green btn-auth-code font-size-12 js-send-auth" data-text="获取验证码" id="get_code">
+                        获取验证码
+                    </button>
+                </li>
+                <li class="relative block-item">
+                    <label>真实姓名</label>
+                    <input type="text" name="real_name" maxlength="11" class="js-txt-telphone" autocomplete="off" placeholder="真实姓名" value=""/>
+                </li>
+                <li class="relative block-item">
+                    <label>身份证号</label>
+                    <input type="text" name="id_no" maxlength="24" class="js-txt-telphone" autocomplete="off" placeholder="身份证号" value=""/>
+                </li>
+            </ul>
+            <p class="help-info c-gray-dark font-size-12">身份证号仅用于会员月酒跨境使用</p>
+            <p class="js-help-info help-info font-size-12" id="error_msg"></p>
+            <div class="action-container">
+                <button class="btn btn-customer btn-block" id="sub">绑定</button>
+            </div>
+            <p class="help-info c-gray-dark font-size-12">绑定成功后，将根据手机号查询会员订单。</p>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="vendor/zepto.min.js"></script>
+<script src="js/common.js"></script>
+<script>
+
+    $(function(){
+        $("#get_code").on("click", get_code);
+        $("#sub").on("click", do_bind);
+    });
+    
+    function get_code() {
+        var mobile = $("input[name=phone]").val();
+        if(!check_mobile(mobile)){
+            show_error("无效的手机号");
+            return;
+        }
+        util.post("/all/login/get_captcha.json", {
+            phone: mobile
+        }, function(data){
+            if(data.error_code == 0){
+                if(data.sms_sent){
+                    countdown = 60;
+                    invalid_get_code($("#get_code")[0]);
+                }else{
+                    show_error(data.error_msg);
+                }
+
+            }else{
+                show_error(data.error_msg);
+            }
+        });
+
+    }
+    
+    function do_bind() {
+        var mobile = $("input[name=phone]").val();
+        var code = $("input[name=code]").val();
+        var real_name = $("input[name=real_name]").val();
+	var id_no = $("input[name=id_no]").val();
+	if(!check_mobile(mobile)){
+            show_error("无效的手机号");
+            return;
+        }
+        if(!check_code(code)){
+            show_error("无效的验证码");
+            return;
+        }
+	if(!check_realname(real_name)){
+            show_error("请填写真实姓名");
+            return;
+        }
+
+	 if(!check_id_no(id_no)){
+            show_error("请填写身份证号");
+            return;
+        }
+        //var real_name = $("input[name=real_name]").val();
+        //var id_no = $("input[name=id_no]").val();
+        util.post("/h5/login/check_wechat/by_phone.json", {
+            phone: mobile
+        }, function(data){
+            if(data.error_code == 0){
+                util.post("/h5/verify_captcha/and_create.json", {
+                    captcha: code,
+                    phone: mobile,
+                    sp_id: sessionStorage.getItem('openid'),
+                    user_name: sessionStorage.getItem('user_name'),
+                    user_profile_pic: sessionStorage.getItem('user_pic'),
+                    real_name: real_name,
+                    id_no: id_no
+                }, function(data){
+                    if(data.error_code == 0){
+                        sessionStorage.setItem('uid',data.result.id);
+                        jump_bind();
+                    }else{
+                        alert(data.error_msg);
+                    }
+                });
+            }else{
+                alert(data.error_msg);
+            }
+        });
+
+
+        
+    }
+
+    function check_mobile(mobile) {
+        if(mobile.length==0)
+        {
+            return false;
+        }
+        if(mobile.length!=11)
+        {
+            return false;
+        }
+
+        var myreg = /^(1)+\d{10}$/;
+        if(!myreg.test(mobile))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    function check_code(code) {
+        if(code.length==0)
+        {
+            return false;
+        }
+        if(code.length!=6)
+        {
+            return false;
+        }
+
+        var myreg = /^\d{6}$/;
+        if(!myreg.test(code))
+        {
+            return false;
+        }
+        return true;
+    }
+ function check_realname(real_name) {
+        if(real_name.length==0)
+        {
+            return false;
+        }
+	return true;
+}
+ function check_id_no(id_no) {
+        if(id_no.length==0)
+        {
+            return false;
+        }
+	return true;
+}
+
+    function show_error(msg) {
+        $("#error_msg").text(msg);
+    }
+
+    // 倒计时60秒
+    var countdown=60;
+    function invalid_get_code(val) {
+        if (countdown == 0) {
+            $(val).on("click", get_code);
+            val.innerHTML="获取验证码";
+            countdown = 60;
+            return;
+        } else {
+            $(val).unbind("click");
+            val.innerHTML="重新发送(" + countdown + ")";
+            countdown--;
+        }
+        setTimeout(function() {
+            invalid_get_code(val);
+        },1000)
+    }
+
+    function jump_bind() {
+        window.location.href="bind.html"
+    }
+</script>
+</html>

@@ -41,6 +41,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	$('.product_name').html(obj.name);
 	$('.det').append(obj.sub_name);
 	$('.sale_counts').html(obj.sales_count);
+
 	//地点
 	$('.other_info .address').html(obj.post_area);
 	//具体运费
@@ -74,7 +75,6 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	}else{
 		packageData = {'item_id':datas.result.item_info[0].id};
 	}
-
 	$.post(config.itemFindItemGroup,packageData,function(datas){
 		//console.log(datas);
 		var package_list = datas.result.list;
@@ -118,10 +118,9 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	
 })
 //添加评论
-function addDatas(comments){
-	$('.comment_box').empty();
+function addDatas(pageNm,comments){
 	$.post(config.itemCommentList,comments,function(datas){
-		//console.log(datas);
+		console.log(datas);
 		var picArr = [],
 			obj = datas.result;
 		for(var k=0;k<obj.length;k++){
@@ -146,7 +145,7 @@ function addDatas(comments){
 			for(var j=0;j<picObj.length;j++){
 				picHtml += '<img src="'+picObj[j]+'" style="width: 6.25rem!important;height: 6.25rem;">';
 			}
-			$('.comment_pic').eq(k).html(picHtml);
+			$('.comment_pic').eq(k+(1*(pageNm-1))).html(picHtml);
 		}
 		$('.comment_pic img').on('click',function(){
 			var picUrl = $(this).attr('src');
@@ -155,6 +154,18 @@ function addDatas(comments){
 		})
 		$(document).on('tap',function(){
 			$('.big_pic').fadeOut();
+		})
+		$('.load_more').off('click').on('click',function(){
+			var totalPage = Math.ceil(datas.total_count/1);
+			if(pageNm<totalPage){
+				pageNm++;
+				comments.page = pageNm;
+				addDatas(pageNm,comments);
+				console.log(comments)
+				$('.load_more').html('加载更多');
+			}else{
+				$('.load_more').html('已加载全部');
+			}	
 		})
 	})
 }
@@ -217,7 +228,18 @@ $('.share_mask').on('tap',function(){
 	$('.share_mask').fadeOut();
 	$('.share_arrow').css({'transform':'rotateX(180deg)'})
 })
-
+//固定tab_header
+$(window).scroll(function(){
+	var height_1 = $('.goods_det').height()+$('.swiper-container').height()+$('.header').height()+$('.package').height();
+	var height_2 = $('.deal_details').height();
+	if (window.scrollY >= height_1&& window.scrollY < height_2+height_1) {	
+		$('.tab_header').css({position:'fixed',left:0,top:'3.125rem',zIndex: 100001});
+		$('body').css({paddingTop:'6.25rem'});
+	}else{
+		$('.tab_header').css({position:'static'});
+		$('body').css({paddingTop:'3.125rem'});
+	}
+})
 //tab
 $('.tab_header li').on('click',function(){
 	var index = $(this).index();
@@ -226,12 +248,14 @@ $('.tab_header li').on('click',function(){
 	$('.deal_details > div').removeClass('active');
 	$('.deal_details > div').eq(index).addClass('active');
 })
-function makeDeal(){
+function makeDeal(page){
 	//成交量
-	$.post(config.itemDetail,{'item_id':itemID},function(datas){
+	$.post(config.itemDetail,{'item_id':itemID,'limit':1,'page':page},function(datas){
 		//console.log(datas);
 		var dealInfo = datas.result;
 		if(dealInfo.length){
+			$('.load_more_deal').show();
+			$('.load_more_deal').html('加载更多');
 			var dealHtml = '';
 			for(var i=0;i<dealInfo.length;i++){
 				var userInfo = dealInfo[i].user_info;
@@ -242,17 +266,22 @@ function makeDeal(){
 						'</li>';
 			}
 			$('.deal_specific_info').html(dealHtml);
+			$('.load_more_deal').on('click',function(){
+				var totalPage = Math.ceil(datas.total_count/1);
+				if(page<totalPage){
+					page++;
+					makeDeal(page);
+					$('.load_more_deal').html('加载更多');
+				}else{
+					$('.load_more_deal').html('已加载全部');
+				}	
+			})
 		}else{
 			$('.deal_specific_info').html('<div class="no_details no_deals">暂无交易～</div>');
+			$('.load_more_deal').hide();
 		}	
 	})
 }
-//comment
-$('.comment_nav li').on('tap',function(){
-	$('.comment_nav li').removeClass('active');
-	$(this).addClass('active');
-})
-
 var num = parseInt($('.specific_num').html());
 //弹窗 加减数量
 $('.add_or_substract a').on('tap',function(){
