@@ -17,10 +17,11 @@ if($openid && $access_token){
 	$param['openid'] = $openid;
 	$result = httpPost('http://101.201.115.31:14445/web/get_user_info/by_open_id.json', $param);
 	$result = json_decode($result,true);
-	if ($result['error_code'] != 0) {
-		echo '<script>sessionStorage.setItem("uid", "'.$result['result']['id'].'");</script>';
+	if (! empty ($result['result'])) {
+		echo '<script>sessionStorage.setItem("uid", "'.$result['result'][0]['id'].'");</script>';
 	}
 	echo '<script>window.location.href="/";</script>';
+
 }
 
 function httpGet($url)
