@@ -14,8 +14,6 @@
 	window.addEventListener(resizeEvt, recalc, false);
 	doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
-//设置全局uid
-var uid = 1370724016130198;
 /**
  * Created by acmen on 2017/4/9.
  */
@@ -42,6 +40,9 @@ var util = {
         });
     }
 };
+var uid = localStorage.getItem("uid");
+var openid = localStorage.getItem("openid");
+console.log(localStorage);
 // header_nav_bar
 var isShow = true;
 $('.nav-bar-icon').on('click',function(){

@@ -10,6 +10,7 @@
 </body>
 </html>
 <script type="text/javascript">
+localStorage.setItem("uid","99999");
 	function getMyDay(date){
 		var week;
 		if(date.getDay()==0){
@@ -31,4 +32,9 @@
 	}
 	
 	console.log(getMyDay(new Date("2017-08-21")))
+</script>
+<script type="text/javascript">
+var uid = localStorage.getItem("uid");
+console.log(localStorage);
+
 </script>
