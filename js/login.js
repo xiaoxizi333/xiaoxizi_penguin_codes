@@ -1,15 +1,8 @@
 $.post(config.userShow,{'uid':uid},function(datas){
 	console.log(datas);
-	
 	var obj = datas.result[0].user_data;
-
-	if(obj.user_profile_pic){
-		$('#preview').html('<img src="" style="width: 100%;height: 100%">');
-		$('#preview img').attr('src',obj.user_profile_pic);
-
-	}else{
-		$('#preview').html('<p class="text-center" style="height:100%;margin-bottom:0;padding-top: 0.4rem;">上传<br>头像</p>')
-	}
+	$('#preview').html('<img src="" style="width: 100%;height: 100%">');
+	$('#preview img').attr('src',obj.user_profile_pic);
 	$('.nickname').val(obj.user_name);
 	$('.username').val(obj.real_name);
 

@@ -1,5 +1,9 @@
-$('.portrait img').attr('src',localStorage.getItem('user_pic'));
-$('.portrait .username').html(localStorage.getItem('user_name'));
+$.post(config.userShow,{'uid':uid},function(datas){
+	console.log(datas);
+	var obj = datas.result[0].user_data;
+	$('.portrait img').attr('src',obj.user_profile_pic);
+	$('.portrait .username').html(obj.user_name);
+})
 //分红
 $.post(config.vipService,{'uid':uid},function(datas){
 	//console.log(datas);
