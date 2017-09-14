@@ -18,7 +18,7 @@
  * Created by acmen on 2017/4/9.
  */
 var util = {
-    api_host:"http://api.qietuan.org",
+    api_host:"http://101.201.115.31:14445",
     get: function(url, callback){
         $.get(url, function (data) {
             callback(data);
