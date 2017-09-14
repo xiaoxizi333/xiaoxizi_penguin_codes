@@ -34,7 +34,7 @@ $.post(config.userShow,{'uid':uid},function(datas){
 	}
 
 	$('.identity').val(obj.id_no);
-	$('.address_box').on('tap',function(){
+	$('.personal_address').on('tap',function(){
 		window.localStorage.setItem('editNum','0');
 		window.location.href="edit_address.html";
 

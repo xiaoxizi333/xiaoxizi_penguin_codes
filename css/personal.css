@@ -54,7 +54,6 @@ header{
 .purchase{
 	background-image: url(../img/personal_bg_2.png);
 	padding-bottom: 3.125rem;
-	margin-top: 3.75rem;
 }
 .logo_txt{
 	color:#fff;
@@ -128,6 +127,14 @@ header{
 }
 .description,.product_price{
 	color:#9b9b9b;
+}
+.description{
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    width: 10rem;
 }
 .go_order{
 	height: 1.0625rem;

@@ -55,7 +55,7 @@ $.post(config.addressList,{'uid':uid},function(data){
 			window.location.href = 'address.html';
 		})
 		//点击地址后变为默认地址
-		$('.more_address .address_pox').on('tap',function(){
+		$('.more_address .address_pox').on('click',function(){
 			var addressId = $(this).attr('data_id');
 			$.post(config.addressChange,{'uid':uid,address_id:addressId},function(data){
 				$('.default_address').empty();

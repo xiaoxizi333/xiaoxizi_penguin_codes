@@ -312,17 +312,17 @@ $('.hide_icon').on('tap',function(){
 })
 function switchDate2(time){
 	var timeStr = new Date(time);
-	var m = timeStr.getMonth();
+	var month = timeStr.getMonth()+1;
 	var d = timeStr.getDate();
 	var h = timeStr.getHours();
 	var m = timeStr.getMinutes();
 	var s = timeStr.getSeconds();
-	m = m<10?'0'+m:m;
+	month = month<10?'0'+month:month;
 	d = d<10?'0'+d:d;
 	h = h<10?'0'+h:h;
 	m = m<10?'0'+m:m;
 	s = s<10?'0'+s:s;
-	return m+'-'+d+' '+h+':'+m+':'+s;
+	return month+'-'+d+' '+h+':'+m+':'+s;
 }
 //保护用户名
 function protectUserName(str){
@@ -330,17 +330,4 @@ function protectUserName(str){
 	var str3 = str.slice(2);
 	return str1+'*'+str3;
 }
-//分享
-// function getWeixinSignature(){
-// 	$.post(config.goToPayItem,{'url':location.href.split('#')[0]},function(data){
-// 		wx.config({
-// 		    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-// 		    appId: 'wx21df74ead4dca012', // 必填，公众号的唯一标识
-// 		    timestamp: data.result.timestamp, // 必填，生成签名的时间戳
-// 		    nonceStr: data.result.nonceStr, // 必填，生成签名的随机串
-// 		    signature: data.result.signature,// 必填，签名，见附录1
-// 		    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-// 		});
-// 	});
-// }
 

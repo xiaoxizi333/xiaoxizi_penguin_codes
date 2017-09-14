@@ -20,8 +20,8 @@ $.post(config.addressList,{'uid':uid},function(data){
 		$('.default_address').html('<a href="edit_address.html" class="text-center" style="height:5.625rem;line-height:5.625rem;display:block;font-family: PingFangSC-Thin;font-size: 0.875rem;letter-spacing: 0.14px;color: #868191;">请选择默认地址哦～</a>');
 	}
 	$('.edit').on('tap',function(){
-		window.location.href="edit_address.html";
 		window.localStorage.setItem('editNum','1');
+		window.location.href="edit_address.html";
 	})
 })
 //商品列表

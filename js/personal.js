@@ -41,12 +41,19 @@ $.post(config.vipService,{'uid':uid},function(datas){
 		$('.purchase').show();
 	}
 })
+isVip();
 //我的订单
 $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 	console.log(datas);
 	if(datas.result.list && datas.result.list.length>0){
+		var whichPrice;
 		var detailsObj = datas.result.list[0].order[0].data; 
 		var aboutPriceData = datas.result.list[0].user_order.data;
+		if(isVipPrice){
+			whichPrice = detailsObj.real_price;
+		}else{
+			whichPrice = detailsObj.public_price;
+		}
 		var orderList = '<li>'+
 							'<div class="clearfix" style="border-bottom:1px solid rgba(151,151,151,.2)">'+
 								'<div class="product_photo pull-left bg" style="background-image:url('+detailsObj.title_pics[0]+')"></div>'+
@@ -55,7 +62,7 @@ $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 									'<div class="description">'+detailsObj.sub_name+'</div>'+
 								'</div>'+
 								'<div class="product_price pull-right">'+
-									'<div class="real_price">¥'+detailsObj.real_price+'</div>'+
+									'<div class="real_price">¥'+whichPrice+'</div>'+
 									'<div class="num">x'+detailsObj.total_count+'</div>'+
 								'</div>'+
 							'</div>'+

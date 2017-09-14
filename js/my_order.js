@@ -160,7 +160,7 @@ function dividePage(page){
 		//再次支付
 		$('.wait_for_pay').on('click',function(){
 			var user_order_id = $(this).parents('.order_list_box').attr('data_id')*1;
-			$.post(config.myOrderRepay,{'user_order_id':user_order_id,'open_id':'oHtkhv9A7dKjnmrRk_1RA_l2pZjA'},function(pay){
+			$.post(config.myOrderRepay,{'user_order_id':user_order_id,'open_id':sessionStorage.getItem('openid')},function(pay){
 				console.log(pay);
 				wx.config({
 					// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -251,12 +251,19 @@ function dividePage(page){
 				}
 			
 			})
-		})		
+		})
+		var whichPrice;	
+		isVip();	
 		for(var i=0;i<obj.length;i++){
 			var listObj = datas.result.list[i].order;
 			for(var j=0;j<listObj.length;j++){
 				var listData = listObj[j].data;
 				var descData = listObj[j].data.sub_name;
+				if(isVipPrice){
+					whichPrice = listData.real_price;
+				}else{
+					whichPrice = listData.public_price;
+				}
 
 				realOrderList = '<li class="clearfix">'+
 									'<div class="product_photo pull-left" style="background-image:url('+listData.title_pics[0]+');background-position: center center;background-size: auto 100%;"></div>'+
@@ -265,7 +272,7 @@ function dividePage(page){
 										'<div class="supplement"></div>'+
 									'</div>'+
 									'<div class="about_cost pull-right">'+
-										'<div class="text-right" style="padding-top: 0.8125rem;margin-bottom: 0.8125rem">¥'+listData.real_price+'</div>'+
+										'<div class="text-right" style="padding-top: 0.8125rem;margin-bottom: 0.8125rem">¥'+whichPrice+'</div>'+
 										'<div class="text-right">x'+listData.total_count+'</div>'+
 									'</div>'+
 								'</li>';
