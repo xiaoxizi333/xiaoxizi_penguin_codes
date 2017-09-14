@@ -44,7 +44,7 @@ $.post(config.vipService,{'uid':uid},function(datas){
 //我的订单
 $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 	console.log(datas);
-	if(datas.result.list.length){
+	if(datas.result.list && datas.result.list.length>0){
 		var detailsObj = datas.result.list[0].order[0].data; 
 		var aboutPriceData = datas.result.list[0].user_order.data;
 		var orderList = '<li>'+
