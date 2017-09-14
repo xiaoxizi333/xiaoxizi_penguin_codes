@@ -134,15 +134,26 @@ function switchDate(time,mark){
 
 //跳转购物车
 $('.shopping_icon').off('tap').on('tap',function(){
-	$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
-		//console.log(datas);
-		if(datas.result.order.length==0){
-			alert('您的购物车还没有商品哦，赶快选购吧～')
-		}else{
-			window.localStorage.setItem('jump_btn','0');
-			window.location.href="firm_order.html";
-		}
-	})
+	if(uid){
+		$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
+			//console.log(datas);
+			if(datas.result.order.length==0){
+				alert('您的购物车还没有商品哦，赶快选购吧～')
+			}else{
+				window.localStorage.setItem('jump_btn','0');
+				window.location.href="firm_order.html";
+			}
+		})
+	}else{
+		window.location.href="register.html"
+	}
+})
+$('.personal_icon').on('tap',function(){
+	if(uid){
+		window.location.href="personal.html"
+	}else{
+		window.location.href="register.html"
+	}
 })
 //isVip
 var isVipPrice;

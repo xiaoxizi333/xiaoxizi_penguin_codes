@@ -1,5 +1,7 @@
+$('.portrait img').attr('src',sessionStorage.getItem('user_pic'));
+$('.portrait .username').html(sessionStorage.getItem('user_name'));
 //分红
-$.post(config.vipService,{'uid':1260826557228176},function(datas){
+$.post(config.vipService,{'uid':uid},function(datas){
 	//console.log(datas);
 	var service = datas.result.service;
 	if(service.length){
