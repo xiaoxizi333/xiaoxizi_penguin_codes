@@ -7,18 +7,18 @@ $access = json_decode(httpGet($access_token_url), true);
 $openid = $access['openid'];
 $access_token = $access['access_token'];
 if($openid && $access_token){
-	echo '<script>localStorage.setItem("openid", "'.$openid.'");</script>';
+	echo '<script>sessionStorage.setItem("openid", "'.$openid.'");</script>';
 	$user_info_url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
 	$user_info = json_decode(httpGet($user_info_url), true);
 	if ($user_info) {
-		echo '<script>localStorage.setItem("user_name", "'.$user_info['nickname'].'");localStorage.setItem("user_pic", "'.$user_info['headimgurl'].'");</script>';
+		echo '<script>sessionStorage.setItem("user_name", "'.$user_info['nickname'].'");sessionStorage.setItem("user_pic", "'.$user_info['headimgurl'].'");</script>';
 	}
 	$param = array();
 	$param['openid'] = $openid;
 	$result = httpPost('http://101.201.115.31:14445/web/get_user_info/by_open_id.json', $param);
 	$result = json_decode($result,true);
 	if ($result['error_code'] != 0) {
-		echo '<script>localStorage.setItem("uid", "'.$result['result']['id'].'");</script>';
+		echo '<script>sessionStorage.setItem("uid", "'.$result['result']['id'].'");</script>';
 	}
 	echo '<script>window.location.href="/";</script>';
 }

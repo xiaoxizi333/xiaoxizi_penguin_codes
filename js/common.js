@@ -40,9 +40,8 @@ var util = {
         });
     }
 };
-var uid = localStorage.getItem("uid");
-var openid = localStorage.getItem("openid");
-console.log(localStorage);
+var uid = sessionStorage.getItem("uid");
+var openid = sessionStorage.getItem("openid");
 // header_nav_bar
 var isShow = true;
 $('.nav-bar-icon').on('click',function(){
