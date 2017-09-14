@@ -16,13 +16,15 @@ $.post(config.userShow,{'uid':uid},function(datas){
 		window.localStorage.setItem('sex',1);
 	}
 	//console.log(obj.gender)
-	var birthday = new Date(obj.birthday);
-	var year = birthday.getFullYear();
-	var month = birthday.getMonth()+1;
-	var day = birthday.getDate();
-	month =(month<10 ? "0"+month:month);
-	day =(day<10 ? "0"+day:day);
-	$('#start_date').val(year+'-'+month+'-'+day);
+	if(obj.birthday){
+		var birthday = new Date(obj.birthday);
+		var year = birthday.getFullYear();
+		var month = birthday.getMonth()+1;
+		var day = birthday.getDate();
+		month =(month<10 ? "0"+month:month);
+		day =(day<10 ? "0"+day:day);
+		$('#start_date').val(year+'-'+month+'-'+day);
+	}
 
 	if(obj.phone){
 		$('.phone_num').val(obj.phone);

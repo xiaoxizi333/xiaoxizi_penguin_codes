@@ -200,7 +200,6 @@ if(cartOrBuy=='0'){
 				alert('请选择邮寄方式哦～')	;
 			}else{
 				localStorage.removeItem('cart_delivery_type');
-				alert(sessionStorage.getItem('openid'))
 				$.post(config.goToPay,{'uid':uid,'pay_source':'h5','open_id':sessionStorage.getItem('openid'),'comment':$('#userMessage').val()},function(pay){
 					console.log(pay);
 					wx.config({
@@ -457,7 +456,6 @@ if(cartOrBuy=='0'){
 		if(delivery_type===''){
 			alert('请选择邮寄方式哦～')	;
 		}else{
-			alert(sessionStorage.getItem('openid'));
 			$.post(config.goToPayItem,{'uid':uid,'pay_source':'h5','open_id':sessionStorage.getItem('openid'),'comment':$('#userMessage').val(),'is_presell':is_presell},function(pay){
 				console.log(pay);
 				wx.config({
