@@ -22,7 +22,6 @@ $.post(config.userShow,{'uid':uid},function(datas){
 		$('.sex > .choose_sex img').eq(1).attr('src','img/choose_selected.png');
 		window.localStorage.setItem('sex',1);
 	}
-	
 	//console.log(obj.gender)
 	var birthday = new Date(obj.birthday);
 	var year = birthday.getFullYear();
