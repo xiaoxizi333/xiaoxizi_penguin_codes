@@ -124,7 +124,7 @@ cc.innerHTML = day1+"天"+' '+hour+":"+minute+":"+second;
 function switchDate(time,mark){
 	var timeStr = new Date(time);
 	var y = timeStr.getFullYear();
-	var m = timeStr.getMonth();
+	var m = timeStr.getMonth()+1;
 	var d = timeStr.getDate();
 	m = m<10?'0'+m:m;
 	d = d<10?'0'+d:d;

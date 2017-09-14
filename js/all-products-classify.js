@@ -1,11 +1,11 @@
 var tabId = window.localStorage.getItem('tabId')*1;
 var tabOrList = window.localStorage.getItem('tabOrList');
 var bannerData;
-if(tabOrList=='0'){
+//if(tabOrList=='0'){
 	bannerData = {'class_id':tabId};
-}else if(tabOrList=='1'){
-	bannerData = {'class_type':'all'};
-}
+//}else if(tabOrList=='1'){
+	//bannerData = {'class_type':'all'};
+//}
 //banner
 $.post(config.commonBanner,bannerData,function(datas){
 	console.log(datas);

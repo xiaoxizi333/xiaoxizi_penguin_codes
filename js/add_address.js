@@ -42,7 +42,6 @@ $('.save_box').on('tap',function(){
 	}else{
 		$.post(config.addAddr,{'uid':uid,'contact_user_name':receiver,'contact_phone':phoneNum,'province':province,'city':city,'district':district,'street':addressDetail,'province_code':provinceCode,'city_code':cityCode,'district_code':districtCode},function(data){
 			if(data.error_code==0){
-				alert(arrData.editNum)
 				if(arrData.editNum=='0'){
 					window.location.href = 'login.html';						
 				}else if(arrData.editNum=='1'){

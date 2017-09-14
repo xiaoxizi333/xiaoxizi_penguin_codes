@@ -28,6 +28,11 @@ function dividePage(page){
 					order_state = '待付款';
 					state_txt = '立即支付';
 					break;
+				case 2:
+					state_class = 'no_btn';
+					order_state = '待发货';
+					state_txt = '';
+					break;
 				case 3:
 					state_class = 'have_sent_goods';
 					order_state = '已发货';
@@ -42,6 +47,10 @@ function dividePage(page){
 					state_class = 'finish_deal';
 					order_state = '交易完成';
 					state_txt = '申请退款';
+					break;
+				case 7:
+					state_class = 'no_btn';
+					order_state = '退款中';
 					break;
 				case 8:
 					state_class = 'have_refunded';
@@ -83,11 +92,7 @@ function dividePage(page){
 								'</ul>'+
 							'</li>';
 			$('.order_box').append(orderBox);
-			if(state_txt==''){
-				$('.'+state_class+'').hide();
-			}else{
-				$('.'+state_class+'').show();
-			}
+			$('.no_btn').hide();
 			switch(stateForOrder){
 				case 3:
 					$('.check_state').eq(i+(20*(page-1))).show();
