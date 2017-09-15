@@ -41,7 +41,9 @@ var util = {
     }
 };
 var uid = sessionStorage.getItem("uid");
+//var uid = 1431768973512333;
 var openid = sessionStorage.getItem("openid");
+//var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 // header_nav_bar
 var isShow = true;
 $('.nav-bar-icon').on('click',function(){
@@ -137,7 +139,7 @@ $('.shopping_icon').off('tap').on('tap',function(){
 		$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
 			//console.log(datas);
 			if(datas.result.order.length==0){
-				alert('您的购物车还没有商品哦，赶快选购吧～')
+				showTips('您的购物车还没有商品哦，赶快选购吧～')
 			}else{
 				window.localStorage.setItem('jump_btn','0');
 				window.location.href="firm_order.html";
