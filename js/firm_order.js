@@ -104,7 +104,8 @@ if(cartOrBuy=='0'){
 			var dataId = $(this).parents('.product_info_box').attr('data_id');
 			if($(this).hasClass('active')){
 				$.post(config.selectOrders,{'uid':uid,'order_ids':dataId,'order_type':0},function(datas){
-					//console.log(datas);
+					console.log(datas);
+					window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 					if(delivery_type!==''){
@@ -115,6 +116,7 @@ if(cartOrBuy=='0'){
 			}else{
 				$.post(config.unselectOrders,{'uid':uid,'order_ids':dataId,'order_type':0},function(datas){
 					//console.log(datas);
+					window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 					if(delivery_type!==''){
@@ -652,6 +654,7 @@ function delivery(){
 		var index = $(this).attr('choose_num')*1;
 		var express = $('.express_name').eq(index).attr('name');
 		var user_order_id = window.localStorage.getItem('user_order_id')*1;
+		console.log(user_order_id);
 		var isPackage = window.localStorage.getItem('package');
 		$.post(config.selectExpress,{'user_order_id':user_order_id,'uid':uid,'post_type':index,'express':express},function(datas){
 			//console.log(datas);

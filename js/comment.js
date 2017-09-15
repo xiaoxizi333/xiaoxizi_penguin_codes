@@ -107,7 +107,7 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		        url: config.userCommitComment,
 		        data: JSON.stringify(commentData), 
 		        success: function(datas){
-		            //console.log(datas);			            
+		            window.location.href="my_order.html";			            
 		        }
 		    });	
 		}			
