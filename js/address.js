@@ -4,7 +4,6 @@ var arrData = {
 }
 $.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(data){
 	//console.log(data);
-	console.log(areadata);
 	var html = '',
 	dataObj = data.result[0].data;
 	html = '<div class="group">'+

@@ -1,5 +1,5 @@
 $.post(config.userShow,{'uid':uid},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result[0].user_data;
 	$('.portrait img').attr('src',obj.user_profile_pic);
 	$('.portrait .username').html(obj.user_name);
@@ -44,7 +44,7 @@ $.post(config.vipService,{'uid':uid},function(datas){
 isVip();
 //我的订单
 $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	if(datas.result.list && datas.result.list.length>0){
 		var whichPrice;
 		var detailsObj = datas.result.list[0].order[0].data; 
@@ -80,7 +80,7 @@ $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 })
 //优惠券
 $.post(config.myCoupon,{'uid':uid},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result;
 	var coupon = '';
 	var bgPic;
@@ -122,7 +122,7 @@ $.post(config.myCoupon,{'uid':uid},function(datas){
 //地址
 $.post(config.addressList,{'uid':uid},function(data){
 	var addressObj = data.result;
-	console.log(addressObj);
+	//console.log(addressObj);
 	if(addressObj.length){
 		for(var i=0;i<addressObj.length;i++){
 			if(addressObj[i].data.state==1){

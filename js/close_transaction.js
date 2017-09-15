@@ -9,7 +9,7 @@ $.post(config.userOrderAddress,{'user_order_id':user_order_id},function(datas){
 })
 //商品
 $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var orderObj = datas.result.list[0].order;
 	$('.order_numbers').html(datas.result.list[0].user_order.id);
 	for(var i=0;i<orderObj.length;i++){

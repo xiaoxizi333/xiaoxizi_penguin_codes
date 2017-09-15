@@ -1,6 +1,6 @@
 var user_order_id = window.localStorage.getItem('user_order_id')*1;
 $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var orders = datas.result.list[0].order;
 	var html = '';
 	for(var i=0;i<orders.length;i++){
@@ -68,7 +68,7 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		}
 		picUrl = JSON.stringify(picUrl);
 		var passData = {'user_order_id':user_order_id,'refund_value':$('.sum_refund').val()*1,'refund_pics':picUrl,'refund_desc':reason};
-		console.log(passData)
+		//console.log(passData)
 		$.ajax({
 		    url: config.userOrderRefund,
 		    type: "POST",
@@ -76,7 +76,7 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		    cache:false, 
 			async:false, 
 		    success:function(datas){
-		    	console.log(datas);
+		    	//console.log(datas);
 		    	window.location.href = "wait_for_refund.html";
 		    }
 		})

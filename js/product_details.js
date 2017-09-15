@@ -120,7 +120,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 //添加评论
 function addDatas(pageNm,comments){
 	$.post(config.itemCommentList,comments,function(datas){
-		console.log(datas);
+		//console.log(datas);
 		var picArr = [],
 			obj = datas.result;
 		for(var k=0;k<obj.length;k++){
@@ -161,7 +161,7 @@ function addDatas(pageNm,comments){
 				pageNm++;
 				comments.page = pageNm;
 				addDatas(pageNm,comments);
-				console.log(comments)
+				//console.log(comments)
 				$('.load_more').html('加载更多');
 			}else{
 				$('.load_more').html('已加载全部');
@@ -191,7 +191,7 @@ $.post(config.guessUouLike,{'location_type':'good_detail'},function(datas){
 			var secEndTime = obj[goodsIndex].item[0].seckill_endtime;
 			var isSeckill = obj[goodsIndex].item[0].is_seckill;
 			var nowTime = Date.parse(new Date());
-			console.log(isSeckill)
+			//console.log(isSeckill)
 			if(saleStartTime||isSeckill){
 				if(saleStartTime>0){
 	    			if(saleStartTime-nowTime>0){

@@ -1,5 +1,5 @@
 $.post(config.userShow,{'uid':uid},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result[0].user_data;
 	$('#preview').html('<img src="" style="width: 100%;height: 100%">');
 	$('#preview img').attr('src',obj.user_profile_pic);

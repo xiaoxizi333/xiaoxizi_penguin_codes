@@ -8,7 +8,7 @@ var bannerData;
 //}
 //banner
 $.post(config.commonBanner,bannerData,function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result[0].data.show_pic_arr;
 	var picUrl = datas.result[0].data.jump_urls;
 	var bannerBox = '';

@@ -13,7 +13,7 @@ function dividePage(page){
       	$('.spinner').show();
       },
       success:function(datas){
-		console.log(datas);
+		//console.log(datas);
 		var obj = datas.result.list;
 		var realOrderList = '',
 			state_class = '',
@@ -68,7 +68,7 @@ function dividePage(page){
 					state_txt = '申请退款';
 					break;
 			}
-			var orderBox = '<li class="order_list_box" data_id="'+obj[i].user_order.id+'">'+
+			var orderBox = '<li class="order_list_box" index="'+i+'" data_id="'+obj[i].user_order.id+'">'+
 								'<ul class="list-unstyled my_order_det">'+
 									'<li>'+
 										'<div class="clearfix" style="padding-bottom: 1.25rem;padding-top: 0.9375rem;">'+
@@ -158,15 +158,20 @@ function dividePage(page){
 		})
 		//查看动态
 		$('.check_state').on('click',function(){
-			var user_order_id = $(this).parents('.order_list_box').attr('data_id');
-			window.localStorage.setItem('user_order_id',user_order_id);
+			var index = $(this).parents('.order_list_box').attr('index');
+			var express_pic = datas.result.list[index].order[0].data.title_pics[0];
+			var express = datas.result.list[index].user_order.data.express;
+			var express_no = datas.result.list[index].user_order.data.express_no;
+			window.localStorage.setItem('express_pic',express_pic);
+			window.localStorage.setItem('express',express);
+			window.localStorage.setItem('express_no',express_no);
 			window.location.href="delivery.html";
 		})
 		//再次支付
 		$('.wait_for_pay').on('click',function(){
 			var user_order_id = $(this).parents('.order_list_box').attr('data_id')*1;
 			$.post(config.myOrderRepay,{'user_order_id':user_order_id,'open_id':sessionStorage.getItem('openid')},function(pay){
-				console.log(pay);
+				//console.log(pay);
 				wx.config({
 					// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 					appId: pay.result.appId, // 必填，公众号的唯一标识
@@ -292,7 +297,7 @@ function dividePage(page){
 				//console.log(datas.result.total_count/20);
 				var totalPage = Math.ceil(datas.result.total_count/20);
 				if(pageNm<totalPage){
-					console.log(pageNm)
+					//console.log(pageNm)
 					pageNm++;
 					dividePage(pageNm);
 				}									

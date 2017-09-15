@@ -1,7 +1,6 @@
 //添加地址数据
 $.post(config.addressList,{'uid':uid},function(data){
 	//console.log(data);
-	console.log(data.result);
 	var addressObj = data.result;
 	var defaultHtml = '';
 	var moreHtml = '';
@@ -105,7 +104,7 @@ $.post(config.addressList,{'uid':uid},function(data){
 	    	$('.delete_mask').show();
 	    	$('.yes').on('click',function(){
 	    		$.post(config.addressRemove,{'id':dataId},function(data){
-		    		console.log(data);
+		    		//console.log(data);
 		    		if(data.error_code==0){
 		    			location.reload();
 		    		}else{

@@ -119,29 +119,29 @@ a,a:focus,a:hover{
 .is_delete{
 	font-family: 'PingFangSC-Light';
 	color: #5a5a5a;
-	width: 12rem;
-	height: 6.375rem;
+	width: 16rem;
+	height: 8rem;
 	border:1px solid rgba(151,151,151,.8);
 	border-radius: 4px;
 	background-color: #fff;
 	position: fixed;
 	top:50%;
 	left: 50%;
-	margin-top: -3.1875rem;
-	margin-left: -6rem;
+	margin-top: -4rem;
+	margin-left: -8rem;
 	z-index: 100001;
 }
 .delete_text{
-	padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
+	height: 60%;
+	line-height: 4.8rem;
 }
 .choose_options{
 	border-top: 1px solid rgba(151,151,151,.8);
 }
 .choose_options > div{
 	width: 50%;
-	padding-top: 0.6rem;
-    padding-bottom: 0.6rem;
+	height: 40%;
+	line-height: 3.2rem;
 }
 /*btn disabled*/
 .btn.disabled{

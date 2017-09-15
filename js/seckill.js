@@ -63,7 +63,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 									goodsBox[i].goods_desc = obj[i].data.sub_name;
 
 								}
-								console.log(goodsBox)
+								//console.log(goodsBox)
 								goodsBox = JSON.stringify(goodsBox);
 								window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
 								window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
@@ -128,7 +128,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 							var spec2 = $('.type_det').eq(1).find('li.active').html()?$('.type_det').eq(1).find('li.active').html():'';
 							var spec3 = $('.type_det').eq(2).find('li.active').html()?$('.type_det').eq(2).find('li.active').html():'';
 							$.post(config.itemSpecFind,{'item_id':itemID,'spec1':spec1,'spec2':spec2,'spec3':spec3},function(data){
-								console.log(data);
+								//console.log(data);
 								if(data.result.length==0){
 									$('.storage_tip').css({'opacity':1}).html('库存不足');
 								}else{
@@ -163,7 +163,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 									$('.storage_tip').css({'opacity':0});					
 									var cartData = {'uid':uid,'item_id':itemID,'spec1':spec1,'spec2':spec2,'spec3':spec3,'num':$('.add_or_substract .specific_num').html()};
 									$.post(config.itemBilling,cartData,function(data){
-										console.log(data);
+										//console.log(data);
 										if(data.error_code==0){
 											var goodsInfo,
 												goodsBox = [],
@@ -183,7 +183,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 												goodsBox[i].goods_id = data.result.order[i].id;
 												goodsBox[i].goods_desc = obj[i].data.sub_name;
 											}
-											console.log(goodsBox)
+											//console.log(goodsBox)
 											goodsBox = JSON.stringify(goodsBox);
 											window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
 											window.localStorage.setItem('user_order_id',data.result.user_order[0].id);

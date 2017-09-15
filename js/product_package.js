@@ -31,7 +31,7 @@ $.ajax({
     	$('.choose_product_box').html(itemDetail);
     	$('.buy').on('tap',function(){
         $.post(config.billing,{'uid':uid,'item_group_id':groupId.group_id_array[0]},function(data){
-            console.log(data)
+            //console.log(data)
             if(data.error_code==0){
               var goodsInfo,
               goodsBox = [],
@@ -48,7 +48,7 @@ $.ajax({
                 goodsBox[i].goods_desc = obj[i].data.sub_name;
 
               }
-              console.log(goodsBox)
+              //console.log(goodsBox)
               goodsBox = JSON.stringify(goodsBox);
               window.localStorage.setItem('total_price',data.result.user_order[0].data.total_price);
               window.localStorage.setItem('user_order_id',data.result.user_order[0].id);

@@ -2,7 +2,7 @@ isVip();
 //地址
 $.post(config.addressList,{'uid':uid},function(data){
 	var addressObj = data.result;
-	console.log(addressObj);
+	//console.log(addressObj);
 	for(var i=0;i<addressObj.length;i++){
 		if(addressObj[i].data.state==1){
 			var defaultHtml = '<div class="address_box">'+
@@ -28,9 +28,10 @@ $.post(config.addressList,{'uid':uid},function(data){
 var cartOrBuy =  window.localStorage.getItem('jump_btn');
 if(cartOrBuy=='0'){
 	$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
-		console.log(datas);
+		//console.log(datas);
 		var obj = datas.result.order;
 		window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
+		//console.log(datas.result.user_order[0].id)
 		//添加身份证号码显示
 		var idNum = datas.result.user_order[0].data.id_no;
 		$('.fill_id input').val(idNum);
@@ -103,15 +104,23 @@ if(cartOrBuy=='0'){
 			var dataId = $(this).parents('.product_info_box').attr('data_id');
 			if($(this).hasClass('active')){
 				$.post(config.selectOrders,{'uid':uid,'order_ids':dataId,'order_type':0},function(datas){
-					console.log(datas);
+					//console.log(datas);
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+					if(delivery_type!==''){
+						delivery_type = datas.result.user_order[0].data.post_type;
+						$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+					}
 				})
 			}else{
 				$.post(config.unselectOrders,{'uid':uid,'order_ids':dataId,'order_type':0},function(datas){
-					console.log(datas);
+					//console.log(datas);
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+					if(delivery_type!==''){
+						delivery_type = datas.result.user_order[0].data.post_type;
+						$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+					}
 				})	
 			}	
 		})
@@ -141,15 +150,17 @@ if(cartOrBuy=='0'){
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+					delivery_type = datas.result.user_order[0].data.post_type;
 					$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
 				})						
 			}else if(index==2){
 				$.post(config.orderAddOne,{'uid':uid,'order_id':dataId,'order_type':0},function(datas){
-					console.log(datas);
+					//console.log(datas);
 					$('.specific_num').eq(dataNum).html(datas.result.order[dataNum].data.total_count);
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
 					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+					delivery_type = datas.result.user_order[0].data.post_type;
 					$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
 				})
 			}
@@ -201,7 +212,7 @@ if(cartOrBuy=='0'){
 			}else{
 				localStorage.removeItem('cart_delivery_type');
 				$.post(config.goToPay,{'uid':uid,'pay_source':'h5','open_id':sessionStorage.getItem('openid'),'comment':$('#userMessage').val()},function(pay){
-					console.log(pay);
+					//console.log(pay);
 					wx.config({
 						// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 						appId: pay.result.appId, // 必填，公众号的唯一标识
@@ -303,7 +314,7 @@ if(cartOrBuy=='0'){
 			if(validator.IsIDCard($('.fill_id input').val())){
 				$.post(config.idNoSave,{'user_order_id':window.localStorage.getItem('user_order_id')*1,'id_no':$('.fill_id input').val()},function(datas){
 					if(datas.error_code==0){
-						console.log(datas);
+						//console.log(datas);
 						window.localStorage.setItem('identity',datas.result[0].data.id_no);
 						alert('保存成功～');
 					}else{
@@ -382,7 +393,7 @@ if(cartOrBuy=='0'){
 		var index = $(this).index();
 		if(index==0){
 			$.post(config.billingSub,{'uid':uid,'order_id':dataId},function(datas){
-				console.log(datas);
+				//console.log(datas);
 				$('.specific_num').eq(0).html(datas.result.order[0].data.total_count);	
 				$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 				$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
@@ -391,13 +402,16 @@ if(cartOrBuy=='0'){
 				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
 				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
 				window.localStorage.setItem('counts_num','1');
-				$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
-				window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+				if(delivery_type!==''){
+					window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
+					$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+					window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+				}
 			})				
 			
 		}else if(index==2){
 			$.post(config.billingAdd,{'uid':uid,'order_id':dataId},function(datas){
-				console.log(datas);
+				//console.log(datas);
 				$('.specific_num').eq(0).html(datas.result.order[0].data.total_count);
 				$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 				$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
@@ -406,8 +420,11 @@ if(cartOrBuy=='0'){
 				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
 				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
 				window.localStorage.setItem('counts_num','1');
-				$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
-				window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+				if(delivery_type!==''){
+					window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
+					$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+					window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+				}
 			})
 		}
 
@@ -454,12 +471,12 @@ if(cartOrBuy=='0'){
 		}else{
 			is_presell = 0;
 		}
-		console.log(is_presell) 
+		//console.log(is_presell) 
 		if(delivery_type===''){
 			alert('请选择邮寄方式哦～')	;
 		}else{
 			$.post(config.goToPayItem,{'uid':uid,'pay_source':'h5','open_id':sessionStorage.getItem('openid'),'comment':$('#userMessage').val(),'is_presell':is_presell},function(pay){
-				console.log(pay);
+				//console.log(pay);
 				wx.config({
 					// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 					appId: pay.result.appId, // 必填，公众号的唯一标识
@@ -597,6 +614,7 @@ function deleteGoods(){
 					if($('.product_info_box').length==1){
 						window.history.go(-1);		
 					}else{
+						window.localStorage.setItem('user_order_id',data.result.user_order[0].id);
 						location.reload();
 					}		
 				}else{
@@ -623,7 +641,7 @@ function delivery(){
 		var user_order_id = window.localStorage.getItem('user_order_id')*1;
 		var isPackage = window.localStorage.getItem('package');
 		$.post(config.selectExpress,{'user_order_id':user_order_id,'uid':uid,'post_type':index,'express':express},function(datas){
-			console.log(datas);
+			//console.log(datas);
 			if(datas.error_code==0){
 				delivery_type = datas.result.user_order[0].data.post_type;
 				$('.delivery_type ul > li').removeClass('active');

@@ -1,6 +1,6 @@
 //receipt type
 var whichShow = window.localStorage.getItem('whichShow');
-console.log(whichShow);
+//console.log(whichShow);
 if(whichShow==null){
 	whichShow = 1;
 }
@@ -27,7 +27,7 @@ $('.invoice_title > span').on('tap',function(){
 })
 var user_order_id = window.localStorage.getItem('user_order_id');
 $.post(config.userOrderInvoice,{'user_order_id':user_order_id},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result[0].data;
 	var typeIndex = obj.invoice_type;
 	var titleIndex = obj.invoice_title;

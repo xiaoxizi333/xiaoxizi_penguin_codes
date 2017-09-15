@@ -1,9 +1,9 @@
 var user_order_id = window.localStorage.getItem('user_order_id')*1;
 $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var userOderObj = datas.result.list[0].user_order.data;
 	var endRefundTime = userOderObj.refund_time+(1000*60*60*24*2);
-	console.log(userOderObj)
+	//console.log(userOderObj)
 	ShowCountDown(endRefundTime,'caculator')
 	setInterval(function(){ShowCountDown(endRefundTime,'caculator');}, interval);
 	var orders = datas.result.list[0].order;
@@ -30,7 +30,7 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 	$('.withdraw').on('click',function(){
 		$.post(config.orderRefundCancel,{'user_order_id':user_order_id},function(datas){
 			if(datas.error_code==0){
-				console.log(datas);
+				//console.log(datas);
 				window.location.href = "my_order.html";
 			}else{
 				alert(datas.error_msg);

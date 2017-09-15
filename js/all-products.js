@@ -12,7 +12,7 @@ function searchItem(){
 	var searchTxt = $('#search').val();
 	//console.log(searchTxt);
 	$.post(config.search,{'item_name':searchTxt},function(datas){
-		console.log(datas);
+		//console.log(datas);
 		var detailsObj = datas.result;
 		var detailsHtml = '';
 		for(var i=0;i<detailsObj.length;i++){
@@ -31,7 +31,7 @@ function searchItem(){
 				var secEndTime = detailsObj[goodsIndex].data.seckill_endtime;
 				var isSeckill = detailsObj[goodsIndex].data.is_seckill;
 				var nowTime = Date.parse(new Date());
-				console.log(isSeckill)
+				//console.log(isSeckill)
 				if(saleStartTime||isSeckill){
 					if(saleStartTime>0){
 		    			if(saleStartTime-nowTime>0){
