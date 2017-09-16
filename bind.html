@@ -46,8 +46,7 @@
             <p class="help-info c-gray-dark font-size-12">身份证号仅用于会员月酒跨境使用</p>
             <p class="js-help-info help-info font-size-12"></p>
             <div class="action-container">
-                <button type="button" class="btn btn-customer btn-block" onclick="bind_info()">绑定</button>
-                <button type="button" class="js-login-cancel btn btn-block btn-white" onclick="jump_info()">跳过</button>
+                <button type="button" class="btn btn-customer btn-block" onclick="bind_info()">完成</button>
             </div>
             <p class="help-info c-gray-dark font-size-12"></p>
         </div>
@@ -56,29 +55,21 @@
 
 </body>
 <script src="vendor/zepto.min.js"></script>
+<script src="config.js"></script>
 <script type="text/javascript" src="vendor/mobileSelect.js"></script>
 <script src="js/data.js"></script>
 <script src="js/common.js"></script>
 <script>
     
     function bind_info() {
-        var wechat_id = $("input[name=wechat_id]").val();
-        var taobao_name = $("input[name=taobao_name]").val();
-        if(!wechat_id && !taobao_name){
-            $(".help-info").text("请填写微信号和淘宝帐号");
+        var real_name = $("input[name=real_name]").val();
+        var id_no = $("input[name=id_no]").val();
+        if(!real_name || !id_no){
+            $(".help-info").text("请填写完整信息");
             return;
         }
-        util.post("/h5/update/user_info.json", {
-            taobao_name: taobao_name,
-            wechat_id: wechat_id,
-            uid: sessionStorage.getItem('uid')
-        }, function(data){
-            if(data.error_code == 0){
-                jump_info();
-            }else{
-                $(".help-info").text(data.error_msg);
-            }
-        });
+        add_address(real_name,id_no);
+
     }
     //选择地区
     var mobileSelect4 = new MobileSelect({
@@ -90,9 +81,60 @@
             // window.localStorage.setItem('areaData',datas);
         } 
     });
-    
-    function jump_info() {
-        window.location.href="index.html"
+
+    function add_address(real_name,id_no) {
+        var receiver = $('.receiver').val();
+        var phoneNum = $('.phone_num').val();
+        var chooseAddress = $('#chooseAddress').html();
+        var addressDetail = $('.address_detail').val();
+        var areaArr = Trim(chooseAddress,'g').split(',');
+        var province = areaArr[0];
+        var city = areaArr[1];
+        var district = areaArr[2];
+        var areaData = JSON.parse(window.localStorage.getItem('areaData'));
+        var provinceCode = areaData[0].id*1;
+        var cityCode = areaData[1].id*1;
+        var districtCode = areaData[2].id*1;
+        //console.log(provinceCode)
+        //验证表单
+        if(receiver ==''||receiver==undefined){
+            $(".help-info").text('请填写姓名');
+            return;
+        }else if(!validator.IsMobilePhoneNumber(phoneNum)){
+            $(".help-info").text("请填写正确手机号");
+            return;
+        }else if(chooseAddress == ''||chooseAddress == undefined){
+            $(".help-info").text("请选择完整地址");
+            return;
+        }else if(addressDetail == ''||addressDetail == undefined){
+            $(".help-info").text("请填写详细地址");
+            return;
+        }else{
+            // -------------------------
+            //| 这里需要把url放到配置文件中 |
+            // -------------------------
+            $.post(config.userProfileUpdate,{
+                'uid':sessionStorage.getItem('uid'),
+                'contact_user_name':receiver,
+                'contact_phone':phoneNum,
+                'province':province,
+                'city':city,
+                'district':district,
+                'street':addressDetail,
+                'province_code':provinceCode,
+                'city_code':cityCode,
+                'district_code':districtCode,
+                'real_name':real_name,
+                'id_no':id_no
+            },function(data){
+                if(data.error_code==0){
+                    window.location.href="index.html"
+                }else{
+                    $(".help-info").text(data.error_msg);
+                }
+            })
+        }
     }
+
 </script>
 </html>

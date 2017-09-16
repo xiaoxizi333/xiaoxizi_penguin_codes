@@ -8,7 +8,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	//添加视频：0 商品介绍区 1 商品幻灯区
 	var videoType = datas.result.item_info[0].data.video_type;
 	var videoUrl = datas.result.item_info[0].data.video_url;
-	if(videoUrl!==undefined){
+	if(videoUrl!==undefined&&videoUrl!==""){
 		var addVideo = '<div class="swiper-slide">'+
 							'<video width="100%" poster="'+objPic[0]+'" controls>'+
 						  		'<source src="'+videoUrl+'">'+

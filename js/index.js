@@ -1,6 +1,6 @@
-if(!openid){
-	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
-}else{
+//if(!openid){
+	//window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
+//}else{
 	//分类详情
 	$.post(config.classify,{'is_add_best_ares':0,'limit':6},function(data){
 		//console.log(data);
@@ -22,27 +22,20 @@ if(!openid){
 	})
 	//banner
 	$.post(config.commonBanner,{'class_type':'index'},function(data){
-		//console.log(data);
+		console.log(data);
 		var obj = data.result[0].data.show_pic_arr;
 		var picUrl = data.result[0].data.jump_urls;
-		//console.log(picUrl);
+		console.log(picUrl);
 		var bannerBox = '';
-		var picJump;
-		if(obj!==undefined){	
-			for(var i=0;i<obj.length;i++){
-				if(picUrl==undefined){
-					picJump = 'javascript:;';	
-				}else{
-					if(picUrl[i]==""||picUrl[i]==undefined){
-						picJump = 'javascript:;';
-					}else{
-						picJump = picUrl[i];
-					}
+		if(obj!==undefined){
+			if(picUrl&&picUrl.length>0){	
+				for(var i=0;i<obj.length;i++){
+					bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" class="pic_for_banner" item_id="'+picUrl[i].item_id+'" item_spec_id="'+picUrl[i].item_spec_id+'"  style="width: 100%;height:14.25rem"></div>';			
 				}
-				bannerBox += ' <div class="swiper-slide"><a href="'+picJump+'"><img src="'+obj[i]+'" alt="" style="width: 100%;height:14.25rem"></a></div>';			
-			}		
+			}
+			$('.banner2_box').html(bannerBox);
+			jumpToGoods($('.pic_for_banner'));		
 		}
-		$('.banner2_box').html(bannerBox);
 		var mySwiper = new Swiper('.banner_contain .swiper-container', {
 			pagination : '.page_box',
 			autoplay: 3000,//可选选项，自动滑动
@@ -72,37 +65,35 @@ if(!openid){
 				var pic_url,
 					pic;
 				if(advertisementObj!==undefined){
-					if(jumpUrl==undefined){
-						jumpUrl[0] = 'javascript:;';
-						jumpUrl[1] = 'javascript:;';
-						jumpUrl[2] = 'javascript:;';
+					if(jumpUrl&&jumpUrl.length>0){
+						switch(bannerType){
+							case 1:
+								pic = '<div class="sorts clearfix sort1"><a><img src="'+advertisementObj[0]+'" class="pic_for_banner" item_id="'+jumpUrl[0].item_id+'" item_spec_id="'+jumpUrl[0].item_spec_id+'" /></a></div>';
+								break;
+							case 2:
+								pic = '<div class="sorts clearfix sort2">'+
+										'<a class="pull-left"><img src="'+advertisementObj[0]+'" class="pic_for_banner" item_id="'+jumpUrl[0].item_id+'" item_spec_id="'+jumpUrl[0].item_spec_id+'" /></a>'+
+										'<a class="pull-right"><img src="'+advertisementObj[1]+'" class="pic_for_banner" item_id="'+jumpUrl[1].item_id+'" item_spec_id="'+jumpUrl[1].item_spec_id+'" /></a>'+
+									'</div>';
+								break;
+							case 3:
+								pic = '<div class="sorts clearfix sort3">'+
+										'<a class="pull-left" style="width:55.3%;"><img src="'+advertisementObj[0]+'" class="pic_for_banner" item_id="'+jumpUrl[0].item_id+'" item_spec_id="'+jumpUrl[0].item_spec_id+'" /></a>'+
+										'<a class="pull-right" style="width:44.3%;margin-bottom:1px"><img src="'+advertisementObj[1]+'" class="pic_for_banner" item_id="'+jumpUrl[1].item_id+'" item_spec_id="'+jumpUrl[1].item_spec_id+'" /></a>'+
+										'<a class="pull-right" style="width:44.3%;"><img src="'+advertisementObj[2]+'" class="pic_for_banner" item_id="'+jumpUrl[2].item_id+'" item_spec_id="'+jumpUrl[2].item_spec_id+'" /></a>'+
+									'</div>';
+								break;
+							case 4:
+								pic = '<div class="sorts clearfix sort4">'+
+										'<a class="pull-right" style="width:55.3%;"><img src="'+advertisementObj[2]+'" class="pic_for_banner" item_id="'+jumpUrl[2].item_id+'" item_spec_id="'+jumpUrl[2].item_spec_id+'" /></a>'+
+										'<a class="pull-left" style="width:44.3%;margin-bottom:1px"><img src="'+advertisementObj[0]+'" class="pic_for_banner" item_id="'+jumpUrl[0].item_id+'" item_spec_id="'+jumpUrl[0].item_spec_id+'"  /></a>'+
+										'<a class="pull-left" style="width:44.3%;"><img src="'+advertisementObj[1]+'" class="pic_for_banner" item_id="'+jumpUrl[1].item_id+'" item_spec_id="'+jumpUrl[1].item_spec_id+'" /></a>'+
+									'</div>';
+								break;
+						}
 					}
-					switch(bannerType){
-						case 1:
-							pic = '<div class="sorts clearfix sort1"><a href="'+jumpUrl[0]+'"><img src="'+advertisementObj[0]+'" alt="" /></a></div>';
-							break;
-						case 2:
-							pic = '<div class="sorts clearfix sort2">'+
-									'<a href="'+jumpUrl[0]+'" class="pull-left"><img src="'+advertisementObj[0]+'" alt="" /></a>'+
-									'<a href="'+jumpUrl[1]+'" class="pull-right"><img src="'+advertisementObj[1]+'" alt="" /></a>'+
-								'</div>';
-							break;
-						case 3:
-							pic = '<div class="sorts clearfix sort3">'+
-									'<a href="'+jumpUrl[0]+'" class="pull-left" style="width:55.3%;"><img src="'+advertisementObj[0]+'" alt="" /></a>'+
-									'<a href="'+jumpUrl[1]+'" class="pull-right" style="width:44.3%;margin-bottom:1px"><img src="'+advertisementObj[1]+'" alt="" /></a>'+
-									'<a href="'+jumpUrl[2]+'" class="pull-right" style="width:44.3%;"><img src="'+advertisementObj[2]+'" alt="" /></a>'+
-								'</div>';
-							break;
-						case 4:
-							pic = '<div class="sorts clearfix sort4">'+
-									'<a href="'+jumpUrl[2]+'" class="pull-right" style="width:55.3%;"><img src="'+advertisementObj[2]+'" alt="" /></a>'+
-									'<a href="'+jumpUrl[0]+'" class="pull-left" style="width:44.3%;margin-bottom:1px"><img src="'+advertisementObj[0]+'" alt="" /></a>'+
-									'<a href="'+jumpUrl[1]+'" class="pull-left" style="width:44.3%;"><img src="'+advertisementObj[1]+'" alt="" /></a>'+
-								'</div>';
-							break;
-					}
-					$('.module_box').append(pic);				
+					$('.module_box').append(pic);
+					jumpToGoods($('.pic_for_banner'));				
 				}
 			}else if(moduleType=='SPLB'){
 				$.ajax({ 
@@ -311,7 +302,7 @@ if(!openid){
 		    'scrollTop':0
 		},1000)
 	})
-}
+//}
 
 
 

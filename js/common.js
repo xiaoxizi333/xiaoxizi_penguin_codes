@@ -40,10 +40,10 @@ var util = {
         });
     }
 };
-var uid = sessionStorage.getItem("uid");
-//var uid = 1431768973512333;
-var openid = sessionStorage.getItem("openid");
-//var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
+//var uid = sessionStorage.getItem("uid");
+var uid = 1431768973512333;
+//var openid = sessionStorage.getItem("openid");
+var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 // header_nav_bar
 var isShow = true;
 $('.nav-bar-icon').on('click',function(){
@@ -357,6 +357,48 @@ var validator = {
 		return false;
 	}
 
+}
+//jump
+function jumpToGoods(obj){
+	obj.on('click',function(){
+		var itemID = $(this).attr('item_id');
+		var itemSpecId = $(this).attr('item_spec_id');
+		window.localStorage.setItem('itemID',itemID);
+		window.localStorage.setItem('itemSpecId',itemSpecId); 
+		$.post(config.goodsLsitJump,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
+			//console.log(datas);
+			var saleStartTime = datas.result[0].data.sales_start_time;
+			var nowTime = Date.parse(new Date());
+			var nowTime = Date.parse(new Date());
+			var secStartTime = datas.result[0].data.seckill_startime;
+			var secEndTime = datas.result[0].data.seckill_endtime;
+			var isSeckill = datas.result[0].data.is_seckill;
+			if(saleStartTime||isSeckill){
+				if(saleStartTime>0){
+	    			if(saleStartTime-nowTime>0){
+	    				window.location.href="pre_sale.html";
+	    			}else{
+	    				window.location.href="product_details.html";
+	    			}
+	    		//跳转正常
+	    		}else if(saleStartTime<0){
+	    			window.location.href="product_details.html";
+	    		}
+	    		//跳转 0:正常详情 1:秒杀详情
+				if(isSeckill==0){
+					window.location.href="product_details.html";
+				}else if(isSeckill==1){
+					if(nowTime>secStartTime&&nowTime<secEndTime){
+						window.location.href="seckill.html";
+					}else{
+						window.location.href="product_details.html";
+					}		
+				}
+			}else{
+				window.location.href="product_details.html";
+			}	
+		})
+	})
 }
 
 
