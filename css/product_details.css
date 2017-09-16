@@ -525,13 +525,13 @@ footer > div{
 	position: fixed;
 	height: 100%;
 	width: 100%;
-	text-align: center;
 	background: rgba(0,0,0,.5);
 	display: none;
 	top: 0;
 	left: 0;
 	z-index: 1000001;
-	padding-top: 15rem;
+	text-align: center;
+	padding-top: 12rem;
 }
 .big_pic img{
 	width: 90%;

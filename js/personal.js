@@ -41,6 +41,10 @@ $.post(config.vipService,{'uid':uid},function(datas){
 		$('.purchase').show();
 	}
 })
+$('.purchase_btn').on('tap',function(){
+	window.localStorage.setItem('tabId',1308254907990793);
+	window.location.href="all-products-classify.html";
+})
 isVip();
 //我的订单
 $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){

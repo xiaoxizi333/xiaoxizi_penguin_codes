@@ -156,7 +156,7 @@ function addDatas(pageNm,comments){
 			$('.big_pic').fadeOut();
 		})
 		$('.load_more').off('click').on('click',function(){
-			var totalPage = Math.ceil(datas.total_count/1);
+			var totalPage = Math.ceil(datas.total_count/10);
 			if(pageNm<totalPage){
 				pageNm++;
 				comments.page = pageNm;
@@ -250,7 +250,7 @@ $('.tab_header li').on('click',function(){
 })
 function makeDeal(page){
 	//成交量
-	$.post(config.itemDetail,{'item_id':itemID,'limit':1,'page':page},function(datas){
+	$.post(config.itemDetail,{'item_id':itemID,'limit':10,'page':page},function(datas){
 		//console.log(datas);
 		var dealInfo = datas.result;
 		if(dealInfo.length){
@@ -267,7 +267,7 @@ function makeDeal(page){
 			}
 			$('.deal_specific_info').html(dealHtml);
 			$('.load_more_deal').on('click',function(){
-				var totalPage = Math.ceil(datas.total_count/1);
+				var totalPage = Math.ceil(datas.total_count/10);
 				if(page<totalPage){
 					page++;
 					makeDeal(page);

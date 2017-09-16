@@ -1,6 +1,6 @@
-//if(!openid){
-	//window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
-//}else{
+if(!openid){
+	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
+}else{
 	//分类详情
 	$.post(config.classify,{'is_add_best_ares':0,'limit':6},function(data){
 		//console.log(data);
@@ -48,6 +48,9 @@
 			window.localStorage.setItem('search_item_name',$(this).val());
 			window.location.href="all-products.html";
 		}
+	})
+	$('.vip_order').on('tap',function(){
+		window.localStorage.setItem('tabId',1308254907990793);
 	})
 	//商品模块化
 	$.post(config.indexModuleList,function(datas){
@@ -302,7 +305,7 @@
 		    'scrollTop':0
 		},1000)
 	})
-//}
+}
 
 
 

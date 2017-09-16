@@ -396,7 +396,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		}
 	})
 	//评论列表	
-	comments = {'item_id':commentId,'limit':1,'page':pageNm};
+	comments = {'item_id':commentId,'limit':10,'page':pageNm};
 	addDatas(pageNm,comments);
 	$('.comment_nav li').on('tap',function(){
 		$('.comment_nav li').removeClass('active');
@@ -407,19 +407,19 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		var index = $(this).index();
 		switch(index){
 			case 0:
-				comments = {'item_id':commentId,'page':pageNm,'limit':1};
+				comments = {'item_id':commentId,'page':pageNm,'limit':10};
 				break;
 			case 1:
-				comments = {'item_id':commentId,'comment_level':0,'page':pageNm,'limit':1};
+				comments = {'item_id':commentId,'comment_level':0,'page':pageNm,'limit':10};
 				break;
 			case 2:
-				comments = {'item_id':commentId,'comment_level':1,'page':pageNm,'limit':1};
+				comments = {'item_id':commentId,'comment_level':1,'page':pageNm,'limit':10};
 				break;
 			case 3:
-				comments = {'item_id':commentId,'comment_level':2,'page':pageNm,'limit':1};
+				comments = {'item_id':commentId,'comment_level':2,'page':pageNm,'limit':10};
 				break;
 			case 4:
-				comments = {'item_id':commentId,'is_pic':1,'page':pageNm,'limit':1};
+				comments = {'item_id':commentId,'is_pic':1,'page':pageNm,'limit':10};
 				break;
 		}
 		addDatas(pageNm,comments);

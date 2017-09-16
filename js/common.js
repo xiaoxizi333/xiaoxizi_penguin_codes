@@ -40,10 +40,10 @@ var util = {
         });
     }
 };
-//var uid = sessionStorage.getItem("uid");
-var uid = 1431768973512333;
-//var openid = sessionStorage.getItem("openid");
-var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
+var uid = sessionStorage.getItem("uid");
+//var uid = 1431768973512333;
+var openid = sessionStorage.getItem("openid");
+//var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 // header_nav_bar
 var isShow = true;
 $('.nav-bar-icon').on('click',function(){
