@@ -60,7 +60,6 @@
 <script src="js/data.js"></script>
 <script src="js/common.js"></script>
 <script>
-    
     function bind_info() {
         var real_name = $("input[name=real_name]").val();
         var id_no = $("input[name=id_no]").val();
@@ -77,8 +76,8 @@
         title: '地区选择',
         wheels: [{data:areadata}],
         callback:function(indexArr, data){
-            // var datas = JSON.stringify(data);
-            // window.localStorage.setItem('areaData',datas);
+            var datas = JSON.stringify(data);
+            window.localStorage.setItem('areaData',datas);
         } 
     });
 
@@ -100,7 +99,7 @@
         if(receiver ==''||receiver==undefined){
             $(".help-info").text('请填写姓名');
             return;
-        }else if(!validator.IsMobilePhoneNumber(phoneNum)){
+        }else if(!validator.IsPhoneNumber(phoneNum)){
             $(".help-info").text("请填写正确手机号");
             return;
         }else if(chooseAddress == ''||chooseAddress == undefined){
