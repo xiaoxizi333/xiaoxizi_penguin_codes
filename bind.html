@@ -113,7 +113,7 @@
             //| 这里需要把url放到配置文件中 |
             // -------------------------
             $.post(config.userProfileUpdate,{
-                'uid':sessionStorage.getItem('uid'),
+                'uid':uid,
                 'contact_user_name':receiver,
                 'contact_phone':phoneNum,
                 'province':province,
@@ -126,6 +126,7 @@
                 'real_name':real_name,
                 'id_no':id_no
             },function(data){
+                var data = JSON.parse(data);
                 if(data.error_code==0){
                     window.location.href="index.html"
                 }else{
