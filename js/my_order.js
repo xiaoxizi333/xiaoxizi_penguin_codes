@@ -281,8 +281,8 @@ function dividePage(page){
 				realOrderList = '<li class="clearfix">'+
 									'<div class="product_photo pull-left" style="background-image:url('+listData.title_pics[0]+');background-position: center center;background-size: auto 100%;"></div>'+
 									'<div class="description pull-left">'+
-										'<div style="padding-top: 0.8125rem;margin-bottom: 0.8125rem;color:#5a5a5a">'+listData.name+'</div>'+
-										'<div class="supplement"></div>'+
+										'<div style="padding-top: 0.8125rem;margin-bottom: 0.8125rem;color:#5a5a5a" class="item_name shrink_font">'+listData.name+'</div>'+
+										'<div class="supplement shrink_font"></div>'+
 									'</div>'+
 									'<div class="about_cost pull-right">'+
 										'<div class="text-right" style="padding-top: 0.8125rem;margin-bottom: 0.8125rem">¥'+whichPrice+'</div>'+

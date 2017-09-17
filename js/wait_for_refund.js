@@ -1,6 +1,6 @@
 var user_order_id = window.localStorage.getItem('user_order_id')*1;
 $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
-	//console.log(datas);
+	console.log(datas);
 	var userOderObj = datas.result.list[0].user_order.data;
 	var endRefundTime = userOderObj.refund_time+(1000*60*60*24*2);
 	//console.log(userOderObj)
@@ -12,11 +12,11 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		var orderObj = orders[i].data;
 		html += '<div class="refund_product clearfix">'+
 					'<div class="product_photo pull-left bg" style="background-image:url('+orderObj.title_pics[0]+')"></div>'+
-					'<span class="pull-left" style="padding-top: 0.625rem">'+orderObj.name+'</span>'+
+					'<span class="pull-left shrink_font" style="padding-top: 0.625rem;width:12rem">'+orderObj.name+'</span>'+
 				'</div>';
 	}
 	$('.order_box').html(html);
-	$('.sum_refund').html(userOderObj.total_price);
+	$('.sum_refund').html(userOderObj.refund_value);
 	$('.refund_reason').html(userOderObj.refund_desc);
 	var RefundTimeStr = userOderObj.refund_time;
 	var applyForRefund = new Date(RefundTimeStr);

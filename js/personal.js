@@ -62,8 +62,8 @@ $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 							'<div class="clearfix" style="border-bottom:1px solid rgba(151,151,151,.2)">'+
 								'<div class="product_photo pull-left bg" style="background-image:url('+detailsObj.title_pics[0]+')"></div>'+
 								'<div class="product_info pull-left">'+
-									'<div class="product_name">'+detailsObj.name+'</div>'+
-									'<div class="description">'+detailsObj.sub_name+'</div>'+
+									'<div class="product_name shrink_font">'+detailsObj.name+'</div>'+
+									'<div class="description shrink_font">'+detailsObj.sub_name+'</div>'+
 								'</div>'+
 								'<div class="product_price pull-right">'+
 									'<div class="real_price">¥'+whichPrice+'</div>'+

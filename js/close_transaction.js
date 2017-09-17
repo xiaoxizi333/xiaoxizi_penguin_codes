@@ -1,4 +1,5 @@
 var user_order_id = window.localStorage.getItem('user_order_id')*1;
+isVip();
 //地址	
 $.post(config.userOrderAddress,{'user_order_id':user_order_id},function(datas){
 	//console.log(datas);
@@ -15,14 +16,20 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 	for(var i=0;i<orderObj.length;i++){
 		var obj = orderObj[i].data;
 		var descData = orderObj[i].data.sub_name;
+		var itemPrice;
+		if(isVipPrice){
+			itemPrice = obj.real_price;
+		}else{
+			itemPrice = obj.public_price;
+		}
 		var productHtml = '<li class="clearfix">'+
 							'<div class="product_photo pull-left bg" style="background-image:url('+obj.title_pics[0]+')"></div>'+
 							'<div class="description pull-left">'+
-								'<div style="padding-top: 0.8125rem;margin-bottom: 0.8125rem;color:#5a5a5a">'+obj.name+'</div>'+
-								'<div class="supplement"></div>'+
+								'<div style="padding-top: 0.8125rem;margin-bottom: 0.8125rem;color:#5a5a5a;width:10rem" class="shrink_font">'+obj.name+'</div>'+
+								'<div class="supplement shrink_font"></div>'+
 							'</div>'+
 							'<div class="about_cost pull-right">'+
-								'<div class="text-right" style="padding-top: 0.8125rem;margin-bottom: 0.8125rem">¥'+obj.real_price+'</div>'+
+								'<div class="text-right" style="padding-top: 0.8125rem;margin-bottom: 0.8125rem">¥'+itemPrice+'</div>'+
 								'<div class="text-right">x'+obj.total_count+'</div>'+
 							'</div>'+
 						'</li>';

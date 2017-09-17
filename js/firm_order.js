@@ -64,9 +64,9 @@ if(cartOrBuy=='0'){
 							'<div class="choose_icon"></div>'+
 							'<div class="specific_photo pull-left bg" style="background-image:url('+obj[i].data.title_pics[0]+')"></div>'+
 							'<div class="description pull-left" style="width:6rem">'+
-								'<div class="product_name">'+obj[i].data.name+'</div>'+
+								'<div class="product_name shrink_font">'+obj[i].data.name+'</div>'+
 								'<div class="spec_info">规格：'+specStr+'</div>'+
-								'<div class="some_desc"></div>'+ 
+								'<div class="some_desc shrink_font"></div>'+ 
 							'</div>'+
 							'<div class="about_num pull-right text-right">'+
 								'<div class="price">¥'+priceForGoods+'</div>'+
@@ -352,9 +352,9 @@ if(cartOrBuy=='0'){
 					'<div class="product_info clearfix">'+
 						'<div class="specific_photo pull-left bg" style="background-image:url('+obj.goods_pic[0]+')"></div>'+
 						'<div class="description pull-left">'+
-							'<div class="product_name">'+obj.goods_name+'</div>'+
+							'<div class="product_name shrink_font">'+obj.goods_name+'</div>'+
 							'<div class="spec_info">规格：'+specInfoStr+'</div>'+
-							'<div class="some_desc">'+obj.goods_desc+'</div>'+
+							'<div class="some_desc shrink_font">'+obj.goods_desc+'</div>'+
 						'</div>'+
 						'<div class="about_num pull-right text-right">'+
 							'<div class="price">¥'+obj.goods_prcie+'</div>'+

@@ -137,7 +137,7 @@ function switchDate(time,mark){
 $('.shopping_icon').off('tap').on('tap',function(){
 	if(uid){
 		$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
-			//console.log(datas);
+			console.log(datas);
 			if(datas.result.order.length==0){
 				showTips('您的购物车还没有商品哦，赶快选购吧～')
 			}else{

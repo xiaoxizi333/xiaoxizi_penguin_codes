@@ -97,12 +97,6 @@ body{
 	left: 0;
 	background-image: url(../img/cusomer_sevices.png);
 }
-.supplement{
-	overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break: break-all;
+.supplement,.item_name{
     width: 10rem;
-
 }

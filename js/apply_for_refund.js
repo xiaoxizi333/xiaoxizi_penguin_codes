@@ -1,15 +1,21 @@
 var user_order_id = window.localStorage.getItem('user_order_id')*1;
+isVip();
 $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 	//console.log(datas);
 	var orders = datas.result.list[0].order;
-	var html = '';
+	var html = '',itemPrice;
 	for(var i=0;i<orders.length;i++){
 		var orderObj = orders[i].data;
+		if(isVipPrice){
+			itemPrice = orderObj.real_price;
+		}else{
+			itemPrice = orderObj.public_price;
+		}
 		html += '<div class="show_product clearfix">'+
 					'<div class="product_photo pull-left"><img src="'+orderObj.title_pics[0]+'" style="width:100%;height:100%;" alt="" /></div>'+
-					'<span class="pull-left" style="padding-top: 0.625rem">'+orderObj.name+'</span>'+
+					'<span class="pull-left product_name shrink_font" style="padding-top: 0.625rem">'+orderObj.name+'</span>'+
 					'<div class="pull-right text-right" style="padding-top: 0.625rem;">'+
-						'<span style="display:block;margin-bottom: 0.8125rem;">'+orderObj.real_price+'</span>'+
+						'<span style="display:block;margin-bottom: 0.8125rem;">¥'+itemPrice+'</span>'+
 						'<span style="display:block">x'+orderObj.total_count+'</span>'+
 					'</div>'+
 				'</div>';

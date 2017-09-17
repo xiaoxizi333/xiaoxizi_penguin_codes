@@ -22,10 +22,9 @@ if(!openid){
 	})
 	//banner
 	$.post(config.commonBanner,{'class_type':'index'},function(data){
-		console.log(data);
+		//console.log(data);
 		var obj = data.result[0].data.show_pic_arr;
 		var picUrl = data.result[0].data.jump_urls;
-		console.log(picUrl);
 		var bannerBox = '';
 		if(obj!==undefined){
 			if(picUrl&&picUrl.length>0){	
