@@ -274,14 +274,18 @@ $.post(config.indexCoupon,{},function(datas){
 	    slidesPerView: 'auto',
 	});
 	$('.coupon .swiper-slide').on('click',function(){
-		var dataId = $(this).attr('data_id');
-		$.post(config.oneCouponTake,{'uid':uid,'coupon_id':dataId},function(datas){
-			if(datas.error_code==0){
-				showTips('领取成功~');
-			}else{
-				showTips(datas.error_msg);
-			}
-		});
+		if(uid){
+			var dataId = $(this).attr('data_id');
+			$.post(config.oneCouponTake,{'uid':uid,'coupon_id':dataId},function(datas){
+				if(datas.error_code==0){
+					showTips('领取成功~');
+				}else{
+					showTips(datas.error_msg);
+				}
+			});
+		}else{
+			window.location.href="register.html";
+		}
 	})
 })
 //图文、文字点击跳转

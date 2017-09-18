@@ -17,9 +17,9 @@ $.post(config.addressList,{'uid':uid},function(data){
 	}
 	$('.default_address').html(defaultHtml);
 	if(!$('.default_address .address_box').length){
-		$('.default_address').html('<a href="edit_address.html" class="text-center edit" style="height:5.625rem;line-height:5.625rem;display:block;font-family: PingFangSC-Thin;font-size: 0.875rem;letter-spacing: 0.14px;color: #868191;">请选择默认地址哦～</a>');
+		$('.default_address').html('<a href="edit_address.html" class="text-center edit_2" style="height:5.625rem;line-height:5.625rem;display:block;font-family: PingFangSC-Thin;font-size: 0.875rem;letter-spacing: 0.14px;color: #868191;">请选择默认地址哦～</a>');
 	}
-	$('.edit').on('tap',function(){
+	$('.edit, .edit_2').on('tap',function(){
 		window.localStorage.setItem('editNum','1');
 		window.location.href="edit_address.html";
 	})
