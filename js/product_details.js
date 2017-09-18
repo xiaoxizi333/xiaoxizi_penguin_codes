@@ -1,6 +1,7 @@
 //banner
-var itemID = window.localStorage.getItem('itemID')*1;
-var itemSpecId = window.localStorage.getItem('itemSpecId')*1;
+var itemID = getQueryString('itemID')*1;
+var itemSpecId = getQueryString('itemSpecId')*1;
+console.log(itemID)
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	//console.log(datas);
 	var objPic = datas.result.item_info[0].data.title_pics;
@@ -184,8 +185,6 @@ $.post(config.guessUouLike,{'location_type':'good_detail'},function(datas){
 			var itemID = $(this).attr('data_id');
 			var goodsIndex = $(this).index();
 			var specId = $(this).attr('specId');
-			window.localStorage.setItem('itemID',itemID);
-			window.localStorage.setItem('itemSpecId',specId);
 			var saleStartTime = obj[goodsIndex].item[0].sales_start_time;
 			var secStartTime = obj[goodsIndex].item[0].seckill_startime;
 			var secEndTime = obj[goodsIndex].item[0].seckill_endtime;

@@ -50,7 +50,7 @@ $('.vip_order').on('tap',function(){
 })
 //商品模块化
 $.post(config.indexModuleList,function(datas){
-	//console.log(datas);
+	console.log(datas);
 	var obj = datas.result;
 	var listIndex = 0;
 	var seckillIndex = 0;
@@ -131,13 +131,13 @@ $.post(config.indexModuleList,function(datas){
 				    		//跳转预售
 				    		if(saleStartTime>0){
 				    			if(saleStartTime-nowTime>0){
-				    				window.location.href="pre_sale.html";
+				    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+itemSpecId;
 				    			}else{
-				    				window.location.href="product_details.html";
+				    				window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 				    			}
 				    		//跳转正常
 				    		}else if(saleStartTime<=0){
-				    			window.location.href="product_details.html";
+				    			window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 				    		}
 				    	})
 				    })
@@ -187,12 +187,12 @@ $.post(config.indexModuleList,function(datas){
 								var isSeckill = datas.result[0].data.is_seckill;
 								//跳转 0:正常详情 1:秒杀详情
 								if(isSeckill==0){
-									window.location.href="product_details.html";
+									window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 								}else if(isSeckill==1){
 									if(nowTime>secStartTime&&nowTime<secEndTime){
-										window.location.href="seckill.html";
+										window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
 									}else{
-										window.location.href="product_details.html";
+										window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 									}							
 								}
 							})
@@ -217,13 +217,23 @@ $.post(config.indexModuleList,function(datas){
 			var picture = tObj.pic;
 			var WZId = tObj.item_class*1;
 		 	var jumpType = tObj.type;
-		 	var customUrl = tObj.custom_url; 	
-		 	//console.log(jumpType)
-		 	if(picture!=''){
-		 		var html = '<div class="zdytw" style="width:100%" type="'+jumpType+'" id="'+WZId+'" customUrl="'+customUrl+'"><img style="width:100%" src="'+picture+'"></div>';
-		 		$('.module_box').append(html);
-		 	}			
-			jump('.zdytw');
+		 	var customUrl = tObj.custom_url; 
+		 	var itemID = tObj.itemid;
+		 	var item_spec_id = 0;
+		 	$.ajax({ 
+		        type: "post", 
+			    url: config.skuno, 
+			    data:{'item_id':itemID},
+			    cache:false, 
+			    async:false, 
+			    success: function(d){
+			    	if(picture!=''){
+				 		var html = '<div class="zdytw" item_id="'+d.result[0].id+'" item_spec_id="'+item_spec_id+'" style="width:100%" type="'+jumpType+'" id="'+WZId+'" customUrl="'+customUrl+'"><img style="width:100%" src="'+picture+'"></div>';
+				 		$('.module_box').append(html);
+				 	}			
+						jump('.zdytw');
+				    }
+			})	
 		}
 	}	
 })
@@ -285,6 +295,8 @@ function jump(obj){
 			window.location.href = "all-products-classify.html";
 		}else if(thisJump=='1'){
 			window.location.href = thisJump2;
+		}else if(thisJump=='2'){
+			jumpToGoods($('.zdytw'));
 		}
 	})
 }

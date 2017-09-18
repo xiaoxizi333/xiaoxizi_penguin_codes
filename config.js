@@ -64,4 +64,5 @@ var config = {
 	itemFreight:'http://101.201.115.31:14445/custom/plugin/show_item_freight.json',
 	trackExpress:'http://101.201.115.31:14445/admin/order/track_express/find.json',
 	userProfileUpdate:'http://101.201.115.31:14445/zjds/user_profile/update.json',
+	skuno:'http://101.201.115.31:14445/web/find_item_by_skuno.json',
 }

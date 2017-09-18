@@ -35,26 +35,26 @@ function searchItem(){
 				if(saleStartTime||isSeckill){
 					if(saleStartTime>0){
 		    			if(saleStartTime-nowTime>0){
-		    				window.location.href="pre_sale.html";
+		    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+specId;
 		    			}else{
-		    				window.location.href="product_details.html";
+		    				window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 		    			}
 		    		//跳转正常
 		    		}else if(saleStartTime<0){
-		    			window.location.href="product_details.html";
+		    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 		    		}
 		    		//跳转 0:正常详情 1:秒杀详情
 					if(isSeckill==0){
-						window.location.href="product_details.html";
+						window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 					}else if(isSeckill==1){
 						if(nowTime>secStartTime&&nowTime<secEndTime){
-							window.location.href="seckill.html";
+							window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
 						}else{
-							window.location.href="product_details.html";
+							window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 						}	
 					}
 				}else{
-					window.location.href="product_details.html";
+					window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 				}		
 			})
 		}

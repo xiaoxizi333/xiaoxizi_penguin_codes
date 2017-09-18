@@ -33,15 +33,8 @@ function addBanner(bannerData){
 }
 
 var firstItem = window.localStorage.getItem('tabId');
-$.post(config.allItemList,{'item_class':firstItem},function(datas){
-	//console.log(datas);
-	var detailsObj = datas.result;
-	var detailsHtml = '';
-	for(var i=0;i<detailsObj.length;i++){
-		detailsHtml += '<div><img src="'+detailsObj[i].data.title_pics+'" class="details"></div>';
-	}
-	$('.SKU_details').html(detailsHtml);
-})
+var dataObj = {'item_class':firstItem};
+searchItems(dataObj);
 //一级列表
 $.post(config.indexItemClassList,function(datas){
 	//console.log(datas);
@@ -176,8 +169,6 @@ function searchItems(passData){
 					var itemID = $(this).attr('data_id');
 					var goodsIndex = $(this).index();
 					var specId = detailsObj[goodsIndex].good_item_spec_id?detailsObj[goodsIndex].good_item_spec_id:0;
-					window.localStorage.setItem('itemID',itemID);
-					window.localStorage.setItem('itemSpecId',specId);
 					var saleStartTime = detailsObj[goodsIndex].data.sales_start_time==undefined?'':detailsObj[goodsIndex].data.sales_start_time;
 					var secStartTime = detailsObj[goodsIndex].data.seckill_startime==undefined?'':detailsObj[goodsIndex].data.seckill_startime;
 					var secEndTime = detailsObj[goodsIndex].data.seckill_endtime==undefined?'':detailsObj[goodsIndex].data.seckill_endtime;
@@ -186,26 +177,26 @@ function searchItems(passData){
 					if(saleStartTime||isSeckill){
 						if(saleStartTime>0){
 			    			if(saleStartTime-nowTime>0){
-			    				window.location.href="pre_sale.html";
+			    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+specId;
 			    			}else{
-			    				window.location.href="product_details.html";
+			    				window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 			    			}
 			    		//跳转正常
 			    		}else if(saleStartTime<0){
-			    			window.location.href="product_details.html";
+			    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 			    		}
 			    		//跳转 0:正常详情 1:秒杀详情
 						if(isSeckill==0){
-							window.location.href="product_details.html";
+							window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 						}else if(isSeckill==1){
 							if(nowTime>secStartTime&&nowTime<secEndTime){
-								window.location.href="seckill.html";
+								window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
 							}else{
-								window.location.href="product_details.html";
+								window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 							}		
 						}
 					}else{
-						window.location.href="product_details.html";
+						window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 					}	
 				})
 			}

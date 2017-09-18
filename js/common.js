@@ -1,6 +1,11 @@
+var uid = sessionStorage.getItem("uid");
+//var uid = 1431768973512333;
+var openid = sessionStorage.getItem("openid");
+//var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 if(!openid){
 	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 }
+
 (function(doc, window)
 {
 	// 设定rem
@@ -43,10 +48,6 @@ var util = {
         });
     }
 };
-var uid = sessionStorage.getItem("uid");
-//var uid = 1431768973512333;
-var openid = sessionStorage.getItem("openid");
-//var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 // header_nav_bar
 var isShow = true;
 $('.nav-bar-icon').on('click',function(){
@@ -91,7 +92,12 @@ function filterGoods(drinkOrPrime){
 	    });
 	})
 }
-
+//截取url参数
+function getQueryString(name) { 
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	var r = window.location.search.substr(1).match(reg); 
+	if (r != null) return unescape(r[2]); return null; 
+}
 //去掉字符串里所有空格
 function Trim(str,is_global) {
     var result;
@@ -205,8 +211,6 @@ function getdata(page,drinkOrPrime){
 				var itemID = $(this).attr('data_id');
 				var goodsIndex = $(this).index();
 				var specId = $(this).attr('spec_id');
-				window.localStorage.setItem('itemID',itemID);
-				window.localStorage.setItem('itemSpecId',specId);
 				var saleStartTime = $(this).attr('sales_start_time')==undefined?'':$(this).attr('sales_start_time');
 				var secStartTime = $(this).attr('seckill_startime')==undefined?'':$(this).attr('seckill_startime');
 				var secEndTime = $(this).attr('seckill_endtime')==undefined?'':$(this).attr('seckill_endtime');
@@ -216,22 +220,22 @@ function getdata(page,drinkOrPrime){
 				if(saleStartTime!==''||isSeckill!==''){
 					if(saleStartTime>0){
 		    			if(saleStartTime-nowTime>0){
-		    				window.location.href="pre_sale.html";
+		    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+specId;
 		    			}else{
-		    				window.location.href="product_details.html";
+		    				window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 		    			}
 		    		//跳转正常
 		    		}else if(saleStartTime<0){
-		    			window.location.href="product_details.html";
+		    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 		    		}
 		    		//跳转 0:正常详情 1:秒杀详情
 					if(isSeckill==0){
-						window.location.href="product_details.html";
+						window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 					}else if(isSeckill==1){
 						if(nowTime>secStartTime&&nowTime<secEndTime){
-							window.location.href="seckill.html";
+							window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
 						}else{
-							window.location.href="product_details.html";
+							window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 						}
 						
 					}
@@ -366,10 +370,8 @@ function jumpToGoods(obj){
 	obj.on('click',function(){
 		var itemID = $(this).attr('item_id');
 		var itemSpecId = $(this).attr('item_spec_id');
-		window.localStorage.setItem('itemID',itemID);
-		window.localStorage.setItem('itemSpecId',itemSpecId); 
 		$.post(config.goodsLsitJump,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
-			//console.log(datas);
+			console.log(datas);
 			var saleStartTime = datas.result[0].data.sales_start_time==undefined?'':datas.result[0].data.sales_start_time;
 			var nowTime = Date.parse(new Date());
 			var nowTime = Date.parse(new Date());
@@ -379,26 +381,26 @@ function jumpToGoods(obj){
 			if(saleStartTime!==''||isSeckill!==''){
 				if(saleStartTime>0){
 	    			if(saleStartTime-nowTime>0){
-	    				window.location.href="pre_sale.html";
+	    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+itemSpecId;
 	    			}else{
-	    				window.location.href="product_details.html";
+	    				window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 	    			}
 	    		//跳转正常
 	    		}else if(saleStartTime<0){
-	    			window.location.href="product_details.html";
+	    			window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 	    		}
 	    		//跳转 0:正常详情 1:秒杀详情
 				if(isSeckill==0){
-					window.location.href="product_details.html";
+					window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 				}else if(isSeckill==1){
 					if(nowTime>secStartTime&&nowTime<secEndTime){
-						window.location.href="seckill.html";
+						window.location.href="seckill.html?itemID="+itemID+"&specId="+itemSpecId;
 					}else{
-						window.location.href="product_details.html";
+						window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 					}		
 				}
 			}else{
-				window.location.href="product_details.html";
+				window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 			}	
 		})
 	})
