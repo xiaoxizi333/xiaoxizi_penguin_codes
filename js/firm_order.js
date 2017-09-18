@@ -93,9 +93,9 @@ if(cartOrBuy=='0'){
 		for(var i=0;i<obj.length;i++){
 			$('.some_desc').eq(i).html(obj[i].data.sub_name);	
 			if(obj[i].data.is_selected==1){
-				$('.choose_icon').addClass('active');				
+				$('.choose_icon').eq(i).addClass('active');				
 			}else if(obj[i].data.is_selected==0){
-				$('.choose_icon').removeClass('active');
+				$('.choose_icon').eq(i).removeClass('active');
 			}
 		}
 		//选择购物车商品
@@ -104,7 +104,7 @@ if(cartOrBuy=='0'){
 			var dataId = $(this).parents('.product_info_box').attr('data_id');
 			if($(this).hasClass('active')){
 				$.post(config.selectOrders,{'uid':uid,'order_ids':dataId,'order_type':0},function(datas){
-					console.log(datas);
+					//console.log(datas);
 					window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
 					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
 					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
