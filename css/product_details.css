@@ -12,7 +12,7 @@ body{
 	letter-spacing:0.14px;
 }
 .swiper-container-1{
-	height: 14.375rem;
+	-height: 14.375rem;
 }
 /*details*/
 .goods_det{

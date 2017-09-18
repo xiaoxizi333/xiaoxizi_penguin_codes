@@ -17,7 +17,7 @@ function addBanner(bannerData){
 		if(obj!==undefined){
 			if(picUrl&&picUrl.length>0){	
 				for(var i=0;i<obj.length;i++){	
-					bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" class="pic_for_banner" item_id="'+picUrl[i].item_id+'" item_spec_id="'+picUrl[i].item_spec_id+'" style="width: 100%;height:14.375rem"></div>';					
+					bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" class="pic_for_banner" item_id="'+picUrl[i].item_id+'" item_spec_id="'+picUrl[i].item_spec_id+'" style="width: 100%;"></div>';					
 				}
 			}	
 			$('.banner2_box').html(bannerBox);	
