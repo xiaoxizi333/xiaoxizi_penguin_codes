@@ -63,7 +63,7 @@ body{
 	background-size: 100%;
 	background-repeat: no-repeat;
 	width: 100%;
-	height: 10.625rem;	
+	-height: 10.625rem;	
 }
 .details_info .details{
 	margin-bottom: 0.9375rem;
