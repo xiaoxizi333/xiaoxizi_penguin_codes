@@ -204,13 +204,13 @@ function getdata(page,drinkOrPrime){
 				var specId = $(this).attr('spec_id');
 				window.localStorage.setItem('itemID',itemID);
 				window.localStorage.setItem('itemSpecId',specId);
-				var saleStartTime = $(this).attr('sales_start_time');
-				var secStartTime = $(this).attr('seckill_startime');
-				var secEndTime = $(this).attr('seckill_endtime');
-				var isSeckill = $(this).attr('is_seckill');
+				var saleStartTime = $(this).attr('sales_start_time')==undefined?'':$(this).attr('sales_start_time');
+				var secStartTime = $(this).attr('seckill_startime')==undefined?'':$(this).attr('seckill_startime');
+				var secEndTime = $(this).attr('seckill_endtime')==undefined?'':$(this).attr('seckill_endtime');
+				var isSeckill = $(this).attr('is_seckill')==undefined?'':$(this).attr('is_seckill');
 				var nowTime = Date.parse(new Date());
 				console.log(isSeckill)
-				if(saleStartTime||isSeckill){
+				if(saleStartTime!==''||isSeckill!==''){
 					if(saleStartTime>0){
 		    			if(saleStartTime-nowTime>0){
 		    				window.location.href="pre_sale.html";
@@ -367,13 +367,13 @@ function jumpToGoods(obj){
 		window.localStorage.setItem('itemSpecId',itemSpecId); 
 		$.post(config.goodsLsitJump,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 			//console.log(datas);
-			var saleStartTime = datas.result[0].data.sales_start_time;
+			var saleStartTime = datas.result[0].data.sales_start_time==undefined?'':datas.result[0].data.sales_start_time;
 			var nowTime = Date.parse(new Date());
 			var nowTime = Date.parse(new Date());
-			var secStartTime = datas.result[0].data.seckill_startime;
-			var secEndTime = datas.result[0].data.seckill_endtime;
-			var isSeckill = datas.result[0].data.is_seckill;
-			if(saleStartTime||isSeckill){
+			var secStartTime = datas.result[0].data.seckill_startime==undefined?'':datas.result[0].data.seckill_startime;
+			var secEndTime = datas.result[0].data.seckill_endtime==undefined?'':datas.result[0].data.seckill_endtime;
+			var isSeckill = datas.result[0].data.is_seckill==undefined?'':datas.result[0].data.is_seckill;
+			if(saleStartTime!==''||isSeckill!==''){
 				if(saleStartTime>0){
 	    			if(saleStartTime-nowTime>0){
 	    				window.location.href="pre_sale.html";

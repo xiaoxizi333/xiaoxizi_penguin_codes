@@ -7,26 +7,31 @@ var bannerData;
 	//bannerData = {'class_type':'all'};
 //}
 //banner
-$.post(config.commonBanner,bannerData,function(datas){
-	//console.log(datas);
-	var obj = datas.result[0].data.show_pic_arr;
-	var picUrl = datas.result[0].data.jump_urls;
-	var bannerBox = '';
-	if(obj!==undefined){
-		if(picUrl&&picUrl.length>0){	
-			for(var i=0;i<obj.length;i++){	
-				bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" class="pic_for_banner" item_id="'+picUrl[i].item_id+'" item_spec_id="'+picUrl[i].item_spec_id+'" style="width: 100%;height:14.375rem"></div>';					
-			}
-		}	
-		$('.banner2_box').html(bannerBox);	
-		jumpToGoods($('.pic_for_banner'));		
-	}
-	var mySwiper = new Swiper('.swiper-container', {
-		pagination : '.swiper-pagination',
-		autoplay: 3000,//可选选项，自动滑动
-		autoplayDisableOnInteraction:false//使滑动效果不停止
+addBanner(bannerData);
+function addBanner(bannerData){
+	$.post(config.commonBanner,bannerData,function(datas){
+		//console.log(datas);
+		var obj = datas.result[0].data.show_pic_arr;
+		var picUrl = datas.result[0].data.jump_urls;
+		var bannerBox = '';
+		if(obj!==undefined){
+			if(picUrl&&picUrl.length>0){	
+				for(var i=0;i<obj.length;i++){	
+					bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" class="pic_for_banner" item_id="'+picUrl[i].item_id+'" item_spec_id="'+picUrl[i].item_spec_id+'" style="width: 100%;height:14.375rem"></div>';					
+				}
+			}	
+			$('.banner2_box').html(bannerBox);	
+			jumpToGoods($('.pic_for_banner'));		
+		}
+		var mySwiper = new Swiper('.swiper-container', {
+			pagination : '.swiper-pagination',
+			autoplay: 3000,//可选选项，自动滑动
+			autoplayDisableOnInteraction:false,//使滑动效果不停止
+			observer:true
+		})
 	})
-})
+}
+
 var firstItem = window.localStorage.getItem('tabId');
 $.post(config.allItemList,{'item_class':firstItem},function(datas){
 	//console.log(datas);
@@ -57,6 +62,9 @@ $.post(config.indexItemClassList,function(datas){
 	}
 	//点击搜索
 	$('.sort_tab li').on('tap',function(){
+		window.localStorage.setItem('tabId',$(this).attr('id'));
+		bannerData = {'class_id':$(this).attr('id')};
+		addBanner(bannerData);
 		$('.SKU_details').empty();
 		$('.product_tab li').removeClass('active');
 		var itemIndex = $(this).index();
@@ -170,10 +178,10 @@ function searchItems(passData){
 					var specId = detailsObj[goodsIndex].good_item_spec_id?detailsObj[goodsIndex].good_item_spec_id:0;
 					window.localStorage.setItem('itemID',itemID);
 					window.localStorage.setItem('itemSpecId',specId);
-					var saleStartTime = detailsObj[goodsIndex].data.sales_start_time;
-					var secStartTime = detailsObj[goodsIndex].data.seckill_startime;
-					var secEndTime = detailsObj[goodsIndex].data.seckill_endtime;
-					var isSeckill = detailsObj[goodsIndex].data.is_seckill;
+					var saleStartTime = detailsObj[goodsIndex].data.sales_start_time==undefined?'':detailsObj[goodsIndex].data.sales_start_time;
+					var secStartTime = detailsObj[goodsIndex].data.seckill_startime==undefined?'':detailsObj[goodsIndex].data.seckill_startime;
+					var secEndTime = detailsObj[goodsIndex].data.seckill_endtime==undefined?'':detailsObj[goodsIndex].data.seckill_endtime;
+					var isSeckill = detailsObj[goodsIndex].data.is_seckill==undefined?'':detailsObj[goodsIndex].data.is_seckill;
 					var nowTime = Date.parse(new Date());
 					if(saleStartTime||isSeckill){
 						if(saleStartTime>0){
