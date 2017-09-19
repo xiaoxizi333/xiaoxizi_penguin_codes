@@ -46,19 +46,21 @@ header{
 	padding-left: 0!important;
 }
 .type_tab ul li a{
-	width: 3.125rem;
+	padding-left: 0.3125rem;
+	padding-right: 0.3125rem;
 	height: 3.125rem;
+	width: 3.625rem;
 	display: block;
 	line-height: 3.125rem;
 	text-align: center;
 	color:#fff;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
-	margin-right: 2.8125rem;
+	margin-right: 2.4rem;
 	margin-left: 1.875rem;
 	margin-bottom: 1.5rem;
-	overflow: hidden;
 	float: left;
+	font-size: 0.75rem;
 }
 /*banner2*/
 .banner_swiper{
@@ -191,9 +193,13 @@ header{
 	bottom: 0;
 	left: 0;
 	z-index: 100000;
-}
-.seckill_mask img{
+	height: 4.21875rem;
 	width: 100%;
+	background-image: url(../img/seckill_mask.png);
+	background-repeat: no-repeat;
+	background-position:left top;
+	background-size: 100% 100%;
+	opacity: 0.8;
 }
 /*通栏文字*/
 .tlwz{

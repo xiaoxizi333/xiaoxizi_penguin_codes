@@ -27,6 +27,7 @@ header{
 	padding-left: 0.875rem;
 	padding-right: 0.875rem;
 	margin-top: 1.625rem;
+	text-align: center;
 }
 .SKU_details .details{
 	background-image:url(../img/bg_product.png); 

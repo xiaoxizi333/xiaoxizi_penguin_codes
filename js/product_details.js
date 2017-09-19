@@ -318,9 +318,12 @@ $('.hide_icon').on('tap',function(){
 isOnline($('.communicate'),'customer_sevices_1.png','cusomer_sevices.png');
 //banner广告体系
 $.post(config.hardAd,{'location_type':'good_detail_banner'},function(datas){
-	//console.log(datas);
+	console.log(datas);
 	if(datas.result.length&&datas.result[0].data.ad_content){
-		$('.vip_banner').html('<a href="'+datas.result[0].data.jump_url+'"><img src="'+datas.result[0].data.ad_content+'" style="width:100%"></a>');
+		var ItemId = datas.result[0].data.jump_url[0].item_id;
+		var specId = datas.result[0].data.jump_url[0].item_spec_id;
+		$('.vip_banner').html('<img class="advertisement_banner" item_id="'+ItemId+'" item_spec_id="'+specId+'" src="'+datas.result[0].data.ad_content+'" style="width:100%">');
+		jumpToGoods($('.advertisement_banner'));
 	}else{
 		$('.vip_banner').html('');
 	}

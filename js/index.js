@@ -154,7 +154,7 @@ $.post(config.indexModuleList,function(datas){
 			    success:function(datas){
 			    	//console.log(datas);
 			    	if(datas.error_code==0){
-						$('.module_box').append($('<div class="seckill"><div class="seckill_time clearfix"><span class="pull-left">限时抢购 <span style="font-family: "PingFangSC-Light";"><em>Wine Seckill</em></span></span><span class="pull-right">还剩 <span id="caculate_time'+seckillIndex+'"></span> 分钟</span></div><div class="swiper-container"><div class="swiper-wrapper"></div></div><div class="seckill_mask"><img src="img/seckill_mask.png"></div></div>'));
+						$('.module_box').append($('<div class="seckill"><div class="seckill_time clearfix"><span class="pull-left">限时抢购 <span style="font-family: "PingFangSC-Light";"><em>Wine Seckill</em></span></span><span class="pull-right">还剩 <span id="caculate_time'+seckillIndex+'"></span> 分钟</span></div><div class="swiper-container"><div class="swiper-wrapper"></div></div><div class="seckill_mask"></div></div>'));
 						var obj = datas.result.list[0].item_list;
 						var seckillPic = '';
 						var endTime = datas.result.list[0].seckill_end_time;

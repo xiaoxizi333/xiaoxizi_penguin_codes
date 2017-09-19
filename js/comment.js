@@ -1,4 +1,8 @@
 var user_order_id = window.localStorage.getItem('user_order_id');
+var spinnerH = $('.spinner').height();
+var spinnerW = $('.spinner').width();
+$('.spinner').css({'position':'fixed','left':'50%','marginLeft':-spinnerW/2+'px','top':'50%','marginTop':-spinnerH/2+'px'})
+
 //显示评论商品图片
 $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 	//console.log(datas);
@@ -44,6 +48,9 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		    enctype: 'multipart',
 		    data: formData,
 		    cache:false,
+		    beforeSend:function(){
+		      	$('.spinner_mask').show();
+		    },
 		    success:function(data){
 		    	//console.log(data)
 		    	try{
@@ -58,7 +65,8 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 					$(this).parent('.pic_box').remove();
 					$('.filebox').eq(showAdd).show();
 			    })
-		    }
+		    },
+		    complete:function(){$('.spinner_mask').hide()},
 		})
 	})
 	//评价
