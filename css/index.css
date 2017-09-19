@@ -149,16 +149,24 @@ header{
 	height: 11.875rem;
 }
 /*go_top*/
-.go_top{
+.go_top,.customer_service{
 	width: 3.75rem;
 	height: 3.75rem;
 	position: fixed;
-	bottom: 1.125rem;
 	right: 1.125rem;
-	background: url(../img/all_top.png) no-repeat center center;
-	background-size: 100% 100%;
+	background-size: 3.75rem 3.75rem;
+	background-repeat: no-repeat;
+	background-position: center center;
 	z-index: 100000;
-	opacity: 0;
+	display: none;
+}
+.go_top{
+	bottom: 5.5rem;
+	background-image: url(../img/all_top.png);
+	background-size: 4.25rem 4.25rem;
+}
+.customer_service{
+	bottom: 1.125rem;
 }
 /*seckill*/
 .seckill{

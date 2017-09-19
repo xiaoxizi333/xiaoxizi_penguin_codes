@@ -309,6 +309,12 @@ $('.hide_icon').on('tap',function(){
 	$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
 	$('.mask').fadeOut(1000);
 })
+isOnline($('.communicate'),'customer_sevices_1.png','cusomer_sevices.png');
+//banner广告体系
+$.post(config.hardAd,{'location_type':'good_detail_banner'},function(datas){
+	//console.log(datas);
+	$('.vip_banner').html('<a href="'+datas.result[0].data.jump_url+'"><img src="'+datas.result[0].data.ad_content+'" style="width:100%"></a>');
+})
 function switchDate2(time){
 	var timeStr = new Date(time);
 	var month = timeStr.getMonth()+1;

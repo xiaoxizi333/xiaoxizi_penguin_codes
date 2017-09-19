@@ -65,4 +65,5 @@ var config = {
 	trackExpress:'http://101.201.115.31:14445/admin/order/track_express/find.json',
 	userProfileUpdate:'http://101.201.115.31:14445/zjds/user_profile/update.json',
 	skuno:'http://101.201.115.31:14445/web/find_item_by_skuno.json',
+	hardAd:'http://101.201.115.31:14445/web/hard_ad/find.json',
 }

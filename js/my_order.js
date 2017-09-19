@@ -1,7 +1,7 @@
 //订单列表
 var pageNm = 1;
 dividePage(pageNm);
-
+isOnline($('.communicate'),'customer_sevices_1.png','cusomer_sevices.png');
 //分页
 function dividePage(page){
 	 $.ajax(
@@ -13,7 +13,7 @@ function dividePage(page){
       	$('.spinner').show();
       },
       success:function(datas){
-		//console.log(datas);
+		console.log(datas);
 		var obj = datas.result.list;
 		var realOrderList = '',
 			state_class = '',
@@ -265,19 +265,19 @@ function dividePage(page){
 				}
 			})
 		})
-		var whichPrice;	
-		isVip();	
+		var whichPrice;		
 		for(var i=0;i<obj.length;i++){
 			var listObj = datas.result.list[i].order;
 			for(var j=0;j<listObj.length;j++){
 				var listData = listObj[j].data;
 				var descData = listObj[j].data.sub_name;
-				if(isVipPrice){
+				var is_vip = listObj[j].data.is_vip;
+				var is_seckill = listObj[j].data.is_seckill;
+				if(is_vip==1||is_seckill==1){
 					whichPrice = listData.real_price;
 				}else{
 					whichPrice = listData.public_price;
 				}
-
 				realOrderList = '<li class="clearfix">'+
 									'<div class="product_photo pull-left" style="background-image:url('+listData.title_pics[0]+');background-position: center center;background-size: auto 100%;"></div>'+
 									'<div class="description pull-left">'+

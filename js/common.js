@@ -405,7 +405,16 @@ function jumpToGoods(obj){
 		})
 	})
 }
-
+//判断客服颜色
+function isOnline(obj,url_1,url_2){
+	var now = new Date();
+	var h = now.getHours();
+	if(h>1&&h<7){
+		obj.css({'backgroundImage':'url(img/'+url_1+')'});
+	}else{
+		obj.css({'backgroundImage':'url(img/'+url_2+')'});
+	}
+}
 
 
 

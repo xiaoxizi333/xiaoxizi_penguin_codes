@@ -288,6 +288,7 @@ $.post(config.indexCoupon,{},function(datas){
 		}
 	})
 })
+isOnline($('.customer_service'),'service_normal@2x.png','service_selected@2x.png');
 //图文、文字点击跳转
 function jump(obj){
 	$(obj).on('click',function(){
@@ -307,9 +308,9 @@ function jump(obj){
 //返回顶部
 $(document).scroll(function(){
 	if($(document).scrollTop()>=50){
-	  $('.go_top').css({'opacity':1,'transition':'1s'});
+	  $('.go_top, .customer_service').fadeIn();
 	}else{
-	  $('.go_top').css({'opacity':0,'transition':'1s'});
+	  $('.go_top, .customer_service').fadeOut();
 	}
 })
 $('.go_top').click(function(){
