@@ -1,7 +1,7 @@
 //banner
 var itemID = getQueryString('itemID')*1;
 var itemSpecId = getQueryString('itemSpecId')*1;
-console.log(itemID)
+//console.log(itemID)
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	//console.log(datas);
 	var objPic = datas.result.item_info[0].data.title_pics;
@@ -174,49 +174,55 @@ function addDatas(pageNm,comments){
 //猜你喜欢
 $.post(config.guessUouLike,{'location_type':'good_detail'},function(datas){
 	//console.log(datas);
-	var obj = datas.result.list[0].items_list;
-	var guessHtml = '';
-	for(var i=0;i<obj.length;i++){
-		var dataId = obj[i].good_item_id;
-		var specId = obj[i].good_item_spec_id?obj[i].good_item_spec_id:0;
-		guessHtml = '<img src="'+obj[i].good_item_pic+'" data_id="'+dataId+'" specId="'+specId+'">';
-		$('.love_banner').append(guessHtml);
-		$('.love_banner>img').off('click').on('click',function(){
-			var itemID = $(this).attr('data_id');
-			var goodsIndex = $(this).index();
-			var specId = $(this).attr('specId');
-			var saleStartTime = obj[goodsIndex].item[0].sales_start_time;
-			var secStartTime = obj[goodsIndex].item[0].seckill_startime;
-			var secEndTime = obj[goodsIndex].item[0].seckill_endtime;
-			var isSeckill = obj[goodsIndex].item[0].is_seckill;
-			var nowTime = Date.parse(new Date());
-			//console.log(isSeckill)
-			if(saleStartTime||isSeckill){
-				if(saleStartTime>0){
-	    			if(saleStartTime-nowTime>0){
-	    				window.location.href="pre_sale.html";
-	    			}else{
-	    				window.location.href="product_details.html";
-	    			}
-	    		//跳转正常
-	    		}else if(saleStartTime<0){
-	    			window.location.href="product_details.html";
-	    		}
-	    		//跳转 0:正常详情 1:秒杀详情
-				if(isSeckill==0){
-					window.location.href="product_details.html";
-				}else if(isSeckill==1){
-					if(nowTime>secStartTime&&nowTime<secEndTime){
-						window.location.href="seckill.html";
-					}else{
-						window.location.href="product_details.html";
-					}					
-				}
-			}else{
-				window.location.href="product_details.html";
-			}					
-		})
+	if(datas.result.list.length&&datas.result.list[0].items_list.length){
+		$('.guess').show();
+		var obj = datas.result.list[0].items_list;
+		var guessHtml = '';
+		for(var i=0;i<obj.length;i++){
+			var dataId = obj[i].good_item_id;
+			var specId = obj[i].good_item_spec_id?obj[i].good_item_spec_id:0;
+			guessHtml = '<img src="'+obj[i].good_item_pic+'" data_id="'+dataId+'" specId="'+specId+'">';
+			$('.love_banner').append(guessHtml);
+			$('.love_banner>img').off('click').on('click',function(){
+				var itemID = $(this).attr('data_id');
+				var goodsIndex = $(this).index();
+				var specId = $(this).attr('specId');
+				var saleStartTime = obj[goodsIndex].item[0].sales_start_time;
+				var secStartTime = obj[goodsIndex].item[0].seckill_startime;
+				var secEndTime = obj[goodsIndex].item[0].seckill_endtime;
+				var isSeckill = obj[goodsIndex].item[0].is_seckill;
+				var nowTime = Date.parse(new Date());
+				//console.log(isSeckill)
+				if(saleStartTime||isSeckill){
+					if(saleStartTime>0){
+		    			if(saleStartTime-nowTime>0){
+		    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+specId;
+		    			}else{
+		    				window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+		    			}
+		    		//跳转正常
+		    		}else if(saleStartTime<0){
+		    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+		    		}
+		    		//跳转 0:正常详情 1:秒杀详情
+					if(isSeckill==0){
+						window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+					}else if(isSeckill==1){
+						if(nowTime>secStartTime&&nowTime<secEndTime){
+							window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
+						}else{
+							window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+						}					
+					}
+				}else{
+					window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+				}					
+			})
+		}
+	}else{
+		$('.guess').hide();
 	}
+	
 })
 //share
 $('.share').on('tap',function(){
@@ -313,7 +319,11 @@ isOnline($('.communicate'),'customer_sevices_1.png','cusomer_sevices.png');
 //banner广告体系
 $.post(config.hardAd,{'location_type':'good_detail_banner'},function(datas){
 	//console.log(datas);
-	$('.vip_banner').html('<a href="'+datas.result[0].data.jump_url+'"><img src="'+datas.result[0].data.ad_content+'" style="width:100%"></a>');
+	if(datas.result.length&&datas.result[0].data.ad_content){
+		$('.vip_banner').html('<a href="'+datas.result[0].data.jump_url+'"><img src="'+datas.result[0].data.ad_content+'" style="width:100%"></a>');
+	}else{
+		$('.vip_banner').html('');
+	}
 })
 function switchDate2(time){
 	var timeStr = new Date(time);

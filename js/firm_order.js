@@ -309,7 +309,6 @@ if(cartOrBuy=='0'){
 						}
 					}else{
 						showTips(pay.error_msg);
-						window.location.href="index.html"
 					}
 				})
 			}

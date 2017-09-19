@@ -50,7 +50,7 @@ $('.vip_order').on('tap',function(){
 })
 //商品模块化
 $.post(config.indexModuleList,function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result;
 	var listIndex = 0;
 	var seckillIndex = 0;
