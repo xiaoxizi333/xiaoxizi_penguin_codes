@@ -69,7 +69,7 @@ function searchItem(){
 				})
 			}
 		}else{
-			$('.SKU_details').html('<img src="img/penguinnn_search2@2x.png">');
+			$('.SKU_details').html('<img src="img/penguinnn_search2@2x.png" style="width:18.75rem">');
 		}
       },
       complete:function(){$('.spinner').hide()},
