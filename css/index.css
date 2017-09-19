@@ -210,9 +210,9 @@ header{
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
 	background-color: #fff;
+	border-bottom: 1px solid rgba(151,151,151,.2);
 }
 .tlwz>div{
-	border-bottom: 1px solid rgba(151,151,151,.2);
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
 }
@@ -229,4 +229,9 @@ header{
 	box-sizing:border-box;
 	display: inline-block;
 }
-
+.module_box > div{
+	margin-bottom: 1px;
+}
+.module_box > div:last-chlid{
+	margin-bottom: none;
+}
