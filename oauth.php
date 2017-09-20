@@ -15,7 +15,7 @@ if($openid && $access_token){
 	}
 	$param = array();
 	$param['openid'] = $openid;
-	$result = httpPost('http://101.201.115.31:14445/web/get_user_info/by_open_id.json', $param);
+	$result = httpPost('http://api.qietuan.org/web/get_user_info/by_open_id.json', $param);
 	$result = json_decode($result,true);
 	if (! empty ($result['result'])) {
 		echo '<script>sessionStorage.setItem("uid", "'.$result['result'][0]['id'].'");</script>';

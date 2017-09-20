@@ -2,41 +2,45 @@
 $.post(config.classify,{'is_add_best_ares':0,'limit':6},function(data){
 	//console.log(data);
 	var obj = data.result;
-	var typeTab = '<ul class="list-unstyled list-inline">'+
-						'<li class="clearfix"><a href="all-products-classify.html" style="background-image: url(img/home_classify_1.png)">'+obj[0].data.class_name+'</a></li><li class="clearfix">'+
-						'<a href="all-products-classify.html" style="background-image: url(img/home_classify_2.png)">'+obj[1].data.class_name+'</a></li><li class="clearfix">'+
-						'<a href="all-products-classify.html" style="background-image: url(img/home_classify_3.png)">'+obj[2].data.class_name+'</a></li><li class="clearfix">'+
-						'<a href="all-products-classify.html" style="background-image: url(img/home_classify_4.png)">'+obj[3].data.class_name+'</a></li><li class="clearfix">'+
-						'<a href="all-products-classify.html" style="background-image: url(img/home_classify_5.png)">'+obj[4].data.class_name+'</a></li><li class="clearfix">'+
-						'<a href="all-products-classify.html" style="background-image: url(img/home_classify_6.png)">'+obj[5].data.class_name+'</a></li class="clearfix">'+
-					'</ul>';
-	$('.type_tab').html(typeTab);
-	$('.type_tab ul li').on('tap',function(){
-		var index = $(this).index();
-		window.localStorage.setItem('tabId',obj[index].id);
-		window.localStorage.setItem('tabOrList','0');
-	})
+	if(obj.length){
+		var typeTab = '<ul class="list-unstyled list-inline">'+
+							'<li class="clearfix"><a href="all-products-classify.html" style="background-image: url(img/home_classify_1.png)">'+obj[0].data.class_name+'</a></li><li class="clearfix">'+
+							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_2.png)">'+obj[1].data.class_name+'</a></li><li class="clearfix">'+
+							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_3.png)">'+obj[2].data.class_name+'</a></li><li class="clearfix">'+
+							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_4.png)">'+obj[3].data.class_name+'</a></li><li class="clearfix">'+
+							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_5.png)">'+obj[4].data.class_name+'</a></li><li class="clearfix">'+
+							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_6.png)">'+obj[5].data.class_name+'</a></li class="clearfix">'+
+						'</ul>';
+		$('.type_tab').html(typeTab);
+		$('.type_tab ul li').on('tap',function(){
+			var index = $(this).index();
+			window.localStorage.setItem('tabId',obj[index].id);
+			window.localStorage.setItem('tabOrList','0');
+		})
+	}
 })
 //banner
 $.post(config.commonBanner,{'class_type':'index'},function(data){
 	//console.log(data);
-	var obj = data.result[0].data.show_pic_arr;
-	var picUrl = data.result[0].data.jump_urls;
-	var bannerBox = '';
-	if(obj!==undefined){
-		if(picUrl&&picUrl.length>0){	
-			for(var i=0;i<obj.length;i++){
-				bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" class="pic_for_banner" item_id="'+picUrl[i].item_id+'" item_spec_id="'+picUrl[i].item_spec_id+'"  style="width: 100%;height:14.25rem"></div>';			
+	if(data.result.length&&data.result[0].data.show_pic_arr){
+		var obj = data.result[0].data.show_pic_arr;
+		var picUrl = data.result[0].data.jump_urls;
+		var bannerBox = '';
+		if(obj!==undefined){
+			if(picUrl&&picUrl.length>0){	
+				for(var i=0;i<obj.length;i++){
+					bannerBox += ' <div class="swiper-slide"><img src="'+obj[i]+'" class="pic_for_banner" item_id="'+picUrl[i].item_id+'" item_spec_id="'+picUrl[i].item_spec_id+'"  style="width: 100%;height:14.25rem"></div>';			
+				}
 			}
+			$('.banner2_box').html(bannerBox);
+			jumpToGoods($('.pic_for_banner'));		
 		}
-		$('.banner2_box').html(bannerBox);
-		jumpToGoods($('.pic_for_banner'));		
+		var mySwiper = new Swiper('.banner_contain .swiper-container', {
+			pagination : '.page_box',
+			autoplay: 3000,//可选选项，自动滑动
+			autoplayDisableOnInteraction:false//使滑动效果不停止
+		});
 	}
-	var mySwiper = new Swiper('.banner_contain .swiper-container', {
-		pagination : '.page_box',
-		autoplay: 3000,//可选选项，自动滑动
-		autoplayDisableOnInteraction:false//使滑动效果不停止
-	});
 })
 //搜索
 $('#search').on('keydown',function(e){
