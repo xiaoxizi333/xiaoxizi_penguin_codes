@@ -1,5 +1,8 @@
 var user_order_id = window.localStorage.getItem('user_order_id')*1;
 isVip();
+var spinnerH = $('.spinner').height();
+var spinnerW = $('.spinner').width();
+$('.spinner').css({'position':'fixed','left':'50%','marginLeft':-spinnerW/2+'px','top':'50%','marginTop':-spinnerH/2+'px'})
 $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 	//console.log(datas);
 	var orders = datas.result.list[0].order;
@@ -44,10 +47,16 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		    enctype: 'multipart',
 		    data: formData,
 		    cache:false,
+		    beforeSend:function(){
+		      	$('.spinner_mask').show();
+		    },
 		    success:function(data){
-		    	//console.log(data)
-		    	addEvidence(data.result.thumbnail_pic,data.result.original_pic);
-		    }
+		    	console.log(data);
+		    	if(data.error_code==0){
+					addEvidence(data.result.thumbnail_pic,data.result.original_pic);
+		    	}    	
+		    },
+		    complete:function(){$('.spinner_mask').hide()},
 		})
 	})
 	function addEvidence(thumbnail_pic,original_pic){

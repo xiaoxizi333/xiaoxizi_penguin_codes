@@ -52,19 +52,21 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 		      	$('.spinner_mask').show();
 		    },
 		    success:function(data){
-		    	//console.log(data)
-		    	try{
-		    		$('.fileList').eq(index).append('<div class="pic_box" style="width:5rem;height:5rem;"><div class="cross_pic"></div><img src="'+data.result.thumbnail_pic+'" origin_src="'+data.result.original_pic+'" style="width:100%;height:100%;"></div>');
-		    	}catch(err){};
-		    	if($('.fileList').eq(index).find('.pic_box').length>=5){
-					$('.filebox').eq(index).hide();
-				}
-				//点击x取消图片
-				$('.cross_pic').off('tap').on('tap',function(){
-					var showAdd = $(this).parent('.pic_box').parent('.fileList').parent('.photos').attr('data_index');
-					$(this).parent('.pic_box').remove();
-					$('.filebox').eq(showAdd).show();
-			    })
+		    	//console.log(data);
+		    	if(data.error_code==0){
+		    		try{
+			    		$('.fileList').eq(index).append('<div class="pic_box" style="width:5rem;height:5rem;"><div class="cross_pic"></div><img src="'+data.result.thumbnail_pic+'" origin_src="'+data.result.original_pic+'" style="width:100%;height:100%;"></div>');
+			    	}catch(err){};
+			    	if($('.fileList').eq(index).find('.pic_box').length>=5){
+						$('.filebox').eq(index).hide();
+					}
+					//点击x取消图片
+					$('.cross_pic').off('tap').on('tap',function(){
+						var showAdd = $(this).parent('.pic_box').parent('.fileList').parent('.photos').attr('data_index');
+						$(this).parent('.pic_box').remove();
+						$('.filebox').eq(showAdd).show();
+				    })
+		    	}
 		    },
 		    complete:function(){$('.spinner_mask').hide()},
 		})

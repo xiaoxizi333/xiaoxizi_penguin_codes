@@ -84,7 +84,7 @@ function dividePage(page){
 												'<span>共'+orderData.item_total_count+'件</span><span class="counts">合计 <span class="sum_money">¥'+orderData.total_price+'</span></span>'+
 											'</div>'+
 											'<div style="height:auto;">'+
-												'<span class="state_btns delete_order">删除订单</span><span class="state_btns '+state_class+'">'+state_txt+'</span><span class="state_btns check_state">查看动态</span>'+
+												'<span class="state_btns delete_order">删除订单</span><span class="state_btns '+state_class+'">'+state_txt+'</span><span class="state_btns check_state">查看动态</span><span class="state_btns refunds_btn">申请退款</span>'+
 												'<div style="clear:both"></div>'+
 											'</div>'+
 										'</div>'+
@@ -94,8 +94,12 @@ function dividePage(page){
 			$('.order_box').append(orderBox);
 			$('.no_btn').hide();
 			switch(stateForOrder){
+				case 2:
+					$('.refunds_btn').eq(i+(20*(page-1))).show();
+					break;
 				case 3:
 					$('.check_state').eq(i+(20*(page-1))).show();
+					$('.refunds_btn').eq(i+(20*(page-1))).show();
 					break;
 				case 5:
 					$('.delete_order').eq(i+(20*(page-1))).show();
@@ -115,7 +119,7 @@ function dividePage(page){
 			})
 		})
 		//退款
-		$('.finish_deal, .refuse_refunde').on('click',function(){
+		$('.finish_deal, .refuse_refunde, .refunds_btn').on('click',function(){
 			var user_order_id = $(this).parents('.order_list_box').attr('data_id');
 			window.localStorage.setItem('user_order_id',user_order_id);
 			window.location.href="apply_for_refund.html";

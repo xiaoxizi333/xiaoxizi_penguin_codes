@@ -17,7 +17,8 @@ $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 	}
 	$('.order_box').html(html);
 	$('.sum_refund').html(userOderObj.refund_value);
-	$('.refund_reason').html(userOderObj.refund_desc);
+	var reasonForRefund = userOderObj.refund_desc?userOderObj.refund_desc:'无';
+	$('.refund_reason').html(reasonForRefund);
 	var RefundTimeStr = userOderObj.refund_time;
 	var applyForRefund = new Date(RefundTimeStr);
 	var rH = applyForRefund.getHours();

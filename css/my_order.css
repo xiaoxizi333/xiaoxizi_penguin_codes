@@ -52,12 +52,7 @@ body{
 	color:#c46566;
 	font-size: 1.125rem;
 }
-.check_state{
-	margin-right: 0.625rem;
-	display: none;
-}
-.delete_order{
-	margin-left: 0.625rem;
+.check_state,.delete_order,.refunds_btn{
 	display: none;
 }
 .state_btns{
@@ -68,7 +63,8 @@ body{
 	background:#c46566;
 	float:right;
 	color: #fff;
-	border-radius: 2px;	
+	border-radius: 2px;
+	margin-left: 0.625rem;	
 }
 .customer_service{
 	padding-left: 1.25rem;
