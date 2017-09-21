@@ -151,6 +151,7 @@ $('.shopping_icon').off('tap').on('tap',function(){
 				showTips('您的购物车还没有商品哦，赶快选购吧～')
 			}else{
 				window.localStorage.setItem('jump_btn','0');
+				window.localStorage.setItem('product_type','goodsInCart');
 				window.location.href="firm_order.html";
 			}
 		})
