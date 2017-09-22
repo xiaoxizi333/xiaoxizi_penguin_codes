@@ -66,4 +66,5 @@ var config = {
 	userProfileUpdate:'http://api.qietuan.org/zjds/user_profile/update.json',
 	skuno:'http://api.qietuan.org/web/find_item_by_skuno.json',
 	hardAd:'http://api.qietuan.org/web/hard_ad/find.json',
+	wxShare:'http://api.qietuan.org/util/wechat/get_signature.json',
 }

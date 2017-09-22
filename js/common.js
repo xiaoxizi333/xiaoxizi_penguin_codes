@@ -2,10 +2,6 @@ var uid = sessionStorage.getItem("uid");
 //var uid = 1431768973512333;
 var openid = sessionStorage.getItem("openid");
 //var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
-if(!openid){
-	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
-}
-
 (function(doc, window)
 {
 	// 设定rem
@@ -144,26 +140,38 @@ function switchDate(time,mark){
 
 //跳转购物车
 $('.shopping_icon').off('tap').on('tap',function(){
-	if(uid){
-		$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
-			console.log(datas);
-			if(datas.result.order.length==0){
-				showTips('您的购物车还没有商品哦，赶快选购吧～')
-			}else{
-				window.localStorage.setItem('jump_btn','0');
-				window.localStorage.setItem('product_type','goodsInCart');
-				window.location.href="firm_order.html";
-			}
-		})
+	if(!openid){
+		window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 	}else{
-		window.location.href="register.html"
+		if(uid){
+			$.post(config.shoppingCartShow,{'order_type':0,'uid':uid},function(datas){
+				//console.log(datas);
+				if(datas.error_code==0){
+					if(datas.result.order.length==0){
+						showTips('您的购物车还没有商品哦，赶快选购吧～')
+					}else{
+						window.localStorage.setItem('jump_btn','0');
+						window.localStorage.setItem('product_type','goodsInCart');
+						window.location.href="firm_order.html";
+					}
+				}else{
+					showTips(datas.error_msg)
+				}
+			})
+		}else{
+			window.location.href="register.html"
+		}
 	}
 })
 $('.personal_icon').on('tap',function(){
-	if(uid){
-		window.location.href="personal.html"
+	if(!openid){
+		window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 	}else{
-		window.location.href="register.html"
+		if(uid){
+			window.location.href="personal.html"
+		}else{
+			window.location.href="register.html"
+		}
 	}
 })
 //isVip
