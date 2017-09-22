@@ -1,7 +1,7 @@
-//var uid = sessionStorage.getItem("uid");
-var uid = 1431768973512333;
-//var openid = sessionStorage.getItem("openid");
-var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
+var uid = sessionStorage.getItem("uid");
+//var uid = 1431768973512333;
+var openid = sessionStorage.getItem("openid");
+//var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 (function(doc, window)
 {
 	// 设定rem
