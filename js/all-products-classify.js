@@ -68,7 +68,7 @@ $.post(config.indexItemClassList,function(datas){
 		//console.log(typeof state)
 		//console.log(state)
 		if(state){
-			if(state == '[1379545677630329]'){
+			if(state == '[1443230295066968]'){
 				state = JSON.parse(state);
 				passData = {'item_class':itemClass,'tag_id_array':state};
 			}else{
@@ -95,8 +95,8 @@ $('.filter_tab li').on('tap',function(){
 		sortState = JSON.stringify(sortState); 
 		window.localStorage.setItem('state',sortState);
 	}else if(itemIndex==1){
-		passData = {'item_class':itemClass,'tag_id_array':[1379545677630329]};
-		var sortState = [1379545677630329];
+		passData = {'item_class':itemClass,'tag_id_array':[1443230295066968]};
+		var sortState = [1443230295066968];
 		sortState = JSON.stringify(sortState); 
 		window.localStorage.setItem('state',sortState);
 	}else if(itemIndex==2){
@@ -126,7 +126,7 @@ $.post(config.tagList,function(datas){
 		var sortId = $(this).attr('id')*1;
 		sortState2[1] = JSON.parse(sortId);
 		if(sortState){
-			if(sortState == '[1379545677630329]'){
+			if(sortState == '[1443230295066968]'){
 				passData = {'item_class':itemClass,'tag_id_array':sortState2};
 			}else{
 				var sortNum = JSON.parse(sortState);

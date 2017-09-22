@@ -1,7 +1,7 @@
-var uid = sessionStorage.getItem("uid");
-//var uid = 1431768973512333;
-var openid = sessionStorage.getItem("openid");
-//var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
+//var uid = sessionStorage.getItem("uid");
+var uid = 1431768973512333;
+//var openid = sessionStorage.getItem("openid");
+var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 (function(doc, window)
 {
 	// 设定rem
@@ -65,7 +65,7 @@ function filterGoods(drinkOrPrime){
 		if(whichCondition==0){
 			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.sales_count":"desc"}};
 		}else if(whichCondition==1){
-			passData = {'drink_or_prime':drinkOrPrime,'tag_id_array':[1379545677630329]};
+			passData = {'drink_or_prime':drinkOrPrime,'tag_id_array':[1443230295066968]};
 		}else if(whichCondition==2){
 			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.published_at":"desc"}};
 		}
