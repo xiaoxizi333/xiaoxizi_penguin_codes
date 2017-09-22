@@ -35,8 +35,97 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		}
 	}
 	$('.det_price').html(priceHtml);
-	var shareDesc = obj.name+' '+$('.vip_price').html();
-	shareToFriends(obj.name,shareDesc,window.location.href,datas.result.item_info[0].data.title_pics[0]);
+	$.post(config.wxShare,{'url':location.href.split('#')[0]},function(data){
+		wx.config({
+		    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+		    appId: 'wx795992462b631e70', // 必填，公众号的唯一标识
+		    timestamp: data.result.timestamp, // 必填，生成签名的时间戳
+		    nonceStr: data.result.nonceStr, // 必填，生成签名的随机串
+		    signature: data.result.signature,// 必填，签名，见附录1
+		    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+		});
+	});
+	var shareTitle = obj.name;
+	var shareLink = window.location.href;
+	var shareDesc = shareTitle+' '+$('.vip_price').html();
+	var shareImg = datas.result.item_info[0].data.title_pics[0];
+	wx.ready(
+		function(){
+			wx.onMenuShareTimeline({
+			    title: shareTitle, // 分享标题
+			    link: shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			    imgUrl: shareImg, // 分享图标
+			    success: function () { 
+			        // 用户确认分享后执行的回调函数
+			       	showError('分享成功！');
+			    },
+			    cancel: function () { 
+			        // 用户取消分享后执行的回调函数
+			        showError('分享取消！');
+			    }
+			});
+			wx.onMenuShareAppMessage({
+			    title: shareTitle, // 分享标题
+			    desc: shareDesc, // 分享描述
+			    link: shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			    imgUrl: shareImg, // 分享图标
+			    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+			    success: function () { 
+			        // 用户确认分享后执行的回调函数
+			        showError('分享成功！');
+			    },
+			    cancel: function () { 
+			        // 用户取消分享后执行的回调函数
+			        showError('分享取消！');
+			    }
+			});
+			wx.onMenuShareQQ({
+			    title: shareTitle, // 分享标题
+			    desc: shareDesc, // 分享描述
+			    link: shareLink, // 分享链接
+			    imgUrl: shareImg, // 分享图标
+			    success: function () { 
+			       // 用户确认分享后执行的回调函数
+			       showError('分享成功！');
+			    },
+			    cancel: function () { 
+			       // 用户取消分享后执行的回调函数
+			       showError('分享取消！');
+			    }
+			});
+			wx.onMenuShareWeibo({
+			    title: shareTitle, // 分享标题
+			    desc: shareDesc, // 分享描述
+			    link: shareLink, // 分享链接
+			    imgUrl: shareImg, // 分享图标
+			    success: function () { 
+			       // 用户确认分享后执行的回调函数
+			       showError('分享成功！');
+			    },
+			    cancel: function () { 
+			        // 用户取消分享后执行的回调函数
+			        showError('分享取消！');
+			    }
+			});
+			wx.onMenuShareQZone({
+			    title: shareTitle, // 分享标题
+			    desc: shareDesc, // 分享描述
+			    link: shareLink, // 分享链接
+			    imgUrl: shareImg, // 分享图标
+			    success: function () { 
+			       // 用户确认分享后执行的回调函数
+			       showError('分享成功！');
+			    },
+			    cancel: function () { 
+			    	showError('分享取消！');
+			        // 用户取消分享后执行的回调函数
+			    }
+			});
+		}
+	);
+	wx.error(function(){
+
+	});
 	var itemTemplate = datas.result.item_spec_template;
 	var templateTxt = '',
 		txt;
