@@ -207,7 +207,7 @@ function getdata(page,drinkOrPrime){
 			console.log(datas)
 			var obj = datas.result;
 			for(var i=0;i<obj.length;i++){
-				var specId = obj[i].data.good_item_spec_id?obj[i].good_item_spec_id:0;
+				var specId = obj[i].data.good_item_spec_id?obj[i].data.good_item_spec_id:0;
 				var saleStartTime = obj[i].data.sales_start_time;
 				var secStartTime = obj[i].data.seckill_startime;
 				var secEndTime = obj[i].data.seckill_endtime;

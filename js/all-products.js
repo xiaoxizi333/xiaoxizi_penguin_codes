@@ -33,7 +33,7 @@ function searchItem(){
 				$('.picBox .details').off('click').on('click',function(){
 					var itemID = $(this).attr('data_id');
 					var goodsIndex = $(this).index();
-					var specId = detailsObj[goodsIndex].data.good_item_spec_id?detailsObj[goodsIndex].good_item_spec_id:0;
+					var specId = detailsObj[goodsIndex].data.good_item_spec_id?detailsObj[goodsIndex].data.good_item_spec_id:0;
 					window.localStorage.setItem('itemID',itemID);
 					window.localStorage.setItem('itemSpecId',specId);
 					var saleStartTime = detailsObj[goodsIndex].data.sales_start_time;
