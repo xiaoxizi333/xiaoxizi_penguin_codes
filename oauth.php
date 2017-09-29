@@ -20,7 +20,7 @@ if($openid && $access_token){
 	if (! empty ($result['result'])) {
 		echo '<script>sessionStorage.setItem("uid", "'.$result['result'][0]['id'].'");</script>';
 	}
-	echo '<script>window.location.href="/";</script>';
+	echo '<script>window.location.href=sessionStorage.getItem("redirect_url");</script>';
 
 }
 

@@ -678,4 +678,6 @@ function delivery(){
 		})
 	});
 }
-
+$('.mask_icon').on('tap',function(){
+	showTips('暂无此选项');
+})

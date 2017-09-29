@@ -208,6 +208,15 @@ body{
 	background-image: url(../img/choose_normal.png);
 	right: -0.59375rem;
 }
+.mask_icon{
+	display: inline-block;
+	width: 2.5rem;
+	height: 2.5rem;
+	position: absolute;
+	right: -0.59375rem;
+	top: 50%;
+    margin-top: -1.25rem;
+}
 .active .is_choose_icon{
 	background-image: url(../img/choose_selected.png);
 }
