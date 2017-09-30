@@ -1,6 +1,6 @@
-var uid = sessionStorage.getItem("uid");
+var uid = localStorage.getItem("uid");
 //var uid = 1431768973512333;
-var openid = sessionStorage.getItem("openid");
+var openid = localStorage.getItem("openid");
 //var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 (function(doc, window)
 {
@@ -141,7 +141,7 @@ function switchDate(time,mark){
 //跳转购物车
 $('.shopping_icon').off('tap').on('tap',function(){
 	if(!openid){
-		sessionStorage.setItem("redirect_url",window.location.href);
+		localStorage.setItem("redirect_url",window.location.href);
 		window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 	}else{
 		if(uid){
@@ -166,7 +166,7 @@ $('.shopping_icon').off('tap').on('tap',function(){
 })
 $('.personal_icon').on('tap',function(){
 	if(!openid){
-		sessionStorage.setItem("redirect_url",window.location.href);
+		localStorage.setItem("redirect_url",window.location.href);
 		window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 	}else{
 		if(uid){
