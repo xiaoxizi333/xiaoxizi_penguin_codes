@@ -152,21 +152,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		if(isVipPrice){
 			txt = '<div class="clearfix" style="line-height: 1.5rem;">'+
 						'<div class="price_style price pull-left">¥<span>'+obj.real_price+'</span></div>'+
-						'<div class="no_vip pull-left">'+
-							'<del >'+
-								'<span class="real_price">非会员价 ¥<span>'+obj.public_price+'</span></span>'+
-							'</del>'+
-						'</div>'+
 					'</div>';
 
 		}else{
 			txt = '<div class="clearfix" style="line-height: 1.5rem;">'+
 					'<div class="price_style real_price pull-left">¥<span>'+obj.public_price+'</span></div>'+
-					'<div class="no_vip pull-left">'+
-						'<del>'+
-							'<span class="price">会员价 ¥<span>'+obj.real_price+'</span></span>'+
-						'</del>'+
-					'</div>'+
 				'</div>';
 		}
 		$('.num_box').html(txt);
@@ -317,21 +307,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			if(isVipPrice){
 				txt = '<div class="clearfix" style="line-height: 1.5rem;">'+
 							'<div class="price_style price pull-left">¥<span>'+titPrice+'</span></div>'+
-							'<div class="no_vip pull-left">'+
-								'<del >'+
-									'<span class="real_price">非会员价 ¥<span>'+titPublicPrice+'</span></span>'+
-								'</del>'+
-							'</div>'+
 						'</div>';
 
 			}else{
 				txt = '<div class="clearfix" style="line-height: 1.5rem;">'+
 						'<div class="price_style real_price pull-left">¥<span>'+titPublicPrice+'</span></div>'+
-						'<div class="no_vip pull-left">'+
-							'<del>'+
-								'<span class="price">会员价 ¥<span>'+titPrice+'</span></span>'+
-							'</del>'+
-						'</div>'+
 					'</div>';
 			}
 			$('.num_box').html(txt);
