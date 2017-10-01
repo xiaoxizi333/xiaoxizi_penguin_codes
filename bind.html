@@ -128,7 +128,7 @@
             },function(data){
                 var data = JSON.parse(data);
                 if(data.error_code==0){
-                    window.location.href="index.html"
+                    window.location.href=localStorage.getItem('redirect_url');
                 }else{
                     $(".help-info").text(data.error_msg);
                 }

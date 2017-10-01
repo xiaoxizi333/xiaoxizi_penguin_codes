@@ -458,7 +458,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 							}
 						})
 					}
-				else{
+				}else{
 					window.location.href="register.html"
 				}
 			}
