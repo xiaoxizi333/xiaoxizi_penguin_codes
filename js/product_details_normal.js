@@ -18,9 +18,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 							'<span class="specific_cost price_for_vip">¥'+obj.real_price+'</span>'+
 						'</div>'+
 						'<div class="pull-left">'+
-							'<del >'+
 								'<span class="another_price normal_price">非会员价 ¥'+obj.public_price+'</span>'+
-							'</del>'+
 						'</div>';
 		}else{
 			priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
@@ -28,9 +26,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 							'<span class="specific_cost normal_price">¥'+obj.public_price+'</span>'+
 						'</div>'+
 						'<div class="no_vip pull-left">'+
-							'<del >'+
 								'<span class="another_price price_for_vip">会员价 ¥'+obj.real_price+'</span>'+
-							'</del>'+
 						'</div>';
 		}
 	}
