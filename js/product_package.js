@@ -21,7 +21,7 @@ $.ajax({
    		for(var i=0;i<packageItem.length;i++){
    			itemDetail += '<div class="choose_product clearfix">'+
            							'<div class="product_photo pull-left bg" style="background-image:url('+packageItem[i].item_info[0].title_pics[0]+')"></div>'+
-        								'<div class="pull-left" style="padding-top:0.4rem;width: 50%;">'+packageItem[i].item_info[0].name+'</div>'+
+        								'<div class="pull-left shrink_font" style="padding-top:0.4rem;width: 50%;">'+packageItem[i].item_info[0].name+'</div>'+
         								'<div class="price pull-right">'+
         									'<div class="text-right" style="padding-top:0.4rem;">¥<span></span>'+packageItem[i].map_group_price+'</div>'+
         									'<div class="text-right"><del>¥<span></span>'+packageItem[i].item_info[0].real_price+'</del></div>'+
