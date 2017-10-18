@@ -398,7 +398,22 @@ if(cartOrBuy=='0'){
 		$('.delivery_type ul li').removeClass('active');
 		$('.delivery_type ul li').eq(delivery_type).addClass('active');
 		$('.express_price').html('');
-		$('.express_price').eq(delivery_type).html('¥'+ship_fee);
+		var express = $('.express_name').eq(delivery_type).attr('name');
+		var user_order_id = window.localStorage.getItem('user_order_id')*1;
+		var isPackage = window.localStorage.getItem('package');
+		$.post(config.selectExpress,{'user_order_id':user_order_id,'uid':uid,'post_type':delivery_type,'express':express},function(datas){
+			console.log(datas);
+			if(datas.error_code==0){
+				$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
+				$('.express_price').html('');
+				$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);	
+				window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+			}else{
+				showTips(datas.error_msg)
+			}
+			
+		})
 	}
 	delivery();
 	//弹窗加减
