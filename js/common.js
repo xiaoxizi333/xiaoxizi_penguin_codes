@@ -76,15 +76,72 @@ function filterGoods(drinkOrPrime){
 	        contentType:'application/json',
 	        url: config.primeDrinkList,
 	        data: JSON.stringify(passData), 
-	        success: function(datas){
-	            console.log(datas);
-	            var obj = datas.result;
-				var html = '';
+	        beforeSend:function(){
+		      	$('.spinner').show();
+		    },
+		    success:function(datas){
+				console.log(datas)
+				var obj = datas.result;
 				for(var i=0;i<obj.length;i++){
-					html += '<div data_num="'+i+'" class="detail_pic"><img src="'+obj[i].data.title_pics[0]+'" class="details"></div>';
+					var specId = obj[i].data.good_item_spec_id?obj[i].data.good_item_spec_id:0;
+					var saleStartTime = obj[i].data.sales_start_time;
+					var secStartTime = obj[i].data.seckill_startime;
+					var secEndTime = obj[i].data.seckill_endtime;
+					var isSeckill = obj[i].data.is_seckill;
+
+					var html = '<div data_num="'+i+'" spec_id="'+specId+'" sales_start_time="'+saleStartTime+'" seckill_startime="'+secStartTime+'" seckill_endtime="'+secEndTime+'" is_seckill="'+isSeckill+'" class="detail_pic" data_id="'+obj[i].id+'"><img src="'+obj[i].data.title_pics[0]+'" class="details"></div>';
+					$('.details_info').append(html);
 				}
-				$('.details_info').html(html);
-	        }
+				$('.detail_pic').off('click').on('click',function(){		
+					var itemID = $(this).attr('data_id');
+					var goodsIndex = $(this).index();
+					var specId = $(this).attr('spec_id');
+					var saleStartTime = $(this).attr('sales_start_time')==undefined?'':$(this).attr('sales_start_time');
+					var secStartTime = $(this).attr('seckill_startime')==undefined?'':$(this).attr('seckill_startime');
+					var secEndTime = $(this).attr('seckill_endtime')==undefined?'':$(this).attr('seckill_endtime');
+					var isSeckill = $(this).attr('is_seckill')==undefined?'':$(this).attr('is_seckill');
+					var nowTime = Date.parse(new Date());
+					console.log(isSeckill)
+					if(saleStartTime!==''||isSeckill!==''){
+						if(saleStartTime>0){
+			    			if(saleStartTime-nowTime>0){
+			    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+specId;
+			    			}else{
+			    				window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+			    			}
+			    		//跳转正常
+			    		}else if(saleStartTime<0){
+			    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+			    		}
+			    		//跳转 0:正常详情 1:秒杀详情
+						if(isSeckill==0){
+							window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+						}else if(isSeckill==1){
+							if(nowTime>secStartTime&&nowTime<secEndTime){
+								window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
+							}else{
+								window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+							}
+							
+						}
+					}else{
+						window.location.href="product_details.html";
+					}
+				})
+				$(window).scroll(function() {
+				    if (window.scrollY  >= $(document).height() - $(window).height()) {		
+						//console.log(scrollY)
+						//console.log(datas.result.total_count/20);
+						var totalPage = Math.ceil(datas.total_count/20);
+						if(pageNm<totalPage){
+							console.log(pageNm)
+							pageNm++;
+							getdata(pageNm,drinkOrPrime);
+						}									
+					}
+				});
+			},
+			complete:function(){$('.spinner').hide()},
 	    });
 	})
 }
