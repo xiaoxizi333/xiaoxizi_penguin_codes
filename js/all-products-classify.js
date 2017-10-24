@@ -160,8 +160,14 @@ function searchItems(passData){
 	        console.log(datas);
 			var detailsObj = datas.result;
 			var detailsHtml = '';
+			var corePic;
 			for(var i=0;i<detailsObj.length;i++){
-				detailsHtml += '<div class="detail_pic" data_id="'+detailsObj[i].id+'"><img src="'+detailsObj[i].data.title_pics+'" class="details"></div>';
+				if(detailsObj[i].data.cover_pic){
+					corePic = detailsObj[i].data.cover_pic;
+				}else{
+					corePic = detailsObj[i].data.title_pics[0];
+				}
+				detailsHtml += '<div class="detail_pic" data_id="'+detailsObj[i].id+'"><img src="'+corePic+'" class="details"></div>';
 			}
 			$('.SKU_details').html(detailsHtml);
 			for(var i=0;i<detailsObj.length;i++){

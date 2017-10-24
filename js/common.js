@@ -88,8 +88,13 @@ function filterGoods(drinkOrPrime){
 					var secStartTime = obj[i].data.seckill_startime;
 					var secEndTime = obj[i].data.seckill_endtime;
 					var isSeckill = obj[i].data.is_seckill;
-
-					var html = '<div data_num="'+i+'" spec_id="'+specId+'" sales_start_time="'+saleStartTime+'" seckill_startime="'+secStartTime+'" seckill_endtime="'+secEndTime+'" is_seckill="'+isSeckill+'" class="detail_pic" data_id="'+obj[i].id+'"><img src="'+obj[i].data.title_pics[0]+'" class="details"></div>';
+					var corePic;
+					if(obj[i].data.cover_pic){
+						corePic = obj[i].data.cover_pic;
+					}else{
+						corePic = obj[i].data.title_pics[0];
+					}
+					var html = '<div data_num="'+i+'" spec_id="'+specId+'" sales_start_time="'+saleStartTime+'" seckill_startime="'+secStartTime+'" seckill_endtime="'+secEndTime+'" is_seckill="'+isSeckill+'" class="detail_pic" data_id="'+obj[i].id+'"><img src="'+corePic+'" class="details"></div>';
 					$('.details_info').append(html);
 				}
 				$('.detail_pic').off('click').on('click',function(){		
@@ -271,8 +276,13 @@ function getdata(page,drinkOrPrime){
 				var secStartTime = obj[i].data.seckill_startime;
 				var secEndTime = obj[i].data.seckill_endtime;
 				var isSeckill = obj[i].data.is_seckill;
-
-				var html = '<div data_num="'+i+'" spec_id="'+specId+'" sales_start_time="'+saleStartTime+'" seckill_startime="'+secStartTime+'" seckill_endtime="'+secEndTime+'" is_seckill="'+isSeckill+'" class="detail_pic" data_id="'+obj[i].id+'"><img src="'+obj[i].data.title_pics[0]+'" class="details"></div>';
+				var corePic;
+				if(obj[i].data.cover_pic){
+					corePic = obj[i].data.cover_pic;
+				}else{
+					corePic = obj[i].data.title_pics[0];
+				}
+				var html = '<div data_num="'+i+'" spec_id="'+specId+'" sales_start_time="'+saleStartTime+'" seckill_startime="'+secStartTime+'" seckill_endtime="'+secEndTime+'" is_seckill="'+isSeckill+'" class="detail_pic" data_id="'+obj[i].id+'"><img src="'+corePic+'" class="details"></div>';
 				$('.details_info').append(html);
 			}
 			$('.detail_pic').off('click').on('click',function(){		

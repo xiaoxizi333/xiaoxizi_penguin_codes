@@ -24,10 +24,16 @@ function searchItem(){
 		console.log(datas);
 		var detailsObj = datas.result;
 		if (datas.error_code==0&&detailsObj.length) {
-			var detailsHtml = '';
+			var detailsHtml = '',
+				corePic;
 			for(var i=0;i<detailsObj.length;i++){
-				detailsHtml += '<div class="picBox"><img src="'+detailsObj[i].data.title_pics+'" class="details" data_id="'+detailsObj[i].id+'"></div>';
-			}
+				if(detailsObj[i].data.cover_pic){
+					corePic = detailsObj[i].data.cover_pic;
+				}else{
+					corePic = detailsObj[i].data.title_pics[0];
+				}
+				detailsHtml += '<div class="picBox"><img src="'+corePic+'" class="details" data_id="'+detailsObj[i].id+'"></div>';
+			};
 			$('.SKU_details').html(detailsHtml);
 			for(var i=0;i<detailsObj.length;i++){
 				$('.picBox .details').off('click').on('click',function(){
