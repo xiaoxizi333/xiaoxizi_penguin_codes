@@ -281,6 +281,23 @@ body{
     letter-spacing: 0.12px;
     display: none;
 }
+/*loading*/
+.spinner_box,.buy_mask{
+	position: fixed;
+	height: 100%;
+	background-color: rgba(0,0,0,.6);
+	top: 0;
+	width: 100%;
+	z-index: 100001;
+	display: none;
+}
+.spinner{
+	position: absolute;
+	height: 110px;
+	top: 50%;
+	margin-top: -55px;
+	z-index: 100001;
+}
 /*footer*/
 footer{
 	width: 100%;
