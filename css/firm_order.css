@@ -285,11 +285,16 @@ body{
 .spinner_box,.buy_mask{
 	position: fixed;
 	height: 100%;
-	background-color: rgba(0,0,0,.6);
 	top: 0;
 	width: 100%;
 	z-index: 100001;
 	display: none;
+}
+.spinner_box{
+	background-color: transparent;
+}
+.buy_mask{
+	background-color: rgba(0,0,0,.6);
 }
 .spinner{
 	position: absolute;

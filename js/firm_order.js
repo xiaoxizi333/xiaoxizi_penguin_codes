@@ -792,7 +792,7 @@ function delivery(){
 	      url:config.selectExpress,
 	      data:{'user_order_id':user_order_id,'uid':uid,'post_type':index,'express':express}, 
 	      beforeSend:function(){
-	      	$('.spinner').show();
+	      	$('.spinner_box').show();
 	      },
 	      success:function(datas){
 			//console.log(datas);
@@ -811,7 +811,7 @@ function delivery(){
 				showTips(datas.error_msg)
 			}
 		  },
-	      complete:function(){$('.spinner').hide()},
+	      complete:function(){$('.spinner_box').hide()},
 			
 		})
 	});
