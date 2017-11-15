@@ -1,4 +1,6 @@
-var tabId = window.localStorage.getItem('tabId')*1;
+//var tabId = window.localStorage.getItem('tabId')*1;
+var tabId = getQueryString('tabId')*1;
+
 var tabOrList = window.localStorage.getItem('tabOrList');
 var bannerData;
 //if(tabOrList=='0'){

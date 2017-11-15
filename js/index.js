@@ -15,17 +15,19 @@ $.post(config.classify,{'is_add_best_ares':0,'limit':6},function(data){
 	var obj = data.result;
 	if(obj.length){
 		var typeTab = '<ul class="list-unstyled list-inline">'+
-							'<li class="clearfix"><a href="all-products-classify.html" style="background-image: url(img/home_classify_1.png)">'+obj[0].data.class_name+'</a></li><li class="clearfix">'+
-							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_2.png)">'+obj[1].data.class_name+'</a></li><li class="clearfix">'+
-							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_3.png)">'+obj[2].data.class_name+'</a></li><li class="clearfix">'+
-							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_4.png)">'+obj[3].data.class_name+'</a></li><li class="clearfix">'+
-							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_5.png)">'+obj[4].data.class_name+'</a></li><li class="clearfix">'+
-							'<a href="all-products-classify.html" style="background-image: url(img/home_classify_6.png)">'+obj[5].data.class_name+'</a></li class="clearfix">'+
+							'<li class="clearfix"><a style="background-image: url(img/home_classify_1.png)">'+obj[0].data.class_name+'</a></li><li class="clearfix">'+
+							'<a style="background-image: url(img/home_classify_2.png)">'+obj[1].data.class_name+'</a></li><li class="clearfix">'+
+							'<a style="background-image: url(img/home_classify_3.png)">'+obj[2].data.class_name+'</a></li><li class="clearfix">'+
+							'<a style="background-image: url(img/home_classify_4.png)">'+obj[3].data.class_name+'</a></li><li class="clearfix">'+
+							'<a style="background-image: url(img/home_classify_5.png)">'+obj[4].data.class_name+'</a></li><li class="clearfix">'+
+							'<a style="background-image: url(img/home_classify_6.png)">'+obj[5].data.class_name+'</a></li class="clearfix">'+
 						'</ul>';
 		$('.type_tab').html(typeTab);
 		$('.type_tab ul li').on('tap',function(){
 			var index = $(this).index();
-			window.localStorage.setItem('tabId',obj[index].id);
+			console.log(obj[index].id)
+			window.location.href = "all-products-classify.html?tabId="+obj[index].id;
+			//window.localStorage.setItem('tabId',obj[index].id);
 			window.localStorage.setItem('tabOrList','0');
 		})
 	}
