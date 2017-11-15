@@ -59,7 +59,6 @@ $.post(config.indexItemClassList,function(datas){
 	//点击搜索
 	$('.sort_tab li').on('tap',function(){
 		//window.localStorage.setItem('tabId',$(this).attr('id'));
-		window.location.href = "all-products-classify.html?tabId="+$(this).attr('id');
 		bannerData = {'class_id':$(this).attr('id')};
 		addBanner(bannerData);
 		$('.SKU_details').empty();
@@ -83,6 +82,7 @@ $.post(config.indexItemClassList,function(datas){
 			passData = {'item_class':itemClass,'limit':20000}
 		}
 		searchItems(passData);
+		window.location.href = "all-products-classify.html?tabId="+$(this).attr('id');
 	})
 })
 //二级标签
