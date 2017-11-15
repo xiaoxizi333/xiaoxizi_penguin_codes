@@ -16,7 +16,7 @@ function searchItem(){
    {
       type:"POST",
       url:config.search,
-      data:{'item_name':searchTxt,'limit':20000}, 
+      data:{'item_name':searchTxt}, 
       beforeSend:function(){
       	$('.spinner').show();
       },

@@ -72,13 +72,13 @@ $.post(config.indexItemClassList,function(datas){
 		if(state){
 			if(state == '[1443230295066968]'){
 				state = JSON.parse(state);
-				passData = {'item_class':itemClass,'tag_id_array':state};
+				passData = {'item_class':itemClass,'tag_id_array':state,'limit':20000};
 			}else{
 				state = JSON.parse(state);
-				passData = {'item_class':itemClass,'sort':state};
+				passData = {'item_class':itemClass,'sort':state,'limit':20000};
 			}	
 		}else{
-			passData = {'item_class':itemClass}
+			passData = {'item_class':itemClass,'limit':20000}
 		}
 		searchItems(passData);
 	})
@@ -92,17 +92,17 @@ $('.filter_tab li').on('tap',function(){
 	var passData;
 	var itemClass = window.localStorage.getItem('item_class');
 	if(itemIndex==0){
-		passData = {'item_class':itemClass,sort:{"data.sales_count":"desc"}};
+		passData = {'item_class':itemClass,sort:{"data.sales_count":"desc"},'limit':20000};
 		var sortState = {"data.sales_count":"desc"};
 		sortState = JSON.stringify(sortState); 
 		window.localStorage.setItem('state',sortState);
 	}else if(itemIndex==1){
-		passData = {'item_class':itemClass,'tag_id_array':[1443230295066968]};
+		passData = {'item_class':itemClass,'tag_id_array':[1443230295066968],'limit':20000};
 		var sortState = [1443230295066968];
 		sortState = JSON.stringify(sortState); 
 		window.localStorage.setItem('state',sortState);
 	}else if(itemIndex==2){
-		passData = {'item_class':itemClass,'sort':{"data.published_at":"desc"}};
+		passData = {'item_class':itemClass,'sort':{"data.published_at":"desc"},'limit':20000};
 		var sortState = {"data.published_at":"desc"};
 		sortState = JSON.stringify(sortState); 
 		window.localStorage.setItem('state',sortState);
@@ -129,17 +129,17 @@ $.post(config.tagList,function(datas){
 		sortState2[1] = JSON.parse(sortId);
 		if(sortState){
 			if(sortState == '[1443230295066968]'){
-				passData = {'item_class':itemClass,'tag_id_array':sortState2};
+				passData = {'item_class':itemClass,'tag_id_array':sortState2,'limit':20000};
 			}else{
 				var sortNum = JSON.parse(sortState);
 				var arr = [];
 				arr[0] = sortId;
 				var tagId = JSON.stringify(arr);
 				tagId = JSON.parse(tagId);
-				passData = {'item_class':itemClass,'sort':sortNum,'tag_id_array':tagId};
+				passData = {'item_class':itemClass,'sort':sortNum,'tag_id_array':tagId,'limit':20000};
 			}	
 		}else{	
-			passData = {'item_class':itemClass,'tag_id_array':tagId}
+			passData = {'item_class':itemClass,'tag_id_array':tagId,'limit':20000}
 		}
 		//console.log(passData)
 		searchItems(passData);
