@@ -4,7 +4,7 @@ $.post(config.classify,function(data){
 	var obj = data.result;
 	var choiceBar = '';
 	for(var i=0;i<obj.length;i++){
-		choiceBar += '<li data_id="'+obj[i].id+'"><a href="all-products-classify.html">'+obj[i].data.class_name+'</a></li>';	
+		choiceBar += '<li data_id="'+obj[i].id+'"><a>'+obj[i].data.class_name+'</a></li>';	
 	}
 	$('.choice_bar').html(choiceBar);
 	var tabListIndex = window.localStorage.getItem('tabListIndex')?window.localStorage.getItem('tabListIndex'):0;
@@ -13,7 +13,8 @@ $.post(config.classify,function(data){
 		$('.choice_bar li').find('a').removeClass('active');
 		var index = $(this).index();
 		window.localStorage.setItem('tabListIndex',index);
-		window.localStorage.setItem('tabId',obj[index].id);
+		window.location.href = "all-products-classify.html?tabId="+obj[index].id;
+		//window.localStorage.setItem('tabId',obj[index].id);
 		window.localStorage.setItem('tabOrList','1');		
 	})
 
