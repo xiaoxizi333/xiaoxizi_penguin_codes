@@ -34,7 +34,8 @@ function addBanner(bannerData){
 	})
 }
 
-var firstItem = window.localStorage.getItem('tabId');
+//var firstItem = window.localStorage.getItem('tabId');
+var firstItem = getQueryString('tabId');
 var dataObj = {'item_class':firstItem};
 searchItems(dataObj);
 //一级列表
@@ -48,7 +49,7 @@ $.post(config.indexItemClassList,function(datas){
 	}
 	$('.sort_tab').html(html);
 	for(var j=0;j<obj.length;j++){
-		var tabId = parseInt(window.localStorage.getItem('tabId'));
+		var tabId = parseInt(getQueryString('tabId'));
 		if(tabId == obj[j].id){
 			$('.sort_tab li').removeClass('active');
 			$('.sort_tab li').eq(j).addClass('active');
@@ -57,7 +58,8 @@ $.post(config.indexItemClassList,function(datas){
 	}
 	//点击搜索
 	$('.sort_tab li').on('tap',function(){
-		window.localStorage.setItem('tabId',$(this).attr('id'));
+		//window.localStorage.setItem('tabId',$(this).attr('id'));
+		window.location.href = "all-products-classify.html?tabId="+$(this).attr('id');
 		bannerData = {'class_id':$(this).attr('id')};
 		addBanner(bannerData);
 		$('.SKU_details').empty();
