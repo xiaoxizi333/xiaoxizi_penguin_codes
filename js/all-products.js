@@ -35,10 +35,10 @@ function searchItem(){
 				detailsHtml += '<div class="picBox"><img src="'+corePic+'" class="details" data_id="'+detailsObj[i].id+'"></div>';
 			};
 			$('.SKU_details').html(detailsHtml);
-			for(var i=0;i<detailsObj.length;i++){
+			//for(var i=0;i<detailsObj.length;i++){
 				$('.picBox .details').off('click').on('click',function(){
 					var itemID = $(this).attr('data_id');
-					var goodsIndex = $(this).index();
+					var goodsIndex = $(this).parent('.picBox').index();
 					var specId = detailsObj[goodsIndex].data.good_item_spec_id?detailsObj[goodsIndex].data.good_item_spec_id:0;
 					window.localStorage.setItem('itemID',itemID);
 					window.localStorage.setItem('itemSpecId',specId);
@@ -73,7 +73,7 @@ function searchItem(){
 						window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 					}		
 				})
-			}
+			//}
 		}else{
 			$('.SKU_details').html('<img src="img/penguinnn_search2@2x.png" style="width:18.75rem">');
 		}

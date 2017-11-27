@@ -63,7 +63,8 @@ $('#search').on('keydown',function(e){
 	}
 })
 $('.vip_order').on('tap',function(){
-	window.localStorage.setItem('tabId',1308254907990793);
+	//window.localStorage.setItem('tabId',1308254907990793);
+	window.location.href = "all-products-classify.html?tabId="+1308254907990793;
 })
 //商品模块化
 $.post(config.indexModuleList,function(datas){
@@ -313,8 +314,8 @@ function jump(obj){
 		var thisJump = $(this).attr('type');
 		var thisJump2 = $(this).attr('customUrl');
 		if(thisJump=='0'){
-			window.localStorage.setItem('tabId',thisId);
-			window.location.href = "all-products-classify.html";
+			//window.localStorage.setItem('tabId',thisId);
+			window.location.href = "all-products-classify.html?tabId="+thisId;
 		}else if(thisJump=='1'){
 			window.location.href = thisJump2;
 		}else if(thisJump=='2'){
