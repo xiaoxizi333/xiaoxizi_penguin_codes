@@ -190,14 +190,19 @@ if(cartOrBuy=='0'){
 			      },
 			      success:function(datas){
 					//console.log(datas);
-					$('.specific_num').eq(dataNum).html(datas.result.order[dataNum].data.total_count);	
-					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
-					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
-					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
-					if(delivery_type!==''){
-						delivery_type = datas.result.user_order[0].data.post_type;
-						$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+					if(datas.error_code==0){
+						$('.specific_num').eq(dataNum).html(datas.result.order[dataNum].data.total_count);	
+						$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
+						$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+						window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+						if(delivery_type!==''){
+							delivery_type = datas.result.user_order[0].data.post_type;
+							$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+						}	
+					}else{
+						showTips(datas.error_msg)
 					}
+					
 				  },
 			      complete:function(){$('.spinner_box').hide()},
 				})						
@@ -212,13 +217,17 @@ if(cartOrBuy=='0'){
 				      },
 				      success:function(datas){
 						//console.log(datas);
-						$('.specific_num').eq(dataNum).html(datas.result.order[dataNum].data.total_count);
-						$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
-						$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
-						window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
-						if(delivery_type!==''){
-							delivery_type = datas.result.user_order[0].data.post_type;
-							$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+						if(datas.error_code==0){
+							$('.specific_num').eq(dataNum).html(datas.result.order[dataNum].data.total_count);
+							$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
+							$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+							window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+							if(delivery_type!==''){
+								delivery_type = datas.result.user_order[0].data.post_type;
+								$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+							}
+						}else{
+							showTips(datas.error_msg)
 						}
 					  },
 				      complete:function(){$('.spinner_box').hide()},
@@ -502,19 +511,24 @@ if(cartOrBuy=='0'){
 		      },
 		      success:function(datas){
 				//console.log(datas);
-				$('.specific_num').eq(0).html(datas.result.order[0].data.total_count);	
-				$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
-				$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
-				window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
-				window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
-				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
-				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
-				window.localStorage.setItem('counts_num','1');
-				if(delivery_type!==''){
-					window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
-					$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
-					window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+				if(datas.error_code==0){
+					$('.specific_num').eq(0).html(datas.result.order[0].data.total_count);	
+					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
+					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+					window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
+					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+					window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
+					window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
+					window.localStorage.setItem('counts_num','1');
+					if(delivery_type!==''){
+						window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
+						$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+						window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+					}
+				}else{
+					showTips(datas.error_msg)
 				}
+				
 			  },
 		      complete:function(){$('.spinner_box').hide()},
 			})				
@@ -530,19 +544,24 @@ if(cartOrBuy=='0'){
 		      },
 		      success:function(datas){
 				//console.log(datas);
-				$('.specific_num').eq(0).html(datas.result.order[0].data.total_count);
-				$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
-				$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
-				window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
-				window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
-				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
-				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
-				window.localStorage.setItem('counts_num','1');
-				if(delivery_type!==''){
-					window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
-					$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
-					window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+				if(datas.error_code==0){
+					$('.specific_num').eq(0).html(datas.result.order[0].data.total_count);
+					$('.total_info .total_price').html('¥'+datas.result.user_order[0].data.item_total_price);
+					$('#sum_1, #sum_2').html(datas.result.user_order[0].data.total_price);
+					window.localStorage.setItem('goods_count',datas.result.order[0].data.total_count);
+					window.localStorage.setItem('user_order_id',datas.result.order[0].data.user_order_id);
+					window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
+					window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
+					window.localStorage.setItem('counts_num','1');
+					if(delivery_type!==''){
+						window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
+						$('.express_price').eq(delivery_type).html('¥'+datas.result.user_order[0].data.ship_fee);
+						window.localStorage.setItem('ship_fee',datas.result.user_order[0].data.ship_fee);
+					}
+				}else{
+					showTips(datas.error_msg)
 				}
+				
 			  },
 		      complete:function(){$('.spinner_box').hide()},
 			})

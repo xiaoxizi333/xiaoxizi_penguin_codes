@@ -59,10 +59,10 @@
     
     function get_code() {
         var mobile = $("input[name=phone]").val();
-        if(!check_mobile(mobile)){
-            show_error("无效的手机号");
-            return;
-        }
+        // if(!check_mobile(mobile)){
+        //     show_error("无效的手机号");
+        //     return;
+        // }
         util.post("/all/login/get_captcha.json", {
             phone: mobile
         }, function(data){
@@ -86,10 +86,10 @@
         var code = $("input[name=code]").val();
         //var real_name = $("input[name=real_name]").val();
 	    //var id_no = $("input[name=id_no]").val();
-	if(!check_mobile(mobile)){
-            show_error("无效的手机号");
-            return;
-        }
+	   // if(!check_mobile(mobile)){
+    //         show_error("无效的手机号");
+    //         return;
+    //     }
         if(!check_code(code)){
             show_error("无效的验证码");
             return;
