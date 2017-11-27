@@ -142,8 +142,8 @@ $.post(config.indexModuleList,function(datas){
 				    	window.localStorage.setItem('itemSpecId',itemSpecId);
 				    	$.post(config.goodsLsitJump,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 				    		//console.log(datas);
-				    		var saleStartTime = datas.result[0].data.sales_start_time;
-				    		var nowTime = Date.parse(new Date());
+				    		var saleStartTime = datas.result[0].data.sales_start_time*1;
+				    		var nowTime = Date.parse(new Date())*1;
 				    		//console.log(saleStartTime)
 				    		//console.log(nowTime)
 				    		//跳转预售
@@ -199,14 +199,14 @@ $.post(config.indexModuleList,function(datas){
 					    	window.localStorage.setItem('itemSpecId',specId);
 							$.post(config.goodsLsitJump,{'item_id':itemID,'item_spec_id':specId},function(datas){
 								//console.log(datas);
-								var nowTime = Date.parse(new Date());
-								var secStartTime = datas.result[0].data.seckill_startime;
-								var secEndTime = datas.result[0].data.seckill_endtime;
-								var isSeckill = datas.result[0].data.is_seckill;
+								var nowTime = Date.parse(new Date())*1;
+								var secStartTime = datas.result[0].data.seckill_startime*1;
+								var secEndTime = datas.result[0].data.seckill_endtime*1;
+								var isSeckill = datas.result[0].data.is_seckill*1;
 								//跳转 0:正常详情 1:秒杀详情
-								if(isSeckill==0){
+								if(isSeckill===0){
 									window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-								}else if(isSeckill==1){
+								}else if(isSeckill===1){
 									if(nowTime>secStartTime&&nowTime<secEndTime){
 										window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
 									}else{

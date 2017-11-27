@@ -24,7 +24,25 @@ $.post(config.commonBanner,{'class_type':'drink'},function(datas){
 //商品列表
 var pageNm = 1;
 getdata(pageNm,'drink');
-filterGoods('drink');
+filterGoods(pageNm,'drink');
+$(window).scroll(function() {
+    if (window.scrollY  >= $(document).height() - $(window).height()) {		
+		//console.log(scrollY)
+		$.ajax({
+			type:"POST",
+		    url:config.primeDrinkList,
+		    data:{'drink_or_prime':'drink','page':pageNm},
+		    success:function(datas){
+		    	var totalPage = Math.ceil(datas.total_count/20);
+				if(pageNm<totalPage){
+					console.log(pageNm);
+					pageNm++;
+					getdata(pageNm,'drink');
+				}
+		    }
+		})									
+	}
+});
 $('.filter_tab li a').on('tap',function(){
 	$('.filter_tab li a').removeClass('active');
 	$(this).addClass('active');

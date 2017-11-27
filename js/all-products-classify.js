@@ -179,11 +179,11 @@ function searchItems(passData){
 					var itemID = $(this).attr('data_id');
 					var goodsIndex = $(this).index();
 					var specId = detailsObj[goodsIndex].good_item_spec_id?detailsObj[goodsIndex].good_item_spec_id:0;
-					var saleStartTime = detailsObj[goodsIndex].data.sales_start_time==undefined?'':detailsObj[goodsIndex].data.sales_start_time;
-					var secStartTime = detailsObj[goodsIndex].data.seckill_startime==undefined?'':detailsObj[goodsIndex].data.seckill_startime;
-					var secEndTime = detailsObj[goodsIndex].data.seckill_endtime==undefined?'':detailsObj[goodsIndex].data.seckill_endtime;
-					var isSeckill = detailsObj[goodsIndex].data.is_seckill==undefined?'':detailsObj[goodsIndex].data.is_seckill;
-					var nowTime = Date.parse(new Date());
+					var saleStartTime = detailsObj[goodsIndex].data.sales_start_time==undefined?'':detailsObj[goodsIndex].data.sales_start_time*1;
+					var secStartTime = detailsObj[goodsIndex].data.seckill_startime==undefined?'':detailsObj[goodsIndex].data.seckill_startime*1;
+					var secEndTime = detailsObj[goodsIndex].data.seckill_endtime==undefined?'':detailsObj[goodsIndex].data.seckill_endtime*1;
+					var isSeckill = detailsObj[goodsIndex].data.is_seckill==undefined?'':detailsObj[goodsIndex].data.is_seckill*1;
+					var nowTime = Date.parse(new Date())*1;
 					if(saleStartTime||isSeckill){
 						if(saleStartTime>0){
 			    			if(saleStartTime-nowTime>0){
@@ -196,9 +196,9 @@ function searchItems(passData){
 			    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 			    		}
 			    		//跳转 0:正常详情 1:秒杀详情
-						if(isSeckill==0){
+						if(isSeckill===0){
 							window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-						}else if(isSeckill==1){
+						}else if(isSeckill===1){
 							if(nowTime>secStartTime&&nowTime<secEndTime){
 								window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
 							}else{

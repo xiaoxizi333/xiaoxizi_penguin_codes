@@ -42,11 +42,11 @@ function searchItem(){
 					var specId = detailsObj[goodsIndex].data.good_item_spec_id?detailsObj[goodsIndex].data.good_item_spec_id:0;
 					window.localStorage.setItem('itemID',itemID);
 					window.localStorage.setItem('itemSpecId',specId);
-					var saleStartTime = detailsObj[goodsIndex].data.sales_start_time;
-					var secStartTime = detailsObj[goodsIndex].data.seckill_startime;
-					var secEndTime = detailsObj[goodsIndex].data.seckill_endtime;
-					var isSeckill = detailsObj[goodsIndex].data.is_seckill;
-					var nowTime = Date.parse(new Date());
+					var saleStartTime = detailsObj[goodsIndex].data.sales_start_time*1;
+					var secStartTime = detailsObj[goodsIndex].data.seckill_startime*1;
+					var secEndTime = detailsObj[goodsIndex].data.seckill_endtime*1;
+					var isSeckill = detailsObj[goodsIndex].data.is_seckill*1;
+					var nowTime = Date.parse(new Date())*1;
 					//console.log(isSeckill)
 					if(saleStartTime||isSeckill){
 						if(saleStartTime>0){
@@ -60,9 +60,9 @@ function searchItem(){
 			    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 			    		}
 			    		//跳转 0:正常详情 1:秒杀详情
-						if(isSeckill==0){
+						if(isSeckill===0){
 							window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-						}else if(isSeckill==1){
+						}else if(isSeckill===1){
 							if(nowTime>secStartTime&&nowTime<secEndTime){
 								window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
 							}else{

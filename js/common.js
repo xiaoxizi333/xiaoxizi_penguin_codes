@@ -56,18 +56,18 @@ $('.nav-bar-icon').on('click',function(){
 	}
 })
 //filter
-function filterGoods(drinkOrPrime){
+function filterGoods(pageNm,drinkOrPrime){
 	$('.filter_tab li').on('tap',function(){
 		var whichCondition,
 			passData;
 		$('.details_info').empty();
 		whichCondition = $(this).index();
 		if(whichCondition==0){
-			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.sales_count":"desc"}};
+			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.sales_count":"desc"},'page':pageNm};
 		}else if(whichCondition==1){
-			passData = {'drink_or_prime':drinkOrPrime,'tag_id_array':[1443230295066968]};
+			passData = {'drink_or_prime':drinkOrPrime,'tag_id_array':[1443230295066968],'page':pageNm};
 		}else if(whichCondition==2){
-			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.published_at":"desc"}};
+			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.published_at":"desc"},'page':pageNm};
 		}
 		//console.log(passData)
 		$.ajax({
@@ -81,73 +81,91 @@ function filterGoods(drinkOrPrime){
 		    },
 		    success:function(datas){
 				console.log(datas)
-				var obj = datas.result;
-				for(var i=0;i<obj.length;i++){
-					var specId = obj[i].data.good_item_spec_id?obj[i].data.good_item_spec_id:0;
-					var saleStartTime = obj[i].data.sales_start_time;
-					var secStartTime = obj[i].data.seckill_startime;
-					var secEndTime = obj[i].data.seckill_endtime;
-					var isSeckill = obj[i].data.is_seckill;
-					var corePic;
-					if(obj[i].data.cover_pic){
-						corePic = obj[i].data.cover_pic;
-					}else{
-						corePic = obj[i].data.title_pics[0];
-					}
-					var html = '<div data_num="'+i+'" spec_id="'+specId+'" sales_start_time="'+saleStartTime+'" seckill_startime="'+secStartTime+'" seckill_endtime="'+secEndTime+'" is_seckill="'+isSeckill+'" class="detail_pic" data_id="'+obj[i].id+'"><img src="'+corePic+'" class="details"></div>';
-					$('.details_info').append(html);
-				}
-				$('.detail_pic').off('click').on('click',function(){		
-					var itemID = $(this).attr('data_id');
-					var goodsIndex = $(this).index();
-					var specId = $(this).attr('spec_id');
-					var saleStartTime = $(this).attr('sales_start_time')==undefined?'':$(this).attr('sales_start_time');
-					var secStartTime = $(this).attr('seckill_startime')==undefined?'':$(this).attr('seckill_startime');
-					var secEndTime = $(this).attr('seckill_endtime')==undefined?'':$(this).attr('seckill_endtime');
-					var isSeckill = $(this).attr('is_seckill')==undefined?'':$(this).attr('is_seckill');
-					var nowTime = Date.parse(new Date());
-					console.log(isSeckill)
-					if(saleStartTime!==''||isSeckill!==''){
-						if(saleStartTime>0){
-			    			if(saleStartTime-nowTime>0){
-			    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+specId;
-			    			}else{
-			    				window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-			    			}
-			    		//跳转正常
-			    		}else if(saleStartTime<0){
-			    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-			    		}
-			    		//跳转 0:正常详情 1:秒杀详情
-						if(isSeckill==0){
-							window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-						}else if(isSeckill==1){
-							if(nowTime>secStartTime&&nowTime<secEndTime){
-								window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
-							}else{
-								window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-							}
-							
-						}
-					}else{
-						window.location.href="product_details.html";
-					}
-				})
+				driOrPriJump(datas);
 				$(window).scroll(function() {
 				    if (window.scrollY  >= $(document).height() - $(window).height()) {		
 						//console.log(scrollY)
-						//console.log(datas.result.total_count/20);
 						var totalPage = Math.ceil(datas.total_count/20);
 						if(pageNm<totalPage){
-							console.log(pageNm)
+							console.log(pageNm);
 							pageNm++;
-							getdata(pageNm,drinkOrPrime);
-						}									
+							filterGoods(pageNm,drinkOrPrime);
+						}
 					}
-				});
+				})									
 			},
 			complete:function(){$('.spinner').hide()},
 	    });
+	})
+}
+function driOrPriJump(datas){
+	var obj = datas.result;
+	for(var i=0;i<obj.length;i++){
+		var specId = obj[i].data.good_item_spec_id?obj[i].data.good_item_spec_id:0;
+		var saleStartTime = obj[i].data.sales_start_time;
+		var secStartTime = obj[i].data.seckill_startime;
+		var secEndTime = obj[i].data.seckill_endtime;
+		var isSeckill = obj[i].data.is_seckill;
+		var corePic;
+		if(obj[i].data.cover_pic){
+			corePic = obj[i].data.cover_pic;
+		}else{
+			corePic = obj[i].data.title_pics[0];
+		}
+		var html = '<div data_num="'+i+'" spec_id="'+specId+'" sales_start_time="'+saleStartTime+'" seckill_startime="'+secStartTime+'" seckill_endtime="'+secEndTime+'" is_seckill="'+isSeckill+'" class="detail_pic" data_id="'+obj[i].id+'"><img src="'+corePic+'" class="details"></div>';
+		$('.details_info').append(html);
+	}
+	$('.detail_pic').off('click').on('click',function(){		
+		var itemID = $(this).attr('data_id');
+		var goodsIndex = $(this).index();
+		var specId = $(this).attr('spec_id');
+		var saleStartTime = $(this).attr('sales_start_time')==undefined?'':$(this).attr('sales_start_time')*1;
+		var secStartTime = $(this).attr('seckill_startime')==undefined?'':$(this).attr('seckill_startime')*1;
+		var secEndTime = $(this).attr('seckill_endtime')==undefined?'':$(this).attr('seckill_endtime')*1;
+		var isSeckill = $(this).attr('is_seckill')==undefined?'':$(this).attr('is_seckill')*1;
+		var nowTime = Date.parse(new Date())*1;
+		if(saleStartTime!==''||isSeckill!==''){
+			if(saleStartTime>0){
+    			if(saleStartTime-nowTime>0){
+    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+specId;
+    			}else{
+    				window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+    			}
+    		//跳转正常
+    		}else if(saleStartTime<0){
+    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+    		}
+    		//跳转 0:正常详情 1:秒杀详情
+			if(isSeckill===0){
+				window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+			}else if(isSeckill===1){
+				if(nowTime>secStartTime&&nowTime<secEndTime){
+					window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
+				}else{
+					window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
+				}
+				
+			}
+		}else{
+			window.location.href="product_details.html";
+		}
+	})
+}
+//分页
+function getdata(pageNm,drinkOrPrime){
+	$.ajax(
+   {    
+		type:"POST",
+	    url:config.primeDrinkList,
+	    data:{'drink_or_prime':drinkOrPrime,'page':pageNm},
+	    beforeSend:function(){
+	      	$('.spinner').show();
+	    },
+	    success:function(datas){
+			console.log(datas);
+			driOrPriJump(datas);
+		},
+		complete:function(){$('.spinner').hide()},
 	})
 }
 //截取url参数
@@ -256,86 +274,6 @@ function showTips(msg){
 	setTimeout(function(){
 		$('.warming').hide();
 	},3000);	
-}
-//分页
-function getdata(page,drinkOrPrime){
-	$.ajax(
-   {    
-		type:"POST",
-	    url:config.primeDrinkList,
-	    data:{'drink_or_prime':drinkOrPrime,'page':page},
-	    beforeSend:function(){
-	      	$('.spinner').show();
-	    },
-	    success:function(datas){
-			console.log(datas)
-			var obj = datas.result;
-			for(var i=0;i<obj.length;i++){
-				var specId = obj[i].data.good_item_spec_id?obj[i].data.good_item_spec_id:0;
-				var saleStartTime = obj[i].data.sales_start_time;
-				var secStartTime = obj[i].data.seckill_startime;
-				var secEndTime = obj[i].data.seckill_endtime;
-				var isSeckill = obj[i].data.is_seckill;
-				var corePic;
-				if(obj[i].data.cover_pic){
-					corePic = obj[i].data.cover_pic;
-				}else{
-					corePic = obj[i].data.title_pics[0];
-				}
-				var html = '<div data_num="'+i+'" spec_id="'+specId+'" sales_start_time="'+saleStartTime+'" seckill_startime="'+secStartTime+'" seckill_endtime="'+secEndTime+'" is_seckill="'+isSeckill+'" class="detail_pic" data_id="'+obj[i].id+'"><img src="'+corePic+'" class="details"></div>';
-				$('.details_info').append(html);
-			}
-			$('.detail_pic').off('click').on('click',function(){		
-				var itemID = $(this).attr('data_id');
-				var goodsIndex = $(this).index();
-				var specId = $(this).attr('spec_id');
-				var saleStartTime = $(this).attr('sales_start_time')==undefined?'':$(this).attr('sales_start_time');
-				var secStartTime = $(this).attr('seckill_startime')==undefined?'':$(this).attr('seckill_startime');
-				var secEndTime = $(this).attr('seckill_endtime')==undefined?'':$(this).attr('seckill_endtime');
-				var isSeckill = $(this).attr('is_seckill')==undefined?'':$(this).attr('is_seckill');
-				var nowTime = Date.parse(new Date());
-				console.log(isSeckill)
-				if(saleStartTime!==''||isSeckill!==''){
-					if(saleStartTime>0){
-		    			if(saleStartTime-nowTime>0){
-		    				window.location.href="pre_sale.html?itemID="+itemID+"&specId="+specId;
-		    			}else{
-		    				window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-		    			}
-		    		//跳转正常
-		    		}else if(saleStartTime<0){
-		    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-		    		}
-		    		//跳转 0:正常详情 1:秒杀详情
-					if(isSeckill==0){
-						window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-					}else if(isSeckill==1){
-						if(nowTime>secStartTime&&nowTime<secEndTime){
-							window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
-						}else{
-							window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-						}
-						
-					}
-				}else{
-					window.location.href="product_details.html";
-				}
-			})
-			$(window).scroll(function() {
-			    if (window.scrollY  >= $(document).height() - $(window).height()) {		
-					//console.log(scrollY)
-					//console.log(datas.result.total_count/20);
-					var totalPage = Math.ceil(datas.total_count/20);
-					if(pageNm<totalPage){
-						console.log(pageNm)
-						pageNm++;
-						getdata(pageNm,drinkOrPrime);
-					}									
-				}
-			});
-		},
-		complete:function(){$('.spinner').hide()},
-	})
 }
 //验证
 var validator = {
@@ -450,12 +388,12 @@ function jumpToGoods(obj){
 		var itemSpecId = $(this).attr('item_spec_id');
 		$.post(config.goodsLsitJump,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 			console.log(datas);
-			var saleStartTime = datas.result[0].data.sales_start_time==undefined?'':datas.result[0].data.sales_start_time;
-			var nowTime = Date.parse(new Date());
-			var nowTime = Date.parse(new Date());
-			var secStartTime = datas.result[0].data.seckill_startime==undefined?'':datas.result[0].data.seckill_startime;
-			var secEndTime = datas.result[0].data.seckill_endtime==undefined?'':datas.result[0].data.seckill_endtime;
-			var isSeckill = datas.result[0].data.is_seckill==undefined?'':datas.result[0].data.is_seckill;
+			var saleStartTime = datas.result[0].data.sales_start_time==undefined?'':datas.result[0].data.sales_start_time*1;
+			var nowTime = Date.parse(new Date())*1;
+			var secStartTime = datas.result[0].data.seckill_startime==undefined?'':datas.result[0].data.seckill_startime*1;
+			var secEndTime = datas.result[0].data.seckill_endtime==undefined?'':datas.result[0].data.seckill_endtime*1;
+			var isSeckill = datas.result[0].data.is_seckill==undefined?'':datas.result[0].data.is_seckill*1;
+			console.log(isSeckill===0)
 			if(saleStartTime!==''||isSeckill!==''){
 				if(saleStartTime>0){
 	    			if(saleStartTime-nowTime>0){
@@ -468,13 +406,13 @@ function jumpToGoods(obj){
 	    			window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 	    		}
 	    		//跳转 0:正常详情 1:秒杀详情
-				if(isSeckill==0){
-					window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
-				}else if(isSeckill==1){
+				if(isSeckill===0){
+					//window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
+				}else if(isSeckill===1){
 					if(nowTime>secStartTime&&nowTime<secEndTime){
-						window.location.href="seckill.html?itemID="+itemID+"&specId="+itemSpecId;
+						//window.location.href="seckill.html?itemID="+itemID+"&specId="+itemSpecId;
 					}else{
-						window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
+						//window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 					}		
 				}
 			}else{
