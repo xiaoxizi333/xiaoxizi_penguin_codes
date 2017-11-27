@@ -147,10 +147,12 @@ function addDatas(pageNm,comments){
 			$('.comment_box').append(commentList);
 			var picObj = detailObj.comment_pics;
 			var picHtml = '';
-			for(var j=0;j<picObj.length;j++){
-				picHtml += '<img src="'+picObj[j]+'" style="width: 6.25rem!important;height: 6.25rem;">';
+			if(picObj){
+				for(var j=0;j<picObj.length;j++){
+					picHtml += '<img src="'+picObj[j]+'" style="width: 6.25rem!important;height: 6.25rem;">';
+				}
+				$('.comment_pic').eq(k+(1*(pageNm-1))).html(picHtml);
 			}
-			$('.comment_pic').eq(k+(1*(pageNm-1))).html(picHtml);
 		}
 		$('.comment_pic img').on('click',function(){
 			var picUrl = $(this).attr('src');
