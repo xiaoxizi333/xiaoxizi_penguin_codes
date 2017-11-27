@@ -55,49 +55,6 @@ $('.nav-bar-icon').on('click',function(){
 		isShow = true;
 	}
 })
-//filter
-function filterGoods(pageNm,drinkOrPrime){
-	$('.filter_tab li').on('tap',function(){
-		var whichCondition,
-			passData;
-		$('.details_info').empty();
-		whichCondition = $(this).index();
-		if(whichCondition==0){
-			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.sales_count":"desc"},'page':pageNm};
-		}else if(whichCondition==1){
-			passData = {'drink_or_prime':drinkOrPrime,'tag_id_array':[1443230295066968],'page':pageNm};
-		}else if(whichCondition==2){
-			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.published_at":"desc"},'page':pageNm};
-		}
-		//console.log(passData)
-		$.ajax({
-	        type: "POST",
-	        dataType:'json',
-	        contentType:'application/json',
-	        url: config.primeDrinkList,
-	        data: JSON.stringify(passData), 
-	        beforeSend:function(){
-		      	$('.spinner').show();
-		    },
-		    success:function(datas){
-				console.log(datas)
-				driOrPriJump(datas);
-				$(window).scroll(function() {
-				    if (window.scrollY  >= $(document).height() - $(window).height()) {		
-						//console.log(scrollY)
-						var totalPage = Math.ceil(datas.total_count/20);
-						if(pageNm<totalPage){
-							console.log(pageNm);
-							pageNm++;
-							filterGoods(pageNm,drinkOrPrime);
-						}
-					}
-				})									
-			},
-			complete:function(){$('.spinner').hide()},
-	    });
-	})
-}
 function driOrPriJump(datas){
 	var obj = datas.result;
 	for(var i=0;i<obj.length;i++){
@@ -151,13 +108,47 @@ function driOrPriJump(datas){
 		}
 	})
 }
+//filter
+function filterGoods(pageNm,drinkOrPrime){
+	passData = {'drink_or_prime':drinkOrPrime,'page':pageNm};
+	$('.filter_tab li').off('tap').on('tap',function(){
+		pageNm = 1;
+		var whichCondition;
+		$('.details_info').empty();
+		whichCondition = $(this).index();
+		if(whichCondition==0){
+			window.localStorage.setItem('filterId',0);
+			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.sales_count":"desc"},'page':pageNm};
+		}else if(whichCondition==1){
+			window.localStorage.setItem('filterId',1);
+			passData = {'drink_or_prime':drinkOrPrime,'tag_id_array':[1443230295066968],'page':pageNm};
+		}else if(whichCondition==2){
+			window.localStorage.setItem('filterId',2);
+			passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.published_at":"desc"},'page':pageNm};
+		}
+		getdata(passData);
+	})
+	filterId = window.localStorage.getItem('filterId');
+	if(filterId==0){
+		passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.sales_count":"desc"},'page':pageNm};
+	}else if(filterId==1){
+		passData = {'drink_or_prime':drinkOrPrime,'tag_id_array':[1443230295066968],'page':pageNm};
+	}else if(filterId==2){
+		passData = {'drink_or_prime':drinkOrPrime,'sort':{"data.published_at":"desc"},'page':pageNm};
+	}else if(filterId==3){
+		passData = {'drink_or_prime':drinkOrPrime,'page':pageNm};
+	}
+	getdata(passData);
+}
 //分页
-function getdata(pageNm,drinkOrPrime){
+function getdata(passData){
 	$.ajax(
    {    
 		type:"POST",
 	    url:config.primeDrinkList,
-	    data:{'drink_or_prime':drinkOrPrime,'page':pageNm},
+	    dataType:'json',
+	 	contentType:'application/json',
+	    data:JSON.stringify(passData),
 	    beforeSend:function(){
 	      	$('.spinner').show();
 	    },

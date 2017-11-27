@@ -21,23 +21,32 @@ $.post(config.commonBanner,{'class_type':'prime'},function(datas){
 		autoplayDisableOnInteraction:false//使滑动效果不停止
 	})
 })
+
 //商品列表
+window.localStorage.setItem('filterId',3);
 var pageNm = 1;
-getdata(pageNm,'prime');
+var passData,
+	filterId;
 filterGoods(pageNm,'prime');
 $(window).scroll(function() {
     if (window.scrollY  >= $(document).height() - $(window).height()) {		
-		//console.log(scrollY)
+		//console.log(scrollY);
+		var filterId2 = window.localStorage.getItem('filterId');
 		$.ajax({
 			type:"POST",
 		    url:config.primeDrinkList,
-		    data:{'drink_or_prime':'prime','page':pageNm},
+		    dataType:'json',
+		    contentType:'application/json',
+		    data:JSON.stringify(passData),
 		    success:function(datas){
 		    	var totalPage = Math.ceil(datas.total_count/20);
+		    	if(filterId!==filterId2){
+					pageNm = 1;
+				} 
 				if(pageNm<totalPage){
-					console.log(pageNm);
+					//console.log(pageNm);
 					pageNm++;
-					getdata(pageNm,'prime');
+					filterGoods(pageNm,'prime');
 				}
 		    }
 		})									
