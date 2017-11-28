@@ -98,9 +98,6 @@
         if(receiver ==''||receiver==undefined){
             $(".help-info").text('请填写姓名');
             return;
-        }else if(!validator.IsPhoneNumber(phoneNum)){
-            $(".help-info").text("请填写正确手机号");
-            return;
         }else if(chooseAddress == ''||chooseAddress == undefined){
             $(".help-info").text("请选择完整地址");
             return;

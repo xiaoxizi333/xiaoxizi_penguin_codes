@@ -67,8 +67,6 @@ $.post(config.addressList,{'uid':uid,'address_id':arrData.addressId},function(da
 		//验证表单
 		if(receiver ==''||receiver==undefined){
 			alert('请填写姓名');
-		}else if(!validator.IsMobilePhoneNumber(phoneNum)){
-			alert('请填写正确手机号');
 		}else if(chooseAddress == ''||chooseAddress == undefined){
 			alert('请选择完整地址');
 		}else if(addressDetail == ''||addressDetail == undefined){
