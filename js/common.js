@@ -398,12 +398,12 @@ function jumpToGoods(obj){
 	    		}
 	    		//跳转 0:正常详情 1:秒杀详情
 				if(isSeckill===0){
-					//window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
+					window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 				}else if(isSeckill===1){
 					if(nowTime>secStartTime&&nowTime<secEndTime){
-						//window.location.href="seckill.html?itemID="+itemID+"&specId="+itemSpecId;
+						window.location.href="seckill.html?itemID="+itemID+"&specId="+itemSpecId;
 					}else{
-						//window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
+						window.location.href="product_details.html?itemID="+itemID+"&specId="+itemSpecId;
 					}		
 				}
 			}else{
