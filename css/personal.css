@@ -101,15 +101,40 @@ header{
 	bottom: -2.1875rem;
 }
 /*my_order*/
-.my_order{
+.my_order,.my_goose,.my_points_info{
 	padding-top: 0.625rem;
 	margin-top: 5.3125rem;
 	font-family:'PingFangSC-Light';
-	font-size:0.875rem;
+	font-size:12px;
 	line-height:1.5rem;
-	color:#5a5a5a;
+	color:#9b9b9b;
 	letter-spacing:-0.34px;
 	position: relative;
+}
+.my_goose,.my_points_info{
+	height: 5rem;
+	padding-top: 2.5rem;
+}
+.point_num,.goose_num{
+	padding-left: 1.25rem;
+}
+.goose_icon{
+	width: 1rem;
+	height: 1.25rem;
+	display: inline-block;
+	background: url(../img/goose_icon.png) no-repeat center center;
+	background-size: 1rem 1.25rem;
+	vertical-align: top;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.get_goose_egg a{
+	text-decoration: underline;
+	font-size: 12px;
+	color:#eea193;
+	position: absolute;
+	right: 0;
+	top: -1.75rem;
 }
 .part_header{
 	position: absolute;
@@ -202,7 +227,7 @@ div.my_coupon{
 .my_address{
 	margin-top: 3.125rem;
 	position: relative;
-	color:#868191;
+	color:#9b9b9b;
 	letter-spacing:0.14px;
 	font-size: 0.875rem;
 	margin-bottom: 1.875rem;
@@ -211,7 +236,6 @@ div.my_coupon{
 	font-family:'PingFangSC-Thin';
 	line-height: 0.875rem;
 	letter-spacing:0.14px;
-	color:#868191;
 	margin-left: 1.25rem;
 	margin-right:1.25rem;
 	padding-top: 0.1875rem;
@@ -227,7 +251,6 @@ div.my_coupon{
 	text-align: right;
 	margin-bottom: 1.25rem;
 	line-height: 1.5625rem;
-	padding-right: 3.3rem;
 }
 .address_details{
 	line-height: 1.75rem;

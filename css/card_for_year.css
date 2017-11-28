@@ -1,0 +1,90 @@
+body{
+	background: #f2f2f2;
+	font-size: 0.875rem;
+}
+.bo_top{
+	background-color: #fff;
+	margin-bottom: 0.8125rem;
+}
+.card_fee_box{
+	height: 2.75rem;
+	line-height: 2.75rem;
+	padding-left:0.9375rem;
+	padding-right:0.9375rem;
+	border-bottom: 1px solid #f2f2f2;
+}
+.spec_fee{
+	color: #9b9b9b;
+}
+.choose_icon{
+	display: inline-block;
+	width:  2.75rem;
+	height:  2.75rem;
+	background-image: url(../img/choose_normal.png);
+	background-repeat: no-repeat;
+	background-position: center right;
+	background-size: 1.25rem 1.25rem;
+	vertical-align: middle;
+}
+.choose_icon.active{
+	background-image: url(../img/choose_selected.png);
+}
+.rules{
+	line-height: 1.6875rem;
+	padding: 0.625rem 0.9375rem;
+	color: #9b9b9b;
+	font-size: 12px;
+}
+.star{
+	width: 0.9375rem;
+	height: 0.9375rem;
+	display: inline-block;
+	background: url(../img/star.png) no-repeat center center;
+	background-size: 0.9375rem 0.9375rem;
+	margin-right: 0.625rem;
+}
+.way_for_pay{
+	padding-left:0.9375rem;
+	padding-right:0.9375rem;
+	background-color: #fff;
+}
+.way_for_pay > div{
+	line-height: 2.75rem;
+	height: 2.75rem;
+}
+.way_for_pay .tit{
+	color:#9b9b9b;
+	border-bottom:1px solid rgba(151,151,151,.2);
+}
+.wechat_icon{
+	background-image: url(../img/wechat.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 1.875rem 1.875rem;
+	display: inline-block;
+	width: 1.875rem;
+	height: 1.875rem;
+	vertical-align: middle;
+	margin-right: 0.5rem;
+}
+.buy_btn{
+	height: 3.125rem;
+	width: 100%;
+	line-height: 3.125rem;
+	color: #fff;
+	opacity:0.75;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background:#5a5665;
+}
+.mask_for_pay{
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	background-color: rgba(0,0,0,.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+}

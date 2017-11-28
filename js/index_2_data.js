@@ -1,0 +1,168 @@
+const goods3 = [
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1437221837146196?imageView2",
+        "vip_price" : 98,
+        "name" : "醉鹅娘 澳洲红酒原瓶进口纷赋卡本妮梅洛赤霞珠干红葡萄酒单支装",
+        "public_price" : 128,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1437221887477847",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1494088965757819?imageView2",
+        "vip_price" : 129,
+        "name" : "醉鹅娘 法国波尔多原瓶进口哈宝诺言贵腐甜白葡萄酒2012",
+        "public_price" : 189,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1494089016089472",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1488228147334559?imageView2",
+        "vip_price" : 109,
+        "name" : "醉鹅娘 原瓶进口三磨坊酒庄2013干红葡萄酒",
+        "public_price" : 109,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1488228164111780",
+    }
+]
+
+
+
+const goods20=[
+        {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1499806422865148?imageView2",
+        "vip_price" : 109,
+        "name" : "醉鹅娘 原瓶进口三磨坊酒庄干红葡萄酒2013",
+        "public_price" : 109,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1488231787990494",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1437551274561581?imageView2",
+        "vip_price" : 228,
+        "name" : "醉鹅娘 澳洲原瓶进口漫山救世主混酿干红葡萄酒单支",
+        "public_price" : 228,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1433232483621303",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1451906481326491?imageView2",
+        "vip_price" : 195,
+        "name" : "醉鹅娘 葡萄牙原瓶进口哥伦布马德拉半甜葡萄酒3年",
+        "public_price" : 195,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1451906514880928",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1494088965757819?imageView2",
+        "vip_price" : 129,
+        "name" : "醉鹅娘 法国波尔多原瓶进口哈宝诺言贵腐甜白葡萄酒2012",
+        "public_price" : 189,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1494089016089472",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1437221837146196?imageView2",
+        "vip_price" : 98,
+        "name" : "醉鹅娘 澳洲红酒原瓶进口纷赋卡本妮梅洛赤霞珠干红葡萄酒单支装",
+        "public_price" : 128,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1437221887477847",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1437387965139993?imageView2",
+        "vip_price" : 188,
+        "name" : "醉鹅娘 意大利原瓶进口红酒特拉维尔DOCG干红葡萄酒单支",
+        "public_price" : 188,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1437388015471644",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1437251952249110?imageView2",
+        "vip_price" : 99,
+        "name" : "醉鹅娘 原瓶进口红酒菲露丝马尔贝克干红葡萄酒单支装",
+        "public_price" : 119,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1437252019357977",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1471959935289864?imageView2",
+        "vip_price" : 129,
+        "name" : "醉鹅娘 意大利原瓶进口红酒芭芭拉酒庄黑珍珠干红葡萄酒单支装",
+        "public_price" : 169,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1433234094234043",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1473780649104948?imageView2",
+        "vip_price" : 248,
+        "name" : "醉鹅娘 法国原瓶进口枫丹城堡干白葡萄酒单只装",
+        "public_price" : 368,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1473780665882169",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1450603495624259?imageView2",
+        "vip_price" : 300,
+        "name" : "醉鹅娘 买一送一加拿大摩恩威代尔冰酒甜型冰葡萄酒单支装",
+        "public_price" : 378,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1450574689144186",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1471961092917799?imageView2",
+        "vip_price" : 119,
+        "name" : "醉鹅娘 奥地利原瓶进口红酒威雷德酒庄雷司令干白葡萄酒",
+        "public_price" : 159,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1438903417507822",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1433275567512273?imageView2",
+        "vip_price" : 158,
+        "name" : "醉鹅娘 意大利原瓶进口小花束布拉凯多低醇甜红低泡葡萄酒单支",
+        "public_price" : 188,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1433275651398361",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1472211375428855?imageView2",
+        "vip_price" : 128,
+        "name" : "醉鹅娘  意大利原瓶进口玛卡瑞奥莫斯卡托低醇甜白低泡葡萄酒2016",
+        "public_price" : 158,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1472211408983292",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1454805819132692?imageView2",
+        "vip_price" : 129,
+        "name" : "醉鹅娘 精选推荐原瓶进口红酒阿达玛赤霞珠干红葡萄酒单支装",
+        "public_price" : 169,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1454805869464345",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1437225410693232?imageView2",
+        "vip_price" : 449,
+        "name" : "醉鹅娘 奥地利原瓶进口冰酒威雷德雷司令金瓶甜白冰葡萄酒单支装375ml",
+        "public_price" : 499,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1437225477802099",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1488227207810453?imageView2",
+        "vip_price" : 199,
+        "name" : "醉鹅娘 意大利原瓶进口维嘉酒庄巴贝拉干红葡萄酒2015",
+        "public_price" : 269,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1488227291696538",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1454794913942218?imageView2",
+        "vip_price" : 288,
+        "name" : "醉鹅娘 原瓶进口红酒菲露丝马尔贝克赤霞珠混酿干红葡萄酒单支装",
+        "public_price" : 328,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1454794964273871",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1504227336720688?imageView2",
+        "vip_price" : 128,
+        "name" : "醉鹅娘 意大利原瓶进口普瑞尔起泡白葡萄酒2016",
+        "public_price" : 168,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1504227387052341",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1437265776675178?imageView2",
+        "vip_price" : 218,
+        "name" : "醉鹅娘 第二瓶半价波特酒葡萄牙进口鸟烧园加烈甜红酒葡萄酒单支",
+        "public_price" : 218,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1437265827006829",
+    },
+    {
+        "pic" : "http://ofdx4t772.bkt.clouddn.com/1454564394992647?imageView2",
+        "vip_price" : 175,
+        "name" : "醉鹅娘 国产红酒新疆天塞精选霞多丽干白葡萄酒2015",
+        "public_price" : 208,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1454564428547083",
+    }
+]

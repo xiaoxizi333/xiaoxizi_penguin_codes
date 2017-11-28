@@ -228,6 +228,46 @@ body{
 	background-size:100% 100%;
 	background-image: url(../img/arrow.png);
 }
+/*鹅蛋／积分*/
+.goose_and_point_box > div{
+	margin-left: 1.25rem;
+	margin-right: 0.9375rem;
+	height: 3.75rem;
+	line-height: 3.75rem;
+	border-bottom: 1px solid rgba(151,151,151,.2);
+}
+.goose_and_point_box > div:last-child{
+	border-bottom: none;
+}
+.goose_and_point_box .box_tit{
+	margin-right: 0.625rem;
+}
+.goose_and_point_box .box_content{
+	font-size: 12px;
+	color: #9b9b9b;
+}
+.point_choose{
+	display: inline-block;
+	width: 2.5rem;
+    height: 3.75rem;
+    background-repeat: no-repeat;
+    background-size: 1.3125rem 1.3125rem;
+    background-position: center right;
+    background-image: url(../img/choose_normal.png);
+    vertical-align: middle;
+}
+.point_choose.active{
+	background-image: url(../img/choose_selected.png);
+}
+.goose_icon{
+	width: 1rem;
+	height: 1.25rem;
+	display: inline-block;
+	background: url(../img/goose_icon.png) no-repeat center center;
+	background-size: 1rem 1.25rem;
+	margin-left: 0.375rem;
+	margin-right: 0.375rem;
+}
 /*message*/
 /*pay communicate*/
 /*service*/
@@ -281,6 +321,15 @@ body{
     letter-spacing: 0.12px;
     display: none;
 }
+.summary_box{
+	height: 7.75rem!important;
+}
+.summary_box > div{
+	line-height: 1.45rem;
+}
+.sum_content{
+	color: #9b9b9b;
+}
 /*loading*/
 .spinner_box,.buy_mask{
 	position: fixed;
@@ -302,6 +351,84 @@ body{
 	top: 50%;
 	margin-top: -55px;
 	z-index: 100001;
+}
+/*无效*/
+.invalid_btn{
+	width: 1.9375rem;
+	height: 0.9375rem;
+	line-height: 0.9375rem;
+	color: #fff;
+	background: #bbbbbb;
+	border-radius:20px;
+	font-size: 12px;
+	position: absolute;
+	left: 0.375rem;
+	margin-top: 2.5rem;
+}
+.sold_out{
+	width: 3.125rem;
+	height: 3.125rem;
+	background:rgba(155,155,155,0.80);
+	border-radius: 100%;
+	color: #fff;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	font-size: 12px;
+	position: absolute;
+	top: 2rem;
+	left: 4rem;
+}
+hr{
+	margin: 0 0.3125rem;
+}
+.warming{
+	z-index: 10000001;
+}
+.lack_eggs_tip{
+	width: 15.625rem;
+	height: 9.375rem;
+	background-color: #fff;
+	border-radius:5px;
+	position: fixed;
+	top: 50%;
+	margin-top: -4.6875rem;
+	left: 50%;
+	margin-left: -7.8125rem;
+	z-index: 10000001;
+	font-size: 0.875rem;
+	display: none;
+}
+.lack_eggs_tip .cross_icon{
+	width: 0.625rem;
+	height: 0.625rem;
+	display: inline-block;
+	background: url(../img/cross_icon.png) no-repeat center center;
+	background-size: 0.625rem 0.625rem;
+	position: absolute;
+	right: 0.625rem;
+	top: 0.625rem;
+}
+.lack_eggs_tip .tip_title{
+	color: #666;
+	font-weight: normal;
+	font-size: 0.875rem;
+	margin-top: 1.25rem;
+	margin-bottom: 0.9375rem;
+}
+.lack_eggs_tip .tip_spec_content{
+	color: #333;
+	line-height: 1.4rem;
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+}
+.jump_to_get_egg_btn{
+	color: #fff;
+	width: 11.25rem;
+	height: 1.875rem;
+	line-height: 1.875rem;
+	margin: 0.625rem auto 0;
+	background:#eea193;
+	border-radius:10px;
 }
 /*footer*/
 footer{

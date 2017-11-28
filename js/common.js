@@ -1,5 +1,6 @@
 var uid = localStorage.getItem("uid");
-//var uid = 1431768973512333;
+//var uid = 1260826557228331;
+//var uid = 1434704852094477;
 var openid = localStorage.getItem("openid");
 //var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 (function(doc, window)
@@ -22,7 +23,7 @@ var openid = localStorage.getItem("openid");
  * Created by acmen on 2017/4/9.
  */
 var util = {
-    api_host:"http://api.qietuan.org",
+    api_host:"http://101.201.115.31:14445",
     get: function(url, callback){
         $.get(url, function (data) {
             callback(data);
@@ -212,7 +213,7 @@ function switchDate(time,mark){
 //跳转购物车
 $('.shopping_icon').off('tap').on('tap',function(){
 	if(!openid){
-		localStorage.setItem("redirect_url",window.location.href);
+		localStorage.setItem("redirect_url",window.location.href); 
 		window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 	}else{
 		if(uid){
@@ -231,18 +232,20 @@ $('.shopping_icon').off('tap').on('tap',function(){
 				}
 			})
 		}else{
-			window.location.href="register.html"
+			window.localStorage.setItem('setIndexNum',1);
+			window.location.href="register.html";
 		}
 	}
 })
 $('.personal_icon').on('tap',function(){
 	if(!openid){
-		localStorage.setItem("redirect_url",window.location.href);
+		localStorage.setItem("redirect_url",window.location.href); 
 		window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 	}else{
 		if(uid){
 			window.location.href="personal.html"
 		}else{
+			window.localStorage.setItem('setIndexNum',1);
 			window.location.href="register.html"
 		}
 	}
@@ -422,6 +425,7 @@ function isOnline(obj,url_1,url_2){
 		obj.css({'backgroundImage':'url(img/'+url_2+')'});
 	}
 }
-
-
+$('.go_back_icon').on('tap',function(){
+	window.history.go(-1);
+})
 

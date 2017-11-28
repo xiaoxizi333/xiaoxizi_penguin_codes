@@ -1,5 +1,4 @@
 window.localStorage.setItem('product_type','goodsForSeckill');
-window.localStorage.setItem('share_uid',getQueryString('shareUid'));
 isVip();
 //商品详情
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){	
@@ -33,8 +32,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		});
 	});
 	var shareTitle = obj.name;
-	var shareUid = uid?uid:0;
-	var shareLink = window.location.href+'&shareUid='+shareUid;
+	var shareLink = window.location.href;
 	var shareDesc = shareTitle+' '+$('.vip_price').text();
 	var shareImg = datas.result.item_info[0].data.title_pics[0];
 	wx.ready(
@@ -45,11 +43,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    imgUrl: shareImg, // 分享图标
 			    success: function () { 
 			        // 用户确认分享后执行的回调函数
-			       	showError('分享成功！');
+			       	showTips('分享成功！');
 			    },
 			    cancel: function () { 
 			        // 用户取消分享后执行的回调函数
-			        showError('分享取消！');
+			        showTips('分享取消！');
 			    }
 			});
 			wx.onMenuShareAppMessage({
@@ -60,11 +58,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 			    success: function () { 
 			        // 用户确认分享后执行的回调函数
-			        showError('分享成功！');
+			        showTips('分享成功！');
 			    },
 			    cancel: function () { 
 			        // 用户取消分享后执行的回调函数
-			        showError('分享取消！');
+			        showTips('分享取消！');
 			    }
 			});
 			wx.onMenuShareQQ({
@@ -74,11 +72,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    imgUrl: shareImg, // 分享图标
 			    success: function () { 
 			       // 用户确认分享后执行的回调函数
-			       showError('分享成功！');
+			       showTips('分享成功！');
 			    },
 			    cancel: function () { 
 			       // 用户取消分享后执行的回调函数
-			       showError('分享取消！');
+			       showTips('分享取消！');
 			    }
 			});
 			wx.onMenuShareWeibo({
@@ -88,11 +86,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    imgUrl: shareImg, // 分享图标
 			    success: function () { 
 			       // 用户确认分享后执行的回调函数
-			       showError('分享成功！');
+			       showTips('分享成功！');
 			    },
 			    cancel: function () { 
 			        // 用户取消分享后执行的回调函数
-			        showError('分享取消！');
+			        showTips('分享取消！');
 			    }
 			});
 			wx.onMenuShareQZone({
@@ -102,10 +100,10 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    imgUrl: shareImg, // 分享图标
 			    success: function () { 
 			       // 用户确认分享后执行的回调函数
-			       showError('分享成功！');
+			       showTips('分享成功！');
 			    },
 			    cancel: function () { 
-			    	showError('分享取消！');
+			    	showTips('分享取消！');
 			        // 用户取消分享后执行的回调函数
 			    }
 			});
@@ -136,7 +134,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 					}else if(index =='1'){
 						var cartData = {'uid':uid,'item_id':itemID,'num':$('.add_or_substract .specific_num').html()};
 						$.post(config.itemBilling,cartData,function(data){
-							//console.log(data)
+							console.log(data)
 							if(data.error_code==0){
 								var goodsInfo,
 									goodsBox = [],
@@ -170,6 +168,14 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 								window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
 								window.localStorage.setItem('jump_btn','1');
 								window.localStorage.setItem('counts_num','0');
+								var userOrderData = data.result.user_order[0].data;
+								window.localStorage.setItem('discountMon',userOrderData.discount_money);
+								window.localStorage.setItem('getGooseCount',userOrderData.get_goose_count);
+								window.localStorage.setItem('getPointCount',userOrderData.get_point_count);
+								window.localStorage.setItem('itemCostGooseTotal',userOrderData.item_cost_goose_total_count);
+								window.localStorage.setItem('myPointInfo',userOrderData.my_point_info);
+								window.localStorage.setItem('isPointDiscount',userOrderData.is_point_discount);
+								window.localStorage.setItem('isGroup',0);
 								window.location.href="firm_order.html";
 							}else{
 								$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
@@ -180,6 +186,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						
 					}
 				}else{
+					window.localStorage.setItem('setIndexNum',1);
 					window.location.href="register.html"
 				}
 			})
@@ -289,6 +296,14 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 											window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
 											window.localStorage.setItem('jump_btn','1');
 											window.localStorage.setItem('counts_num','0');
+											var userOrderData = data.result.user_order[0].data;
+											window.localStorage.setItem('discountMon',userOrderData.discount_money);
+											window.localStorage.setItem('getGooseCount',userOrderData.get_goose_count);
+											window.localStorage.setItem('getPointCount',userOrderData.get_point_count);
+											window.localStorage.setItem('itemCostGooseTotal',userOrderData.item_cost_goose_total_count);
+											window.localStorage.setItem('myPointInfo',userOrderData.my_point_info);
+											window.localStorage.setItem('isPointDiscount',userOrderData.is_point_discount);
+											window.localStorage.setItem('isGroup',0);
 											window.location.href="firm_order.html";
 										}else{
 											$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
@@ -301,6 +316,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						}
 					}
 				}else{
+					window.localStorage.setItem('setIndexNum',1);
 					window.location.href="register.html"
 				}
 			})

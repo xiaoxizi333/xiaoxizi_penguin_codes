@@ -1,0 +1,48 @@
+.egg_box,.points_box,.cou_box{
+	display: none;
+}
+.det_price{
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+.shrink_font{
+	margin-bottom: 0.625rem;
+}
+.benefits{
+	font-size: 12px;
+	color: #514b71;
+	line-height: 0.9375rem;
+	border-bottom: 1px solid #979797;
+	margin-bottom: 0.9375rem;
+	padding-bottom: 0.9375rem;
+}
+.benefits > div{
+	margin-bottom: 0.3125rem;
+}
+.tab_tit{
+	margin-right: 1.25rem;
+	border: 1px solid #eea193;
+	padding:1px 6px; 
+	color: #eea193;
+}
+.bene_content{
+	width: 17.0625rem;
+	margin-bottom: 0;
+}
+.cou_box .bene_content li{
+	width: 4.28rem;
+	height: 1.1875rem;
+	line-height: 1.1875rem;
+	background: url(../img/cou_bg_blank.png) no-repeat center center;
+	background-size: 4.28rem 1.1875rem;
+	text-align: center;
+	margin-left: 0.625rem;
+}
+.cou_box .tab_tit{
+	margin-right: 0.625rem;
+}
+.cou_box .bene_content li.active{
+	background: url(../img/cou_bg_nor.png) no-repeat center center;
+	background-size: 4.28rem 1.1875rem;
+	color: #fff;
+}

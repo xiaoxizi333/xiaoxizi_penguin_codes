@@ -67,4 +67,16 @@ var config = {
 	skuno:'http://api.qietuan.org/web/find_item_by_skuno.json',
 	hardAd:'http://api.qietuan.org/web/hard_ad/find.json',
 	wxShare:'http://api.qietuan.org/util/wechat/get_signature.json',
+	selectTag:'http://api.qietuan.org/common/select_wine_class_tag/list.json',
+	selectWineTag:'http://api.qietuan.org/web/find_item_by/select_wine_tag.json',
+	points:'http://api.qietuan.org/web/take_point/list.json',
+	userTakePoint:'http://api.qietuan.org/web/user_take/point.json',
+	goose:'http://api.qietuan.org/web/take_goose/list.json',
+	userTakeGoose:'http://api.qietuan.org/web/user_take/goose.json',
+	globalRate:'http://api.qietuan.org/web/user_info_and_global_rate.json',
+	exchange:'http://api.qietuan.org/web/user_exchange_point_to_goose.json',
+	showItem:'http://api.qietuan.org/show_item_goose_point_coupon.json',
+	selectUsePoint:'http://api.qietuan.org/web/confirm_order/select_use_point.json',
+	unselectUsePoint:'http://api.qietuan.org/web/confirm_order/unselect_use_point.json',
 }
+

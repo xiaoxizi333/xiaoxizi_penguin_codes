@@ -1,8 +1,10 @@
 $.post(config.userShow,{'uid':uid},function(datas){
 	//console.log(datas);
-	var obj = datas.result[0].user_data;
-	$('.portrait img').attr('src',obj.user_profile_pic);
-	$('.portrait .username').html(obj.user_name);
+	if(datas.error_code==0){
+		var obj = datas.result[0].user_data;
+		$('.portrait img').attr('src',obj.user_profile_pic);
+		$('.portrait .username').html(obj.user_name);
+	}
 })
 //分红
 $.post(config.vipService,{'uid':uid},function(datas){
@@ -46,6 +48,16 @@ $('.purchase_btn').on('tap',function(){
 	window.location.href="all-products-classify.html";
 })
 isVip();
+//鹅蛋
+$.post(config.globalRate,{'uid':uid},function(datas){
+	//console.log(datas);
+	var obj = datas.result.user[0].user_data;
+	var points = obj.point?obj.point:0;
+	var goose = obj.goose?obj.goose:0;
+	$('.goose_num').html(goose);
+	$('.point_num').html(points);
+	
+})
 //我的订单
 $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 	//console.log(datas);
@@ -79,7 +91,7 @@ $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){
 			window.location.href = "my_order.html";
 		})
 	}else{
-		$('.my_order_list').html('<div class="text-center" style="padding-bottom: 1.25rem;font-family:PingFangSC-Thin">您还没有订单哟～</div>');
+		$('.my_order_list').html('<div style="padding-bottom: 1.25rem;font-family:PingFangSC-Thin">您还没有订单哟～</div>');
 	}	
 })
 //优惠券

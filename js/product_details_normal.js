@@ -1,5 +1,4 @@
 window.localStorage.setItem('product_type','normalGoods');
-window.localStorage.setItem('share_uid',getQueryString('shareUid'));
 isVip();
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	//console.log(datas);
@@ -32,6 +31,39 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		}
 	}
 	$('.det_price').html(priceHtml);
+	//优惠
+	var benUid = uid?uid:0;
+	var benData = {'uid':benUid,'item_id':itemID,'item_spec_id':itemSpecId};
+	$.ajax({
+		type:'post',
+		url:config.showItem,
+	    dataType:'json',
+	    contentType:'application/json',
+	   	data: JSON.stringify(benData), 
+        success:function(datas){
+	      	if(datas.error_code==0){
+	      		//console.log(datas);
+		      	var obj = datas.result;
+		      	if(obj.goose_info){
+		      		$('.egg_box').show();
+		      		$('.egg_box .bene_content').html(obj.goose_info);
+		      	}
+		      	if(obj.point_info){
+		      		$('.points_box').show();
+		      		$('.points_box .bene_content').html(obj.point_info);
+		      	}
+		      	if(obj.coupon_info.length){
+		      		$('.cou_box').show();
+		      		var couList = '';
+		      		for(var i=0;i<obj.coupon_info.length;i++){
+		      			couList += '<li class="active">'+obj.coupon_info[i]+'</li>'
+		      		}
+		      		$('.cou_box .bene_content').html(couList);
+		      	}
+	      	}
+	    },
+	})
+	
 	$.post(config.wxShare,{'url':location.href.split('#')[0]},function(data){
 		wx.config({
 		    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -43,8 +75,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		});
 	});
 	var shareTitle = obj.name;
-	var shareUid = uid?uid:0;
-	var shareLink = window.location.href+'&shareUid='+shareUid;
+	var shareLink = window.location.href;
 	var shareDesc = shareTitle+' '+$('.vip_price').text();
 	var shareImg = datas.result.item_info[0].data.title_pics[0];
 	wx.ready(
@@ -55,11 +86,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    imgUrl: shareImg, // 分享图标
 			    success: function () { 
 			        // 用户确认分享后执行的回调函数
-			       	showError('分享成功！');
+			       	showTips('分享成功！');
 			    },
 			    cancel: function () { 
 			        // 用户取消分享后执行的回调函数
-			        showError('分享取消！');
+			        showTips('分享取消！');
 			    }
 			});
 			wx.onMenuShareAppMessage({
@@ -70,11 +101,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 			    success: function () { 
 			        // 用户确认分享后执行的回调函数
-			        showError('分享成功！');
+			        showTips('分享成功！');
 			    },
 			    cancel: function () { 
 			        // 用户取消分享后执行的回调函数
-			        showError('分享取消！');
+			        showTips('分享取消！');
 			    }
 			});
 			wx.onMenuShareQQ({
@@ -84,11 +115,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    imgUrl: shareImg, // 分享图标
 			    success: function () { 
 			       // 用户确认分享后执行的回调函数
-			       showError('分享成功！');
+			       showTips('分享成功！');
 			    },
 			    cancel: function () { 
 			       // 用户取消分享后执行的回调函数
-			       showError('分享取消！');
+			       showTips('分享取消！');
 			    }
 			});
 			wx.onMenuShareWeibo({
@@ -98,11 +129,11 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    imgUrl: shareImg, // 分享图标
 			    success: function () { 
 			       // 用户确认分享后执行的回调函数
-			       showError('分享成功！');
+			       showTips('分享成功！');
 			    },
 			    cancel: function () { 
 			        // 用户取消分享后执行的回调函数
-			        showError('分享取消！');
+			        showTips('分享取消！');
 			    }
 			});
 			wx.onMenuShareQZone({
@@ -112,10 +143,10 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 			    imgUrl: shareImg, // 分享图标
 			    success: function () { 
 			       // 用户确认分享后执行的回调函数
-			       showError('分享成功！');
+			       showTips('分享成功！');
 			    },
 			    cancel: function () { 
-			    	showError('分享取消！');
+			    	showTips('分享取消！');
 			        // 用户取消分享后执行的回调函数
 			    }
 			});
@@ -161,7 +192,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						var cartData = {'uid':uid,'item_id':itemID,'num':$('.add_or_substract .specific_num').html()*1};
 						//console.log(cartData)
 						$.post(config.itemBilling,cartData,function(data){
-							//console.log(data)
+							console.log(data)
 							if(data.error_code==0){
 								var goodsInfo,
 									goodsBox = [],
@@ -198,6 +229,14 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 								window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
 								window.localStorage.setItem('jump_btn','1');
 								window.localStorage.setItem('counts_num','0');
+								var userOrderData = data.result.user_order[0].data;
+								window.localStorage.setItem('discountMon',userOrderData.discount_money);
+								window.localStorage.setItem('getGooseCount',userOrderData.get_goose_count);
+								window.localStorage.setItem('getPointCount',userOrderData.get_point_count);
+								window.localStorage.setItem('itemCostGooseTotal',userOrderData.item_cost_goose_total_count);
+								window.localStorage.setItem('myPointInfo',userOrderData.my_point_info);
+								window.localStorage.setItem('isPointDiscount',userOrderData.is_point_discount);
+								window.localStorage.setItem('isGroup',0);
 								window.location.href="firm_order.html";
 							}else{
 								$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
@@ -208,6 +247,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						
 					}
 				}else{
+					window.localStorage.setItem('setIndexNum',1);
 					window.location.href="register.html"
 				}
 			})
@@ -450,6 +490,14 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 											window.localStorage.setItem('identity',data.result.user_order[0].data.id_no);
 											window.localStorage.setItem('jump_btn','1');
 											window.localStorage.setItem('counts_num','0');
+											var userOrderData = data.result.user_order[0].data;
+											window.localStorage.setItem('discountMon',userOrderData.discount_money);
+											window.localStorage.setItem('getGooseCount',userOrderData.get_goose_count);
+											window.localStorage.setItem('getPointCount',userOrderData.get_point_count);
+											window.localStorage.setItem('itemCostGooseTotal',userOrderData.item_cost_goose_total_count);
+											window.localStorage.setItem('myPointInfo',userOrderData.my_point_info);
+											window.localStorage.setItem('isPointDiscount',userOrderData.is_point_discount);
+											window.localStorage.setItem('isGroup',0);
 											window.location.href="firm_order.html";
 										}else{
 											$('.choose_item_type').css({'transform':'translateY(26.25rem)'});
@@ -462,6 +510,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						}
 					}
 				}else{
+					window.localStorage.setItem('setIndexNum',1);
 					window.location.href="register.html"
 				}
 			})

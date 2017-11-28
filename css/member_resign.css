@@ -1,0 +1,55 @@
+body{
+	background: #f2f2f2;
+	font-size: 0.875rem;
+}
+.block{
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+	padding-bottom: 1.875rem;
+	background-color: #fff;
+}
+.block > li{
+	border-bottom:1px solid rgba(51,51,51,0.20);
+	height: 2.75rem;
+	line-height: 2.75rem;
+	color: #666666;
+	font-size: 0.875rem;
+}
+.block > li:last-child{
+	border-bottom:none;
+	height:auto;
+}
+.block > li input{
+	outline: none;
+	border: none;
+	height: 1.5rem;
+}
+.block > li input::placeholder{
+	color: #999999;
+}
+.block > li label{
+	font-weight: normal;
+	width: 4.5rem;
+	margin-right: 2.5rem;
+}
+.address_detail{
+	height: 5rem;
+	resize:none;
+	outline: none;
+	line-height: 1.5rem;
+	padding-top: 0.6rem;
+}
+.btn-customer{
+	width: 100%;
+	height: 3.125rem;
+	text-align: center;
+	background:#5a5665;
+	color: #fff!important;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	outline: none!important;
+}
+.help-info{
+	padding-left: 0.9375rem;
+}

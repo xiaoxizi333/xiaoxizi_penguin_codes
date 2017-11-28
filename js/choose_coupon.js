@@ -36,16 +36,24 @@ $.post(config.myCouponList,{'uid':uid,'user_order_id':user_order_id},function(da
 		if(index==0){
 			$.post(config.noCoupon,{'uid':uid,'user_order_id':user_order_id},function(datas){
 				//console.log(datas);
-				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
-				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
-				window.location.href="firm_order.html";
+				if(datas.error_code==0){
+					window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
+					window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
+					window.location.href="firm_order.html";
+				}else{
+					showTips(datas.error_msg);
+				}
 			})
 		}else{
 			$.post(config.selectOneCoupon,{'uid':uid,'user_order_id':user_order_id,'history_coupon_id':$('.coupon_info').eq(index-1).attr('coupon_id')*1},function(datas){
 				//console.log(datas);
-				window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
-				window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
-				window.location.href="firm_order.html";
+				if(datas.error_code==0){
+					window.localStorage.setItem('total_price',datas.result.user_order[0].data.total_price);
+					window.localStorage.setItem('item_total_price',datas.result.user_order[0].data.item_total_price);
+					window.location.href="firm_order.html";
+				}else{
+					showTips(datas.error_msg);
+				}
 			})
 		}
 		$('.use_icon').removeClass('active');

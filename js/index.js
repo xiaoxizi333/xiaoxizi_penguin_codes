@@ -2,33 +2,25 @@ if(!openid){
 	localStorage.setItem("redirect_url",window.location.href);
 	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 }
-setTimeout(function(){
-	$('.adver_mask').fadeIn();
-},200)
-
-$('.adver_delete img').on('tap',function(){
-	$('.adver_mask').fadeOut();
-})
 //分类详情
 $.post(config.classify,{'is_add_best_ares':0,'limit':6},function(data){
 	//console.log(data);
 	var obj = data.result;
 	if(obj.length){
-		var typeTab = '<ul class="list-unstyled list-inline">'+
-							'<li class="clearfix"><a style="background-image: url(img/home_classify_1.png)">'+obj[0].data.class_name+'</a></li><li class="clearfix">'+
-							'<a style="background-image: url(img/home_classify_2.png)">'+obj[1].data.class_name+'</a></li><li class="clearfix">'+
-							'<a style="background-image: url(img/home_classify_3.png)">'+obj[2].data.class_name+'</a></li><li class="clearfix">'+
-							'<a style="background-image: url(img/home_classify_4.png)">'+obj[3].data.class_name+'</a></li><li class="clearfix">'+
-							'<a style="background-image: url(img/home_classify_5.png)">'+obj[4].data.class_name+'</a></li><li class="clearfix">'+
-							'<a style="background-image: url(img/home_classify_6.png)">'+obj[5].data.class_name+'</a></li class="clearfix">'+
-						'</ul>';
-		$('.type_tab').html(typeTab);
-		$('.type_tab ul li').on('tap',function(){
+		var typeTab = '';
+		for(var i=0;i<obj.length;i++){
+			typeTab += '<li>'+
+							'<a>'+
+								'<div><img src="'+obj[i].data.class_pic+'"></div>'+
+								'<div>'+obj[i].data.class_name+'</div>'+
+						'</li>'
+		}
+		$('.top_tab_box').html(typeTab);
+		$('.top_tab_box li').on('tap',function(){
 			var index = $(this).index();
-			console.log(obj[index].id)
-			window.location.href = "all-products-classify.html?tabId="+obj[index].id;
 			//window.localStorage.setItem('tabId',obj[index].id);
 			window.localStorage.setItem('tabOrList','0');
+			window.location.href = "all-products-classify.html?tabId="+obj[index].id;
 		})
 	}
 })
@@ -68,7 +60,7 @@ $('.vip_order').on('tap',function(){
 })
 //商品模块化
 $.post(config.indexModuleList,function(datas){
-	//console.log(datas);
+	console.log(datas);
 	var obj = datas.result;
 	var listIndex = 0;
 	var seckillIndex = 0;
@@ -245,12 +237,13 @@ $.post(config.indexModuleList,function(datas){
 			    cache:false, 
 			    async:false, 
 			    success: function(d){
-			    	//console.log(d)
-			    	if(picture!=''){
-				 		var html = '<div class="zdytw" item_id="'+d.result[0].id+'" item_spec_id="'+item_spec_id+'" style="width:100%" type="'+jumpType+'" id="'+WZId+'" customUrl="'+customUrl+'"><img style="width:100%" src="'+picture+'"></div>';
-				 		$('.module_box').append(html);
-				 	}			
-					jump('.zdytw');
+			    	if(d.result.length){
+				    	if(picture!=''){
+					 		var html = '<div class="zdytw" item_id="'+d.result[0].id+'" item_spec_id="'+item_spec_id+'" style="width:100%" type="'+jumpType+'" id="'+WZId+'" customUrl="'+customUrl+'"><img style="width:100%" src="'+picture+'"></div>';
+					 		$('.module_box').append(html);
+					 	}			
+						jump('.zdytw');
+					}
 				}
 			})	
 		}
@@ -259,53 +252,136 @@ $.post(config.indexModuleList,function(datas){
 //coupon
 $.post(config.indexCoupon,{},function(datas){
 	//console.log(datas);
-	var obj = datas.result;
-	var coupon = '';
-	var bgPic;
-	for(var i=0;i<obj.length;i++){
-		var objTxt = obj[i].data;
-		//1.固定金额 3.折扣 13.满减
-		var chooseBg = objTxt.coupon_value_type_array[0];
-		var discount,couponName;
-		if(chooseBg==1){
-			bgPic = 'background-image: url(img/home_coupon_bg_1.png)';
-			discount = '<span class="money_mark">¥</span>'+objTxt.coupon_value;
-			couponName = objTxt.name;
-		}else if(chooseBg==3){
-			bgPic = 'background-image: url(img/home_coupon_bg_2.png)';
-			discount = objTxt.coupon_discount/10+' 折';
-			couponName = objTxt.name;
-		}else if(chooseBg==13){
-			bgPic = 'background-image: url(img/home_coupon_bg_3.png)';
-			discount = '<span class="money_mark">¥</span>'+objTxt.coupon_value;
-			couponName = '满'+objTxt.full_sub_value+'减'+objTxt.coupon_value;
+	if(datas.error_code==0){
+		var obj = datas.result;
+		var coupon = '';
+		for(var i=0;i<obj.length;i++){
+			var objTxt = obj[i].data;
+			//1.固定金额 3.折扣 13.满减
+			var chooseBg = objTxt.coupon_value_type_array[0];
+			var discount,couponName;
+			// if(chooseBg==1){
+			// 	bgPic = 'background-image: url(img/home_coupon_bg_1.png)';
+			// 	discount = '<span class="money_mark">¥</span>'+objTxt.coupon_value;
+			// 	couponName = objTxt.name;
+			// }else if(chooseBg==3){
+			// 	bgPic = 'background-image: url(img/home_coupon_bg_2.png)';
+			// 	discount = objTxt.coupon_discount/10+' 折';
+			// 	couponName = objTxt.name;
+			// }else if(chooseBg==13){
+			// 	bgPic = 'background-image: url(img/home_coupon_bg_3.png)';
+			// 	discount = '<span class="money_mark">¥</span>'+objTxt.coupon_value;
+			// 	couponName = '满'+objTxt.full_sub_value+'减'+objTxt.coupon_value;
+			// }
+			// coupon += '<div class="swiper-slide" data_id="'+obj[i].id+'">'+
+			// 				'<a href="javascript:;" style="'+bgPic+'">'+
+			// 					'<div class="text-center">'+couponName+'</div>'+
+			// 					'<div class="coupon_price text-center">'+discount+'</div>'+
+			// 				'</a>'+
+			// 			'</div>';
+			coupon += '<div class="swiper-slide" data_id="'+obj[i].id+'">'+
+							'<a href="javascript:;" style="background-image:url(img/cou_bg.png);display:table">'+
+								'<div class="text-center" style="display:table-cell;vertical-align:middle;">领取 '+objTxt.coupon_value+' 优惠券</div>'+
+							'</a>'+
+						'</div>';
 		}
-		coupon += '<div class="swiper-slide" data_id="'+obj[i].id+'">'+
-						'<a href="javascript:;" style="'+bgPic+'">'+
-							'<div class="text-center">'+couponName+'</div>'+
-							'<div class="coupon_price text-center">'+discount+'</div>'+
-						'</a>'+
-					'</div>';
+		$('.coupon .swiper-wrapper').html(coupon);
+		//优惠券滑动
+		var couponSwiper = new Swiper('.coupon .swiper-container', {
+		    slidesPerView: 'auto',
+		});
+		$('.coupon .swiper-slide').on('click',function(){
+			if(uid){
+				var dataId = $(this).attr('data_id');
+				$.post(config.oneCouponTake,{'uid':uid,'coupon_id':dataId},function(datas){
+					if(datas.error_code==0){
+						showTips('领取成功~');
+					}else{
+						showTips(datas.error_msg);
+					}
+				});
+			}else{
+				window.localStorage.setItem('setIndexNum',1);
+				window.location.href="register.html";
+			}
+		})
 	}
-	$('.coupon .swiper-wrapper').html(coupon);
-	//优惠券滑动
-	var couponSwiper = new Swiper('.coupon .swiper-container', {
-	    slidesPerView: 'auto',
-	});
-	$('.coupon .swiper-slide').on('click',function(){
-		if(uid){
-			var dataId = $(this).attr('data_id');
-			$.post(config.oneCouponTake,{'uid':uid,'coupon_id':dataId},function(datas){
-				if(datas.error_code==0){
-					showTips('领取成功~');
-				}else{
-					showTips(datas.error_msg);
-				}
-			});
-		}else{
-			window.location.href="register.html";
+})
+//积分
+$.post(config.points,{},function(datas){
+	//console.log(datas);
+	if(datas.error_code==0){
+		var obj = datas.result;
+		if(obj.length){
+			var poSwiper = '';
+			for(var i=0;i<obj.length;i++){
+				var points = obj[i].data.every_user_take_point;
+				poSwiper += '<div class="swiper-slide" data_id="'+obj[i].id+'">'+
+								'<a href="javascript:;" style="background-image:url(img/points.png);display:table">'+
+									'<div class="text-center" style="display:table-cell;vertical-align:middle;">领取 '+points+' 积分</div>'+
+								'</a>'+
+							'</div>';
+			}
 		}
-	})
+		$('.points .swiper-wrapper').html(poSwiper);
+		//优惠券滑动
+		new Swiper('.points .swiper-container', {
+		    slidesPerView: 'auto',
+		});
+		$('.points .swiper-slide').on('click',function(){
+			if(uid){
+				var dataId = $(this).attr('data_id');
+				$.post(config.userTakePoint,{'uid':uid,'take_id':dataId},function(datas){
+					if(datas.error_code==0){
+						showTips('领取成功~');
+					}else{
+						showTips(datas.error_msg);
+					}
+				});
+			}else{
+				window.localStorage.setItem('setIndexNum',1);
+				window.location.href="register.html";
+			}
+		})
+	}
+})
+//鹅蛋
+$.post(config.goose,{},function(datas){
+	//console.log(datas);
+	if(datas.error_code==0){
+		var obj = datas.result;
+		if(obj.length){
+			var gooseSwiper = '';
+			for(var i=0;i<obj.length;i++){
+				var goose = obj[i].data.every_user_take_point;
+				gooseSwiper += '<div class="swiper-slide" data_id="'+obj[i].id+'">'+
+								'<a href="javascript:;" style="background-image:url(img/points.png);display:table">'+
+									'<div class="text-center" style="display:table-cell;vertical-align:middle;">领取 '+goose+' 鹅蛋</div>'+
+								'</a>'+
+							'</div>';
+			}
+		}
+		$('.goose .swiper-wrapper').html(gooseSwiper);
+		//优惠券滑动
+		new Swiper('.goose .swiper-container', {
+		    slidesPerView: 'auto',
+		});
+		$('.goose .swiper-slide').on('click',function(){
+			if(uid){
+				var dataId = $(this).attr('data_id');
+				$.post(config.userTakeGoose,{'uid':uid,'take_id':dataId},function(datas){
+					if(datas.error_code==0){
+						showTips('领取成功~');
+					}else{
+						showTips(datas.error_msg);
+					}
+				});
+			}else{
+				window.localStorage.setItem('setIndexNum',1);
+				window.location.href="register.html";
+			}
+		})
+	}
 })
 isOnline($('.customer_service'),'service_normal@2x.png','service_selected@2x.png');
 //图文、文字点击跳转
@@ -315,7 +391,8 @@ function jump(obj){
 		var thisJump = $(this).attr('type');
 		var thisJump2 = $(this).attr('customUrl');
 		if(thisJump=='0'){
-			//window.localStorage.setItem('tabId',thisId);
+			window.localStorage.setItem('tabId',thisId);
+			//window.location.href = "all-products-classify.html";
 			window.location.href = "all-products-classify.html?tabId="+thisId;
 		}else if(thisJump=='1'){
 			window.location.href = thisJump2;

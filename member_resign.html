@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>企鹅团精选商城</title>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/mobileSelect.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/member_resign.css">
+</head>
+<body>
+<div class="js-modal-login">
+    <div class="account-form">
+        <div class="js-change-phone-form">
+            <div class="form-title big text-center">
+                <span>醉鹅娘会员卡注册</span>
+            </div>
+            <ul class="list-unstyled block form">
+                 <li class="relative block-item">
+                    <label>姓名</label>
+                    <input type="text" class="receiver" name="receiver" value='' placeholder="请输入您的姓名">
+                </li>
+                <li class="relative block-item">
+                    <label>手机号</label>
+                    <input type="text" class="phone_num" name="phone_num" value='' placeholder="请输入收件手机号">
+                </li>
+                <li class="block-item">
+                    <label>真实姓名</label>
+                    <input type="text" name="real_name" maxlength="11" class="js-txt-telphone" autocomplete="off" placeholder="请输入真实姓名" value=""/>
+                </li>
+                <li class="relative block-item">
+                    <label>身份证号</label>
+                    <input type="text" name="id_no" class="js-txt-telphone" placeholder="请输入身份证号" maxlength="24" value=""/>
+                </li>
+                
+                <li class="relative block-item">
+                    <label>地址</label>           
+                    <span id="chooseAddress" style="display: inline-block;height: 20px;width:10rem"></span>
+                </li>
+                <li class="relative block-item">
+                   <label style="vertical-align:top">详细地址</label>
+                    <textarea class="address_detail"></textarea>
+                </li>
+            </ul>
+            <p class="js-help-info help-info font-size-12"></p>
+            <div class="action-container">
+                <button type="button" class="btn btn-customer btn-block" onclick="bind_info()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="vendor/zepto.min.js"></script>
+<script src="config.js"></script>
+<script type="text/javascript" src="vendor/mobileSelect.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script>
+    function bind_info() {
+        var real_name = $("input[name=real_name]").val();
+        var id_no = $("input[name=id_no]").val();
+        if(!real_name || !id_no){
+            $(".help-info").text("请填写完整信息");
+            return;
+        }
+        add_address(real_name,id_no);
+
+    }
+    //选择地区
+    var mobileSelect4 = new MobileSelect({
+        trigger: '#chooseAddress',
+        title: '地区选择',
+        wheels: [{data:areadata}],
+        callback:function(indexArr, data){
+            var datas = JSON.stringify(data);
+            window.localStorage.setItem('areaData',datas);
+        } 
+    });
+
+    function add_address(real_name,id_no) {
+        var receiver = $('.receiver').val();
+        var phoneNum = $('.phone_num').val();
+        var chooseAddress = $('#chooseAddress').html();
+        var addressDetail = $('.address_detail').val();
+        var areaArr = Trim(chooseAddress,'g').split(',');
+        var province = areaArr[0];
+        var city = areaArr[1];
+        var district = areaArr[2];
+        var areaData = JSON.parse(window.localStorage.getItem('areaData'));
+        var provinceCode = areaData[0].id*1;
+        var cityCode = areaData[1].id*1;
+        var districtCode = areaData[2].id*1;
+        //console.log(provinceCode)
+        //验证表单
+        if(receiver ==''||receiver==undefined){
+            $(".help-info").text('请填写姓名');
+            return;
+        }else if(chooseAddress == ''||chooseAddress == undefined){
+            $(".help-info").text("请选择完整地址");
+            return;
+        }else if(addressDetail == ''||addressDetail == undefined){
+            $(".help-info").text("请填写详细地址");
+            return;
+        }else{
+            // -------------------------
+            //| 这里需要把url放到配置文件中 |
+            // -------------------------
+            $.post(config.userProfileUpdate,{
+                'uid':uid,
+                'contact_user_name':receiver,
+                'contact_phone':phoneNum,
+                'province':province,
+                'city':city,
+                'district':district,
+                'street':addressDetail,
+                'province_code':provinceCode,
+                'city_code':cityCode,
+                'district_code':districtCode,
+                'real_name':real_name,
+                'id_no':id_no
+            },function(data){
+                var data = JSON.parse(data);
+                if(data.error_code==0){
+                    window.location.href=localStorage.getItem('redirect_url');
+                }else{
+                    $(".help-info").text(data.error_msg);
+                }
+            })
+        }
+    }
+
+</script>
+</html>

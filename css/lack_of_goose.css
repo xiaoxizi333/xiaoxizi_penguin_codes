@@ -1,0 +1,38 @@
+.spec_info{
+	background-color: #fff;
+	padding-top: 1.875rem;
+	padding-bottom: 0.625rem;
+	margin-bottom: 0.9375rem;
+}
+.goose_logo{
+	width: 6.9375rem;
+	height: 6.9375rem;
+	background: url(../img/go_logo.png) no-repeat center center;
+	background-size: 6.9375rem 6.9375rem;
+	margin: 0 auto;
+}
+.goose_warning{
+	font-size: 12px;
+	color: #333;
+	line-height: 1.25rem;
+	margin-top: 0.375rem;
+}
+.show_data{
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+	height: 3.75rem;
+	width: 100%;
+	background-color: #fff;
+	line-height: 3.75rem;
+	font-size: 0.875rem;
+}
+.data_tit{
+	color: #333;
+	margin-right: 0.625rem;
+}
+.data_points{
+	color: #9b9b9b;
+}
+.get_instance_btn{
+	color: #eea193;
+}

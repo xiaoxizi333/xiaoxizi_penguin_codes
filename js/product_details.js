@@ -2,6 +2,7 @@ if(!openid){
 	localStorage.setItem("redirect_url",window.location.href);
 	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 }
+window.localStorage.setItem('isSelectPoint','0');
 //banner
 var itemID = getQueryString('itemID')*1;
 var itemSpecId = getQueryString('itemSpecId')*1;
@@ -193,11 +194,11 @@ $.post(config.guessUouLike,{'location_type':'good_detail'},function(datas){
 				var itemID = $(this).attr('data_id');
 				var goodsIndex = $(this).index();
 				var specId = $(this).attr('specId');
-				var saleStartTime = obj[goodsIndex].item[0].sales_start_time;
-				var secStartTime = obj[goodsIndex].item[0].seckill_startime;
-				var secEndTime = obj[goodsIndex].item[0].seckill_endtime;
-				var isSeckill = obj[goodsIndex].item[0].is_seckill;
-				var nowTime = Date.parse(new Date());
+				var saleStartTime = obj[goodsIndex].item[0].sales_start_time*1;
+				var secStartTime = obj[goodsIndex].item[0].seckill_startime*1;
+				var secEndTime = obj[goodsIndex].item[0].seckill_endtime*1;
+				var isSeckill = obj[goodsIndex].item[0].is_seckill*1;
+				var nowTime = Date.parse(new Date())*1;
 				//console.log(isSeckill)
 				if(saleStartTime||isSeckill){
 					if(saleStartTime>0){
@@ -211,9 +212,9 @@ $.post(config.guessUouLike,{'location_type':'good_detail'},function(datas){
 		    			window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
 		    		}
 		    		//跳转 0:正常详情 1:秒杀详情
-					if(isSeckill==0){
+					if(isSeckill===0){
 						window.location.href="product_details.html?itemID="+itemID+"&specId="+specId;
-					}else if(isSeckill==1){
+					}else if(isSeckill===1){
 						if(nowTime>secStartTime&&nowTime<secEndTime){
 							window.location.href="seckill.html?itemID="+itemID+"&specId="+specId;
 						}else{
@@ -262,7 +263,7 @@ $('.tab_header li').on('click',function(){
 function makeDeal(page){
 	//成交量
 	$.post(config.itemDetail,{'item_id':itemID,'limit':10,'page':page},function(datas){
-		//console.log(datas);
+		console.log(datas);
 		var dealInfo = datas.result;
 		if(dealInfo.length){
 			$('.load_more_deal').show();
@@ -271,7 +272,7 @@ function makeDeal(page){
 			for(var i=0;i<dealInfo.length;i++){
 				var userInfo = dealInfo[i].user_info;
 				dealHtml += '<li class="clearfix">'+
-							'<span class="username pull-left" style="width: 30%">'+protectUserName(userInfo.user_data.real_name)+'</span>'+
+							'<span class="username pull-left" style="width: 30%">'+protectUserName(userInfo.user_data.real_name?userInfo.user_data.real_name:'用户')+'</span>'+
 							'<span class="deal_time pull-left text-center" style="width: 50%">'+switchDate2(dealInfo[i].created_at)+'</span>'+
 							'<span class="deal_num pull-left text-center" style="width: 20%">'+dealInfo[i].data.total_count+'</span>'+
 						'</li>';
@@ -324,7 +325,7 @@ $('.hide_icon').on('tap',function(){
 isOnline($('.communicate'),'customer_sevices_1.png','cusomer_sevices.png');
 //banner广告体系
 $.post(config.hardAd,{'location_type':'good_detail_banner'},function(datas){
-	console.log(datas);
+	//console.log(datas);
 	if(datas.result.length&&datas.result[0].data.ad_content){
 		var ItemId = datas.result[0].data.jump_url[0].item_id;
 		var specId = datas.result[0].data.jump_url[0].item_spec_id;

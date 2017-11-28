@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header>
-		<div style="height: 3.125rem;position: relative;" class="header">
+		<div style="height: 2.5rem;position: relative;" class="header">
 			<div class="nav-bar-icon">
 				<i></i>
 				<i></i>
@@ -27,6 +27,10 @@
 	</header>
 	<div class="bodier" style="position: relative;">
 		<ul class="choice_bar list-unstyled"></ul>
+		<div class="filter_bar">
+			<div class="line_for_filter"></div>
+			<button class="filter_bar_btn">筛选<i class="filter_icon"></i></button>
+		</div>
 		<div class="swiper-container">
 		  <div class="swiper-wrapper banner2_box">
 		  </div>
@@ -34,6 +38,53 @@
 		</div>
 		<div class="SKU_details"></div>
 	</div>
+	<!-- <div class="filter_part">
+		<div class="tit">筛选</div>
+		<div class="filter_board"></div>
+		<div class="price_range">
+			<div style="padding-top:10px;padding-bottom:1rem">价格</div>
+			<input type="number" class="min_pri"> ~ <input type="number" class="max_pri"> 元
+		</div>
+		<div class="tab_btn_group">
+			<button class="filter_cancel_btn">取消</button><button class="sure">确定</button>
+		</div>	
+	</div> -->
+	<div class="filter_part">
+		<div class="tit">筛选</div>
+		<div class="filter_board"></div>
+		<div class="price_range">
+			<div style="padding-top:10px;padding-bottom:1rem">价格</div>
+			<ul class="list-unstyled list-inline price_range_contain">
+				<li>
+					<span class="min_price_num">0</span>~<span class="max_price_num">49</span>
+				</li>
+				<li>
+					<span class="min_price_num">49</span>~<span class="max_price_num">99</span>
+				</li>
+				<li>
+					<span class="min_price_num">99</span>~<span class="max_price_num">199</span>
+				</li>
+				<li>
+					<span class="min_price_num">199</span>~<span class="max_price_num">500</span>
+				</li>
+				<li>
+					<span class="min_price_num">500</span>以上
+				</li>
+			</ul>
+		</div>
+		<div class="tab_btn_group">
+			<button class="filter_cancel_btn">取消</button><button class="sure">确定</button>
+		</div>	
+	</div>
+	<div class="filter_mask"></div>
+	<!-- <div class="filter_mask">
+		<div class="sub_filter_box">
+			<div class="finish_btn text-right">完成</div>
+			<div class="filter_content">
+				<ul class="list-unstyled sort_2"></ul>
+			</div>
+		</div>
+	</div> -->
 	<div class="spinner" style="width:100%"><img src="img/penguinnn_search1@2x.png" style="width:8.75rem"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
 </body>
 </html>

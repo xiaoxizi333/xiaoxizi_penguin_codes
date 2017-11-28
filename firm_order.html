@@ -41,6 +41,16 @@
 					<span class="pull-right" style="color: #9b9b9b;"><span style="margin-right: 1.5625rem;"></span><i class="is_choose_icon"></i></span>
 				</div>
 			</div>
+			<div class="goose_and_point_box">
+				<div class="my_point clearfix">
+					<span class="box_tit pull-left">我的积分</span>
+					<span class="box_content my_point_content pull-left"></span><i class="point_choose pull-right"></i>
+				</div>
+				<div class="my_goose clearfix">
+					<span class="box_tit pull-left">我的鹅蛋</span>
+					<span class="box_content my_goose_content pull-left">本次需要消耗<span class="spec_egg"></span><i class="goose_icon"></i>鹅蛋</span>
+				</div>
+			</div>
 			<div class="total_info">
 				<ul class="list-unstyled">
 					<li class="clearfix">
@@ -55,9 +65,23 @@
 						<span class="pull-left" style="color: #5a5a5a;">发票</span>
 						<span class="pull-right" style="color: #9b9b9b;"><i class="receipt"></i></span>
 					</li>
-					<li class="clearfix" style="padding-top: 1.25rem;padding-bottom: 1.25rem;height: 6.25rem">
-						<span class="pull-left" style="color: #5a5a5a;">合计</span>
-						<span class="pull-right" style="color: #9b9b9b;"><span style="font-size: 1.125rem;color:#c46566">¥<span id="sum_1"></span></span>
+					<li style="padding-top: 1rem;padding-bottom: 1.25rem;" class="summary_box">
+						<div class="clearfix welfare_list">
+							<span class="pull-left">已为您节省</span>
+							<span class="pull-right sum_content">¥<span class="can_cut"></span></span>
+						</div>
+						<div class="clearfix welfare_list">
+							<span class="pull-left">获赠鹅蛋</span>
+							<span class="pull-right sum_content"><span class="can_get_egg_num"></span>颗<i class="goose_icon"></i></span>
+						</div>
+						<div class="clearfix welfare_list">
+							<span class="pull-left">获赠积分</span>
+							<span class="pull-right sum_content"><span class="can_get_points"></span> 积分</span>
+						</div>
+						<div class="clearfix">
+							<span class="pull-left" style="color: #5a5a5a;">合计</span>
+							<span class="pull-right" style="color: #9b9b9b;"><span style="font-size: 1.125rem;color:#c46566">¥<span id="sum_1"></span></span>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -91,6 +115,12 @@
 		</div>
 	</div>
 	<div class="warming"></div>
+	<div class="lack_eggs_tip text-center">
+		<i class="cross_icon"></i>
+		<h4 class="tip_title">温馨提示</h4>
+		<div class="tip_spec_content">您的鹅蛋不足，无法购买该商品，可使用积分兑换鹅蛋。</div>
+		<div class="jump_to_get_egg_btn">立刻获取鹅蛋</div>
+	</div>
 	<div class="spinner_box">
 		<div class="spinner" style="width:100%"><img src="img/penguinnn_search1@2x.png" style="width:8.75rem"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
 	</div>
@@ -101,6 +131,7 @@
 <script type="text/javascript" src="vendor/zepto.min.js"></script>
 <script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="vendor/numeral.min.js"></script>
 <script src="config.js"></script>
 <script src="js/common.js"></script>
 <script src="js/firm_order.js"></script>
