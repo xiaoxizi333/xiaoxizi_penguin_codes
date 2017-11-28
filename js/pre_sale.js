@@ -153,7 +153,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		$('.storage_num').html(obj.storage);
 		$('.type_det_box').hide();
 		$('.mask .sure').off('tap').on('tap',function(){
-			if(1uid){
+			if(uid){
 				var cartData = {'uid':uid,'item_id':itemID,'num':$('.add_or_substract .specific_num').html()};
 				$.post(config.itemBilling,cartData,function(data){
 					//console.log(data)
