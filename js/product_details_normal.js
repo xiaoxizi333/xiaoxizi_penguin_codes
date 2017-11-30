@@ -1,4 +1,5 @@
 window.localStorage.setItem('product_type','normalGoods');
+var specialPro = getQueryString('itemID');
 isVip();
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	//console.log(datas);
@@ -12,22 +13,42 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 						'<span class="specific_cost">¥'+obj.range_price+'</span>'+
 					'</div>';
 	}else{
-		if(isVipPrice){
-			priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
-							'<span>价格</span>'+
-							'<span class="specific_cost price_for_vip">¥'+obj.real_price+'</span>'+
-						'</div>'+
-						'<div class="pull-left">'+
-								'<span class="another_price normal_price">非会员价 ¥'+obj.public_price+'</span>'+
-						'</div>';
+		if(specialPro==1541933576032431){
+			if(isVipPrice){
+				priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
+								'<span>价格</span>'+
+								'<span class="specific_cost price_for_vip">¥ ***</span>'+
+							'</div>'+
+							'<div class="pull-left">'+
+									'<span class="another_price normal_price">非会员价 ¥'+obj.public_price+'</span>'+
+							'</div>';
+			}else{
+				priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
+								'<span>价格</span>'+
+								'<span class="specific_cost normal_price">¥'+obj.public_price+'</span>'+
+							'</div>'+
+							'<div class="no_vip pull-left">'+
+									'<span class="another_price price_for_vip">会员价 ¥ ***</span>'+
+							'</div>';
+			}
 		}else{
-			priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
-							'<span>价格</span>'+
-							'<span class="specific_cost normal_price">¥'+obj.public_price+'</span>'+
-						'</div>'+
-						'<div class="no_vip pull-left">'+
-								'<span class="another_price price_for_vip">会员价 ¥'+obj.real_price+'</span>'+
-						'</div>';
+			if(isVipPrice){
+				priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
+								'<span>价格</span>'+
+								'<span class="specific_cost price_for_vip">¥'+obj.real_price+'</span>'+
+							'</div>'+
+							'<div class="pull-left">'+
+									'<span class="another_price normal_price">非会员价 ¥'+obj.public_price+'</span>'+
+							'</div>';
+			}else{
+				priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
+								'<span>价格</span>'+
+								'<span class="specific_cost normal_price">¥'+obj.public_price+'</span>'+
+							'</div>'+
+							'<div class="no_vip pull-left">'+
+									'<span class="another_price price_for_vip">会员价 ¥'+obj.real_price+'</span>'+
+							'</div>';
+			}
 		}
 	}
 	$('.det_price').html(priceHtml);
