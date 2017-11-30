@@ -10,8 +10,8 @@ $.post(config.selectExpress,{'uid':uid,'user_order_id':window.localStorage.getIt
 $('.buy_btn').on('tap',function(){
 	$.post(config.goToPayItem,{'uid':uid,'pay_source':'h5','open_id':openid,'comment':'','is_presell':0},function(pay){
 		//console.log(pay);
-		$('.mask_for_pay').show();
 		if(pay.error_code==0){
+			$('.mask_for_pay').show();
 			wx.config({
 				// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 				appId: pay.result.appId, // 必填，公众号的唯一标识
@@ -101,9 +101,6 @@ $('.buy_btn').on('tap',function(){
 			}
 		}else{
 			showTips(pay.error_msg);
-			setTimeout(function(){
-				$('.mask_for_pay').hide();
-			},3000)
 		}
 	})
 })

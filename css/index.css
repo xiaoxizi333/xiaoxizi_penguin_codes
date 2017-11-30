@@ -242,8 +242,10 @@ header{
 .filter_bar_btn{
 	left:1rem;
 	top: 6rem;
+	z-index: 100001;
 }
 .line_for_filter{
 	height: 1rem;
 	left:4rem;
+	z-index: 100001;
 }
