@@ -1,0 +1,150 @@
+body{
+	padding-top: 5rem;
+}
+header{
+	height: 5rem;
+}
+/*search*/
+#search {
+	width: 21.875rem;
+	height: 1.75rem;
+	border: 0;
+	outline: none;
+	border-radius: 20px;
+	background-image: url(../img/home_search.png);
+	background-repeat: no-repeat;
+	background-position: 0.4375rem center;
+	background-size: 1rem 0.875rem;
+	color:#9B9B9B;
+	font-family: 'PingFangSC-Light';
+	padding-left: 2.1875rem;
+	font-size: 0.875rem;
+	display: block;
+	margin:0 auto;
+}
+.choice_bar{
+	top:2.5rem;
+}
+.order{
+	background-color: #fff;
+}
+.order ul{
+	padding-left: 0.625rem;
+	padding-right: 0.625rem;
+	padding-top: 1.375rem;
+	padding-bottom: 1.25rem;
+}
+.order ul li{
+	margin-right: 1.75rem;
+	margin-left: 1.75rem;
+}
+.order ul li a{
+	width: 3.125rem;
+	height: 3.125rem;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 3.125rem 3.125rem;
+}
+.competitive_products_bg{
+	background-image: url(../img/jingpin.png);
+}
+.drinking_bg{
+	background-image: url(../img/dr.png);
+}
+.vip_order{
+	background-image: url(../img/mem.png);
+}
+.series_tit i{
+	display: inline-block;
+	width: 3.75rem;
+	height: 0.9375rem;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 3.75rem 0.9375rem;
+	margin-top: 1rem;
+}
+.com_pro_txt{
+	background-image: url(../img/cp_1.png);
+}
+.dri_txt{
+	background-image: url(../img/dr_2.png);
+}
+.vip_order_txt{
+	background-image: url(../img/mem_3.png);
+}
+.assortment_box{
+	background-color: #fff;
+	padding-top: 0.9375rem;
+}
+.zui_bg img{
+	width: 11rem;
+	margin-bottom: 0.5rem;
+	height: 1.25rem;
+}
+.spec_assort_box{
+	display: none;
+}
+.spec_assort_box:not(:last-child){
+	margin-bottom: 0.9375rem;
+}
+.spec_assort_box .assort_tit_box i{
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.spec_assort_box .assort_tit_box .left_bar,.spec_assort_box .assort_tit_box .right_bar{
+	width: 1.875rem;
+	height: 0.125rem;
+	background-size: 1.875rem 0.125rem;
+	vertical-align: middle;
+}
+.spec_assort_box .assort_tit_box .left_bar{
+	background-image: url(../img/left_bar.png);
+	margin-right: 7.1875rem;
+}
+.spec_assort_box .assort_tit_box .right_bar{
+	background-image: url(../img/right_bar.png);
+	margin-left: 7.1875rem;
+}
+.spec_assort_box .assort_tit_box .spec_as_tit{
+	width: 3.75rem;
+	height: 1.875rem;
+	vertical-align: middle;
+	background-size: 3.75rem 1.875rem;
+}
+.new_arrival .assort_tit_box .spec_as_tit{
+	background-image: url(../img/new.png);
+}
+.smart_buys .assort_tit_box .spec_as_tit{
+	background-image: url(../img/member_order.png);	
+}
+.Boutique .assort_tit_box .spec_as_tit{
+	background-image: url(../img/cp_series.png);
+	width: 3.75rem;
+	background-size: 5rem 1.875rem;	
+}
+.drinks_series .assort_tit_box .spec_as_tit{
+	background-image: url(../img/dr_series.png);
+	width: 3.75rem;
+	background-size: 5rem 1.875rem;		
+}
+.guess_series .assort_tit_box .spec_as_tit{
+	background-image: url(../img/you_like.png);
+	width: 3.75rem;
+	background-size: 5rem 1.875rem;		
+}
+.get_more_btn{
+	margin-top: -0.625rem;
+}
+.get_more_btn i{
+	display: inline-block;
+	width: 3.125rem;
+	height: 1.25rem;
+	background: url(../img/index_more.png) no-repeat center center;
+	background-size: 3.125rem 1.25rem;
+	margin-right: 0.9375rem;
+}
+.spec_assort_box .swiper-wrapper img{
+	width: 100%;
+}

@@ -237,7 +237,7 @@ $.post(config.indexModuleList,function(datas){
 			    cache:false, 
 			    async:false, 
 			    success: function(d){
-			    	if(d.result.length){
+			    	if(d.result&&d.result.length){
 				    	if(picture!=''){
 					 		var html = '<div class="zdytw" item_id="'+d.result[0].id+'" item_spec_id="'+item_spec_id+'" style="width:100%" type="'+jumpType+'" id="'+WZId+'" customUrl="'+customUrl+'"><img style="width:100%" src="'+picture+'"></div>';
 					 		$('.module_box').append(html);

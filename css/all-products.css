@@ -23,6 +23,9 @@ header{
 	padding-left: 2.1875rem;
 	font-size: 0.875rem;
 }
+.choice_bar{
+	top:2.5rem;
+}
 /*筛选*/
 .line_for_filter{
 	height: 2rem;
@@ -79,6 +82,7 @@ header{
 }
 .filter_tabs{
 	padding-left: 4%;
+	padding-right: 4%;
 	border-bottom: 1px solid #f2f2f2;
 	margin-top: 10px;
 	padding-bottom: 0.5rem;
@@ -86,17 +90,28 @@ header{
 .filter_tabs ul.sort_1, .price_range_contain{
 	margin-left: 0px;
 	margin-bottom: 0;
+	margin-left: -0.375rem;
+	margin-right: -0.375rem;
 }
 .filter_tabs ul.sort_1  li, .price_range_contain > li{
 	text-align: center;
 	-width: 30%;
-	padding: 0.8rem 1.6rem;
-	margin-right: 0.4rem;
-	margin-left: 0.4rem;
+	padding: 0.8rem 1.9rem;
+	margin-right: 0.375rem;
+	margin-left: 0.375rem;
 	margin-bottom: 0.4rem;
 	background-color: #f2f2f2;
 	border-radius: 4px;
 	color: rgb(133,133,133);
+}
+.price_range{
+	padding-right: 4%;
+}
+.price_range_contain > li{
+	width: 30%;
+	padding: 0.8rem 0rem;
+	margin-left: 1%;
+	margin-right: 1%;
 }
 .tab_btn_group{
 	position: fixed;
@@ -153,13 +168,15 @@ header{
 .second_bar {
 	margin-left: 0px;
 	margin-bottom: 0;
+	margin-left: -0.375rem;
+	margin-right: -0.375rem;
 }
 .second_bar li{
 	text-align: center;
 	-width: 24%;
-	padding: 0.5rem 1rem;
-	margin-right: 0.4rem;
-	margin-left: 0.4rem;
+	padding: 0.8rem 1rem;
+	margin-left: 0.375rem;
+	margin-right: 0.375rem;
 	margin-bottom: 0.4rem;
 	background-color: #f2f2f2;
 	border-radius: 4px;
