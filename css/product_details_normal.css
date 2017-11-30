@@ -45,4 +45,6 @@
 	background: url(../img/cou_bg_nor.png) no-repeat center center;
 	background-size: 4.28rem 1.1875rem;
 	color: #fff;
+	vertical-align: top;
+	margin-bottom: 0.3rem;
 }

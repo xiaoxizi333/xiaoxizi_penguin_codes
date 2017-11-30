@@ -4,7 +4,7 @@ if(!openid){
 }
 $('.vip_order, .more_vip').on('tap',function(){
     //window.localStorage.setItem('tabId',1308254907990793);
-    window.location.href = "all-products-classify.html?tabId="+1543320665920817;
+    window.location.href = "all-products-classify.html?tabId="+1308254907990793;
 })
 $('.new_arrival_more').on('tap',function(){
     //window.localStorage.setItem('tabId',1377969693067433);
@@ -57,7 +57,7 @@ $.ajax({
 })
 //会员订购
 //var smartBuyData = {page:1,limit:4,item_class:1308254907990793};
-var smartBuyData = {page:1,limit:4,item_class:1543320665920817};
+var smartBuyData = {page:1,limit:4,item_class:1308254907990793};
 $.ajax({
     type:"POST",
     url:config.allItemList,

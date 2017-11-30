@@ -162,13 +162,13 @@ wx.error(function(){
 //点击开通买醉卡
 $('.set_jump_page').on('tap',function(){
 	if(uid){
-		$.post(config.itemBilling,{'uid':uid,'item_id':1538792528873281},function(datas){
+		$.post(config.itemBilling,{'uid':uid,'item_id':1543320665920817},function(datas){
 			console.log(datas);
 			if(datas.error_code==0){
 				window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
 				window.location.href = "card_for_year.html";
 			}else{
-				showTips('您已购买会员卡或购物车中有未支付的会员卡订单');
+				showTips('您已购买会员卡或个人中心中有未支付的会员卡订单');
 			}
 		})
 	}else{
