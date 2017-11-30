@@ -162,7 +162,7 @@ wx.error(function(){
 //点击开通买醉卡
 $('.set_jump_page').on('tap',function(){
 	if(uid){
-		$.post(config.itemBilling,{'uid':uid,'item_id':1538792528873281},function(datas){
+		$.post(config.itemBilling,{'uid':uid,'item_id':1543320665920817},function(datas){
 			console.log(datas);
 			if(datas.error_code==0){
 				window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
