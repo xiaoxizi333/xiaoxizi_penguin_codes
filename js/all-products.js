@@ -1,6 +1,28 @@
 var searchItemNm = window.localStorage.getItem('search_item_name');
 $('#search').val(searchItemNm);
-searchItem();
+var totalFitlerD = JSON.parse(window.localStorage.getItem('total_data_of_filter'));
+console.log(totalFitlerD)
+var filterNum = window.localStorage.getItem('filterNum');
+if(filterNum==1){
+	searchItem();
+}else if(filterNum==2){
+	 $.ajax({
+	    type: "POST",
+	    dataType:'json',
+	    contentType:'application/json',
+	    url: config.selectWineTag,
+	    data: JSON.stringify(totalFitlerD), 
+	    beforeSend:function(){
+	      	$('.spinner').show();
+	    },
+	    success:function(datas){
+			//console.log(datas);
+			showItems(datas);
+	    },
+	    complete:function(){$('.spinner').hide()},
+	})
+}
+
 // 搜索
 $('#search').on('keydown',function(e){
 	if(e.keyCode ==13){

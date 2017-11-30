@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="css/swiper-3.4.2.min.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/header-nav-bar.css">
+	<link rel="stylesheet" href="css/filter.css">
 	<link rel="stylesheet" href="css/new_index.css">
 </head>
 <body>
@@ -24,6 +25,10 @@
 	</header>
 	<div class="bodier" style="position: relative;">
 		<ul class="choice_bar list-unstyled"></ul>
+		<div class="filter_bar">
+			<div class="line_for_filter"></div>
+			<button class="filter_bar_btn">筛选<i class="filter_icon"></i></button>
+		</div>
 		<div><a href="introduction_of_king.html"><img src="img/home_2_bn.png" width="100%"></a></div>
 		<div class="order text-center">
 			<ul class="list-unstyled clearfix">
@@ -110,6 +115,34 @@
 			</div>
 		</div>
 	</div>
+	<div class="filter_part">
+		<div class="tit">筛选</div>
+		<div class="filter_board"></div>
+		<div class="price_range">
+			<div style="padding-top:10px;padding-bottom:1rem">价格</div>
+			<ul class="list-unstyled list-inline price_range_contain">
+				<li>
+					<span class="min_price_num">0</span>~<span class="max_price_num">49</span>
+				</li>
+				<li>
+					<span class="min_price_num">49</span>~<span class="max_price_num">99</span>
+				</li>
+				<li>
+					<span class="min_price_num">99</span>~<span class="max_price_num">199</span>
+				</li>
+				<li>
+					<span class="min_price_num">199</span>~<span class="max_price_num">500</span>
+				</li>
+				<li>
+					<span class="min_price_num">500</span>以上
+				</li>
+			</ul>
+		</div>
+		<div class="tab_btn_group">
+			<button class="filter_cancel_btn">取消</button><button class="sure">确定</button>
+		</div>	
+	</div>
+	<div class="filter_mask"></div>
 	<div class="warming"></div>
 
 <script type="text/javascript" src="vendor/jquery.js"></script>
@@ -119,6 +152,7 @@
 <script src="config.js"></script>
 <script type="text/javascript" src="js/header_list.js"></script>
 <script src="js/common.js"></script>
+<script type="text/javascript" src="js/filter.js"></script>
 <script src="js/new_index.js"></script>
 
 </body>

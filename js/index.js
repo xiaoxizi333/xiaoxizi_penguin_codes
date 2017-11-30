@@ -4,7 +4,7 @@ if(!openid){
 }
 //分类详情
 $.post(config.classify,{'is_add_best_ares':0,'limit':6},function(data){
-	//console.log(data);
+	console.log(data);
 	var obj = data.result;
 	if(obj.length){
 		var typeTab = '';
@@ -51,6 +51,7 @@ $.post(config.commonBanner,{'class_type':'index'},function(data){
 $('#search').on('keydown',function(e){
 	if(e.keyCode ==13){
 		window.localStorage.setItem('search_item_name',$(this).val());
+		window.localStorage.setItem('filterNum',1);
 		window.location.href="all-products.html";
 	}
 })
@@ -60,7 +61,7 @@ $('.vip_order').on('tap',function(){
 })
 //商品模块化
 $.post(config.indexModuleList,function(datas){
-	console.log(datas);
+	//console.log(datas);
 	var obj = datas.result;
 	var listIndex = 0;
 	var seckillIndex = 0;
