@@ -78,5 +78,7 @@ var config = {
 	showItem:'http://api.qietuan.org/show_item_goose_point_coupon.json',
 	selectUsePoint:'http://api.qietuan.org/web/confirm_order/select_use_point.json',
 	unselectUsePoint:'http://api.qietuan.org/web/confirm_order/unselect_use_point.json',
+	getLastestOrder:'http://api.qietuan.org/get_lastest_order_item_and_spec_id.json',
+	shareUserOrderAddPoint:'http://api.qietuan.org/share_user_order_add_point.json',
 }
 

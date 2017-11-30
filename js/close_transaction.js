@@ -1,5 +1,5 @@
 var user_order_id = window.localStorage.getItem('user_order_id')*1;
-isVip();
+
 //地址	
 $.post(config.userOrderAddress,{'user_order_id':user_order_id},function(datas){
 	//console.log(datas);

@@ -47,16 +47,28 @@ $('.purchase_btn').on('tap',function(){
 	window.localStorage.setItem('tabId',1308254907990793);
 	window.location.href="all-products-classify.html";
 })
-isVip();
+
+if(isVipPrice==0){
+	$('.my_goose').hide();
+}else if(isVipPrice==1){
+	$('.my_goose').show();
+}
+
 //鹅蛋
 $.post(config.globalRate,{'uid':uid},function(datas){
 	//console.log(datas);
-	var obj = datas.result.user[0].user_data;
-	var points = obj.point?obj.point:0;
-	var goose = obj.goose?obj.goose:0;
-	$('.goose_num').html(goose);
-	$('.point_num').html(points);
-	
+	if(datas.error_code==0){
+		var obj = datas.result.user[0];
+		if(obj){
+			var points = obj.user_data.point?obj.point:0;
+			var goose = obj.user_data.goose?obj.goose:0;
+			$('.goose_num').html(goose);
+			$('.point_num').html(points);
+		}else{
+			$('.goose_num').html(0);
+			$('.point_num').html(0);
+		}
+	}		
 })
 //我的订单
 $.post(config.userOrderList,{'uid':uid,'limit':1},function(datas){

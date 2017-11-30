@@ -38,3 +38,32 @@ body{
 .go_btn > span a:focus{
 	color: #fff;
 }
+/*share mask*/
+.share_mask{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background:rgba(0,0,0,.6);
+	font-size: 1.375rem;
+	color:#fff;
+	font-family: 'PingFangSC-Light';
+	padding-top: 4.6875rem;
+	padding-right: 5.9375rem;
+	z-index: 10001;
+	height: 100%;
+	display: none;
+	z-index: 100001;
+}
+.share_arrow{
+	display: inline-block;
+	width: 3.8rem;
+	height: 5rem;
+	position: absolute;
+	top: 0.625rem;
+	right: 1.25rem;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-image: url(../img/share_arrow.png);
+	transition: 1s;
+	transform: rotateX(180deg);
+}
