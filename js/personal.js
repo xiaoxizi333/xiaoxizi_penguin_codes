@@ -56,12 +56,13 @@ if(isVipPrice==0){
 
 //鹅蛋
 $.post(config.globalRate,{'uid':uid},function(datas){
-	//console.log(datas);
+	console.log(datas);
 	if(datas.error_code==0){
 		var obj = datas.result.user[0];
 		if(obj){
-			var points = obj.user_data.point?obj.point:0;
-			var goose = obj.user_data.goose?obj.goose:0;
+			var points = obj.user_data.point?obj.user_data.point:0;
+			var goose = obj.user_data.goose?obj.user_data.goose:0;
+			console.log(obj.user_data.point)
 			$('.goose_num').html(goose);
 			$('.point_num').html(points);
 		}else{
