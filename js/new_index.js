@@ -14,6 +14,7 @@ $('.new_arrival_more').on('tap',function(){
 $('#search').on('keydown',function(e){
     if(e.keyCode ==13){
         window.localStorage.setItem('search_item_name',$(this).val());
+        window.localStorage.setItem('filterNum',1);
         window.location.href="all-products.html";
     }
 })
