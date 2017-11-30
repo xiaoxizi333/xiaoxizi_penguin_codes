@@ -1,5 +1,5 @@
 window.localStorage.setItem('product_type','goodsForSeckill');
-isVip();
+
 //商品详情
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){	
 	//console.log(datas);

@@ -1,5 +1,4 @@
 var user_order_id = window.localStorage.getItem('user_order_id')*1;
-isVip();
 var spinnerH = $('.spinner').height();
 var spinnerW = $('.spinner').width();
 $('.spinner').css({'position':'fixed','left':'50%','marginLeft':-spinnerW/2+'px','top':'50%','marginTop':-spinnerH/2+'px'})
