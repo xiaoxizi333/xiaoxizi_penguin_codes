@@ -79,7 +79,12 @@ header{
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: break-all;
-    height: 2.5rem;
+}
+.pro_des_for_ws{
+	height: 2.125rem;
+}
+.pro_des_for_five{
+	height: 2.5rem;
 }
 .vip_icon{
 	display: inline-block;
