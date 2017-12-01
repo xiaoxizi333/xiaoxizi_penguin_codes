@@ -1,6 +1,6 @@
 //筛选--2
 $('.filter_part').css('min-height',$(window).height()+'px');
-$('.filter_bar_btn').on('click',function(){
+$('.filter_bar_btn, .get_more_btn').on('click',function(){
 	$('.filter_part, .filter_mask').show();
 	$.post(config.selectTag,{'state':1},function(datas){
 		console.log(datas);
