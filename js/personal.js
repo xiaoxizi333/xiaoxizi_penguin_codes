@@ -62,7 +62,7 @@ $.post(config.globalRate,{'uid':uid},function(datas){
 		if(obj){
 			var points = obj.user_data.point?obj.user_data.point:0;
 			var goose = obj.user_data.goose?obj.user_data.goose:0;
-			console.log(obj.user_data.point)
+			//console.log(obj.user_data.point)
 			$('.goose_num').html(goose);
 			$('.point_num').html(points);
 		}else{
