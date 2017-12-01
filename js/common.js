@@ -1,6 +1,7 @@
 var uid = localStorage.getItem("uid");
 //var uid = 1260826557228331;
 //var uid = 1434704852094477;
+//var uid = 1265194169869133;
 var openid = localStorage.getItem("openid");
 //var openid = 'ogePAv-X0KgmRDl4_jlLLy69T6rY';
 (function(doc, window)
@@ -251,13 +252,14 @@ $('.personal_icon').on('tap',function(){
 	}
 })
 //isVip
-var isVipPrice = 0;
+var isVipNum = 0;
 $.post(config.isVip,{'uid':uid?uid:0},function(datas){
 	if(datas.result.length){
-		isVipPrice += 1;
+		isVipNum += 1;
 	}else{
-		isVipPrice += 0;
+		isVipNum += 0;
 	}
+	window.localStorage.setItem('isVipPrice',isVipNum);
 })
 
 //提示3秒消失

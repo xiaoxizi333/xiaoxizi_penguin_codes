@@ -1,6 +1,6 @@
 window.localStorage.setItem('product_type','normalGoods');
 var specialPro = getQueryString('itemID');
-
+var isVipPrice = window.localStorage.getItem('isVipPrice')*1;
 $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function(datas){
 	//console.log(datas);
 	var obj = datas.result.item_info[0].data;

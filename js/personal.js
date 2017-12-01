@@ -6,6 +6,7 @@ $.post(config.userShow,{'uid':uid},function(datas){
 		$('.portrait .username').html(obj.user_name);
 	}
 })
+var isVipPrice = window.localStorage.getItem('isVipPrice')*1;
 //分红
 $.post(config.vipService,{'uid':uid},function(datas){
 	//console.log(datas);

@@ -1,3 +1,32 @@
+body{
+	padding-top:3.125rem;
+}
+header{	
+	height: 3.125rem;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	max-width: 650px;
+	z-index: 100001;
+	background-color:#3f3c47;
+}
+.header{
+	background-image: url(../img/menu_logo.png);
+	background-repeat:no-repeat;
+	background-position: 0.9375rem center;
+	background-size: 12.5rem 2.625rem;
+}
+.index_home{
+	display: inline-block;
+	width: 1.5625rem;
+	height: 1.5625rem;
+	position: absolute;
+	right: 3.3125rem;
+	top: 50%;
+	margin-top: -0.78125rem;
+	background: url(../img/index_home.png) no-repeat center center;
+	background-size: 1.5625rem 1.5625rem;
+}
 .top_pic{
 	position: relative;
 }
@@ -50,12 +79,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: break-all;
-}
-.pro_des_for_ws{
-	height: 2.125rem;
-}
-.pro_des_for_five{
-	height: 2.5rem;
+    height: 2.5rem;
 }
 .vip_icon{
 	display: inline-block;

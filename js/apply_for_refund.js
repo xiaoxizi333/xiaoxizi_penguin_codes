@@ -2,6 +2,7 @@ var user_order_id = window.localStorage.getItem('user_order_id')*1;
 var spinnerH = $('.spinner').height();
 var spinnerW = $('.spinner').width();
 $('.spinner').css({'position':'fixed','left':'50%','marginLeft':-spinnerW/2+'px','top':'50%','marginTop':-spinnerH/2+'px'})
+var isVipPrice = window.localStorage.getItem('isVipPrice')*1;
 $.post(config.myOrderComment,{'user_order_id':user_order_id},function(datas){
 	//console.log(datas);
 	var orders = datas.result.list[0].order;
