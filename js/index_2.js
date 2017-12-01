@@ -1,3 +1,7 @@
+if(!openid){
+	localStorage.setItem("redirect_url",window.location.href);
+	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
+}
 //goods3
 //console.log(goods3);
 var goodsHtml = '';
@@ -141,10 +145,7 @@ if(getQueryString('drinkingUid')){
 }else{
 	window.localStorage.setItem('drinkingUid',0);
 }
-if(!openid){
-	localStorage.setItem("redirect_url",window.location.href);
-	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
-}
+
 $.post(config.wxShare,{'url':location.href.split('#')[0]},function(data){
 	wx.config({
 	    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
