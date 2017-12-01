@@ -115,11 +115,11 @@ $('.buy_btn').on('tap',function(){
 				})
 			}else{
 				localStorage.setItem("redirect_url",window.location.href);
-				window.location.href = "register.html";
+				window.location.href = "member_resign.html";
 			}
 		}else{
 			localStorage.setItem("redirect_url",window.location.href);
-			window.location.href = "register.html";
+			window.location.href = "member_resign.html";
 		}
 		
 	})
