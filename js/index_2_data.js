@@ -1,22 +1,22 @@
 const goods3 = [
     {
-        "pic" : "http://ofdx4t772.bkt.clouddn.com/1437221837146196?imageView2",
+        "pic" : "img/in_1.png",
         "vip_price" : 98,
-        "name" : "醉鹅娘 澳洲红酒原瓶进口纷赋卡本妮梅洛赤霞珠干红葡萄酒单支装",
+        "name" : "醉鹅娘 哈宝诺言贵腐甜白",
         "public_price" : 128,
         "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1437221887477847",
     },
     {
-        "pic" : "http://ofdx4t772.bkt.clouddn.com/1494088965757819?imageView2",
-        "vip_price" : 129,
-        "name" : "醉鹅娘 法国波尔多原瓶进口哈宝诺言贵腐甜白葡萄酒2012",
-        "public_price" : 189,
-        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1494089016089472",
+        "pic" : "img/in_2.png",
+        "vip_price" : "***",
+        "name" : "醉鹅娘 拉菲无年份香槟",
+        "public_price" : 378,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1541933576032431",
     },
     {
-        "pic" : "http://ofdx4t772.bkt.clouddn.com/1512896795316678?imageView2",
+        "pic" : "img/in_3.png",
         "vip_price" : 468,
-        "name" : "醉鹅娘 法国勃艮第路易拉图科通干红葡萄酒2001",
+        "name" : "醉鹅娘 纷赋赤霞珠梅洛混酿干红",
         "public_price" : 588,
         "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1512884094964071",
     }

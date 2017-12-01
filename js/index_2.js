@@ -7,6 +7,12 @@ if(!openid){
 var goodsHtml = '';
 for(var i=0;i<goods3.length;i++){
 	var obj = goods3[i];
+	var cutMon = obj.public_price-obj.vip_price;
+	if(cutMon){
+		cutMon = cutMon;
+	}else{
+		cutMon = "***";
+	}
 	goodsHtml += '<li class="col-xs-4 col-md-4 col-lg-4">'+
 					'<a href="'+obj.jump_url+'">'+
 						'<div class="intro_img_for_ws"><img src="'+obj.pic+'" alt=""></div>'+
@@ -17,7 +23,7 @@ for(var i=0;i<goods3.length;i++){
 								'<span class="vip_price vip_price_for_ws">¥'+obj.vip_price+'</span>'+
 							'</div>'+
 							'<div class="pull-right">'+
-								'<span class="cut_price cut_price_for_ws">省'+(obj.public_price-obj.vip_price)+'元</span>'+
+								'<span class="cut_price cut_price_for_ws">省'+cutMon+'元</span>'+
 							'</div>'+
 						'</div>'+
 					'</a>'+
