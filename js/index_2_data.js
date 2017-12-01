@@ -1,24 +1,24 @@
 const goods3 = [
     {
         "pic" : "img/in_1.png",
-        "vip_price" : 98,
-        "name" : "醉鹅娘 哈宝诺言贵腐甜白",
-        "public_price" : 128,
-        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1437221887477847",
+        "vip_price" : 129,
+        "name" : "哈宝诺言贵腐甜白",
+        "public_price" : 189,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1494089016089472",
     },
     {
         "pic" : "img/in_2.png",
         "vip_price" : "***",
-        "name" : "醉鹅娘 拉菲无年份香槟",
+        "name" : "拉菲无年份香槟",
         "public_price" : 378,
         "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1541933576032431",
     },
     {
         "pic" : "img/in_3.png",
-        "vip_price" : 468,
-        "name" : "醉鹅娘 纷赋赤霞珠梅洛混酿干红",
-        "public_price" : 588,
-        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1512884094964071",
+        "vip_price" : 98,
+        "name" : "纷赋赤霞珠梅洛混酿干红",
+        "public_price" : 128,
+        "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1437221887477847",
     }
 ]
 
