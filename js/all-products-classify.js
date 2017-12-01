@@ -39,120 +39,120 @@ var firstItem = getQueryString('tabId');
 var dataObj = {'item_class':firstItem};
 searchItems(dataObj);
 //一级列表
-$.post(config.indexItemClassList,function(datas){
-	//console.log(datas);
-	var obj = datas.result;
-	//console.log(obj)
-	var html = '';
-	for(var i=0;i<obj.length;i++){
-		html += '<li id="'+obj[i].id+'"><a href="javascript:;">'+obj[i].data.class_name+'</a></li>';
-	}
-	$('.sort_tab').html(html);
-	for(var j=0;j<obj.length;j++){
-		var tabId = parseInt(getQueryString('tabId'));
-		if(tabId == obj[j].id){
-			$('.sort_tab li').removeClass('active');
-			$('.sort_tab li').eq(j).addClass('active');
-		}
-		addTabActive($('.sort_tab li'));
-	}
-	//点击搜索
-	$('.sort_tab li').on('tap',function(){
-		//window.localStorage.setItem('tabId',$(this).attr('id'));
-		bannerData = {'class_id':$(this).attr('id')};
-		addBanner(bannerData);
-		$('.SKU_details').empty();
-		$('.product_tab li').removeClass('active');
-		var itemIndex = $(this).index();
-		var itemClass = datas.result[itemIndex].id;
-		window.localStorage.setItem('item_class',itemClass);
-		var state = window.localStorage.getItem('state');
-		var passData;
-		//console.log(typeof state)
-		//console.log(state)
-		if(state){
-			if(state == '[1443230295066968]'){
-				state = JSON.parse(state);
-				passData = {'item_class':itemClass,'tag_id_array':state,'limit':20000};
-			}else{
-				state = JSON.parse(state);
-				passData = {'item_class':itemClass,'sort':state,'limit':20000};
-			}	
-		}else{
-			passData = {'item_class':itemClass,'limit':20000}
-		}
-		searchItems(passData);
-		window.location.href = "all-products-classify.html?tabId="+$(this).attr('id');
-	})
-})
+// $.post(config.indexItemClassList,function(datas){
+// 	//console.log(datas);
+// 	var obj = datas.result;
+// 	//console.log(obj)
+// 	var html = '';
+// 	for(var i=0;i<obj.length;i++){
+// 		html += '<li id="'+obj[i].id+'"><a href="javascript:;">'+obj[i].data.class_name+'</a></li>';
+// 	}
+// 	$('.sort_tab').html(html);
+// 	for(var j=0;j<obj.length;j++){
+// 		var tabId = parseInt(getQueryString('tabId'));
+// 		if(tabId == obj[j].id){
+// 			$('.sort_tab li').removeClass('active');
+// 			$('.sort_tab li').eq(j).addClass('active');
+// 		}
+// 		addTabActive($('.sort_tab li'));
+// 	}
+// 	//点击搜索
+// 	$('.sort_tab li').on('tap',function(){
+// 		//window.localStorage.setItem('tabId',$(this).attr('id'));
+// 		bannerData = {'class_id':$(this).attr('id')};
+// 		addBanner(bannerData);
+// 		$('.SKU_details').empty();
+// 		$('.product_tab li').removeClass('active');
+// 		var itemIndex = $(this).index();
+// 		var itemClass = datas.result[itemIndex].id;
+// 		window.localStorage.setItem('item_class',itemClass);
+// 		var state = window.localStorage.getItem('state');
+// 		var passData;
+// 		//console.log(typeof state)
+// 		//console.log(state)
+// 		if(state){
+// 			if(state == '[1443230295066968]'){
+// 				state = JSON.parse(state);
+// 				passData = {'item_class':itemClass,'tag_id_array':state,'limit':20000};
+// 			}else{
+// 				state = JSON.parse(state);
+// 				passData = {'item_class':itemClass,'sort':state,'limit':20000};
+// 			}	
+// 		}else{
+// 			passData = {'item_class':itemClass,'limit':20000}
+// 		}
+// 		searchItems(passData);
+// 		window.location.href = "all-products-classify.html?tabId="+$(this).attr('id');
+// 	})
+// })
 //二级标签
-addTabActive($('.filter_tab li'));
-$('.filter_tab li').on('tap',function(){
-	$('.SKU_details').empty();
-	$('.product_tab li').removeClass('active');
-	var itemIndex = $(this).index();
-	var passData;
-	var itemClass = window.localStorage.getItem('item_class');
-	if(itemIndex==0){
-		passData = {'item_class':itemClass,sort:{"data.sales_count":"desc"},'limit':20000};
-		var sortState = {"data.sales_count":"desc"};
-		sortState = JSON.stringify(sortState); 
-		window.localStorage.setItem('state',sortState);
-	}else if(itemIndex==1){
-		passData = {'item_class':itemClass,'tag_id_array':[1443230295066968],'limit':20000};
-		var sortState = [1443230295066968];
-		sortState = JSON.stringify(sortState); 
-		window.localStorage.setItem('state',sortState);
-	}else if(itemIndex==2){
-		passData = {'item_class':itemClass,'sort':{"data.published_at":"desc"},'limit':20000};
-		var sortState = {"data.published_at":"desc"};
-		sortState = JSON.stringify(sortState); 
-		window.localStorage.setItem('state',sortState);
-	}
-	searchItems(passData);
-})
+// addTabActive($('.filter_tab li'));
+// $('.filter_tab li').on('tap',function(){
+// 	$('.SKU_details').empty();
+// 	$('.product_tab li').removeClass('active');
+// 	var itemIndex = $(this).index();
+// 	var passData;
+// 	var itemClass = window.localStorage.getItem('item_class');
+// 	if(itemIndex==0){
+// 		passData = {'item_class':itemClass,sort:{"data.sales_count":"desc"},'limit':20000};
+// 		var sortState = {"data.sales_count":"desc"};
+// 		sortState = JSON.stringify(sortState); 
+// 		window.localStorage.setItem('state',sortState);
+// 	}else if(itemIndex==1){
+// 		passData = {'item_class':itemClass,'tag_id_array':[1443230295066968],'limit':20000};
+// 		var sortState = [1443230295066968];
+// 		sortState = JSON.stringify(sortState); 
+// 		window.localStorage.setItem('state',sortState);
+// 	}else if(itemIndex==2){
+// 		passData = {'item_class':itemClass,'sort':{"data.published_at":"desc"},'limit':20000};
+// 		var sortState = {"data.published_at":"desc"};
+// 		sortState = JSON.stringify(sortState); 
+// 		window.localStorage.setItem('state',sortState);
+// 	}
+// 	searchItems(passData);
+// })
 //三级标签
-$.post(config.tagList,function(datas){
-	//console.log(datas);
-	var obj = datas.result;
-	var html = '';
-	for(var i=0;i<obj.length;i++){
-		html += '<li id="'+obj[i].id+'"><a href="javascript:;">'+obj[i].data.tag_name+'</a></li>';
-	}
-	$('.product_tab').html(html);
-	addTabActive($('.product_tab li'));
-	$('.product_tab li').on('tap',function(){
-		$('.SKU_details').empty();
-		var passData;
-		var itemClass = window.localStorage.getItem('item_class');
-		var sortState = window.localStorage.getItem('state');
-		var sortState2 = JSON.parse(sortState);
-		var sortId = $(this).attr('id')*1;
-		sortState2[1] = JSON.parse(sortId);
-		if(sortState){
-			if(sortState == '[1443230295066968]'){
-				passData = {'item_class':itemClass,'tag_id_array':sortState2,'limit':20000};
-			}else{
-				var sortNum = JSON.parse(sortState);
-				var arr = [];
-				arr[0] = sortId;
-				var tagId = JSON.stringify(arr);
-				tagId = JSON.parse(tagId);
-				passData = {'item_class':itemClass,'sort':sortNum,'tag_id_array':tagId,'limit':20000};
-			}	
-		}else{	
-			passData = {'item_class':itemClass,'tag_id_array':tagId,'limit':20000}
-		}
-		//console.log(passData)
-		searchItems(passData);
-	})
-})
-function addTabActive(obj){
-	obj.on('tap',function(){
-		obj.removeClass('active');
-		$(this).addClass('active');
-	})
-}	
+// $.post(config.tagList,function(datas){
+// 	//console.log(datas);
+// 	var obj = datas.result;
+// 	var html = '';
+// 	for(var i=0;i<obj.length;i++){
+// 		html += '<li id="'+obj[i].id+'"><a href="javascript:;">'+obj[i].data.tag_name+'</a></li>';
+// 	}
+// 	$('.product_tab').html(html);
+// 	addTabActive($('.product_tab li'));
+// 	$('.product_tab li').on('tap',function(){
+// 		$('.SKU_details').empty();
+// 		var passData;
+// 		var itemClass = window.localStorage.getItem('item_class');
+// 		var sortState = window.localStorage.getItem('state');
+// 		var sortState2 = JSON.parse(sortState);
+// 		var sortId = $(this).attr('id')*1;
+// 		sortState2[1] = JSON.parse(sortId);
+// 		if(sortState){
+// 			if(sortState == '[1443230295066968]'){
+// 				passData = {'item_class':itemClass,'tag_id_array':sortState2,'limit':20000};
+// 			}else{
+// 				var sortNum = JSON.parse(sortState);
+// 				var arr = [];
+// 				arr[0] = sortId;
+// 				var tagId = JSON.stringify(arr);
+// 				tagId = JSON.parse(tagId);
+// 				passData = {'item_class':itemClass,'sort':sortNum,'tag_id_array':tagId,'limit':20000};
+// 			}	
+// 		}else{	
+// 			passData = {'item_class':itemClass,'tag_id_array':tagId,'limit':20000}
+// 		}
+// 		//console.log(passData)
+// 		searchItems(passData);
+// 	})
+// })
+// function addTabActive(obj){
+// 	obj.on('tap',function(){
+// 		obj.removeClass('active');
+// 		$(this).addClass('active');
+// 	})
+// }	
 function searchItems(passData){
 	$.ajax({
 	    type: "POST",

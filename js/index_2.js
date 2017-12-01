@@ -39,7 +39,6 @@ $('.recommond_list_for_ws').html(goodsHtml);
 
 //list
 addProList(goosePro1,$('.goose_data_1 ul'));
-addProList(goosePro2,$('.goose_data_2 ul'));
 addProList(flashPurchase,$('.flash_purchase ul'));
 addProList(hong,$('.ganhong ul'));
 addProList(bai,$('.ganbai ul'));
