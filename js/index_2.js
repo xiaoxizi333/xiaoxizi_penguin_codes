@@ -37,111 +37,35 @@ for(var i=0;i<goods3.length;i++){
 }
 $('.recommond_list_for_ws').html(goodsHtml);
 
-//鹅蛋专区1
-var gooseList1 = '';
-for(var i=0;i<goosePro1.length;i++){
-	var obj = goosePro1[i];
-	gooseList1 += '<li class="col-xs-6 col-md-6 col-lg-6">'+
-					'<a href="'+obj.jump_url+'">'+
-						'<div class="intro_img_for_five"><img src="'+obj.pic+'" alt=""></div>'+
-						'<div class="pro_des pro_des_for_five">'+obj.name+'</div>'+
-						'<div class="spec_price spec_price_for_five clearfix">'+
-							'<div class="pull-left">'+
-								'<i class="vip_icon"></i>'+
-								'<span class="vip_price vip_price_for_five">¥'+obj.vip_price+'</span>'+
+//list
+addProList(goosePro1,$('.goose_data_1 ul'));
+addProList(goosePro2,$('.goose_data_2 ul'));
+addProList(flashPurchase,$('.flash_purchase ul'));
+addProList(hong,$('.ganhong ul'));
+addProList(bai,$('.ganbai ul'));
+function addProList(obj1,obj2){
+	var listData = '';
+	for(var i=0;i<obj1.length;i++){
+		var obj = obj1[i];
+		listData += '<li class="col-xs-6 col-md-6 col-lg-6">'+
+						'<a href="'+obj.jump_url+'">'+
+							'<div class="intro_img_for_five"><img src="'+obj.pic+'" alt=""></div>'+
+							'<div class="pro_des pro_des_for_five">'+obj.name+'</div>'+
+							'<div class="spec_price spec_price_for_five clearfix">'+
+								'<div class="pull-left">'+
+									'<i class="vip_icon"></i>'+
+									'<span class="vip_price vip_price_for_five">¥'+obj.vip_price+'</span>'+
+								'</div>'+
+								'<div class="pull-right">'+
+									'<span class="cut_price cut_price_for_five">省'+(obj.public_price-obj.vip_price)+'元</span>'+
+								'</div>'+
 							'</div>'+
-							'<div class="pull-right">'+
-								'<span class="cut_price cut_price_for_five">省'+(obj.public_price-obj.vip_price)+'元</span>'+
-							'</div>'+
-						'</div>'+
-					'</a>'+
-				'</li>'
+						'</a>'+
+					'</li>'
+	}
+	obj2.html(listData);
 }
-$('.goose_data_1 ul').html(gooseList1);
-//鹅蛋专区2
-var gooseList2 = '';
-for(var i=0;i<goosePro2.length;i++){
-	var obj = goosePro2[i];
-	gooseList2 += '<li class="col-xs-6 col-md-6 col-lg-6">'+
-					'<a href="'+obj.jump_url+'">'+
-						'<div class="intro_img_for_five"><img src="'+obj.pic+'" alt=""></div>'+
-						'<div class="pro_des pro_des_for_five">'+obj.name+'</div>'+
-						'<div class="spec_price spec_price_for_five clearfix">'+
-							'<div class="pull-left">'+
-								'<i class="vip_icon"></i>'+
-								'<span class="vip_price vip_price_for_five">¥'+obj.vip_price+'</span>'+
-							'</div>'+
-							'<div class="pull-right">'+
-								'<span class="cut_price cut_price_for_five">省'+(obj.public_price-obj.vip_price)+'元</span>'+
-							'</div>'+
-						'</div>'+
-					'</a>'+
-				'</li>'
-}
-$('.goose_data_2 ul').html(gooseList2);
-// 小闪购
-var gooseList3 = '';
-for(var i=0;i<flashPurchase.length;i++){
-	var obj = flashPurchase[i];
-	gooseList3 += '<li class="col-xs-6 col-md-6 col-lg-6">'+
-					'<a href="'+obj.jump_url+'">'+
-						'<div class="intro_img_for_five"><img src="'+obj.pic+'" alt=""></div>'+
-						'<div class="pro_des pro_des_for_five">'+obj.name+'</div>'+
-						'<div class="spec_price spec_price_for_five clearfix">'+
-							'<div class="pull-left">'+
-								'<i class="vip_icon"></i>'+
-								'<span class="vip_price vip_price_for_five">¥'+obj.vip_price+'</span>'+
-							'</div>'+
-							'<div class="pull-right">'+
-								'<span class="cut_price cut_price_for_five">省'+(obj.public_price-obj.vip_price)+'元</span>'+
-							'</div>'+
-						'</div>'+
-					'</a>'+
-				'</li>'
-}
-$('.flash_purchase ul').html(gooseList3);
-// 干红
-var gooseList4 = '';
-for(var i=0;i<hong.length;i++){
-	var obj = hong[i];
-	gooseList4 += '<li class="col-xs-6 col-md-6 col-lg-6">'+
-					'<a href="'+obj.jump_url+'">'+
-						'<div class="intro_img_for_five"><img src="'+obj.pic+'" alt=""></div>'+
-						'<div class="pro_des pro_des_for_five">'+obj.name+'</div>'+
-						'<div class="spec_price spec_price_for_five clearfix">'+
-							'<div class="pull-left">'+
-								'<i class="vip_icon"></i>'+
-								'<span class="vip_price vip_price_for_five">¥'+obj.vip_price+'</span>'+
-							'</div>'+
-							'<div class="pull-right">'+
-								'<span class="cut_price cut_price_for_five">省'+(obj.public_price-obj.vip_price)+'元</span>'+
-							'</div>'+
-						'</div>'+
-					'</a>'+
-				'</li>'
-}
-$('.ganhong ul').html(gooseList4);
-//干白
-var gooseList5 = '';
-for(var i=0;i<bai.length;i++){
-	var obj = bai[i];
-	gooseList5 += '<li class="col-xs-6 col-md-6 col-lg-6">'+
-					'<a href="'+obj.jump_url+'">'+
-						'<div class="intro_img_for_five"><img src="'+obj.pic+'" alt=""></div>'+
-						'<div class="pro_des pro_des_for_five">'+obj.name+'</div>'+
-						'<div class="spec_price spec_price_for_five clearfix">'+
-							'<div class="pull-left">'+
-								'<i class="vip_icon"></i>'+
-								'<span class="vip_price vip_price_for_five">¥'+obj.vip_price+'</span>'+
-							'</div>'+
-							'<div class="pull-right">'+
-								'<span class="cut_price cut_price_for_five">省'+(obj.public_price-obj.vip_price)+'元</span>'+
-							'</div>'+
-						'</div>'+
-					'</a>'+
-				'</li>'
-}
-$('.ganbai ul').html(gooseList5);
+
 $('.recommond_list_for_five > li').eq(0).show();
 //点击sort_tab
 $('.sort_ul > li').on('tap',function(){

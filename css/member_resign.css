@@ -22,7 +22,7 @@ body{
 .block > li input{
 	outline: none;
 	border: none;
-	height: 1.5rem;
+	height: 2.5rem;
 }
 .block > li input::placeholder{
 	color: #999999;
@@ -36,6 +36,7 @@ body{
 	height: 5rem;
 	resize:none;
 	outline: none;
+	border: none;
 	line-height: 1.5rem;
 	padding-top: 0.6rem;
 }
