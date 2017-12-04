@@ -39,9 +39,11 @@ $('.recommond_list_for_ws').html(goodsHtml);
 
 //list
 addProList(goosePro1,$('.goose_data_1 ul'));
-addProList(flashPurchase,$('.flash_purchase ul'));
 addProList(hong,$('.ganhong ul'));
 addProList(bai,$('.ganbai ul'));
+addProList(qipao,$('.bubble ul'));
+addProList(tianjiu,$('.sweet_wine ul'));
+addProList(changyin,$('.drink_wine ul'));
 function addProList(obj1,obj2){
 	var listData = '';
 	for(var i=0;i<obj1.length;i++){
