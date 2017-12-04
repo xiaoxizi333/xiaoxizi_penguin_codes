@@ -101,17 +101,17 @@ header{
 }
 .spec_assort_box .assort_tit_box .left_bar{
 	background-image: url(../img/left_bar.png);
-	margin-right: 7.1875rem;
+	margin-right: 5rem;
 }
 .spec_assort_box .assort_tit_box .right_bar{
 	background-image: url(../img/right_bar.png);
-	margin-left: 7.1875rem;
+	margin-left: 5rem;
 }
 .spec_assort_box .assort_tit_box .spec_as_tit{
-	width: 3.75rem;
-	height: 1.875rem;
+	width:  7.5rem;
+	height: 2.125rem;
 	vertical-align: middle;
-	background-size: 3.75rem 1.875rem;
+	background-size: 7.5rem 2.125rem;
 }
 .new_arrival .assort_tit_box .spec_as_tit{
 	background-image: url(../img/new.png);
@@ -121,18 +121,12 @@ header{
 }
 .Boutique .assort_tit_box .spec_as_tit{
 	background-image: url(../img/cp_series.png);
-	width: 3.75rem;
-	background-size: 5rem 1.875rem;	
 }
 .drinks_series .assort_tit_box .spec_as_tit{
-	background-image: url(../img/dr_series.png);
-	width: 3.75rem;
-	background-size: 5rem 1.875rem;		
+	background-image: url(../img/dr_series.png);	
 }
 .guess_series .assort_tit_box .spec_as_tit{
-	background-image: url(../img/you_like.png);
-	width: 3.75rem;
-	background-size: 5rem 1.875rem;		
+	background-image: url(../img/you_like.png);	
 }
 .get_more_btn{
 	margin-top: -0.625rem;
