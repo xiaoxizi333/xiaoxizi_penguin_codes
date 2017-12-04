@@ -22,62 +22,6 @@ const goods3 = [
     }
 ]
 
-
-// 鹅蛋专区
-
-const goosePro1 = 
-    [
-        {
-            "pic" : "http://ofdx4t772.bkt.clouddn.com/1543472533282054?imageView2",
-            "vip_price" : 599,
-            "name" : "男爵酒庄干红葡萄酒2012",
-            "public_price" : 1314,
-            "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1543472550059273",
-        },
-        {
-            "pic" : "http://ofdx4t772.bkt.clouddn.com/1543468557081800?imageView2",
-            "vip_price" : 599,
-            "name" : "玫瑰山酒庄干红葡萄酒",
-            "public_price" : 1594.8,
-            "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1543468573859019",
-        },
-        {
-            "pic" : "http://ofdx4t772.bkt.clouddn.com/1543468372532420?imageView2",
-            "vip_price" : 149,
-            "name" : " 多韦酒庄贵腐2013",
-            "public_price" : 379.8,
-            "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1543468406086855",
-        },
-        {
-            "pic" : "http://ofdx4t772.bkt.clouddn.com/1543465302301845?imageView2",
-            "vip_price" : 329,
-            "name" : " 靓次伯酒庄干白2014",
-            "public_price" : 723.6,
-            "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1543465319079064",
-        },
-        {
-            "pic" : "http://ofdx4t772.bkt.clouddn.com/1543465184861329?imageView2",
-            "vip_price" : 299,
-            "name" : "迪仙酒庄干红葡萄酒",
-            "public_price" : 865.8,
-            "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1543465201638548",
-        },
-        {
-            "pic" : "http://ofdx4t772.bkt.clouddn.com/1543462416620663?imageView2",
-            "vip_price" : 799,
-            "name" : " 雄狮酒庄2007",
-            "public_price" : 1854,
-            "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1543462433397882",
-        },
-        {
-            "pic" : "http://ofdx4t772.bkt.clouddn.com/1542061854626858?imageView2",
-            "vip_price" : 199,
-            "name" : "拉图嘉利庄园干红葡萄酒2014",
-            "public_price" : 499,
-            "jump_url" : "http://shop.qietuan.org/product_details.html?specId=0&from=singlemessage&itemID=1542061854626859",
-        }
-    ]
-
 // 干红
 const hong =
 [
