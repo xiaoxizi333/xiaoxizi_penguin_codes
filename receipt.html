@@ -4,9 +4,6 @@
 	<meta charset="UTF-8">
 	<title>醉鹅娘精选</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-	<meta http-equiv="pragma" content="no-cache"> 
-	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
-	<meta http-equiv="expires" content="0">
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/receipt.css">
@@ -51,6 +48,12 @@
 <script type="text/javascript" src="vendor/jquery.js"></script>
 <script type="text/javascript" src="vendor/zepto.min.js"></script>
 <script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="config.js"></script>
+<!-- <script type="text/javascript" src="config.js"></script>
 <script src="js/common.js"></script>
-<script src="js/receipt.js"></script>
+<script src="js/receipt.js"></script> -->
+<script>
+document.write("<script type='text/javascript' src='config.js?"+Math.random()+"'></scri"+"pt>");
+document.write("<script type='text/javascript' src='js/common.js?"+Math.random()+"'></scri"+"pt>");
+document.write("<script type='text/javascript' src='js/receipt.js?"+Math.random()+"'></scri"+"pt>");
+
+</script>
