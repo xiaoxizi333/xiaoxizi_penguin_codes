@@ -2,10 +2,17 @@ if(!openid){
     localStorage.setItem("redirect_url",window.location.href);
     window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 }
+<<<<<<< HEAD
 // $('.vip_order, .more_vip').on('tap',function(){
 //     //window.localStorage.setItem('tabId',1308254907990793);
 //     window.location.href = "all-products-classify.html?tabId="+1308254907990793;
 // })
+=======
+$('.vip_order').on('tap',function(){
+    //window.localStorage.setItem('tabId',1308254907990793);
+    window.location.href = "all-products-classify.html?tabId="+1308254907990793;
+})
+>>>>>>> wx
 // $('.new_arrival_more').on('tap',function(){
 //     //window.localStorage.setItem('tabId',1377969693067433);
 //     window.location.href = "all-products-classify.html?tabId="+1542046973236148;

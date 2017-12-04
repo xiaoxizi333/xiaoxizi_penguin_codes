@@ -103,7 +103,7 @@ header{
 	vertical-align: middle;
 }
 .cut_price{
-	font-size:12px;
+	font-size:0.75rem;
 	color:#3f3c47;
 }
 .get_more_recommond{
@@ -112,7 +112,7 @@ header{
 }
 .get_more_recommond a{
 	color: #bbbbbb;
-	font-size: 12px;
+	font-size: 0.75rem;
 }
 .re_more_icon{
 	display: inline-block;
@@ -170,25 +170,22 @@ header{
 	margin-bottom: 0.9375rem;
 }
 .sort_bar{
-	height: 2.5rem;
 	width: 100%;
 	padding-left: 0.875rem;
 	padding-right: 0.875rem;
-	margin-bottom: 1.25rem;
 }
 .sort_ul{
 	margin-top: 0.875rem;
-	height: 2.5rem;
 }
 .sort_ul > li{
-	width: 25%;
 	height: 2.5rem;
 	line-height: 2.5rem;
 	color: #acacb8;
-	font-size: 12px;
+	font-size: 0.75rem;
 	text-align: center;
-	padding-left: 0;
-	padding-right: 0;
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
+	margin-bottom: 1.25rem;
 	float: left;
 }
 .sort_ul > li.active{
