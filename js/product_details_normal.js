@@ -16,7 +16,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		if(specialPro==1541933576032431){
 			if(isVipPrice){
 				priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
-								'<span>价格</span>'+
+								'<span>会员价</span>'+
 								'<span class="specific_cost price_for_vip">¥ ***</span>'+
 							'</div>'+
 							'<div class="pull-left">'+
@@ -24,7 +24,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 							'</div>';
 			}else{
 				priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
-								'<span>价格</span>'+
+								'<span>非会员价</span>'+
 								'<span class="specific_cost normal_price">¥'+obj.public_price+'</span>'+
 							'</div>'+
 							'<div class="no_vip pull-left">'+
@@ -34,7 +34,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 		}else{
 			if(isVipPrice){
 				priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
-								'<span>价格</span>'+
+								'<span>会员价</span>'+
 								'<span class="specific_cost price_for_vip">¥'+obj.real_price+'</span>'+
 							'</div>'+
 							'<div class="pull-left">'+
@@ -42,7 +42,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 							'</div>';
 			}else{
 				priceHtml = '<div class="vip_price pull-left" style="margin-right: 1.375rem">'+
-								'<span>价格</span>'+
+								'<span>非会员价</span>'+
 								'<span class="specific_cost normal_price">¥'+obj.public_price+'</span>'+
 							'</div>'+
 							'<div class="no_vip pull-left">'+
