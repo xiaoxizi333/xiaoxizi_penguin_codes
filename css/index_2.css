@@ -183,8 +183,7 @@ header{
 	color: #acacb8;
 	font-size: 0.75rem;
 	text-align: center;
-	padding-left: 0.75rem;
-	padding-right: 0.75rem;
+	width: 20%;
 	margin-bottom: 1.25rem;
 	float: left;
 }
