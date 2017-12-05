@@ -428,4 +428,20 @@ function isOnline(obj,url_1,url_2){
 $('.go_back_icon').on('tap',function(){
 	window.history.go(-1);
 })
-
+//点击开通买醉卡
+$('.set_jump_page').on('click',function(){
+	if(uid){
+		$.post(config.itemBilling,{'uid':uid,'item_id':1543320665920817},function(datas){
+			console.log(datas);
+			if(datas.error_code==0){
+				window.localStorage.setItem('user_order_id',datas.result.user_order[0].id);
+				window.location.href = "card_for_year.html";
+			}else{
+				showTips('您已购买会员卡或个人中心中有未支付的会员卡订单');
+			}
+		})
+	}else{
+		window.localStorage.setItem('setIndexNum',2);
+		window.location.href = "register.html";
+	}
+})

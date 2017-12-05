@@ -441,7 +441,7 @@ if(cartOrBuy=='0'){
 		})
 		//console.log(delivery_type)
 		//立即购买
-		$('.buy_instance').on('tap',function(){
+		$('.buy_instance').on('click',function(){
 			if(delivery_type===''&&window.localStorage.getItem('cart_delivery_type')===null){
 				showTips('请选择邮寄方式哦～')	;
 			}else{
@@ -927,7 +927,7 @@ if(cartOrBuy=='0'){
 		window.location.href="receipt.html";			
 	})
 	//立即购买
-	$('.buy_instance').on('tap',function(){
+	$('.buy_instance').on('click',function(){
 		var is_presell,
 			productType = window.localStorage.getItem('product_type');
 		if(productType=='preSale'){
