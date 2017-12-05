@@ -2,6 +2,12 @@ if(!openid){
 	localStorage.setItem("redirect_url",window.location.href);
 	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
 }
+
+new Swiper('.top_banner_sw_contain.swiper-container', {
+	pagination : '.top_banner_box',
+	autoplay: 3000,//可选选项，自动滑动
+	autoplayDisableOnInteraction:false//使滑动效果不停止
+});
 //分类详情
 $.post(config.classify,{'is_add_best_ares':0,'limit':6},function(data){
 	console.log(data);

@@ -183,14 +183,23 @@ header{
 	color: #acacb8;
 	font-size: 0.75rem;
 	text-align: center;
-	width: 20%;
+	width: 2.5rem;
 	margin-bottom: 1.25rem;
 	float: left;
+	margin-left: 0.25rem;
+	margin-right: 0.25rem;
 }
 .sort_ul > li.active{
-	background: url(../img/sort_bar.png) no-repeat center bottom;
-	background-size: 4.3125rem 0.25rem;
+	background: url(../img/short_ba.png) no-repeat center bottom;
+	background-size: 2.5rem 0.25rem;
 	color: #3f3c47;
+}
+.sort_ul > li.spec_bar{
+	width: 3.75rem;
+}
+.sort_ul > li.active.spec_bar{
+	background: url(../img/sort_bar.png) no-repeat center bottom;
+	background-size: 3.75rem 0.25rem;
 }
 .recommond_list_for_five ul.special_list li{
 	margin-bottom: 1.125rem;

@@ -232,7 +232,7 @@ $.post(config.guessUouLike,{'location_type':'good_detail'},function(datas){
 	
 })
 //share
-$('.share').on('tap',function(){
+$('.share').on('click',function(){
 	$('.share_mask').fadeIn();
 	$('.share_arrow').css({'transform':'rotateX(0deg)','transition':'1s'})
 })
@@ -313,7 +313,7 @@ $('.add_or_substract a').on('tap',function(){
 })
 
 //蒙版
-$('.buy,.shopping_cart,.default_style').on('tap',function(){
+$('.buy,.shopping_cart,.default_style').on('click',function(){
 	$('.mask').fadeIn();
 	$('.choose_item_type').css({'transition': '1s','transform':'translateY(0)'});
 	
