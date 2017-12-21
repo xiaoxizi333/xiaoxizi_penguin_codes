@@ -40,7 +40,8 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 	});
 	var shareTitle = obj.name;
 	var shareLink = window.location.href;
-	var shareDesc = shareTitle+' '+$('.vip_price').text();
+	//var shareDesc = shareTitle+' '+$('.vip_price').text();
+	var shareDesc = obj.sub_name;
 	var shareImg = datas.result.item_info[0].data.title_pics[0];
 	wx.ready(
 		function(){
