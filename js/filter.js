@@ -56,12 +56,13 @@ $('.filter_bar_btn, .get_more_btn').on('click',function(){
 			var tagFirId = $(this).attr('data_id');
 			var index = $(this).parents('.filter_tabs').index();
 			var subSortI = $(this).index();
+			$('.filter_tabs:eq('+index+') .sub_sort_2 .second_bar li').removeClass('active');
+			$('.filter_tabs:eq('+index+') .sub_sort_2').hide();
 			if($(this).hasClass('active')){
 				$(this).removeClass('active');
-				$('.filter_tabs:eq('+index+') .sub_sort_2:eq('+subSortI+') .second_bar li').removeClass('active');
 				$('.filter_tabs:eq('+index+') .sub_sort_2:eq('+subSortI+')').hide();
 			}else{
-				$(this).addClass('active');
+				$(this).addClass('active').siblings().removeClass('active');
 				$('.filter_tabs:eq('+index+') .sub_sort_2:eq('+subSortI+')').show();
 			}
 		})

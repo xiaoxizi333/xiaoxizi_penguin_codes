@@ -48,123 +48,7 @@ function searchItem(){
       complete:function(){$('.spinner').hide()},
   })
 }
-// 筛选--1
-// $('.filter_part').css('min-height',$(window).height()+'px');
-// $('.filter_bar_btn').on('click',function(){
-// 	$('.filter_part').css({'width':'20rem','transition':'width .5s'});
-// 	$.post(config.selectTag,{'state':1},function(datas){
-// 		console.log(datas);
-// 		var obj = datas.result.list;
-// 		var html = '',
-// 			subFilArr = [];
-// 		for(var i=0;i<obj.length;i++){
-// 			subFilArr.push({});
-// 			var tagObj = obj[i];
-// 			html += '<div class="filter_tabs">'+
-// 						'<div class="caption">'+tagObj.wine_class_class_name+'</div>'+
-// 						'<ul class="list-unstyled list-inline sort_1">'+
-// 						'</ul>'+
-// 					'</div>';
-// 		}
-// 		$('.filter_board').html(html);
-// 		for(var i=0;i<obj.length;i++){
-// 			for(var k=0;k<obj[i].wine_tag_list.length;k++){
-// 				var firstT = obj[i].wine_tag_list[k];
-// 				var tagHtml_1 = '<li data_id="'+firstT.wine_class_id+'">'+firstT.wine_class_tag_name+'</li>';	
-// 				$('.sort_1').eq(i).append(tagHtml_1);
-// 			}		
-// 		}
 
-// 		$('.sort_1 > li').on('tap',function(){
-// 			//console.log(subFilArr)
-// 			var index = $(this).parents('.filter_tabs').index();
-// 			$(this).addClass('active').siblings().removeClass('active');
-// 			var tagFirId = $(this).attr('data_id');
-// 			var secTag = '';
-// 			$.post(config.selectTag,{'state':1},function(datas){
-// 				for(var i=0;i<obj.length;i++){
-// 					for(var k=0;k<obj[i].wine_tag_list.length;k++){
-// 						var obj2 = obj[i].wine_tag_list[k];
-// 						var firstId = obj2.wine_class_id;
-// 						if(tagFirId==firstId && obj2.wine_tag.length){
-// 							$('.filter_mask').show(200);
-// 							for(var j=0;j<obj2.wine_tag.length;j++){
-// 								secTag += '<li data_id="'+obj2.wine_tag[j].id+'"><a href="javascript:;">'+obj2.wine_tag[j].tag_name+'</a></li>';
-// 							}
-// 						}
-// 					}
-// 				}
-// 				$('.sort_2').html(secTag);
-// 				for(var i=0;i<subFilArr.length;i++){
-// 					if(subFilArr[i].active_sub){
-// 						for(var b=0;b<$('.sort_2 > li').length;b++){
-// 							for(var k=0;k<subFilArr[i].active_sub.length;k++){
-// 								if($('.sort_2 > li').eq(b).attr('data_id')==subFilArr[i].active_sub[k]){
-// 									$('.sort_2 > li').eq(b).addClass('active');
-// 								}
-// 							}
-// 						}
-// 					}
-// 				}
-
-
-// 				$('.sort_2 > li').on('tap',function(){
-// 					$(this).toggleClass('active');
-// 				})
-// 				$('.finish_btn').off('tap').on('tap',function(){
-// 					$('.filter_mask').hide();
-// 					subFilArr[index].active_sub = [];
-// 					for(var i=0;i<$('.sort_2 > li').length;i++){
-// 						if($('.sort_2 > li').eq(i).hasClass('active')){
-// 							subFilArr[index].active_sub.push($('.sort_2 > li').eq(i).attr('data_id'));
-// 						}	
-// 					}
-// 				})
-// 			})
-// 		})
-// 		$('.sure').on('tap',function(){
-// 			$('.filter_part').css({'width':'0','transition':'width .5s'});
-// 			var arryId = {};
-// 			arryId.select_wine_tag_array = [];
-// 			console.log(subFilArr)
-// 			for(var i=0;i<subFilArr.length;i++){
-// 				if(subFilArr[i].active_sub){
-// 					for(var k=0;k<subFilArr[i].active_sub.length;k++){
-// 						arryId.select_wine_tag_array.push(subFilArr[i].active_sub[k]*1);
-// 					}
-// 				}
-// 			}
-// 			console.log(arryId)
-// 			arryId.item_name = $('#search').val();
-// 			if($('.max_pri').val()){
-// 				arryId.max_wine_price = $('.max_pri').val()*1;
-// 			}
-// 			if($('.min_pri').val()){
-// 				arryId.min_wine_price = $('.min_pri').val()*1;
-// 			}				
-// 			//console.log(arryId)
-// 			$.ajax({
-// 			    type: "POST",
-// 			    dataType:'json',
-// 			    contentType:'application/json',
-// 			    url: config.selectWineTag,
-// 			    data: JSON.stringify(arryId), 
-// 			    beforeSend:function(){
-// 			      	$('.spinner').show();
-// 			    },
-// 			    success:function(datas){
-// 					//console.log(datas);
-// 					showItems(datas);
-// 			    },
-// 			    complete:function(){$('.spinner').hide()},
-// 			})
-// 		})
-// 		$('.cancel').on('tap',function(){
-// 			$('.filter_part').hide();
-// 			$('.filter_part').css({'width':'0'});
-// 		})
-// 	})
-// })
 
 //筛选--2
 $('.filter_part').css('min-height',$(window).height()+'px');
@@ -224,12 +108,13 @@ $('.filter_bar_btn').on('click',function(){
 			var tagFirId = $(this).attr('data_id');
 			var index = $(this).parents('.filter_tabs').index();
 			var subSortI = $(this).index();
+			$('.filter_tabs:eq('+index+') .sub_sort_2 .second_bar li').removeClass('active');
+			$('.filter_tabs:eq('+index+') .sub_sort_2').hide();
 			if($(this).hasClass('active')){
 				$(this).removeClass('active');
-				$('.filter_tabs:eq('+index+') .sub_sort_2:eq('+subSortI+') .second_bar li').removeClass('active');
 				$('.filter_tabs:eq('+index+') .sub_sort_2:eq('+subSortI+')').hide();
 			}else{
-				$(this).addClass('active');
+				$(this).addClass('active').siblings().removeClass('active');
 				$('.filter_tabs:eq('+index+') .sub_sort_2:eq('+subSortI+')').show();
 			}
 		})
