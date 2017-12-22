@@ -96,3 +96,12 @@ body{
 .supplement,.item_name{
     width: 10rem;
 }
+.buy_mask{
+	position: fixed;
+	height: 100%;
+	top: 0;
+	width: 100%;
+	z-index: 100001;
+	display: none;
+	background-color: rgba(0,0,0,.5);
+}

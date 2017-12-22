@@ -174,6 +174,7 @@ function dividePage(page){
 		//再次支付
 		$('.wait_for_pay').on('click',function(){
 			var user_order_id = $(this).parents('.order_list_box').attr('data_id')*1;
+			$('.buy_mask').show();
 			$.post(config.myOrderRepay,{'user_order_id':user_order_id,'open_id':openid},function(pay){
 				//console.log(pay);
 				if(pay.error_code==0){
@@ -266,6 +267,9 @@ function dividePage(page){
 					}
 				}else{
 					showTips(pay.error_msg);
+					setTimeout(function(){
+						$('.buy_mask').hide();
+					},3000)
 				}
 			})
 		})
