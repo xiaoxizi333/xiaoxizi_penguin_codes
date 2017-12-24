@@ -253,13 +253,19 @@ $('.personal_icon').on('tap',function(){
 })
 //isVip
 var isVipNum = 0;
-$.post(config.isVip,{'uid':uid?uid:0},function(datas){
-	if(datas.result.length){
-		isVipNum += 1;
-	}else{
-		isVipNum += 0;
+$.ajax({
+	url:config.isVip,
+	type:'post',
+	data:{'uid':uid?uid:0},
+	async: false,
+	success: function(datas){
+		if(datas.result.length){
+			isVipNum += 1;
+		}else{
+			isVipNum += 0;
+		}
+		window.localStorage.setItem('isVipPrice',isVipNum);
 	}
-	window.localStorage.setItem('isVipPrice',isVipNum);
 })
 
 //提示3秒消失

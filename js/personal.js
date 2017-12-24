@@ -26,7 +26,7 @@ $.post(config.vipService,{'uid':uid},function(datas){
 										'<span class="pull-right my_points">'+points+'</span>'+
 									'</li>'+
 									'<li class="clearfix">'+
-										'<span class="pull-left delivery_info">会员期：'+obj.vip_service.data.date_start+'-'+obj.vip_service.data.date_end+'</span>'+
+										'<span class="pull-left delivery_info">会员期：'+switchDate(obj.vip_service.data.start_time,'/')+'-'+switchDate(obj.vip_service.data.end_time,'/')+'</span>'+
 										'<span class="pull-right delivery_state">'+obj.vip_service.data.current_loop+' / '+obj.vip_service.data.loop+'</span>'+
 									'</li>'+
 									'<li class="clearfix">'+
