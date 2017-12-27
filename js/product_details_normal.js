@@ -541,7 +541,7 @@ $.post(config.itemInfoShow,{'item_id':itemID,'item_spec_id':itemSpecId},function
 
 	}
 	$('.introduction').append(obj.detail_desc);
-	makeDeal();
+	makeDeal(1);
 	//评论tab条数
 	var commentId,commentLevel,isPic,comments,pageNm = 1;
 	if(datas.result.item_spec_template.length>0){

@@ -1,6 +1,7 @@
 var searchItemNm = window.localStorage.getItem('search_item_name');
 $('#search').val(searchItemNm);
 var totalFitlerD = JSON.parse(window.localStorage.getItem('total_data_of_filter'));
+totalFitlerD.limit = 20000;
 console.log(totalFitlerD)
 var filterNum = window.localStorage.getItem('filterNum');
 if(filterNum==1){
@@ -37,7 +38,7 @@ function searchItem(){
    {
       type:"POST",
       url:config.search,
-      data:{'item_name':searchTxt}, 
+      data:{'item_name':searchTxt,limit:20000}, 
       beforeSend:function(){
       	$('.spinner').show();
       },
@@ -163,7 +164,8 @@ $('.filter_bar_btn').on('click',function(){
 					arryId.max_wine_price = $('.price_range_contain li:eq('+i+') .max_price_num').html()*1;
 					arryId.min_wine_price = $('.price_range_contain li:eq('+i+') .min_price_num').html()*1;
 				}
-			}				
+			}
+			arryId.limit = 20000;				
 			//console.log(arryId)
 			$.ajax({
 			    type: "POST",

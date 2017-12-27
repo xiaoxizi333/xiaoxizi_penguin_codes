@@ -36,7 +36,7 @@ function addBanner(bannerData){
 
 //var firstItem = window.localStorage.getItem('tabId');
 var firstItem = getQueryString('tabId');
-var dataObj = {'item_class':firstItem};
+var dataObj = {'item_class':firstItem,limit:20000};
 searchItems(dataObj);
 //一级列表
 // $.post(config.indexItemClassList,function(datas){

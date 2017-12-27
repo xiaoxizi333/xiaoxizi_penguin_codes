@@ -268,16 +268,16 @@ function makeDeal(page){
 		if(dealInfo.length){
 			$('.load_more_deal').show();
 			$('.load_more_deal').html('加载更多');
-			var dealHtml = '';
 			for(var i=0;i<dealInfo.length;i++){
 				var userInfo = dealInfo[i].user_info;
-				dealHtml += '<li class="clearfix">'+
-							'<span class="username pull-left" style="width: 30%">'+protectUserName(userInfo.user_data.real_name?userInfo.user_data.real_name:'用户')+'</span>'+
-							'<span class="deal_time pull-left text-center" style="width: 50%">'+switchDate2(dealInfo[i].created_at)+'</span>'+
-							'<span class="deal_num pull-left text-center" style="width: 20%">'+dealInfo[i].data.total_count+'</span>'+
-						'</li>';
+				var dealHtml = '<li class="clearfix">'+
+									'<span class="username pull-left" style="width: 30%">'+protectUserName(userInfo.user_data.real_name?userInfo.user_data.real_name:'用户')+'</span>'+
+									'<span class="deal_time pull-left text-center" style="width: 50%">'+switchDate2(dealInfo[i].created_at)+'</span>'+
+									'<span class="deal_num pull-left text-center" style="width: 20%">'+dealInfo[i].data.total_count+'</span>'+
+								'</li>';
+				$('.deal_specific_info').append(dealHtml);
 			}
-			$('.deal_specific_info').html(dealHtml);
+			
 			$('.load_more_deal').on('click',function(){
 				var totalPage = Math.ceil(datas.total_count/10);
 				if(page<totalPage){
