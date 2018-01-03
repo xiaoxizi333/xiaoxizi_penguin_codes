@@ -6,7 +6,7 @@ $('#cou').on('tap',function(){
 	if(uid){
 		$.post(config.oneCouponTake,{uid:uid,coupon_id:1591051744775975},function(datas){
 			if(datas.error_code==0){
-				showTips('领取成功~');
+				showTips('领取成功,3秒后跳转到商品页面~');
 				setTimeout(function(){
 					window.location.href = "http://shop.qietuan.org/product_details.html?itemID=1591050352267046&specId=0";
 				},3000)
