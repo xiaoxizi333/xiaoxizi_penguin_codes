@@ -7,7 +7,9 @@ $('#cou').on('tap',function(){
 		$.post(config.oneCouponTake,{uid:uid,coupon_id:1591051744775975},function(datas){
 			if(datas.error_code==0){
 				showTips('领取成功~');
-				window.location.href = "http://shop.qietuan.org/product_details.html?itemID=1591050352267046&specId=0";
+				setTimeout(function(){
+					window.location.href = "http://shop.qietuan.org/product_details.html?itemID=1591050352267046&specId=0";
+				},3000)
 			}else{
 				showTips(datas.error_msg);
 			}
