@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>待领取</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<script type="text/javascript">
+		document.write('<link rel="stylesheet" href="css/common.css?'+Math.random()+'">');
+	</script>
+</head>
+<body style="background:#fff">
+	<div style="padding:0.9375rem 0.3125rem;" id="cou">
+		<img src="img/30.png" width="100%">
+	</div>
+	<div class="warming"></div>
+</body>
+</html>
+<script type="text/javascript" src="vendor/jquery.js"></script>
+<script type="text/javascript" src="vendor/zepto.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+document.write("<script type='text/javascript' src='config.js?"+Math.random()+"'></scri"+"pt>");
+document.write("<script type='text/javascript' src='js/common.js?"+Math.random()+"'></scri"+"pt>");
+
+localStorage.setItem("redirect_url",window.location.href);
+if(!openid){
+	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx795992462b631e70&redirect_uri=http%3A%2F%2Fshop.qietuan.org%2Foauth.php&response_type=code&scope=snsapi_userinfo&state=12345678901#wechat_redirect"
+}
+$('#cou').on('tap',function(){
+	if(uid){
+		$.post(config.oneCouponTake,{uid:uid,coupon_id:1591051744775975},function(datas){
+			if(datas.error_code==0){
+				showTips('领取成功~');
+				window.location.href = "http://shop.qietuan.org/product_details.html?itemID=1591050352267046&specId=0";
+			}else{
+				showTips(datas.error_msg);
+			}
+		})
+	}else{
+		window.localStorage.setItem('setIndexNum',1);
+		window.location.href="register.html"
+	}
+})
+</script>
