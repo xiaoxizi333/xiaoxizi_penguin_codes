@@ -1,0 +1,1 @@
+jumpCouForCode(1591050352267046,'http://shop.qietuan.org/product_details.html?itemID=1591050352267046&specId=0');
