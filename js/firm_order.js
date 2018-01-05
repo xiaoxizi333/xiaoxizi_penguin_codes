@@ -1167,7 +1167,9 @@ function delivery(isSelectPoint){
 				delivery_type = datas.result.user_order[0].data.post_type;
 				$('.delivery_type ul > li').removeClass('active');
 				$('.delivery_type ul > li').eq(delivery_type).addClass('active');
-				window.localStorage.setItem('cart_delivery_type',datas.result.user_order[0].data.post_type);
+				if(cartOrBuy=='0'){
+					window.localStorage.setItem('cart_delivery_type',datas.result.user_order[0].data.post_type);
+				}
 				window.localStorage.setItem('delivery_type',datas.result.user_order[0].data.post_type);
 				if(datas.result.user_order[0].data.is_point_discount==1){
 					var sumB = datas.result.user_order[0].data.discount_money;
